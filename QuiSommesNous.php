@@ -11,7 +11,7 @@
 </head>
 <body>
     <nav>
-        <a href="index.php"><img class="logo" src="img/APSI.png" alt=""></a>
+        <a href="index.html"><img class="logo" src="img/APSI.png" alt=""></a>
 
         <div class="menu">
             <ul>

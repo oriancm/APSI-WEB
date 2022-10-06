@@ -12,7 +12,7 @@
 
     <main>
         <h1>Login Form</h1>
-        <form action="POST" action="login.php">
+        <form method="POST" action="login.php">
             <div>
                 <label for="">username</label>
                 <input type="text" name="user" required>
@@ -30,17 +30,4 @@
 </body>
 </html>
 
-<?php
-//phpinfo();
-require('./db.php');
 
-if (!empty($_POST['user']) && !empty($_POST['pass']))
-{
-    $user =$_POST['user'];
-    $pass =$_POST['pass'];
-
-    var_dump($user,$pass);
-
-}
-
-?>
