@@ -1,10 +1,3 @@
-<?php
-
-$user = 'root';
-$pass = '';
-$db = new PDO('mysql:host=locahost;dbname=apsi',$user,$pass);
-
-?>
 
 <!doctype html>
 <html lang="en">
@@ -19,17 +12,17 @@ $db = new PDO('mysql:host=locahost;dbname=apsi',$user,$pass);
 
     <main>
         <h1>Login Form</h1>
-        <form action="POST">
+        <form action="POST" action="login.php">
             <div>
                 <label for="">username</label>
-                <input type="text" name="username" required>
+                <input type="text" name="user" required>
             </div>
             <div>
                 <label for="">password</label>
-                <input type="text" name="password" required>
+                <input type="text" name="pass" required>
             </div>
             <div>
-                <input type="submit" value=""Login>
+                <button type="submit" value="">Connexion</button>
             </div>
 
         </form>
@@ -37,3 +30,17 @@ $db = new PDO('mysql:host=locahost;dbname=apsi',$user,$pass);
 </body>
 </html>
 
+<?php
+//phpinfo();
+require('./db.php');
+
+if (!empty($_POST['user']) && !empty($_POST['pass']))
+{
+    $user =$_POST['user'];
+    $pass =$_POST['pass'];
+
+    var_dump($user,$pass);
+
+}
+
+?>
