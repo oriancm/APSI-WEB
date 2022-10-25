@@ -7,7 +7,12 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
     $user =$_POST['user'];
     $pass =$_POST['pass'];
 
-    var_dump($user,$pass);
+    $sql = "SELECT * FROM apsi";
+    $stmt= $pdo->prepare($sql);
+    $stmt->execute();
+    $res= $stmt->fetchAll();
+
+    var_dump($user,$pass,$res);
 
 }
 
