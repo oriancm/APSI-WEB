@@ -7,12 +7,22 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
     $user =$_POST['user'];
     $pass =$_POST['pass'];
 
-    $sql = "SELECT * FROM apsi";
-    $stmt= $pdo->prepare($sql);
+    $sql = "SELECT * FROM admin WHERE login = :user";
+    $stmt= $db->prepare($sql);
+    $stmt->bindValue('user',$user);
     $stmt->execute();
-    $res= $stmt->fetchAll();
+    $res= $stmt->fetch(PDO::FETCH_ASSOC);
 
-    var_dump($user,$pass,$res);
+    if ($res) {
+        $passwordHash = $res['pass'];
+        if (password_verify($pass, $passwordHash)) {
+            echo "Connexion réussie !";
+        } else {
+            echo "Identifiants invalides";
+        }
+    } else {
+        echo "Identifiants invalides";
+    }
 
 }
 
