@@ -10,28 +10,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
-    <nav>
-        <a href="index.html"><img class="logo" src="img/APSI.png" alt=""></a>
 
-        <div class="menu">
-            <ul>
-                <li class="active"><a href="#">Qui sommes-nous</a></li>
-                <li><a href="/NosMétiers.php">Nos métiers</a></li>
-                <li><a href="/NosRéférences.php">Nos références</a></li>
-                <li><a href="/NosClients.php">Nos clients</a></li>
-                <li><a href="/NousContacter.php">Nous contacter</a></li>
-            </ul>
-        </div>
-        <img src="img/menu.png" alt="" class="btn-menu">
-    </nav>
+    <?php include "./nav.php"; ?>
 
     <main>
 
     </main>
 
-
-
 </body>
 </html>
 
-<?php
