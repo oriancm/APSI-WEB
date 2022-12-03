@@ -1,18 +1,22 @@
 <?php
 //phpinfo();
-require('./db.php');
+require_once __DIR__ . '/../vendor/autoload.php';
+
 session_start();
 
-if (!empty($_POST['user']) && !empty($_POST['pass']))
+if (!empty($_POST['login']) && !empty($_POST['login']))
 {
-    $user =$_POST['user'];
-    $pass =$_POST['pass'];
+    $login = $_POST['login'];
+    $pass = $_POST['pass'];
 
-    $sql = "SELECT * FROM admin WHERE login = :user";
-    $stmt= $db->prepare($sql);
-    $stmt->bindValue('user',$user);
-    $stmt->execute();
-    $res= $stmt->fetch(PDO::FETCH_ASSOC);
+    $admin = new \Admin\Model\Admin();
+    $res = $admin->findBy(["login" => $login]);
+
+//    $sql = "SELECT * FROM admin WHERE login = :login";
+//    $stmt= $db->prepare($sql);
+//    $stmt->bindValue('login',$login);
+//    $stmt->execute();
+//    $res= $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($res) {
         $passwordHash = $res['pass'];
@@ -53,7 +57,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
     <form method="POST" action="login.php">
         <div>
             <label for="">Identifiant</label>
-            <input type="text" name="user" required>
+            <input type="text" name="login" required>
         </div>
         <div>
             <label for="">Mot de passe</label>

@@ -1,6 +1,5 @@
 <?php
 require('./db.php');
-require('../pathVar.php');
 session_start();
 
 if ($_SESSION["session"] != "valide"){
@@ -11,28 +10,44 @@ if (isset($_POST['submit'])){
     $titre = htmlspecialchars_decode($_POST['titre']);
 
     $pic = htmlspecialchars_decode($_FILES['pic']['name']);
+    $localPath = (dirname(__DIR__));
     $dirPic = $localPath.'/pic/'.$pic;
     $extPic = pathinfo($dirPic, PATHINFO_EXTENSION);
     $extValid = ['jpg','png'];
 
-    $titre = htmlspecialchars_decode($_POST['titre']);
-    $secteur = empty($_POST['secteur']) ? null : htmlspecialchars_decode($_POST['secteur']);
-    $dateD = empty($_POST['dateD']) ? null : htmlspecialchars_decode($_POST['dateD'])."-01";
-    $dateF = empty($_POST['dateF']) ? null : htmlspecialchars_decode($_POST['dateF'])."-01";
-    $moe = htmlspecialchars_decode($_POST['moe']);
-    $archi = htmlspecialchars_decode($_POST['archi']);
-    $montant = empty($_POST['montant']) ? null : htmlspecialchars_decode($_POST['montant']);
-    $nbE = empty($_POST['nbE']) ? null : htmlspecialchars_decode($_POST['nbE']);
+    $titre = ($_POST['titre']);
+    $secteur = empty($_POST['secteur']) ? null : ($_POST['secteur']);
+    $dateD = empty($_POST['dateD']) ? null : ($_POST['dateD'])."-01";
+    $dateF = empty($_POST['dateF']) ? null : ($_POST['dateF'])."-01";
+    $moe = ($_POST['moe']);
+    $archi = ($_POST['archi']);
+    $montant = empty($_POST['montant']) ? null : ($_POST['montant']);
+    $nbE = empty($_POST['nbE']) ? null : ($_POST['nbE']);
 
 //    var_dump($titre,$_FILES['pic'],$secteur,$dateD,$dateF,$moe,$archi,$montant,$nbE);
+
+    $reference = new Reference();
+    $reference = $reference // reference devient un Model
+        ->setTitre($titre)
+        ->setSecteur($secteur)
+        ->setDateD($dateD)
+        ->setDateF($dateF)
+        ->setMoe($moe)
+        ->setArchi($archi)
+        ->setMontant($montant)
+        ->setNbE($nbE);
+
+    $reference->create($reference);
 
     $sql = "INSERT INTO reference (titre, secteur, dateD, dateF, moe, archi, montant, nbE)";
     $sql .= " VALUES (?,?,?,?,?,?,?,?)";
     $stmt= $db->prepare($sql);
-    $stmt->execute([$titre,$secteur,$dateD,$dateF,$moe,$archi,$montant,$nbE]);
+    if ($stmt->execute([$titre,$secteur,$dateD,$dateF,$moe,$archi,$montant,$nbE])){
+        echo 'reference enregistrée';
+    }
 
     if ($pic){
-        $sql = "INSERT INTO photo (titre, dir, idR)";
+        $sql = "INSERT INTO photo (titre, dir, id)";
         $sql .= " VALUES (?,?,LAST_INSERT_ID())";
         $stmt= $db->prepare($sql);
         $stmt->execute([$pic, $extPic]);
