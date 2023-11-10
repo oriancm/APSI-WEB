@@ -3,14 +3,14 @@
 require('./db.php');
 session_start();
 
-if (!empty($_POST['user']) && !empty($_POST['pass']))
+if (!empty($_POST['login']) && !empty($_POST['pass']))
 {
-    $user =$_POST['user'];
+    $login =$_POST['login'];
     $pass =$_POST['pass'];
 
-    $sql = "SELECT * FROM admin WHERE login = :user";
+    $sql = "SELECT * FROM admin WHERE login = :login";
     $stmt= $db->prepare($sql);
-    $stmt->bindValue('user',$user);
+    $stmt->bindValue('login',$login);
     $stmt->execute();
     $res= $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -53,7 +53,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
     <form method="POST" action="login.php">
         <div>
             <label for="">Identifiant</label>
-            <input type="text" name="user" required>
+            <input type="text" name="login" required>
         </div>
         <div>
             <label for="">Mot de passe</label>

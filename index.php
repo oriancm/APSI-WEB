@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
@@ -26,5 +27,5 @@
 
 
 </body>
+<link rel="stylesheet" href="css/indexResponsive.css">
 </html>
-
