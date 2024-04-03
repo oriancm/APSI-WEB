@@ -31,10 +31,12 @@ nav .logo {
 
 nav ul {
     display: flex;
+    align-items: baseline;
 }
 
 nav ul li {
     margin: 0 25px;
+    align-items: center;
 }
 
 .active {
@@ -53,8 +55,19 @@ nav ul li {
     position: absolute;
 }
 
-/*.scrolled {*/
-/*    overflow: scroll !important;*/
-/*    height: 100vh;*/
-/*    width: 100vw;*/
-/*}*/
+.filtre {
+    margin-top: -6px;
+    margin-left: 30px;
+}
+
+.commune {
+    line-height: 12px;
+    color: grey;
+    font-size: 12px;
+}
+
+@media (max-width: 1300px) {
+    .filtre {
+        display: none;
+    }
+}

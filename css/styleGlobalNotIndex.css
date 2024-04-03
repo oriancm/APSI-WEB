@@ -12,13 +12,6 @@ body {
     background-size: cover;
 }
 
-/*main {*/
-/*    height: 100vh;*/
-/*    !*width: 100vw;*!*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*}*/
-
 @media screen and (max-width: 1200px) {
 
     ul li {
@@ -27,8 +20,8 @@ body {
 
     .btn-menu{
         display: block;
+        position: fixed;
     }
-
 
 }
 

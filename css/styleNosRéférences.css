@@ -50,9 +50,10 @@ section {
 
 .scrolled {
     overflow: scroll;
-    height: 80vh;
+    height: calc(100vh - 114px);
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+
 }
 
 body {
@@ -68,3 +69,8 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+@media screen and (max-width: 1020px) {
+    main {
+        background-position: center;
+    }
+}

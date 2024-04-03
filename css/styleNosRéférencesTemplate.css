@@ -1,26 +1,62 @@
-section {
-    align-items: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Les deux colonnes prennent chacune la moitié de l'écran en largeur */
-    margin-top: 5%;
+/*section {*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    grid-template-columns: 1fr 1fr; !* Les deux colonnes prennent chacune la moitié de l'écran en largeur *!*/
+/*    margin-top: 5%;*/
+/*    gap: 5%;*/
+/*    overflow-x: hidden;*/
+/*}*/
+
+main {
+    height: calc(100vh - -2px);
 }
 
-
-.grid1 {
+.mainSection {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: space-between; /* Pour espacer les deux articles sur toute la largeur de la section */
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
-.grid2 {
-    margin-left: 10%;
-    margin-bottom: 21%;
-    max-height: 10vh;
-    width: 43vw;
+.secondSection {
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+article {
+    flex-grow: 0; /* Empêche l'agrandissement des articles pour remplir l'espace */
+    flex-shrink: 0; /* Empêche le rétrécissement des articles */
+}
+
+article:nth-child(1) {
+    width: 50%; /* Taille de l'article de la première colonne */
+}
+
+article:nth-child(2) {
+    width: 50%; /* Taille de l'article de la deuxième colonne */
+}
+
+/* Pour centrer le contenu de chaque article */
+article > * {
+    margin: 0 auto;
+}
+
+
+/*.grid1 {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: flex-end;*/
+/*}*/
+
+/*.grid2 {*/
+/*    margin-bottom: 21%;*/
+/*    max-height: 10vh;*/
+/*    width: 43vw;*/
+/*}*/
 
 .desc-ref-template {
     text-align: justify;
+
 }
 
 :root {
@@ -35,7 +71,6 @@ section {
 .slider{
     width: 800px;
     height: 500px;
-    border-radius: 10px;
     overflow: hidden;
     margin-top: 100px;
 }
@@ -56,9 +91,10 @@ section {
 }
 
 .slide img{
+    /*border-radius: 10px;*/
     width: 800px;
     height: 500px;
-    object-fit: cover;
+    object-fit: contain;
     transition: 0.5s;
 }
 
@@ -70,12 +106,13 @@ section {
     margin-top: -40px;
     display: flex;
     justify-content: center;
+    position: sticky;
 }
 
 .manual-btn{
     border: 2px solid #ffffff;
-    padding: 5px;
     border-radius: 10px;
+    padding: 5px;
     cursor: pointer;
     transition: 1s;
 }
@@ -92,39 +129,102 @@ section {
     background: #ffffff;
 }
 
-@media (max-width: 1900px) {
+.domaine {
+    margin-top: -20px;
+    color: #606060;
+    font-size: 13px;
+}
 
-    section {
-        margin-left: 5%;
+.scrolled {
+    overflow: scroll;
+    height: calc(100vh - 104px);
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+}
+
+.othersInfo div {
+    display: flex;
+}
+
+
+@media (min-width: 1900px) {
+
+    .secondSection {
+        margin-top: 2%;
+    }
+}
+
+@media (min-width: 1300px) {
+
+    .othersInfo div p {
+        width: 20%;
     }
 
+    .mainSection {
+        margin-top: -80px;
+    }
+
+    .secondSection {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    .grid2 {
+        margin-left: 50px;
+    }
+
+    .align-items {
+        display: flex;
+        align-items: center;
+    }
+
+    svg {
+        margin-right: 10px;
+        margin-left: -39px;
+    }
+}
+
+/*1ère*/
+@media (max-width: 1900px) {
+
     .desc-ref-template {
-        margin-left: -100px;
-        width: 90%;
+        /*margin-left: -100px;*/
     }
 
     .slide img{
-        width: 700px;
+        width: 659px;
         height: 437.5px;
-        object-fit: cover;
+        object-fit: contain;
     }
 
     .navigation-manual {
-        margin-left: -50px;
+        margin-left: -80px;
         margin-top: -100px;
+    }
+
+    .slider {
+        margin-right: 100px;
+        width: 700px;
     }
 
 }
 
+
+/*2ème*/
 @media (max-width: 1500px) {
+    .secondSection {
+        margin-top: -4%;
+    }
+
     .desc-ref-template {
-        margin-left: -200px;
+        margin-left: 0;
         width: 100%;
     }
     .slide img{
         width: 600px;
         height: 375px;
-        object-fit: cover;
+        object-fit: contain;
     }
 
     .navigation-manual {
@@ -132,17 +232,38 @@ section {
         margin-top: -160px;
     }
 
+    .slider {
+        margin-right: 200px;
+        width: 600px;
+    }
+
 }
+
+/*3ème*/
 
 @media (max-width: 1300px) {
     main {
         margin-left: 5%;
         margin-right: 5%;
-        margin-top: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        margin-top: 30px;
+        /*display: flex;*/
+        /*justify-content: center;*/
+        /*align-items: center;*/
+    }
 
+    article:nth-child(1) {
+        width: auto;
+    }
+
+    .align-items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    svg {
+        margin-left: -10px;
+        margin-right: 10px;
     }
 
     section {
@@ -154,8 +275,8 @@ section {
     }
 
     .navigation-manual {
-        margin-left: 0;
-        margin-top: -160px;
+        margin-left: 50px;
+        margin-top: 20px;
     }
 
     .grid1 {
@@ -164,21 +285,69 @@ section {
         text-align: center;
     }
 
+    .mainSection {
+        margin-top: -80px;
+    }
+
+    .desc-ref-template {
+        text-align: center;
+    }
+
+    .slide img{
+        width: 900px;
+        height: 562.5px;
+        object-fit: contain;
+    }
+
     .grid2 {
         margin-left: 0;
         margin-right: 0;
-        margin-top: -50px;
+        margin-top: 40px;
     }
 
+    .slider {
+        margin-left: 200px;
+        width: 900px;
+        height: 562.5px;
+    }
 
-    .desc-ref-template {
-        margin-right: 0;
-        margin-left: -50%;
-        width: 86vw;
+    .secondSection {
+        margin-top: 40px;
+    }
+
+    .othersInfo {
+        text-align: justify;
+        margin-right: -110px;
+    }
+
+    .othersInfo div p {
+        width: 250px;
+    }
+
+}
+
+
+/*4ème*/
+@media (max-width: 920px) {
+
+    .slide img{
+        width: 500px;
+        height: 312.5px;
+        object-fit: contain;
+    }
+
+    .navigation-manual {
+        margin-left: 50px;
+        margin-top: -220px;
+    }
+
+    .grid2 {
+        margin-top: -220px;
     }
 }
 
-@media (max-width: 675px) {
+/*5ème dernière*/
+@media (max-width: 580px) {
     .slide img{
         width: 350px;
         height: 218.75px;
@@ -186,11 +355,21 @@ section {
     }
 
     .navigation-manual {
-        margin-left: 0px;
+        margin-left: 50px;
         margin-top: -310px;
     }
 
     .grid2 {
-        margin-top: -225px;
+        margin-top: -300px;
+    }
+
+    .othersInfo {
+        text-align: start;
+        margin-right: 0px;
+    }
+
+    .othersInfo div p {
+        width: 165px;
     }
 }
+

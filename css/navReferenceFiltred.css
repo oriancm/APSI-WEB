@@ -4,12 +4,13 @@ nav {
     left: 0;
     padding: 5px 80px 0px 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     width: 100%;
     box-sizing: border-box;
     text-transform: uppercase;
     z-index: 1;
+    gap: 5%;
 
 }
 
@@ -31,10 +32,12 @@ nav .logo {
 
 nav ul {
     display: flex;
+    align-items: baseline;
 }
 
 nav ul li {
     margin: 0 25px;
+    align-items: center;
 }
 
 .active {
@@ -53,8 +56,31 @@ nav ul li {
     position: absolute;
 }
 
-/*.scrolled {*/
-/*    overflow: scroll !important;*/
-/*    height: 100vh;*/
-/*    width: 100vw;*/
-/*}*/
+.filtre {
+    margin-top: -6px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    background-color: transparent;
+    color: #000000;
+    border-color: #000000;
+}
+
+.commune {
+    line-height: 12px;
+    color: grey;
+    font-size: 12px;
+}
+
+
+@media (max-width: 1300px) {
+    .filtre {
+        display: none;
+    }
+}

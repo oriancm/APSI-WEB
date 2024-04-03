@@ -1,5 +1,6 @@
 <?php
 require('admin/db.php');
+require('functions/htmlPrint.php');
 
 function getAllRef($db) {
     $sql = "SELECT * FROM reference";
@@ -9,7 +10,7 @@ function getAllRef($db) {
 }
 
 function getAllPic($db) {
-    $sql = "SELECT * FROM photo";
+    $sql = "SELECT * FROM photo ORDER BY orderPic ASC";
     $stmt= $db->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -17,7 +18,6 @@ function getAllPic($db) {
 
 $refTab = getAllRef($db);
 $picTab = getAllPic($db);
-
 
 ?>
 
@@ -29,13 +29,12 @@ $picTab = getAllPic($db);
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="css/styleGlobalNotIndex.css">
     <link rel="stylesheet" href="css/styleNosRéférences.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
 
-    <?php include "./nav.php"; ?>
+    <?php include "./navReference.php"; ?>
 
     <main id="main" class="scrolled">
             <section>
@@ -44,7 +43,7 @@ $picTab = getAllPic($db);
                         <div>
                             <?php
                                 foreach($picTab as $pic) {
-                                    if($pic['idR'] == $ref['id']) {
+                                    if($pic['idR'] == $ref['id'] && $pic['orderPic'] == 1) {
                                         $picOfRef = $pic;
                                     }
                                 }
@@ -52,18 +51,24 @@ $picTab = getAllPic($db);
                             <a href="NosRéférencesTemplate.php?id=<?= $ref['id'] ?>"><img class="image-ref" src="pic/<?= $picOfRef["titre"]; ?>" alt=""></a>
                         </div>
                         <div class="desc-ref">
-                            <?= $ref["titre"]; ?><br>
-                            <?= $ref["commune"]; ?><br>
-                            <?php if ($ref["anneeD"] && $ref["anneeF"]): ?>
-                                <?= $ref["anneeD"]; ?> - <?= $ref["anneeF"]; ?><br>
-                            <?php endif; ?>
-                            <?= $ref["statut"]; ?>
+                            <p><?= $ref["titre"]; ?></p>
+                            <p class="commune"><?= $ref["commune"]; ?></p>
+
+
+<!--                            --><?php //= getStatutText($ref['statut']); ?>
+<!--                            --><?php //if ($ref["anneeD"] && $ref["anneeF"]): ?>
+<!--                                --><?php //= $ref["anneeD"]; ?><!-- - --><?php //= $ref["anneeF"]; ?><!--<br>-->
+<!--                            --><?php //elseif($ref["anneeD"]): ?>
+<!--                                --><?php //= $ref["anneeD"]; ?><!--<br>-->
+<!--                            --><?php //endif; ?>
+
                         </div>
                     </article>
                 <?php endforeach ?>
             </section>
     </main>
 </body>
+<link rel="stylesheet" href="css/styleGlobalNotIndex.css">
 </html>
 
 <script>

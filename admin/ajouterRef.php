@@ -39,28 +39,29 @@ if (isset($_POST['submit'])) {
             }
 
             if ($pics[0]['name'] != '') {
-                $idPhoto = $db->lastInsertId();
+                $idRef = $db->lastInsertId();
+                $orderPic = 1;
                 foreach($pics as $pic) {
                     $localPath = (dirname(__DIR__));
                     $dirPic = $localPath . '/pic/' . $pic['name'];
                     $extPic = pathinfo($dirPic, PATHINFO_EXTENSION);
                     $extValid = ['jpg', 'png'];
-
-                    $sql = "INSERT INTO photo (titre, dir, idR)";
-                    $sql .= " VALUES (?,?,?)";
+                    $sql = "INSERT INTO photo (titre, dir, idR, orderPic)";
+                    $sql .= " VALUES (?,?,?,?)";
                     $stmt = $db->prepare($sql);
-                    if (in_array(strtolower($extPic), $extValid) && $stmt->execute([$pic['name'], $dirPic, $idPhoto]) && move_uploaded_file($pic['tmp_name'], $dirPic)) {
+                    if (in_array(strtolower($extPic), $extValid) && $stmt->execute([$pic['name'], $dirPic, $idRef, $orderPic]) && move_uploaded_file($pic['tmp_name'], $dirPic)) {
                         print "<p> SUCCES Image ". $pic['name']. " enregistrée en BDD et transférée sur le serveur </p>";
                     }
                     else if (!in_array(strtolower($extPic), $extValid)) {
                         print "<p> ERREUR L'extension de l'image ". $pic['name']. " doit être un jpg ou un png</p>";
                     }
-                    else if (!$stmt->execute([$pic['name'], $extPic, $idPhoto])) {
+                    else if (!$stmt->execute([$pic['name'], $extPic, $idRef])) {
                         print "<p> ERREUR L'image ". $pic['name']. " n'a pas pu être enregistrée en BDD</p>";
                     }
                     else if (!move_uploaded_file($pic['tmp_name'], $dirPic)) {
                         print "<p> ERREUR L'image ". $pic['name']. " n'a pas pu être transférée sur le serveur</p>";
                     }
+                    $orderPic++;
                 }
             }
     }
@@ -151,13 +152,13 @@ return $res['MAX(id)'];
             <label for="">Statut</label>
 
             <input type="radio" name="statut" value="1">
-            <label style="color: black">Fini</label>
+            <label style="color: black">Opération livrée</label>
 
             <input type="radio" name="statut" value="2">
             <label style="color: black"for="">Travaux en cours</label>
 
             <input type="radio" name="statut" value="3">
-            <label style="color: black"for="">Livraison en cours</label>
+            <label style="color: black"for="">Conception en cours</label>
         </div>
 
         <div>
