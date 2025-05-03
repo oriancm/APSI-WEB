@@ -1,6 +1,6 @@
 <?php
 try{
-    $db = new PDO('mysql:host=127.0.0.1;dbname=apsi;charset=utf8mb4','root','root');
+    $db = new PDO('mysql:host=apsi;port=3306;dbname=default;charset=utf8mb4', 'root', 'root');
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e){
