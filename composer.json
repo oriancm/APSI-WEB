@@ -1,0 +1,17 @@
+{
+    "name": "orian/apsi",
+    "autoload": {
+        "psr-4": {
+            "Orian\\Apsi\\": "src/",
+            "Admin\\Model\\": "admin/Model/",
+            "Admin\\Database\\": "admin/Database/"
+        }
+    },
+    "authors": [
+        {
+            "name": "oriancm",
+            "email": "orian.cm@hotmail.com"
+        }
+    ],
+    "require": {}
+}
