@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ['php83', 'php83Extensions.pdo_mysql', 'php83Extensions.gd', 'composer', 'apache2']
+
+[phases.build]
+cmds = ['composer install', 'cp -r . /var/www/html']
+
+[phases.start]
+cmd = 'apache2-foreground'
+
+[start]
+cmd = '/usr/sbin/apache2ctl -D FOREGROUND'
