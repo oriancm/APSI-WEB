@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+  # Traefik: Reverse Proxy
+  traefik:
+    image: traefik:v3.1
+    container_name: coolify-proxy
+    command:
+      - "--api.insecure=true"   # Activer l'API Traefik pour le tableau de bord
+      - "--providers.docker=true"   # Utiliser Docker comme fournisseur
+      - "--entrypoints.web.address=:80"  # Entrée pour HTTP
+      - "--entrypoints.websecure.address=:443"  # Entrée pour HTTPS
+    ports:
+      - "80:80"    # HTTP
+      - "443:443"  # HTTPS
+      - "8080:8080"  # Dashboard de Traefik (seulement en local)
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"  # Permet à Traefik de communiquer avec Docker
+    networks:
+      - coolify
+
+  # Application Web
+  webapp:
+    image: sgw8w8skowgk8kw008ww0g80:071476d7a8706e6f2868ad40fc1638332e59f9a2
+    container_name: my-web-app
+    expose:
+      - "3000"   # Le port interne sur lequel ton application écoute
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.my-app.rule=Host(`sgw8w8skowgk8kw008ww0g80.173.212.238.189.sslip.io`) && PathPrefix(`/`)"
+      - "traefik.http.services.my-app.loadbalancer.server.port=3000"  # Rediriger vers le port interne de l'application
+      - "traefik.http.middlewares.my-app-https.redirectscheme.scheme=https"  # Rediriger vers HTTPS
+    networks:
+      - coolify
+
+  # Base de données MySQL
+  mysql:
+    image: mysql:8
+    container_name: apsi-db
+    environment:
+      MYSQL_ROOT_PASSWORD: example  # Remplace avec ton mot de passe
+    networks:
+      - coolify
+    expose:
+      - "3306"
+
+  # Base de données Redis
+  redis:
+    image: redis:7-alpine
+    container_name: coolify-redis
+    networks:
+      - coolify
+    expose:
+      - "6379"
+
+  # Autres services de Coolify (comme Postgres, Realtime, etc.) si nécessaire.
+  # Tu peux ajouter ces services de manière similaire en fonction des besoins de ton application.
+
+networks:
+  coolify:
+    external: true
