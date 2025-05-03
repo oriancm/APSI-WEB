@@ -1,64 +1,158 @@
+/* Cards for references */
+:root {
+    --card-border-radius: 12px;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --card-background: white;
+    --card-border: 1px solid #eaeaea;
+    --card-transition: all 0.3s ease;
+    --card-hover-transform: translateY(-10px);
+    --card-hover-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    --title-color: #333;
+    --subtitle-color: #666;
+    --accent-color: dodgerblue;
+    --gap-article: 40px; /* Espacement uniforme */
+    --image-border: 1px solid #f0f0f0; /* Bordure légère pour l'image */
+}
+
+.references-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    padding: 10px 0;
+}
+
 main {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     height: auto;
+    width: 100%;
 }
 
-:root {
-    --gap-article: 120px;
-    --padding-top: 10px;
-    --row-gap: 60px;
-    --padding-bottom: 100px;
-    --image-max-height: 150px;
-    --image-width: 250px;
-
+h1#references-title {
+    color: dodgerblue;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    border-bottom: 2px solid dodgerblue;
+    padding-bottom: 10px;
+    line-height: 1.6;
+    text-align: left;
+    display: block;
 }
 
-section {
-    box-sizing: content-box;
-    gap: var(--gap-article);
-    padding-top: var(--padding-top);
-    padding-bottom: var(--padding-bottom);
+#references-section {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: center;
-    row-gap: var(--row-gap);
-    margin-left: 1%;
-    margin-right: 1%;
+    justify-content: space-evenly;
+    gap: var(--gap-article);
+    padding: 20px var(--gap-article) 20px; 
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Card styling */
+article {
+    width: 280px;
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: var(--card-transition);
+    border: var(--card-border);
+    height: auto; /* Hauteur automatique au lieu de 100% */
+    cursor: pointer; /* Indique que toute la carte est cliquable */
+    position: relative; /* Pour le positionnement du lien invisible */
+}
+
+/* Lien invisible couvrant toute la carte */
+article a.card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10; /* Au-dessus de tout sauf l'effet de survol de l'image */
+}
+
+article:hover {
+    transform: var(--card-hover-transform);
+    box-shadow: var(--card-hover-shadow);
+}
+
+/* Image container */
+article > div:first-child {
+    width: 100%;
+}
+
+article > div > div:first-child {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-bottom: var(--image-border); /* Bordure en bas de l'image */
 }
 
 .image-ref {
-    width: var(--image-width);
-    max-height: var(--image-max-height);
-    object-fit: cover; /*crop but keep proportion*/
-    /*background-size: cover; !* dont crop but kill proportion*!*/
-    cursor: pointer;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
     transition: transform 0.5s;
 }
 
-
-.image-ref:hover {
-    transform: translateY(-10px);
-    z-index: 10;
+article:hover .image-ref {
+    transform: scale(1.05);
 }
 
+/* Text container */
 .desc-ref {
-    padding: 15px;
+    padding: 16px;
     text-align: center;
+    background-color: var(--card-background);
 }
 
+.text-wrapper {
+    margin-bottom: 5px;
+}
+
+.text-wrapper:last-child {
+    margin-bottom: 0;
+}
+
+/* Title styling */
+.text-wrapper p {
+    margin: 0;
+    font-weight: 600;
+    color: var(--title-color);
+    font-size: 18px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    line-height: 1.5; /* Ajout d'une hauteur de ligne pour éviter les coupures */
+    padding-bottom: 2px; /* Padding pour éviter la coupure des lettres qui descendent */
+}
+
+/* Commune styling */
+.text-wrapper p.commune {
+    font-weight: normal;
+    color: var(--subtitle-color);
+    font-size: 16px;
+    margin-top: 5px;
+    line-height: 1.5; /* Ajout d'une hauteur de ligne pour éviter les coupures */
+    padding-bottom: 2px; /* Padding pour éviter la coupure des lettres qui descendent */
+}
+
+/* Restauration de la classe scrolled */
 .scrolled {
     overflow: scroll;
     height: calc(100vh - 114px);
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 body::-webkit-scrollbar {
@@ -69,8 +163,38 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+.pb {
+    padding-bottom: 4px;
+}
+
+/* Responsive adjustments */
 @media screen and (max-width: 1020px) {
     main {
         background-position: center;
     }
+}
+
+@media screen and (max-width: 768px) {
+    h1#references-title {
+        font-size: 2em;
+    }
+    #references-section {
+        gap: 30px;
+        padding: 20px 30px 20px;
+    }
+    /* article {
+        width: 290px;
+    } */
+}
+
+@media screen and (max-width: 480px) {
+    #references-section {
+        gap: 20px;
+        padding: 20px 20px 20px;
+    }
+    
+    /* article {
+        width: 90%;
+        max-width: 320px;
+    } */
 }

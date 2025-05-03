@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Enlever le .php dans l'URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^/]+)$ $1.php [L]
+
+# Exemple pour référence propre : /reference/8
+RewriteRule ^reference/([0-9]+)$ reference.php?id=$1 [L]
