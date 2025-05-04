@@ -6,6 +6,13 @@ Qui sommes nous  et Nos metiers : ameliorer mise en forme du texte, rajouter gra
 Toute les pages : verifier coherence des couleurs et gras, hauteur du slogan et en responsive
 loading mail
 
-afficher slogan legal notice and privacy
-
 back office, ameliorer ajouter modifier supprimer, mdp admin
+
+
+
+
+deploiement:
+redirection propre
+certificat ssl
+css chargement
+server mail
