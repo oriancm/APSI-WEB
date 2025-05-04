@@ -1,3 +1,4 @@
+bug rsponsive: desactive le scroll sur lindex
 bug responsive: bouton nav image
 bug responsive: hover h1 nos ref bizarre
 bug responsive: texte nos metiers qui se cache quand largeur trop petite
