@@ -43,7 +43,7 @@ $picTab = getAllPic($db);
                 <section id="references-section">
                 <?php foreach($refTab as $ref): ?>
                     <article>
-                    <a class="card-link" href="reference?id=<?= $ref['id'] ?>"></a>
+                    <a class="card-link" href="reference.php?id=<?= $ref['id'] ?>"></a>
                         <div>
                             <?php
                                 foreach($picTab as $pic) {

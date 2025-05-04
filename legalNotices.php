@@ -34,6 +34,7 @@
                     <p>Téléphone : <strong>[numéro de l'hébergeur]</strong></p>
                 </div>
                 
+                <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
             </div>
         </section>
     </main>

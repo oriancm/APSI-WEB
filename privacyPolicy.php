@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>APSI BTP - Mentions Légales</title>
-    <link rel="stylesheet" href="css/styleMentionsLegales.css">
+    <link rel="stylesheet" href="css/stylePolicyPrivacy.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
@@ -25,6 +25,9 @@
                     <p>Si vous avez des questions concernant le traitement de vos données, vous pouvez contacter : <strong>[ton e-mail de contact]</strong></p>
                 </div>
 
+                <div class="pb">
+                    <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
+                </div>   
 
             </div>
         </section>
