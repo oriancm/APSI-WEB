@@ -9,8 +9,8 @@ try {
         ]
     );
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully!";
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage() . " | Code: " . $e->getCode() . " | Trace: " . $e->getTraceAsString());
+    // echo "Connected successfully!";
+} catch(PDOException $e){
+    echo "Connection failed: " . $e->getMessage();
 }
 
