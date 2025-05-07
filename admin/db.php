@@ -1,7 +1,7 @@
 <?php
 try {
     $db = new PDO(
-        'mysql:host=apsi;port=3306;dbname=default;charset=utf8mb4',
+        'mysql:host=owks4scg8gcokow40cc0kk4w;port=3306;dbname=default;charset=utf8mb4',
         'root',
         'root',
         [
