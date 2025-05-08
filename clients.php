@@ -6,7 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="css/styleGlobalNotIndex.css">
     <link rel="stylesheet" href="css/styleNosClients.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
@@ -28,7 +27,7 @@
                     <img src="img/logo/justice.png" alt="Justice Logo">
                     <img src="img/logo/Logo_Crous_vectorisé.svg.png" alt="Crous Logo">
                     <img src="img/logo/Logo_ville_Vitrolles.png" alt="Vitrolles Logo">
-                    <img src="img/logo/Office_national_des_forêts_logo.svg.png" alt="ONF Logo">
+                    <img src="img/logo/Office_national_des_forêts_logo.png" alt="ONF Logo">
                     <img src="img/logo/paysdapt.jpg" alt="Pays d'Apt Logo">
                     <img src="img/logo/provenceAlpes.png" alt="Provence Alpes Logo">
                     <img src="img/logo/sdis.png" alt="SDIS Logo">
@@ -59,3 +58,4 @@
         mainElement.style.marginTop = navHeight + 'px';
     });
 </script>
+<link rel="stylesheet" href="css/styleGlobalNotIndex.css">
