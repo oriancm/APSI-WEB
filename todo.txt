@@ -5,7 +5,6 @@ bug responsive: texte nos metiers qui se cache quand largeur trop petite
 Qui sommes nous  et Nos metiers : ameliorer mise en forme du texte, rajouter gras mots cles, changer image
 Toute les pages : verifier coherence des couleurs et gras, hauteur du slogan et en responsive
 loading mail
-responsive menu burger nos clients
 
 back office, ameliorer ajouter modifier supprimer, mdp admin
 

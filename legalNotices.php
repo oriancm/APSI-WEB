@@ -20,25 +20,24 @@
                 
                 <div class="legal-section">
                     <h2>Éditeur du site</h2>
-                    <p>Le présent site est édité par : <strong>[Nom de l'entreprise]</strong>, société de type <strong>[forme juridique]</strong>, au capital de <strong>[montant du capital social]</strong>, ayant son siège social situé à <strong>[adresse du siège social]</strong>, immatriculée au Registre du Commerce et des Sociétés de <strong>[ville]</strong> sous le numéro <strong>[numéro RCS]</strong>.</p>
-                    <p>Numéro de TVA intracommunautaire : <strong>[à compléter si applicable]</strong></p>
-                    <p>Directeur de la publication : <strong>[Nom du dirigeant]</strong></p>
-                    <p>Contact : <strong>[adresse e-mail ou numéro de téléphone]</strong></p>
+                    <p>Le présent site est édité par : <strong>APSI BTP</strong>, société de type <strong>SARL</strong>, au capital de <strong>6 800,00 €</strong>, ayant son siège social situé à <strong>QUARTIER PIERREFEU, CHEMIN DE SAINT JEAN, 84750 CASENEUVE</strong>, immatriculée au Registre du Commerce et des Sociétés d'<strong>Avignon</strong> sous le numéro <strong>495 392 557 R.C.S. Avignon</strong>.</p>
+                    <p>Numéro de TVA intracommunautaire : <strong>FR40495392557</strong></p>
+                    <p>Directeur de la publication : <strong>Ludovic MESSY</strong></p>
+                    <p>Contact : <strong>l.messy@apsi-btp.fr</strong></p>
                 </div>
                 
                 <div class="legal-section">
                     <h2>Hébergement</h2>
-                    <p>Le site est hébergé par : <strong>[Nom de l'hébergeur]</strong></p>
-                    <p>Adresse : <strong>[adresse complète de l'hébergeur]</strong></p>
-                    <p>Site web : <strong>[URL du site de l'hébergeur]</strong></p>
-                    <p>Téléphone : <strong>[numéro de l'hébergeur]</strong></p>
+                    <p>Le site est hébergé par : <strong>OVH</strong></p>
+                    <p>Adresse : <strong>2 rue Kellermann, 59100 Roubaix, France</strong></p>
+                    <p>Site web : <strong><a href="https://www.ovh.com" target="_blank">https://www.ovh.com</a></strong></p>
+                    <p>Téléphone : <strong>1007</strong> (gratuit depuis un poste fixe en France)</p>
                 </div>
                 
                 <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
             </div>
         </section>
     </main>
-
 
 </body>
 <link rel="stylesheet" href="css/styleGlobalNotIndex.css">
