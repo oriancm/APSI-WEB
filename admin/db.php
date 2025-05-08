@@ -1,6 +1,6 @@
 <?php
 // Petit chargeur .env "à la zeub"
-$envFile = __DIR__ . '/../.env'; // adapte le chemin si besoin
+$envFile = __DIR__ . '/.env'; // adapte le chemin si besoin
 if (file_exists($envFile)) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
