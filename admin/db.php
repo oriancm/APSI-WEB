@@ -1,16 +1,26 @@
 <?php
-try {
-    $db = new PDO(
-        'mysql:host=owks4scg8gcokow40cc0kk4w;port=3306;dbname=default;charset=utf8mb4',
-        'root',
-        'root',
-        [
-            PDO::MYSQL_ATTR_SSL_CA => '/etc/ssl/certs/coolify-ca.crt',
-        ]
-    );
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connected successfully!";
-} catch(PDOException $e){
-    echo "Connection failed: " . $e->getMessage();
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$options = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+];
+
+if (!empty($_ENV['DB_SSL_CA'])) {
+    $options[PDO::MYSQL_ATTR_SSL_CA] = $_ENV['DB_SSL_CA'];
 }
 
+try {
+    $db = new PDO(
+        'mysql:host=' . $_ENV['DB_HOST'] .
+        ';port=' . $_ENV['DB_PORT'] .
+        ';dbname=' . $_ENV['DB_NAME'] .
+        ';charset=utf8mb4',
+        $_ENV['DB_USER'],
+        $_ENV['DB_PASSWORD'],
+        $options
+    );
+    // echo "Connected successfully!";
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
