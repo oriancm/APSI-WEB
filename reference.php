@@ -37,11 +37,12 @@ $showCarousel = count($picTab) > 1;
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="/css/styleNosRéférencesTemplate.css">
+    <title>APSI BTP - Référence</title>
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/styleNosRéférencesTemplate.css">
+    <link rel="stylesheet" href="css/styleGlobalNotIndex.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
-    </head>
+</head>
 <body>
 
 <?php include "./nav.php"; ?>
@@ -143,7 +144,6 @@ $showCarousel = count($picTab) > 1;
 
 </main>
 </body>
-<link rel="stylesheet" href="/css/styleGlobalNotIndex.css">
 </html>
 
 <?php if ($showCarousel): ?>

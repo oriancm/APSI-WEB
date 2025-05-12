@@ -5,8 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>APSI BTP - Nos clients</title>
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/styleNosClients.css">
+    <link rel="stylesheet" href="css/styleGlobalNotIndex.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
@@ -49,13 +51,3 @@
 
 </body>
 </html>
-<script>
-    addEventListener('load', (event) => {
-        var navElement = document.getElementById('nav');
-        var navHeight = navElement.offsetHeight;
-        
-        var mainElement = document.getElementById('main');
-        mainElement.style.marginTop = navHeight + 'px';
-    });
-</script>
-<link rel="stylesheet" href="css/styleGlobalNotIndex.css">

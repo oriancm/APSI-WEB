@@ -5,8 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>APSI BTP - Mentions Légales</title>
+    <title>APSI BTP - Politique de confidentialité</title>
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/stylePolicyPrivacy.css">
+    <link rel="stylesheet" href="css/styleGlobalNotIndex.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
@@ -22,7 +24,7 @@
                     <p>Ce site ne collecte pas de données personnelles en dehors de celles fournies via le formulaire de contact.</p>
                     <p>Le formulaire de contact présent sur ce site recueille certaines informations (nom, objet, message) uniquement dans le but de permettre à l'entreprise de répondre aux demandes envoyées.</p>
                     <p>Ces données ne sont ni stockées en base de données, ni utilisées à des fins commerciales ou publicitaires, ni transmises à des tiers.</p>
-                    <p>Si vous avez des questions concernant le traitement de vos données, vous pouvez contacter : <strong>[ton e-mail de contact]</strong></p>
+                    <p>Si vous avez des questions concernant le traitement de vos données, vous pouvez contacter : <strong>l.messy@apsi-btp.fr</strong></p>
                 </div>
 
                 <div class="pb">
@@ -33,17 +35,5 @@
         </section>
     </main>
 
-
 </body>
-<link rel="stylesheet" href="css/styleGlobalNotIndex.css">
 </html>
-
-<script>
-    addEventListener('load', (event) => {
-        var navElement = document.getElementById('nav');
-        var navHeight = navElement.offsetHeight;
-        
-        var mainElement = document.getElementById('main');
-        mainElement.style.marginTop = navHeight + 'px';
-    });
-</script>

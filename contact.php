@@ -1,5 +1,3 @@
-
-
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
@@ -35,9 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <title>APSI BTP - Nous contacter</title>
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/styleNousContacter.css">
+    <link rel="stylesheet" href="css/styleGlobalNotIndex.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
@@ -75,15 +74,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 </body>
-<link rel="stylesheet" href="css/styleGlobalNotIndex.css">
 </html>
-
-<script>
-    addEventListener('load', (event) => {
-        var navElement = document.getElementById('nav');
-        var navHeight = navElement.offsetHeight;
-        
-        var mainElement = document.getElementById('main');
-        mainElement.style.marginTop = navHeight + 'px';
-    });
-</script>

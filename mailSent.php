@@ -1,5 +1,3 @@
-
-
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstname = $_POST['firstname'];
@@ -23,15 +21,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <title>APSI BTP - Message envoyé</title>
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/styleMailSent.css">
+    <link rel="stylesheet" href="css/styleGlobalNotIndex.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
@@ -40,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <main id="main" class="scrolled">   
 
-        <div">
+        <div>
             <div style="text-align: center; width: 100%">
             <h1 class="senth1">Nous Contacter</h1>
             <div class="sent">
@@ -64,21 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
         </div>
         
-
-
     </main>
 
-
-
 </body>
-<link rel="stylesheet" href="css/styleGlobalNotIndex.css">
 </html>
-<script>
-    addEventListener('load', (event) => {
-        var navElement = document.getElementById('nav');
-        var navHeight = navElement.offsetHeight;
-        
-        var mainElement = document.getElementById('main');
-        mainElement.style.marginTop = navHeight + 'px';
-    });
-</script>
