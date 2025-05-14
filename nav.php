@@ -12,7 +12,7 @@
 
 <?php $pagename = basename($_SERVER['PHP_SELF']); ?>
     <nav id="nav">
-        <a href="/index.php"><img class="logo" src="/img/APSI.png" alt=""></a>
+        <a href="/index.php" class="logo-wrapper"><img class="logo" src="/img/APSI.png" alt=""></a>
 
         <div class="menu">
             <ul>
