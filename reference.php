@@ -139,7 +139,10 @@ $showCarousel = count($picTab) > 1;
                 
         </article>
     </section>
-    <p class="slogan" style="margin-top: 10px">APSI BTP, vos projets en toute sérénité…</p>
+    <div class="pb">
+        <p class="slogan" style="margin-top: 0;">APSI BTP, vos projets en toute sérénité…</p>
+    </div>
+    
 
 </main>
 </body>

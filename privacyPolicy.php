@@ -22,7 +22,7 @@
                     <p>Ce site ne collecte pas de données personnelles en dehors de celles fournies via le formulaire de contact.</p>
                     <p>Le formulaire de contact présent sur ce site recueille certaines informations (nom, objet, message) uniquement dans le but de permettre à l'entreprise de répondre aux demandes envoyées.</p>
                     <p>Ces données ne sont ni stockées en base de données, ni utilisées à des fins commerciales ou publicitaires, ni transmises à des tiers.</p>
-                    <p>Si vous avez des questions concernant le traitement de vos données, vous pouvez contacter : <strong>[ton e-mail de contact]</strong></p>
+                    <p>Si vous avez des questions concernant le traitement de vos données, vous pouvez contacter : <strong>oriancm.pro@gmail.com</strong></p>
                 </div>
 
                 <div class="pb">

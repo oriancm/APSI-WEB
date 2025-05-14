@@ -75,7 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 </body>
-<link rel="stylesheet" href="css/styleGlobalNotIndex.css">
 </html>
 
 <script>
@@ -87,3 +86,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mainElement.style.marginTop = navHeight + 'px';
     });
 </script>
+<link rel="stylesheet" href="css/styleGlobalNotIndex.css">

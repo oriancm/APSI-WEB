@@ -20,7 +20,7 @@
                 
                 <p>La société APSI BTP a été créée en 2007 par Ludovic MESSY.</p>
                 
-                <p>Après une période de développement, elle a reçu du renfort avec l'arrivée en avril 2021 de Laurent Métayer.</p>
+                <p>Après une période de développement, elle a reçu du renfort avec l'arrivée en avril 2021 de Laurent MÉTAYER.</p>
                 
                 <p>Depuis cette date, notre équipe continue à soutenir activement nos clients et nos partenaires maîtres d'œuvre dans leurs projets.</p>
                 
@@ -63,9 +63,10 @@
                     <li>Hautes-Alpes (05)</li>
                     <li>Gard (30)</li>
                 </ul>
-                
-                <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
             </div>
+            <div class="pb">
+                <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
+            </div>  
         </section>
     </main>
 

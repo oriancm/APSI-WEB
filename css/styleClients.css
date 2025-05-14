@@ -1,9 +1,15 @@
 .scrolled {
     overflow: scroll;
-    height: calc(100vh - 114px);
+    height: calc(100dvh - 114px);
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  @supports not (height: 100dvh) {
+    .scrolled {
+        height: calc(100vh - 114px);
+    }
+}
 
 section {
     box-sizing: content-box;
@@ -52,6 +58,11 @@ section {
 
 .pb {
     padding-bottom: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+
+
 }
 
 @media (max-width: 600px) {
@@ -64,6 +75,9 @@ section {
 
     .logo-gallery img {
         max-width: 120px;
+    }
+    .scrolled {
+        height: calc(100svh - 114px);
     }
 }
 

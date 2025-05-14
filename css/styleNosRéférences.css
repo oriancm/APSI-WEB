@@ -1,4 +1,4 @@
-/* Cards for references */
+/* Cards for references modernisé avec unités viewport modernes */
 :root {
     --card-border-radius: 12px;
     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -142,12 +142,19 @@ article:hover .image-ref {
     padding-bottom: 2px; /* Padding pour éviter la coupure des lettres qui descendent */
 }
 
-/* Restauration de la classe scrolled */
+/* Restauration de la classe scrolled avec unités modernes */
 .scrolled {
     overflow: scroll;
-    height: calc(100vh - 114px);
+    height: calc(100dvh - 114px);
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+}
+
+/* Fallback pour compatibilité */
+@supports not (height: 100dvh) {
+    .scrolled {
+        height: calc(100vh - 114px);
+    }
 }
 
 body {
@@ -164,6 +171,7 @@ body::-webkit-scrollbar {
 }
 
 .pb {
+    max-width: 90%;
     padding-bottom: 4px;
 }
 
@@ -182,9 +190,17 @@ body::-webkit-scrollbar {
         gap: 30px;
         padding: 20px 30px 20px;
     }
-    /* article {
-        width: 290px;
-    } */
+    /* Pour les petits écrans, utilisation de svh */
+    .scrolled {
+        height: calc(100svh - 114px);
+    }
+}
+
+@media screen and (min-width: 1021px) {
+    /* Pour les grands écrans, utilisation de lvh */
+    .scrolled {
+        height: calc(100lvh - 114px);
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -192,9 +208,4 @@ body::-webkit-scrollbar {
         gap: 20px;
         padding: 20px 20px 20px;
     }
-    
-    /* article {
-        width: 90%;
-        max-width: 320px;
-    } */
 }

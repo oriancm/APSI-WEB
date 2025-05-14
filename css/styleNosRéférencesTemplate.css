@@ -1,5 +1,13 @@
+/* Style détail référence modernisé */
 main {
-    height: calc(100vh - -2px);
+    height: calc(100dvh - -2px);
+}
+
+/* Fallback pour les navigateurs qui ne supportent pas dvh */
+@supports not (height: 100dvh) {
+    main {
+        height: calc(100vh - -2px);
+    }
 }
 
 h1#references-title {
@@ -23,9 +31,6 @@ a {
 .mainSection {
     display: flex;
     align-items: center; /* Vertically center items */
-    marginMark {
-        vertical-align: middle;
-    }
     margin-left: 2%;
     margin-right: 2%;
     gap: 2%;
@@ -148,15 +153,22 @@ article {
 
 .scrolled {
     overflow: scroll;
-    height: calc(100vh - 114px);
+    height: calc(100dvh - 114px);
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+/* Fallback pour compatibilité */
+@supports not (height: 100dvh) {
+    .scrolled {
+        height: calc(100vh - 114px);
+    }
 }
 
 @media (min-width:1500px) {
     .mainSection {
         margin-top: 20px;
-    }    
+    }
 }
 
 @media (min-width: 1300px) {
@@ -182,12 +194,13 @@ article {
         margin-top: -104px;
     }
 }
+
 .title {
-        margin-top: 10px; 
-        margin-bottom: 15px; 
-        width: 100%;
-        text-align: center;
-    }
+    margin-top: 10px; 
+    margin-bottom: 15px; 
+    width: 100%;
+    text-align: center;
+}
 
 @media (min-width: 1301px) {
     .title {
@@ -198,8 +211,8 @@ article {
         text-align: left;
     }
 }
-@media (max-width: 1300px) {
 
+@media (max-width: 1300px) {
     .infos p {
         text-align: left;
     }
@@ -253,6 +266,33 @@ article {
         margin-left: 0px;
         margin-top: -100px;
     }
+    
+    /* Pour les écrans moyens, utilisation de dvh */
+    .scrolled {
+        height: calc(100dvh - 114px);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Pour les petits écrans, utilisation de svh */
+    .scrolled {
+        height: calc(100svh - 114px);
+    }
+    
+    main {
+        height: calc(100svh - -2px);
+    }
+}
+
+@media (min-width: 1021px) {
+    /* Pour les grands écrans, utilisation de lvh */
+    .scrolled {
+        height: calc(100lvh - 114px);
+    }
+    
+    main {
+        height: calc(100lvh - -2px);
+    }
 }
 
 @media (max-width: 650px) {
@@ -292,5 +332,28 @@ article {
     .navigation-manual {
         margin-left: -238px;
         margin-top: -174px;
+    }
+}
+
+.slogan {
+    position: absolute;
+    bottom: 3px;
+}
+
+.pb {
+    padding-bottom: 4px;
+    display: flex;
+    justify-content: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@media (max-height:700px) {
+    .slogan {
+        margin-top: 20px !important;
+        position: relative;
+        bottom: 0;
     }
 }

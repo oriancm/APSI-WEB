@@ -15,7 +15,7 @@ main {
   
   .scrolled {
     overflow: scroll;
-    height: calc(100vh - 114px);
+    height: calc(100svh - 114px);
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }

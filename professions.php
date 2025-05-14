@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>APSI BTP - Nos Métiers</title>
     <link rel="stylesheet" href="/css/styleNosMétiers.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
     
@@ -157,21 +157,22 @@
                     <li>Traçabilité des décisions prises.</li>
                     <li>Accompagnement pendant la garantie de parfait achèvement.</li>
                 </ul>
-
-                <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
             </div>
+            <div class="pb">
+                <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
+            </div>  
         </section>
     </main>
-
-    <script>
-        addEventListener('load', (event) => {
-            var navElement = document.getElementById('nav');
-            var navHeight = navElement.offsetHeight;
-            
-            var mainElement = document.getElementById('main');
-            mainElement.style.marginTop = navHeight + 'px';
-        });
-    </script>
 </body>
-</html>
 <link rel="stylesheet" href="css/styleGlobalNotIndex.css">
+</html>
+
+<script>
+    addEventListener('load', (event) => {
+        var navElement = document.getElementById('nav');
+        var navHeight = navElement.offsetHeight;
+        
+        var mainElement = document.getElementById('main');
+        mainElement.style.marginTop = navHeight + 'px';
+    });
+</script>
