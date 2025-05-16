@@ -14,7 +14,7 @@ body {
 
 @media screen and (max-width: 1200px) {
 
-    ul li {
+    nav ul li {
         display: none;
     }
 

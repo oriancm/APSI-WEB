@@ -1,0 +1,191 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    text-align: center;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    font-size: 1.875rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+h1 a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+h1 a:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+form > * {
+    padding: 10px;
+    text-decoration: none;
+    list-style: none;
+}
+
+label {
+    color: #0048ff;
+}
+
+.message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid;
+}
+
+.message.success {
+    background-color: #d1fae5;
+    border-color: #10b981;
+    color: #065f46;
+}
+
+.message.error {
+    background-color: #fee2e2;
+    border-color: #ef4444;
+    color: #991b1b;
+}
+
+.refresh-btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.refresh-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.refresh-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #93c5fd;
+}
+
+.refresh-note {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-bottom: 1rem;
+}
+
+.reference-list {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.reference-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.reference-item:last-child {
+    border-bottom: none;
+}
+
+.reference-item span {
+    color: #374151;
+}
+
+.reference-item form {
+    margin: 0;
+}
+
+.delete-btn {
+    background-color: #dc2626;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.delete-btn:hover {
+    background-color: #b91c1c;
+}
+
+.delete-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #f87171;
+}
+
+.no-references {
+    color: #4b5563;
+    padding: 1rem;
+}
+
+
+.action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+    .add-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 20px 0;
+        display: inline-block;
+        text-decoration: none;
+    }
+    
+    .edit-btn {
+        background-color: #ff9800;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 6px 12px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 14px;
+        display: inline-block;
+    }
+    
+    .delete-btn {
+        background-color: #f44336;
+        font-size: 14px;
+    }
+    
+    .admin-header {
+        margin-bottom: 30px;
+        position: relative;
+    }
+    
+    .logout-link {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #6c757d;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 4px;
+    }

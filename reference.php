@@ -39,7 +39,7 @@ $showCarousel = count($picTab) > 1;
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <link rel="stylesheet" href="/css/styleNosRéférencesTemplate.css">
+    <link rel="stylesheet" href="/css/reference.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
     </head>
 <body>

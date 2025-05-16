@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>APSI BTP - Qui sommes-nous</title>
-    <link rel="stylesheet" href="css/styleQuiSommesNous.css">
+    <link rel="stylesheet" href="css/aboutUs.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
