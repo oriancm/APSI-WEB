@@ -5,9 +5,6 @@ Toute les pages : verifier coherence des couleurs et gras, hauteur du slogan et 
 loading mail
 
 
-confirmation suppression ref confirmDelete bizarre
-
-
 deploiement:
 redirection propre
 css chargement
