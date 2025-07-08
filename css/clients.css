@@ -11,6 +11,11 @@
     }
 }
 
+.tropGrand {
+    max-width: 100px !important;
+    height: auto;
+}
+
 section {
     box-sizing: content-box;
     padding-top: 10px;

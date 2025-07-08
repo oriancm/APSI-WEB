@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
 <body>
@@ -25,13 +25,13 @@
 
     <footer>
         <div class="legal-links">
-            <a href="legalNotices.php">Mentions légales</a>
-            <a href="privacyPolicy.php">Politique de confidentialité</a>
+            <a href="legalNotices">Mentions légales</a>
+            <a href="privacyPolicy">Politique de confidentialité</a>
         </div>
     </footer>
 
 </body>
-<link rel="stylesheet" href="css/indexResponsive.css">
+<link rel="stylesheet" href="/css/indexResponsive.css">
 </html>
 <script>
   function setRealVH() {

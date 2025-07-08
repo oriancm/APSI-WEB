@@ -32,6 +32,8 @@ $picTab = getAllPic($db);
     <title>Document</title>
     <link rel="stylesheet" href="/css/references.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
+    <!-- Iconscout Link For Icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
 <body>
 
@@ -39,11 +41,25 @@ $picTab = getAllPic($db);
     
     <main id="main" class="scrolled">
         <div class="references-container">
-        <h1 id="references-title">Nos Références</h1>
+            <!-- Fixed Filter Button -->
+            <div class="fixed-filter">
+                <div class="filter-trigger">
+                    <i class="uil uil-filter"></i>
+                </div>
+                <div class="filter-panel">
+                    <div class="filter-header">
+                        <span>Filtrer par domaine</span>
+                        <i class="uil uil-times close-filter"></i>
+                    </div>
+                    <ul class="filter-options"></ul>
+                </div>
+            </div>
+            
+            <h1 id="references-title">Nos Références</h1>
                 <section id="references-section">
                 <?php foreach($refTab as $ref): ?>
-                    <article>
-                    <a class="card-link" href="reference.php?id=<?= $ref['id'] ?>"></a>
+                    <article data-domain="<?= isset($ref['domaine']) ? $ref['domaine'] : '0' ?>">
+                    <a class="card-link" href="reference/<?= $ref['id'] ?>"></a>
                         <div>
                             <?php
                                 foreach($picTab as $pic) {
@@ -118,11 +134,115 @@ $picTab = getAllPic($db);
     
     // Initial update
     // Add a slight delay to ensure layout is complete
-    setTimeout(updateTitleWidth, 100);
+    setTimeout(() => {
+        updateTitleWidth();
+    }, 100);
     
     // Update on resize
     window.addEventListener('resize', function() {
-        setTimeout(updateTitleWidth, 100);
+        setTimeout(() => {
+            updateTitleWidth();
+        }, 100);
     });
+});
+
+// Custom Select for Domain Filter
+const fixedFilter = document.querySelector(".fixed-filter"),
+filterTrigger = fixedFilter.querySelector(".filter-trigger"),
+filterPanel = fixedFilter.querySelector(".filter-panel"),
+closeFilter = fixedFilter.querySelector(".close-filter"),
+filterOptions = fixedFilter.querySelector(".filter-options");
+
+let domains = [
+    "Tous les domaines",
+    "Résidences Universitaires", 
+    "Équipements sportifs", 
+    "Équipements culturels", 
+    "Groupes scolaires et collèges", 
+    "Aménagements urbains", 
+    "Bâtiments publics", 
+    "Crèches", 
+    "Centre d'Incendie et de Secours", 
+    "Santé", 
+    "Logements sociaux", 
+    "Monuments Historiques", 
+    "Restructuration et réhabilitation"
+];
+
+// Mapping between domain names and their numeric values in database
+const domainMapping = {
+    "Tous les domaines": "all",
+    "Résidences Universitaires": "1", 
+    "Équipements sportifs": "2", 
+    "Équipements culturels": "3", 
+    "Groupes scolaires et collèges": "4", 
+    "Aménagements urbains": "5", 
+    "Bâtiments publics": "6", 
+    "Crèches": "7", 
+    "Centre d'Incendie et de Secours": "8", 
+    "Santé": "9", 
+    "Logements sociaux": "10", 
+    "Monuments Historiques": "11", 
+    "Restructuration et réhabilitation": "12"
+};
+
+function addDomain(selectedDomain) {
+    filterOptions.innerHTML = "";
+    domains.forEach(domain => {
+        let isSelected = domain == selectedDomain ? "selected" : "";
+        let li = `<li onclick="updateDomainName(this)" class="${isSelected}">${domain}</li>`;
+        filterOptions.insertAdjacentHTML("beforeend", li);
+    });
+}
+addDomain();
+
+function updateDomainName(selectedLi) {
+    addDomain(selectedLi.innerText);
+    fixedFilter.classList.remove("active");
+    
+    // Filter references based on selected domain
+    filterReferences(selectedLi.innerText);
+}
+
+function filterReferences(selectedDomain) {
+    const articles = document.querySelectorAll('#references-section article');
+    const domainValue = domainMapping[selectedDomain];
+    
+    articles.forEach(article => {
+        const articleDomain = article.getAttribute('data-domain');
+        
+        if (domainValue === "all") {
+            // Show all articles
+            article.style.display = 'block';
+        } else {
+            // Show only articles matching the selected domain
+            if (articleDomain === domainValue) {
+                article.style.display = 'block';
+            } else {
+                article.style.display = 'none';
+            }
+        }
+    });
+    
+    // Update title width after filtering
+    setTimeout(() => {
+        updateTitleWidth();
+    }, 100);
+}
+
+// Event listeners for opening and closing the filter
+filterTrigger.addEventListener("click", () => {
+    fixedFilter.classList.toggle("active");
+});
+
+closeFilter.addEventListener("click", () => {
+    fixedFilter.classList.remove("active");
+});
+
+// Close filter when clicking outside
+document.addEventListener("click", (e) => {
+    if (!fixedFilter.contains(e.target)) {
+        fixedFilter.classList.remove("active");
+    }
 });
 </script>

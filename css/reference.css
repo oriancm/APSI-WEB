@@ -1,6 +1,8 @@
 /* Style détail référence modernisé */
 main {
     height: calc(100dvh - -2px);
+    display: flex;
+    flex-direction: column;
 }
 
 /* Fallback pour les navigateurs qui ne supportent pas dvh */
@@ -11,10 +13,9 @@ main {
 }
 
 h1#references-title {
-    color: dodgerblue;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     font-size: 2.5em;
-    border-bottom: 2px solid dodgerblue;
+    border-bottom: 2px solid #ccc;
     padding-bottom: 10px;
     line-height: 1.6;
     text-align: left;
@@ -22,6 +23,43 @@ h1#references-title {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
+    flex-shrink: 0;
+}
+
+h1#references-title a {
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+h1#references-title a::before {
+    content: "← ";
+    opacity: 1;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+    transform: translateX(0);
+}
+
+h1#references-title a:hover {
+    color: dodgerblue;
+    transform: translateX(-5px);
+}
+
+h1#references-title a:hover::before {
+    transform: translateX(-3px);
+    color: dodgerblue;
+}
+
+h1#references-title:hover {
+    border-bottom-color: dodgerblue;
+}
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
@@ -33,8 +71,8 @@ a {
     align-items: center; /* Vertically center items */
     margin-left: 2%;
     margin-right: 2%;
-    gap: 2%;
-    margin-top: -20px;
+    gap: 10%;
+    flex: 1;
 }
 
 p {
@@ -90,16 +128,15 @@ article {
     white-space: normal;
 }
 
-/* SLIDER IMAGE */
 .slider {
-    width: 800px;
-    height: 493.83px;
+    width: 600px;
+    height: 375px;
     overflow: hidden;
 }
 
 .slides {
     width: 500%;
-    height: 500px;
+    height: 375px;
     display: flex;
 }
 
@@ -116,16 +153,16 @@ article {
 }
 
 .slide img {
-    width: 800px;
-    height: 500px;
+    width: 600px;
+    height: 375px;
     object-fit: contain;
     transition: 0.5s;
 }
 
 .navigation-manual {
     position: absolute;
-    width: 800px;
-    margin-top: -45px;
+    width: 600px;
+    margin-top: -33px;
     display: flex;
     justify-content: center;
     position: sticky;
@@ -169,12 +206,17 @@ article {
     .mainSection {
         margin-top: 20px;
     }
+
 }
 
 @media (min-width: 1300px) {
     .grid2 {
         flex: 0 0 48%;
         margin-right: 5%;
+    }
+
+    .divDesc {
+        max-width: 73%;
     }
 }
 
@@ -187,11 +229,6 @@ article {
 
     .slider {
         width: 600px;
-    }
-
-    .navigation-manual {
-        margin-left: -100px;
-        margin-top: -104px;
     }
 }
 
@@ -221,8 +258,8 @@ article {
     }
 
     .title {
-        margin-top: 55px; /* Adjust spacing */
-        margin-bottom: -35px;
+        margin-top: 0px; /* Adjust spacing */
+        margin-bottom: 32px;
         width: 100%;
     }
     .justify {
@@ -235,41 +272,52 @@ article {
     }
 
     .mainSection {
-        margin-top: -40px;
+        margin-top: 0px;
         flex-direction: column;
         align-items: center;
     }
 
     .grid1, .grid2 {
+        margin-top: -15px;
         flex: 0 0 auto;
         width: 100%;
     }
 
     .info-container {
+        /* margin-bottom: 11px; */
         max-width: 100%;
         text-align: center;
     }
 
     .slide img {
         width: 600px;
-        height: 370.37px;
+        height: 343px;
         object-fit: contain;
     }
 
     .slider {
-        margin-left: 0;
-        width: 800px;
-        height: 480.5px;
+        margin-left: 0px;
+        width: 640px;
+        height: 400px;
+    }
+
+    .slides {
+        width: 500%;
     }
 
     .navigation-manual {
-        margin-left: 0px;
-        margin-top: -100px;
+        margin-left: 20px;
+        margin-top: -52px;
     }
     
     /* Pour les écrans moyens, utilisation de dvh */
     .scrolled {
         height: calc(100dvh - 114px);
+    }
+
+    /* Rapprocher les points sur écrans moyens */
+    .manual-btn:not(:last-child) {
+        margin-right: 25px; /* Réduit de 40px à 25px */
     }
 }
 
@@ -281,7 +329,10 @@ article {
     
     main {
         height: calc(100svh - -2px);
+        display: flex;
+        flex-direction: column;
     }
+
 }
 
 @media (min-width: 1021px) {
@@ -292,6 +343,8 @@ article {
     
     main {
         height: calc(100lvh - -2px);
+        display: flex;
+        flex-direction: column;
     }
 }
 
@@ -301,8 +354,8 @@ article {
     }
 
     .title {
-        margin-top: 165px; /* Adjust spacing */
-        margin-bottom: -124px;
+        margin-top: 120px; /* Adjust spacing */
+        margin-bottom: 37px;
         width: 100%;
     }
 
@@ -311,7 +364,7 @@ article {
     }
 
     .grid2 {
-        margin-top: -100px;
+        margin-top: 19px;
     }
 
     .info-container {
@@ -319,25 +372,38 @@ article {
         /* padding: 0 10px; */
     }
 
+    /* CORRECTION : Maintenir le rapport d'aspect 16:10 sur mobile */
     .slide img {
-        width: 325px;
-        height: 203.125px;
+        width: 360px;  /* Largeur adaptée pour tous les petits écrans */
+        height: 225px; /* Hauteur calculée pour maintenir le ratio 16:10 */
         object-fit: contain;
     }
 
     .slider {
-        width: 325px;
+        width: 360px;  /* Largeur du slider adaptée */
+        height: 225px; /* Hauteur adaptée */
+    }
+
+    .slides {
+        height: 225px; /* Hauteur des slides adaptée */
     }
 
     .navigation-manual {
-        margin-left: -238px;
-        margin-top: -174px;
+        width: 360px;  /* Largeur de la navigation adaptée */
+        margin-left: 0px; /* Centrage ajusté */
+        margin-top: -33px;  /* Position des boutons ajustée */
+    }
+
+    /* Rapprocher les points sur petits écrans */
+    .manual-btn:not(:last-child) {
+        margin-right: 15px; /* Réduit de 40px à 15px */
     }
 }
 
 .slogan {
-    position: absolute;
-    bottom: 3px;
+    text-align: center;
+    color: #000000;
+    font-style: italic;
 }
 
 .pb {
@@ -347,13 +413,5 @@ article {
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
-}
-
-
-@media (max-height:700px) {
-    .slogan {
-        margin-top: 20px !important;
-        position: relative;
-        bottom: 0;
-    }
+    margin-top: auto;
 }

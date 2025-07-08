@@ -47,12 +47,13 @@ $showCarousel = count($picTab) > 1;
 <?php include "./nav.php"; ?>
 
 <main id="main" class="scrolled" style="margin-top: 114px;">
-<h1 id="references-title"><a href="./references.php">Nos Références</a></h1>
-    <section class="mainSection">
-        <?php if ($ref["titre"]): ?>
-            <h2 class="title"><?= $ref['titre'] ?></h2>
-        <?php endif; ?>
-        <article class="grid1">
+    <div class="content-wrapper">
+        <h1 id="references-title"><a href="/references">Nos Références</a></h1>
+        <section class="mainSection">
+            <?php if ($ref["titre"]): ?>
+                <h2 class="title"><?= $ref['titre'] ?></h2>
+            <?php endif; ?>
+            <article class="grid1">
             <!--image slider start-->
             <div class="slider">
                 <div class="slides">
@@ -86,13 +87,10 @@ $showCarousel = count($picTab) > 1;
                 <?php if ($ref["titre"]): ?>
                     <h2><?= $ref['titre'] ?></h2>
                 <?php endif; ?>
-                <?php if ($ref["description"]): ?>
-                    <p class="desc"><?= $ref['description'] ?></p>
-                <?php endif; ?>
                 <section class="justify">
                 <section class="infos">
                     <?php if ($ref["commune"]): ?>
-                        <div><p>Commune : </p><p><?= $ref['commune'] ?></p></div>
+                        <div><p>Lieu : </p><p><?= $ref['commune'] ?></p></div>
                     <?php endif; ?>
 
                     <?php if ($ref["statut"]): ?>
@@ -118,7 +116,7 @@ $showCarousel = count($picTab) > 1;
                     <?php endif; ?>
 
                     <?php if ($ref["montant"]): ?>
-                        <div><p>Montant des Travaux : </p><p><?= formatNumber($ref['montant']) ?> €</p></div>
+                        <div><p>Montant des Travaux : </p><p><?= formatNumber($ref['montant']) ?> € HT</p></div>
                     <?php endif; ?>
 
                     <?php if ($ref["nbPhase"]): ?>
@@ -134,11 +132,20 @@ $showCarousel = count($picTab) > 1;
                     <?php endif; ?>
                 </section>
                 </section>
+                <article class="divDesc">
+                    <?php if ($ref["description"]): ?>
+                        <p class="desc"><?= $ref['description'] ?></p>
+                    <?php endif; ?>
+                    </article>
+                    
+                </article>
+                
                 </div>
 
                 
         </article>
-    </section>
+        </section>
+    </div>
     <div class="pb">
         <p class="slogan" style="margin-top: 0;">APSI BTP, vos projets en toute sérénité…</p>
     </div>
@@ -155,19 +162,71 @@ $showCarousel = count($picTab) > 1;
     const labels = document.querySelectorAll('.navigation-manual label');
     let checked = document.querySelector('.manual-btn');
     const firstSlide = document.querySelector('.slide');
+    const slider = document.querySelector('.slider');
+    
+    let currentSlide = 0;
+    const totalSlides = radios.length;
 
     checked.classList.add('checked');
+    
+    // Fonction pour changer de slide
+    function changeSlide(index) {
+        if (index >= 0 && index < totalSlides) {
+            checked.classList.remove('checked');
+            radios[index].checked = true;
+            checked = document.querySelector(`label[for="${radios[index].id}"]`);
+            checked.classList.add('checked');
+            const marginLeftValue = index * -20;
+            firstSlide.style.marginLeft = `${marginLeftValue}%`;
+            currentSlide = index;
+        }
+    }
 
     radios.forEach((radio, index) => {
         radio.addEventListener('change', () => {
             if (radio.checked) {
-                checked.classList.remove('checked');
-                checked = document.querySelector(`label[for="${radio.id}"]`);
-                checked.classList.add('checked');
-                const marginLeftValue = index * -20;
-                firstSlide.style.marginLeft = `${marginLeftValue}%`;
+                changeSlide(index);
             }
         });
     });
+
+    // Swipe tactile pour mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isTouch = false;
+
+    slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        isTouch = true;
+    });
+
+    slider.addEventListener('touchend', (e) => {
+        if (!isTouch) return;
+        
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        isTouch = false;
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50; // Distance minimum pour déclencher le swipe
+        const swipeDistance = touchStartX - touchEndX;
+
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe vers la gauche - slide suivante
+                const nextSlide = currentSlide + 1;
+                if (nextSlide < totalSlides) {
+                    changeSlide(nextSlide);
+                }
+            } else {
+                // Swipe vers la droite - slide précédente
+                const prevSlide = currentSlide - 1;
+                if (prevSlide >= 0) {
+                    changeSlide(prevSlide);
+                }
+            }
+        }
+    }
 </script>
 <?php endif; ?>

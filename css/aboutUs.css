@@ -33,6 +33,7 @@ section {
 .content {
   color: #000;
   line-height: 1.6;
+  text-align: justify;
 }
 
 .content p {
@@ -86,6 +87,20 @@ p {
     margin-left: auto;
     margin-right: auto;
     max-width: 90%;
+}
+
+.divCarte {
+  text-align: center;
+}
+
+.carte {
+  width: 56%;
+}
+
+.departements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (max-width: 768px) {

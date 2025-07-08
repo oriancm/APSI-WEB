@@ -2,12 +2,10 @@ bug responsive: bouton carrousel image
 bug responsive: hover h1 nos ref bizarre
 Qui sommes nous  et Nos metiers : ameliorer mise en forme du texte, rajouter gras mots cles, changer image
 Toute les pages : verifier coherence des couleurs et gras, hauteur du slogan et en responsive
-loading mail
 
 
-deploiement:
-redirection propre
-css chargement
 server mail
 
 changer login coolify, bdd, backoffice, git privé
+
+onglet info et logo

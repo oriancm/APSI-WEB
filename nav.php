@@ -12,18 +12,18 @@
 
 <?php $pagename = basename($_SERVER['PHP_SELF']); ?>
     <nav id="nav">
-        <a href="/index.php" class="logo-wrapper"><img class="logo" src="/img/APSI.png" alt=""></a>
+        <a href="/" class="logo-wrapper"><img class="logo" src="/img/APSI.png" alt=""></a>
 
         <div class="menu">
             <ul>
-                <li><a <?php if ($pagename == 'aboutUs.php') {echo ' class="active"';} ?> href="/aboutUs.php">Qui sommes-nous</a></li>
-                <li><a <?php if ($pagename == 'professions.php') {echo ' class="active"';} ?> href="/professions.php">Nos métiers</a></li>
-                <li><a <?php if ($pagename == 'references.php' || $pagename == 'reference.php') {echo ' class="active"';} ?>  href="/references.php">Nos références</a></li>
-                <li><a <?php if ($pagename == 'clients.php') {echo ' class="active"';} ?> href="/clients.php">Nos clients</a></li>
-                <li><a <?php if ($pagename == 'contact.php' || $pagename == 'mailSent.php') {echo ' class="active"';} ?> href="/contact.php">Nous contacter</a></li>
+                <li><a <?php if ($pagename == 'aboutUs.php') {echo ' class="active"';} ?> href="/aboutUs">Qui sommes-nous</a></li>
+                <li><a <?php if ($pagename == 'professions.php') {echo ' class="active"';} ?> href="/professions">Nos métiers</a></li>
+                <li><a <?php if ($pagename == 'references.php' || $pagename == 'reference.php') {echo ' class="active"';} ?>  href="/references">Nos références</a></li>
+                <li><a <?php if ($pagename == 'clients.php') {echo ' class="active"';} ?> href="/clients">Nos clients</a></li>
+                <li><a <?php if ($pagename == 'contact.php' || $pagename == 'mailSent.php') {echo ' class="active"';} ?> href="/contact">Nous contacter</a></li>
             </ul>
         </div>
-        <a href="/index.php" class="a-btn-menu"><img src="/img/menu.png" alt="" class="btn-menu"></a>
+        <a href="/" class="a-btn-menu"><img src="/img/menu.png" alt="" class="btn-menu"></a>
 
     </nav>
 </body>

@@ -7,9 +7,11 @@ main {
 
 section {
     box-sizing: content-box;
-    padding-top: 10px;
-    padding-bottom: 100px;
+
     max-width: 800px;
+    min-height: calc(100dvh - 114px);
+    display: flex;
+    flex-direction: column;
 }
 
 .scrolled {
@@ -20,17 +22,27 @@ section {
     scrollbar-width: none; /* Firefox */
 }
 
-
 .pb {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 90%;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    width: 100%;
+}
+
+.slogan {
+    text-align: center;
+    color: #000000;
+    font-style: italic;
 }
 
 /* Fallback pour les navigateurs qui ne supportent pas dvh */
 @supports not (height: 100dvh) {
     .scrolled {
         height: calc(100vh - 114px);
+    }
+    
+    section {
+        min-height: calc(100vh - 114px);
     }
 }
 
@@ -41,10 +53,13 @@ section {
 .content {
     color: #000;
     line-height: 1.6;
+    text-align: justify;
+    flex: 1;
 }
 
 .content p {
     font-family: 'Inter', sans-serif;
+    margin-bottom: 15px;
 }
 
 /* Override the global list-style: none for content lists */
@@ -60,6 +75,7 @@ section {
     font-family: 'Inter', sans-serif;
 }
 
+/* Style pour les li de premier niveau */
 .content ul li:before {
     content: "";
     position: absolute;
@@ -71,6 +87,31 @@ section {
     border-radius: 50%;
 }
 
+/* Style pour les li imbriqués (ul dans ul) */
+.content ul ul {
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+.content ul ul li {
+    margin-bottom: 5px;
+    padding-left: 20px;
+}
+
+.content ul ul li:before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    border-radius: 0;
+    color: dodgerblue;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
 h1 {
     color: dodgerblue;
     margin-bottom: 30px;
@@ -80,7 +121,7 @@ h1 {
 }
 
 h2 {
-    color: dodgerblue;
+    color: black;
     margin-top: 30px;
     margin-bottom: 15px;
     font-size: 1.8em;
@@ -93,8 +134,12 @@ h3 {
     font-size: 1.4em;
 }
 
-p {
+i {
+    color: #5c5c5c;
+    font-style: italic; 
+    font-size: 1.1em;
     margin-bottom: 15px;
+    display: block;
 }
 
 .chantier-image {
@@ -103,6 +148,11 @@ p {
     height: auto;
     display: block;
     margin: 40px auto;
+}
+
+.phase-title {
+    margin-bottom: 15px;
+    display: block;
 }
 
 @media screen and (max-width: 768px) {
@@ -126,6 +176,10 @@ p {
     .scrolled {
         height: calc(100svh - 114px);
     }
+    
+    section {
+        min-height: calc(100svh - 114px);
+    }
 }
 
 @media screen and (min-width: 1021px) {
@@ -133,10 +187,83 @@ p {
     .scrolled {
         height: calc(100lvh - 114px);
     }
+    
+    section {
+        min-height: calc(100lvh - 114px);
+    }
 }
 
 @media screen and (max-width: 1020px) {
     main {
         background-position: center;
+    }
+}
+
+/* CSS pour les menus déroulants */
+
+.dropdown-section {
+    margin-bottom: 20px;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    padding: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    color: rgb(30, 144, 255);
+}
+
+.dropdown-arrow {
+    float: right;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+    color: black;
+    font-weight: bold;
+}
+
+.dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 0 0 5px 5px;
+}
+
+.dropdown-content.open {
+    max-height: none;
+}
+
+/* Ajout d'un léger padding pour le contenu */
+.dropdown-content > * {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.dropdown-content > *:first-child {
+    padding-top: 8px;
+}
+
+.dropdown-content > *:last-child {
+    padding-bottom: 15px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .dropdown-toggle {
+        padding: 12px 0;
+        font-size: 1.3em;
+    }
+    
+    .dropdown-arrow {
+        font-size: 0.7em;
+    }
+    
+    .dropdown-content > * {
+        padding-left: 5px;
+        padding-right: 5px;
     }
 }

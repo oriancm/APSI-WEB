@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add li to list
         json.forEach(item => {
-            listResults.innerHTML += `<li>${item.nom}</li>`
+            const departementCode = item.codeDepartement || '';
+            const displayName = departementCode ? `${item.nom} (${departementCode})` : item.nom;
+            listResults.innerHTML += `<li data-ville-complete="${displayName}">${displayName}</li>`
         })
         choisirVille(listResults)
     })
@@ -48,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const json = await response.json()
 
         json.forEach(item => {
-            listResults.innerHTML += `<li>${item.nom}</li>`
+            const departementCode = item.codeDepartement || '';
+            const displayName = departementCode ? `${item.nom} (${departementCode})` : item.nom;
+            listResults.innerHTML += `<li data-ville-complete="${displayName}">${displayName}</li>`
         })
         choisirVille(listResults)
     })
@@ -63,14 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function choisirVille(listResults) {
     let villes = document.querySelectorAll("#result-code-or-city li")
-    let ville
 
     for (let i = 0; i < villes.length; i++) {
         villes[i].onclick = function () {
-            listResults.innerHTML = "<input id=\"villeChoisie\" type=\"text\" disabled=\"disabled\">"
-            ville = this.innerHTML
-            document.getElementById("villeChoisie").setAttribute('value', ville);
-            document.getElementById("villeChoisieHidden").setAttribute('value', ville);
+            // Récupérer la valeur de l'attribut data-ville-complete ou le texte
+            const ville = this.getAttribute('data-ville-complete') || this.innerHTML;
+            
+            // Créer l'input désactivé pour afficher la sélection
+            listResults.innerHTML = "<input id=\"villeChoisie\" type=\"text\" disabled=\"disabled\">";
+            
+            // Définir les valeurs dans les champs
+            document.getElementById("villeChoisie").value = ville;
+            document.getElementById("villeChoisieHidden").value = ville;
         };
     }
 }

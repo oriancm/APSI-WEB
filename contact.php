@@ -1,32 +1,44 @@
-
-
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer6.10/src/PHPMailer.php';
+require 'phpmailer6.10/src/SMTP.php';
+require 'phpmailer6.10/src/Exception.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
-    $email = 'tempmailabc10@gmail.com'; // Expéditeur
-    $subject = $_POST['objet'];
+    $objet = $_POST['objet'];
     $message = $_POST['message'];
 
-    $to = 'nairodroid@gmail.com'; // Destinataire
-    $subject = 'Nouveau message de ' . $name . ': ' . $subject;
-    $headers = 'From: ' . $email . "\r\n" .
-        'Reply-To: ' . $email . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
+    $mail = new PHPMailer(true);
 
-    // Envoi de l'email
-    $mail_result = mail($to, $subject, $message, $headers);
+    try {
+        // Config SMTP
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'tempmailabc10@gmail.com'; // Email Gmail
+        $mail->Password = 'vvhvegaqxoqsodwj';         // Mot de passe d'application
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-    // Vérification de l'envoi de l'e-mail
-    if ($mail_result) {
-        // Redirection vers une page de confirmation si l'e-mail est envoyé avec succès
+        // Infos email
+        $mail->setFrom('tempmailabc10@gmail.com', 'Formulaire de contact');
+        $mail->addAddress('nairodroid@gmail.com'); // Destinataire
+        $mail->Subject = "Message de $name : $objet";
+        $mail->Body = $message;
+
+        $mail->send();
         header('Location: MailSent');
         exit;
-    } else {
-        // Afficher un message d'erreur si l'envoi de l'e-mail échoue
-        echo "Erreur lors de l'envoi de l'e-mail.";
+
+    } catch (Exception $e) {
+        echo "Erreur : {$mail->ErrorInfo}";
     }
 }
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -44,13 +56,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php include "./nav.php"; ?>
 
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Envoi en cours...</div>
+        </div>
+    </div>
+
     <main id="main" class="scrolled">
 
     <section>
         <div class="container">
             <h1>Nous Contacter</h1>
             <div class="contact">
-            <form action="contact.php" method="POST">
+            <form action="contact.php" method="POST" id="contactForm">
                 <label for="fname">NOM Prénom</label>
                 <input type="text" id="fname" name="name" placeholder="ex: VALERY Paul">
 
@@ -58,9 +78,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" id="sujet" name="objet" placeholder="L'objet de votre message">
 
                 <label for="subject">Message</label>
-                <textarea id="subject" name="message" placeholder="Votre message" style="height:150px"></textarea>
+                <textarea id="subject" name="message" placeholder="Votre message" style="height:140px"></textarea>
 
-                <input type="submit" value="Envoyer">
+                <div class="form-footer">
+                    <div class="email-contact">l.messy@apsi-btp.fr</div>
+                    <input type="submit" value="Envoyer" id="submitBtn">
+                </div>
             </form>
             </div>
             
@@ -72,18 +95,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </main>
 
+    <script>
+        addEventListener('load', (event) => {
+            var navElement = document.getElementById('nav');
+            var navHeight = navElement.offsetHeight;
+            
+            var mainElement = document.getElementById('main');
+            mainElement.style.marginTop = navHeight + 'px';
+        });
 
+        // Gestion du loading
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            // Afficher le loading
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            
+            // Désactiver le bouton pour éviter les double-clics
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.value = 'Envoi...';
+            
+            // Le formulaire continue son envoi normal
+            // Le loading sera caché automatiquement lors de la redirection
+        });
 
+        // Cacher le loading si on revient sur la page (bouton retour du navigateur)
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = false;
+                submitBtn.value = 'Envoyer';
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="/css/styleGlobalNotIndex.css">
 </body>
 </html>
-
-<script>
-    addEventListener('load', (event) => {
-        var navElement = document.getElementById('nav');
-        var navHeight = navElement.offsetHeight;
-        
-        var mainElement = document.getElementById('main');
-        mainElement.style.marginTop = navHeight + 'px';
-    });
-</script>
-<link rel="stylesheet" href="css/styleGlobalNotIndex.css">

@@ -20,16 +20,18 @@
                 
                 <div class="legal-section">
                     <h2>Éditeur du site</h2>
-                    <p>Le présent site est édité par : <strong>APSI BTP</strong>, société de type <strong>SARL</strong>, au capital de <strong>6 800,00 €</strong>, ayant son siège social situé à <strong>QUARTIER PIERREFEU, CHEMIN DE SAINT JEAN, 84750 CASENEUVE</strong>, immatriculée au Registre du Commerce et des Sociétés d'<strong>Avignon</strong> sous le numéro <strong>495 392 557 R.C.S. Avignon</strong>.</p>
-                    <p>Numéro de TVA intracommunautaire : <strong>FR40495392557</strong></p>
+                    <p>Le présent site est édité par <strong>APSI BTP</strong>, société de type <strong>SARL</strong>, au capital de <strong>6 800,00 €</strong></p>
+                    <p>Siège social : Quartier Pierrefeu, chemin de Saint Jean, 84750 CASENEUVE</p>
+                    <p>RCS Avignon : <strong> 2007 B 498</strong></p>
+                    <p>Numéro de TVA : <strong>FR 40 495 392 557</strong></p>
                     <p>Directeur de la publication : <strong>Ludovic MESSY</strong></p>
-                    <p>Contact : <strong>l.messy@apsi-btp.fr</strong></p>
+                    <p>Contact : l.messy@apsi-btp.fr</p>
                 </div>
                 
                 <div class="legal-section">
                     <h2>Hébergement</h2>
                     <p>Le site est hébergé par : <strong>OVH</strong></p>
-                    <p>Adresse : <strong>2 rue Kellermann, 59100 Roubaix, France</strong></p>
+                    <p>Adresse : 2 rue Kellermann, 59100 Roubaix, France</p>
                     <p>Site web : <strong><a href="https://www.ovh.com" target="_blank">https://www.ovh.com</a></strong></p>
                     <p>Téléphone : <strong>1007</strong> (gratuit depuis un poste fixe en France)</p>
                 </div>
@@ -40,7 +42,7 @@
     </main>
 
 </body>
-<link rel="stylesheet" href="css/styleGlobalNotIndex.css">
+<link rel="stylesheet" href="/css/styleGlobalNotIndex.css">
 </html>
 
 <script>

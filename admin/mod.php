@@ -3,12 +3,12 @@ require('./db.php');
 session_start();
 
 if ($_SESSION["session"] != "valide") {
-    header("Location:login.php");
+    header("Location:login");
     exit;
 }
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: admin.php");
+    header("Location: admin");
     exit;
 }
 
@@ -21,7 +21,7 @@ $stmt->execute([$id]);
 $reference = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$reference) {
-    header("Location: admin.php?error=" . urlencode("La référence avec l'ID $id n'existe pas."));
+    header("Location: admin?error=" . urlencode("La référence avec l'ID $id n'existe pas."));
     exit;
 }
 
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 <body class="bg-gray-100 font-sans">
     <main class="max-w-4xl mx-auto py-8 px-4">
         <h1 class="text-3xl font-bold text-gray-800 mb-6">
-            <a href="./admin.php" class="text-blue-600 hover:underline">Espace administrateur</a>
+            <a href="./admin" class="text-blue-600 hover:underline">Espace administrateur</a>
         </h1>
         <h2 class="text-2xl font-semibold text-gray-700 mb-4">Modification de la référence n°<?= $id ?></h2>
 

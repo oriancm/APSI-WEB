@@ -3,7 +3,7 @@ require('./db.php');
 session_start();
 
 if ($_SESSION["session"] != "valide") {
-    header("Location:login.php");
+    header("Location:login");
     exit;
 }
 
@@ -16,14 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     if (empty($_POST['villeChoisieHidden'])) {
         $errorsValidation['commune'] = 'Erreur : La commune est requise';
     }
-    // if (empty($_POST['domaine'])) {
-    //     $errorsValidation['domaine'] = 'Erreur : Le domaine est requis';
-    // }
+    
+    // Validation des images
+    if (empty($_FILES['images']['name'][0]) || !isset($_POST['picOrder']) || empty($_POST['picOrder'])) {
+        $errorsValidation['images'] = 'Erreur : Au moins une image est requise';
+    }
 
     if (empty($errorsValidation)) {
         $titre = ($_POST['titre']);
         $commune = ($_POST['villeChoisieHidden']);
-        $pics = normalizeFiles();
         $description = empty($_POST['description']) ? null : ($_POST['description']);
         $domaine = ($_POST['domaine']);
         $anneeD = empty($_POST['anneeD']) ? null : ($_POST['anneeD']);
@@ -42,60 +43,77 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $sql .= " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $db->prepare($sql);
 
-        if ($stmt->execute([$titre, $commune, $domaine, $description, $anneeD, $anneeF, $statut, $moa, $archi, $eMoe, $nbPhase, $montant, $nbE, $duree_travaux_mois, $nombre_lots])) {
-        $idRef = $db->lastInsertId(); // Stocker l'ID maintenant
-        $message = "<div class='...'>SUCCÈS: Informations du chantier $idRef enregistrées avec succès</div>";
-
-        if (!empty($_FILES['images']) && isset($_POST['picOrder'])) {
-            $files = $_FILES['images'];
-            $orderPic = 1;  // Commencer par la position 1
+        $insertSuccess = $stmt->execute([$titre, $commune, $domaine, $description, $anneeD, $anneeF, $statut, $moa, $archi, $eMoe, $nbPhase, $montant, $nbE, $duree_travaux_mois, $nombre_lots]);
+        
+        if ($insertSuccess) {
+            $idRef = $db->lastInsertId();
+            $imageErrors = [];
             
-            // Récupérer l'ordre des images à partir de picOrder[]
-            $picOrderList = isset($_POST['picOrder']) ? $_POST['picOrder'] : [];
-            $fileMap = [];
+            // Gestion des images
+            if (!empty($_FILES['images']) && isset($_POST['picOrder'])) {
+                $files = $_FILES['images'];
+                $orderPic = 1;
+                
+                // Récupérer l'ordre des images à partir de picOrder[]
+                $picOrderList = isset($_POST['picOrder']) ? $_POST['picOrder'] : [];
+                $fileMap = [];
 
-            for ($i = 0; $i < count($files['name']); $i++) {
-                if ($files['error'][$i] === 0) {
-                    $fileMap[$files['name'][$i]] = [
-                        'name' => $files['name'][$i],
-                        'tmp_name' => $files['tmp_name'][$i],
-                        'type' => $files['type'][$i],
-                        'error' => $files['error'][$i],
-                        'size' => $files['size'][$i]
-                    ];
+                // Créer une map des fichiers par nom
+                for ($i = 0; $i < count($files['name']); $i++) {
+                    if ($files['error'][$i] === 0) {
+                        $fileMap[$files['name'][$i]] = [
+                            'name' => $files['name'][$i],
+                            'tmp_name' => $files['tmp_name'][$i],
+                            'type' => $files['type'][$i],
+                            'error' => $files['error'][$i],
+                            'size' => $files['size'][$i]
+                        ];
+                    }
                 }
-            }
 
-            foreach ($picOrderList as $fileName) {
-                if (isset($fileMap[$fileName]) && $fileMap[$fileName]['error'] === 0) {
-                    $pic = $fileMap[$fileName];
-                    $extPic = pathinfo($pic['name'], PATHINFO_EXTENSION);
-                    $extValid = ['jpg', 'jpeg', 'png'];
-                    $localPath = dirname(__DIR__);
-                    $uploadDir = $localPath . '/pic/';
-                    $uploadPath = $uploadDir . $pic['name'];
-
-                    if (in_array(strtolower($extPic), $extValid) && move_uploaded_file($pic['tmp_name'], $uploadPath)) {
-                        $sql = "INSERT INTO photo (titre, dir, idR, orderPic) VALUES (?, ?, ?, ?)";
-                        $stmt = $db->prepare($sql);
-                        if (!$stmt->execute([$pic['name'], $uploadPath, $idRef, $orderPic])) {
-                            $message .= "<div class='...'>Erreur BDD pour l'image " . htmlspecialchars($pic['name']) . "</div>";
+                // Traiter chaque image dans l'ordre spécifié
+                foreach ($picOrderList as $fileName) {
+                    if (isset($fileMap[$fileName]) && $fileMap[$fileName]['error'] === 0) {
+                        $pic = $fileMap[$fileName];
+                        $extPic = pathinfo($pic['name'], PATHINFO_EXTENSION);
+                        $extValid = ['jpg', 'jpeg', 'png'];
+                        $localPath = dirname(__DIR__);
+                        $uploadDir = $localPath . '/pic/';
+                        
+                        // Vérifier si le dossier existe, sinon le créer
+                        if (!is_dir($uploadDir)) {
+                            mkdir($uploadDir, 0755, true);
                         }
-                        $orderPic++;
-                    } else {
-                        $message .= "<div class='...'>Erreur lors du traitement de l'image " . htmlspecialchars($pic['name']) . "</div>";
+                        
+                        $uploadPath = $uploadDir . $pic['name'];
+
+                        if (in_array(strtolower($extPic), $extValid) && move_uploaded_file($pic['tmp_name'], $uploadPath)) {
+                            $sql = "INSERT INTO photo (titre, dir, idR, orderPic) VALUES (?, ?, ?, ?)";
+                            $stmt = $db->prepare($sql);
+                            if (!$stmt->execute([$pic['name'], $uploadPath, $idRef, $orderPic])) {
+                                $imageErrors[] = "Erreur BDD pour l'image " . htmlspecialchars($pic['name']);
+                            }
+                            $orderPic++;
+                        } else {
+                            $imageErrors[] = "Erreur lors du traitement de l'image " . htmlspecialchars($pic['name']);
+                        }
                     }
                 }
             }
-        }}}
-    // ---- FIN gestion des images ----
-
-    // Redirection une fois tout terminé
-    header("Location: add.php?success=" . urlencode("Informations du chantier $idRef enregistrées avec succès"));
-    exit;
+            
+            // Préparer le message de succès
+            $successMessage = "Informations du chantier $idRef enregistrées avec succès";
+            if (!empty($imageErrors)) {
+                $successMessage .= " (avec " . count($imageErrors) . " erreur(s) d'image)";
+            }
+            
+            header("Location: add.php?success=" . urlencode($successMessage));
+            exit;
+        } else {
+            $errorsValidation['general'] = 'Erreur lors de l\'enregistrement du chantier';
+        }
+    }
 }
-
-
 
 if (isset($_GET['success'])) {
     $message = "<div class='bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4'>SUCCÈS: " . htmlspecialchars($_GET['success']) . "</div>";
@@ -109,18 +127,7 @@ function dernierChantier($db) {
     return $res['MAX(id)'] ?? 0;
 }
 
-function normalizeFiles(string $fieldName = 'images'): array
-{
-    $out = [];
-    if (isset($_FILES[$fieldName]) && is_array($_FILES[$fieldName])) {
-        foreach ($_FILES[$fieldName] as $key => $values) {
-            foreach ($values as $index => $value) {
-                $out[$index][$key] = $value;
-            }
-        }
-    }
-    return $out;
-}
+
 
 ?>
 
@@ -137,6 +144,10 @@ function normalizeFiles(string $fieldName = 'images'): array
         label {
             @apply block text-sm font-medium text-gray-700 mb-1;
         }
+        /* Mettre en évidence les champs requis */
+        label:has(*):before {
+            content: "";
+        }
         input, select, textarea {
             @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50;
         }
@@ -147,13 +158,25 @@ function normalizeFiles(string $fieldName = 'images'): array
             @apply flex space-x-4;
         }
         .error {
-            @apply text-red-500 text-sm mt-1;
+            @apply text-red-500 text-sm mt-1 font-medium;
         }
         .submit-btn {
             @apply bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500;
         }
         .form-container {
             @apply bg-white p-6 rounded-lg shadow-md;
+        }
+        /* Styles pour les champs requis */
+        .required-field {
+            border-left: 3px solid #ef4444;
+            padding-left: 12px;
+        }
+        .required-info {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 16px;
         }
     </style>
 </head>
@@ -165,17 +188,33 @@ function normalizeFiles(string $fieldName = 'images'): array
         <h2 class="text-2xl font-semibold text-gray-700 mb-4">Ajout d'une référence (Référence n°<?= (dernierChantier($db) + 1) ?>)</h2>
 
         <?php if (isset($message)) echo $message; ?>
+        
+        <?php if (isset($errorsValidation['general'])): ?>
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+                <?php echo $errorsValidation['general']; ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="required-info">
+            <h3 class="text-lg font-medium text-red-700 mb-2">⚠️ Champs obligatoires</h3>
+            <p class="text-sm text-red-600">Les champs marqués d'un astérisque (*) sont obligatoires :</p>
+            <ul class="text-sm text-red-600 mt-2 list-disc list-inside">
+                <li><strong>Titre</strong> : Nom du chantier/projet</li>
+                <li><strong>Commune</strong> : Lieu du projet (sélectionner dans la liste)</li>
+                <li><strong>Images</strong> : Au moins une image est requise (formats JPEG, PNG)</li>
+            </ul>
+        </div>
 
         <form method="POST" action="add.php" enctype="multipart/form-data" class="form-container space-y-6">
             <div class="mb-4">
-                <label for="titre">Titre *</label>
+                <label for="titre" class="text-sm font-medium text-gray-700 mb-1">Titre <span class="text-red-500">*</span></label>
                 <input type="text" name="titre" id="titre" required class="border <?php echo isset($errorsValidation['titre']) ? 'border-red-500' : ''; ?>">
                 <?php if (isset($errorsValidation['titre'])): ?>
                     <p class="error"><?php echo $errorsValidation['titre']; ?></p>
                 <?php endif; ?>
             </div>
             <div class="mb-4">
-                <label for="code">Commune *</label>
+                <label for="code" class="text-sm font-medium text-gray-700 mb-1">Commune <span class="text-red-500">*</span></label>
                 <div class="flex space-x-4">
                     <input data-search-code id="code" placeholder="Code postal" class="flex-1">
                     <input data-search-city id="ville" placeholder="Ville" class="flex-1">
@@ -194,7 +233,7 @@ function normalizeFiles(string $fieldName = 'images'): array
                 <label for="domaine">Domaine d'activités</label>
                 <select name="domaine" id="domaine" class="border <?php echo isset($errorsValidation['domaine']) ? 'border-red-500' : ''; ?>">
                     <option value="">Choisir le domaine</option>
-                    <option value="1">Résidence Universitaire</option>
+                    <option value="1">Résidences Universitaires</option>
                     <option value="2">Équipements sportifs</option>
                     <option value="3">Équipements culturels</option>
                     <option value="4">Groupes scolaires et collèges</option>
@@ -202,7 +241,7 @@ function normalizeFiles(string $fieldName = 'images'): array
                     <option value="6">Bâtiments publics</option>
                     <option value="7">Crèches</option>
                     <option value="8">Centre d'Incendie et de Secours</option>
-                    <option value="9">Hôpitaux publics</option>
+                    <option value="9">Santé</option>
                     <option value="10">Logements sociaux</option>
                     <option value="11">Monuments Historiques et bâtiments à caractère patrimonial</option>
                     <option value="12">Restructuration et réhabilitation en site occupé (phasage)</option>
@@ -261,13 +300,16 @@ function normalizeFiles(string $fieldName = 'images'): array
                 </div>
             </div>
             <div class="mb-4">
-                <label for="image-upload">Images *</label>
-                <input type="file" id="image-upload" name="images[]" multiple accept="image/jpeg,image/png" class="mt-1 block w-full">
-                <p class="text-sm text-gray-500">Faites glisser les images pour changer l'ordre</p>
+                <label for="image-upload" class="text-sm font-medium text-gray-700 mb-1">Images  <span class="text-red-500">*</span></label>
+                <input type="file" id="image-upload" name="images[]" multiple accept="image/jpeg,image/png" required class="mt-1 block w-full <?php echo isset($errorsValidation['images']) ? 'border-red-500' : ''; ?>">
+                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG. Faites glisser les images pour changer l'ordre</p>
                 <div id="image-container" class="image-container mb-4 flex flex-wrap mt-2 border border-gray-300 p-4 rounded">
                     <p id="no-images" class="text-gray-400 w-full text-center">Aucune image sélectionnée</p>
                 </div>
                 <div id="images-data"></div> <!-- hidden inputs générés dynamiquement ici -->
+                <?php if (isset($errorsValidation['images'])): ?>
+                    <p class="error"><?php echo $errorsValidation['images']; ?></p>
+                <?php endif; ?>
             </div>
             <div class="text-right">
                 <button type="submit" name="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Valider</button>
@@ -308,6 +350,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const files = Array.from(e.target.files);
         
         if (files.length > 0) {
+            // Traiter tous les fichiers de manière synchrone
+            let processedCount = 0;
+            const totalFiles = files.length;
+            
             files.forEach(file => {
                 if (file.type.match('image/jpeg') || file.type.match('image/png')) {
                     const reader = new FileReader();
@@ -316,12 +362,35 @@ document.addEventListener('DOMContentLoaded', function() {
                         const exists = images.some(img => img.file.name === file.name);
                         if (!exists) {
                             images.push({ file, preview: e.target.result });
+                        }
+                        
+                        processedCount++;
+                        if (processedCount === totalFiles) {
                             displayImages();
+                            // Mettre à jour le champ de fichier avec tous les fichiers
+                            updateFileInput();
                         }
                     };
                     reader.readAsDataURL(file);
+                } else {
+                    processedCount++;
+                    if (processedCount === totalFiles) {
+                        displayImages();
+                        updateFileInput();
+                    }
                 }
             });
+        }
+    }
+
+    // Fonction pour mettre à jour le champ de fichier avec tous les fichiers
+    function updateFileInput() {
+        if (images.length > 0) {
+            const dataTransfer = new DataTransfer();
+            images.forEach(image => {
+                dataTransfer.items.add(image.file);
+            });
+            imageUpload.files = dataTransfer.files;
         }
     }
 
@@ -362,8 +431,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.stopPropagation();
                 images.splice(index, 1);
                 displayImages();
-                // Réinitialiser le champ fichier après suppression
-                clearFileInput();
+                // Mettre à jour le champ de fichier après suppression
+                updateFileInput();
             };
             imageItem.appendChild(deleteBtn);
 
@@ -429,6 +498,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Mettre à jour l'affichage
             displayImages();
+            // Mettre à jour le champ de fichier après réorganisation
+            updateFileInput();
         }
     }
 
@@ -438,16 +509,16 @@ document.addEventListener('DOMContentLoaded', function() {
             return; // Ne rien faire s'il n'y a pas d'images
         }
 
-        // Créer un objet FormData temporaire pour reconstruire le fichier
-        const formData = new FormData();
+        // Créer un nouveau DataTransfer pour reconstruire le champ de fichier
+        const dataTransfer = new DataTransfer();
         
         // Ajouter chaque fichier dans l'ordre actuel
         images.forEach((image, index) => {
-            formData.append('images[]', image.file);
+            dataTransfer.items.add(image.file);
         });
         
-        // Note: Les fichiers seront envoyés avec le formulaire normal,
-        // les champs picOrder[] indiquent l'ordre correct
+        // Mettre à jour le champ de fichier avec les fichiers dans le bon ordre
+        imageUpload.files = dataTransfer.files;
     });
 });    </script>
 

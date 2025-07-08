@@ -144,10 +144,10 @@ main {
     }
   }
 
-  @media (max-height:700px) {
+  @media (max-height:694px) {
     .slogan {
       margin-top: 20px !important;
       position: relative;
       bottom: 0;
     }
-  }
+  }                                  
