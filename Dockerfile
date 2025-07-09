@@ -1,16 +1,28 @@
-FROM php:8.2-cli
+FROM php:8.2-fpm
 
-# Installer les extensions nécessaires si besoin
+# Installer les extensions nécessaires
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Copier les fichiers de l'app
+# Installer nginx
+RUN apt-get update && apt-get install -y nginx \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copier les fichiers de l'application
 COPY . /var/www/html
 
-# Se placer dans le dossier
+# Définir le dossier de travail
 WORKDIR /var/www/html
 
-# Exposer le port 3000
+# Copier la configuration nginx avec rewrite
+COPY ./nginx.conf /etc/nginx/sites-available/default
+
+# Copier le script de démarrage
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Exposer le port 3000 (Nginx écoutera dessus)
 EXPOSE 3000
 
-# Lancer le serveur intégré de PHP
-CMD ["php", "-S", "0.0.0.0:3000"]
+# Lancer le script
+CMD ["/start.sh"]
