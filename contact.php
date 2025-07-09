@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Body = $message;
 
         $mail->send();
-        header('Location: /MailSent');
+        header('Location: mailSent');
         exit;
 
     } catch (Exception $e) {
