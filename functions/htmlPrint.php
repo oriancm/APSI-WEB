@@ -2,11 +2,11 @@
 function getDomaineText($domaine) {
     switch ($domaine) {
         case '1':
-            return 'Résidence universitaire';
+            return 'Résidences Universitaires';
         case '2':
-            return 'Equipements sportifs';
+            return 'Équipements sportifs';
         case '3':
-            return 'Equipements culturels';
+            return 'Équipements culturels';
         case '4':
             return 'Groupes scolaires et collèges';
         case '5':
@@ -18,10 +18,12 @@ function getDomaineText($domaine) {
         case '8':
             return 'Centre d\'Incendie et de Secours';
         case '9':
-            return 'Hôpitaux publics';
+            return 'Santé';
         case '10':
             return 'Logements sociaux';
         case '11':
+            return 'Monuments Historiques et Sites Patrimoniaux';
+        case '12':
             return 'Restructuration et réhabilitation en site occupé (phasage)';
         default:
             return '';

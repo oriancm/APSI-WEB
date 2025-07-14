@@ -1,8 +1,43 @@
+/* Reset et base */
+* {
+    box-sizing: border-box;
+}
+
+/* Variables pour les cartes - Reprises de references.css */
+:root {
+    --card-border-radius: 12px;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --card-background: white;
+    --card-border: 1px solid #eaeaea;
+    --card-transition: all 0.3s ease;
+    --card-hover-transform: translateY(-10px);
+    --card-hover-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    --title-color: #333;
+    --subtitle-color: #666;
+    --accent-color: dodgerblue;
+    --gap-article: 40px;
+    --image-border: 1px solid #f0f0f0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+}
+
 /* Style détail référence modernisé */
 main {
     height: calc(100dvh - -2px);
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 /* Fallback pour les navigateurs qui ne supportent pas dvh */
@@ -12,48 +47,73 @@ main {
     }
 }
 
-h1#references-title {
-    margin-bottom: 50px;
-    font-size: 2.5em;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
-    line-height: 1.6;
-    text-align: left;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-    flex-shrink: 0;
+.page-container {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box; /* Assurer que le padding est inclus dans la largeur */
 }
 
-h1#references-title a {
-    color: #333;
+/* Responsive pour le container principal */
+@media (max-width: 768px) {
+    .page-container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-container {
+        padding: 10px;
+    }
+}
+
+/* Navigation et titre au même niveau - parfaitement centré */
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px; /* Espacement fixe et conséquent */
+    width: 100%;
+}
+
+.back-navigation {
+    flex: 0 0 150px;
+    margin-left: 20px;
+}
+
+.back-link {
+    font-size: 1rem;
+    color: #666;
     text-decoration: none;
     transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
 }
 
-h1#references-title a::before {
-    content: "← ";
-    opacity: 1;
-    margin-right: 5px;
-    transition: all 0.3s ease;
-    transform: translateX(0);
-}
-
-h1#references-title a:hover {
+.back-link:hover {
     color: dodgerblue;
-    transform: translateX(-5px);
-}
-
-h1#references-title a:hover::before {
     transform: translateX(-3px);
-    color: dodgerblue;
 }
 
-h1#references-title:hover {
-    border-bottom-color: dodgerblue;
+/* Titre de la référence */
+.reference-title {
+    font-size: 1.8rem;
+    margin: 0;
+    text-align: center;
+    color: #333;
+    font-weight: 600;
+    flex: 1;
+    line-height: 1.3;
+}
+
+/* Spacer pour équilibrer */
+.spacer {
+    flex: 0 0 150px;
 }
 
 .content-wrapper {
@@ -68,15 +128,29 @@ a {
 
 .mainSection {
     display: flex;
-    align-items: center; /* Vertically center items */
+    justify-content: center;
+    align-items: center;
     margin-left: 2%;
     margin-right: 2%;
-    gap: 10%;
+    margin-top: 0px;
     flex: 1;
 }
 
 p {
     font-family: 'Inter', sans-serif;
+}
+
+/* Card principale qui englobe tout */
+.reference-card {
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    max-width: 90%;
+    width: fit-content;
+    overflow: hidden;
 }
 
 article {
@@ -85,19 +159,24 @@ article {
 }
 
 .grid1 {
-    flex: 0 0 50%;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
+    flex: 0 0 auto;
 }
 
 .grid2 {
-    flex: 0 0 45%;
+    flex: 1;
     text-align: justify;
+    max-width: 283px; /* Augmentation de 2px */
+    padding: 20px;
 }
 
+/* Suppression de l'ancienne card info */
 .info-container {
-    max-width: 80%;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    max-width: 100%;
+    width: 100%;
     word-wrap: break-word;
     white-space: normal;
 }
@@ -107,36 +186,61 @@ article {
 }
 
 .info-container .desc {
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 15px;
+    font-size: 0.75rem;
+    color: #555;
+    line-height: 1.5;
 }
 
 .info-container div {
     display: flex;
+    flex-direction: column;
     justify-content: initial;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .info-container div p:first-child {
-    min-width: 200px;
+    min-width: auto;
     flex-shrink: 0;
-    color: #888888;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 3px;
 }
 
 .info-container div p:last-child {
     flex-grow: 1;
     white-space: normal;
+    font-size: 0.75rem;
+    color: #333;
+    font-family: 'Inter', sans-serif;
+}
+
+.divDesc {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.divDesc .desc {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 0.75rem;
+    color: #555;
+    font-family: 'Inter', sans-serif;
 }
 
 .slider {
-    width: 600px;
-    height: 375px;
+    width: 720px;
+    height: 480px;
     overflow: hidden;
 }
 
 .slides {
     width: 500%;
-    height: 375px;
+    height: 480px;
     display: flex;
 }
 
@@ -148,21 +252,21 @@ article {
     width: 20%;
     transition: 1.1s;
     display: flex;
-    justify-content: center; /* Center image within slide */
-    align-items: center; /* Center image vertically */
+    justify-content: center;
+    align-items: center;
 }
 
 .slide img {
-    width: 600px;
-    height: 375px;
-    object-fit: contain;
+    width: 720px;
+    height: 480px;
+    object-fit: cover;
     transition: 0.5s;
 }
 
 .navigation-manual {
     position: absolute;
-    width: 600px;
-    margin-top: -33px;
+    width: 720px;
+    margin-top: -40px;
     display: flex;
     justify-content: center;
     position: sticky;
@@ -204,64 +308,38 @@ article {
 
 @media (min-width:1500px) {
     .mainSection {
-        margin-top: 20px;
+        margin-top: 0px;
     }
-
 }
 
 @media (min-width: 1300px) {
     .grid2 {
-        flex: 0 0 48%;
-        margin-right: 5%;
+        flex: 0 0 40%;
+        margin-right: 3%;
     }
 
-    .divDesc {
-        max-width: 73%;
-    }
 }
 
 @media (max-width: 1500px) {
     .slide img {
-        width: 600px;
-        height: 375px;
-        object-fit: contain;
+        width: 720px;
+        height: 480px;
+        object-fit: cover;
     }
 
     .slider {
-        width: 600px;
+        width: 720px;
+        height: 480px;
     }
 }
 
-.title {
-    margin-top: 10px; 
-    margin-bottom: 15px; 
-    width: 100%;
-    text-align: center;
-}
 
-@media (min-width: 1301px) {
-    .title {
-        display: none; /* Hide the standalone title since it's inside .grid2 */
-    }
-    .info-container h2 {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-}
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
     .infos p {
         text-align: left;
     }
-    .info-container h2 {
-        display: none; /* Hide the h2 in .grid2 */
-    }
 
-    .title {
-        margin-top: 0px; /* Adjust spacing */
-        margin-bottom: 32px;
-        width: 100%;
-    }
     .justify {
         display: flex;
         justify-content: center;
@@ -271,34 +349,63 @@ article {
         text-align: justify;
     }
 
-    .mainSection {
-        margin-top: 0px;
+    .reference-card {
         flex-direction: column;
         align-items: center;
     }
 
     .grid1, .grid2 {
-        margin-top: -15px;
+        margin-top: 0;
         flex: 0 0 auto;
         width: 100%;
     }
 
-    .info-container {
-        /* margin-bottom: 11px; */
+    .grid2 {
         max-width: 100%;
-        text-align: center;
+        padding: 20px;
+    }
+
+    .info-container {
+        max-width: 100%;
+        text-align: left; /* Alignement à gauche pour les labels */
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: center; /* Centrer la description sur tablette */
+    }
+
+    /* Labels à gauche, valeurs à droite sur tablette/iPad */
+    .info-container div {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        margin-bottom: 12px;
+    }
+
+    .info-container div p:first-child {
+        min-width: 140px;
+        flex-shrink: 0;
+        margin-bottom: 0;
+        margin-right: 15px;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        flex-grow: 1;
+        text-align: left;
     }
 
     .slide img {
-        width: 600px;
-        height: 343px;
-        object-fit: contain;
+        width: 670px;
+        height: 447px;
+        object-fit: cover;
     }
 
     .slider {
         margin-left: 0px;
-        width: 640px;
-        height: 400px;
+        width: 670px;
+        height: 447px;
     }
 
     .slides {
@@ -306,23 +413,106 @@ article {
     }
 
     .navigation-manual {
-        margin-left: 20px;
-        margin-top: -52px;
+        width: 670px;
+        margin-left: 0px; /* Centrer les boutons */
+        margin-top: -50px; /* Ajuster la hauteur */
+        display: flex;
+        justify-content: center;
     }
     
-    /* Pour les écrans moyens, utilisation de dvh */
     .scrolled {
         height: calc(100dvh - 114px);
     }
 
-    /* Rapprocher les points sur écrans moyens */
     .manual-btn:not(:last-child) {
-        margin-right: 25px; /* Réduit de 40px à 25px */
+        margin-right: 25px;
+    }
+
+    .same-domain-grid {
+        gap: 20px; /* Optimisé pour 3 cartes sur 1024px */
+        padding: 20px 15px 20px;
+    }
+
+    .top-section {
+        margin-bottom: 35px;
     }
 }
 
+/* Spécifique iPad (769px-1200px) - Ajustements slider uniquement */
+@media (max-width: 1200px) and (min-width: 769px) {
+    .slide img {
+        width: 660px;
+        height: 440px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 660px;
+        height: 440px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .slides {
+        width: 500%;
+        height: 440px;
+        display: flex;
+    }
+
+    .navigation-manual {
+        width: 660px;
+        margin-left: 0;
+        margin-top: -40px; /* Remonter pour être sur l'image */
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .grid1 {
+        position: relative; /* Pour le positionnement des boutons */
+    }
+
+    .grid2 {
+        max-width: 660px; /* Limiter à la largeur de l'image iPad */
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: center; /* Centrer la description sur iPad */
+        max-width: 100%;
+    }
+}
+
+
+
+@media (min-width: 1021px) {
+    .scrolled {
+        height: calc(100lvh - 114px);
+    }
+    
+    main {
+        height: calc(100lvh - -2px);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Optimisations pour garder tout visible sans scroll en mode desktop */
+    .same-domain-section {
+        margin: 25px auto 0;
+    }
+    
+    .pb {
+        margin-top: 20px;
+    }
+    
+    .top-section {
+        margin-bottom: 20px;
+    }
+}
+
+/* Mobile spécifique (≤768px) - Layout modifications */
 @media (max-width: 768px) {
-    /* Pour les petits écrans, utilisation de svh */
     .scrolled {
         height: calc(100svh - 114px);
     }
@@ -333,70 +523,105 @@ article {
         flex-direction: column;
     }
 
-}
-
-@media (min-width: 1021px) {
-    /* Pour les grands écrans, utilisation de lvh */
-    .scrolled {
-        height: calc(100lvh - 114px);
+    .top-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
     }
     
-    main {
-        height: calc(100lvh - -2px);
-        display: flex;
-        flex-direction: column;
+    .back-navigation {
+        align-self: flex-start;
+        flex: none;
     }
-}
-
-@media (max-width: 650px) {
-    h1#references-title {
-        font-size: 2em;
+    
+    .spacer {
+        display: none;
     }
 
-    .title {
-        margin-top: 120px; /* Adjust spacing */
-        margin-bottom: 37px;
-        width: 100%;
+    .reference-title {
+        font-size: 1.4rem;
     }
 
     .mainSection {
-        margin-top: -140px;
+        margin-top: 0px;
+    }
+
+    .reference-card {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
     }
 
     .grid2 {
-        margin-top: 19px;
+        margin-top: 0;
+        max-width: 340px; /* Limiter à la largeur de l'image mobile */
+        padding: 15px;
     }
 
     .info-container {
         max-width: 100%;
-        /* padding: 0 10px; */
+        text-align: left; /* Alignement à gauche pour les labels comme sur iPad */
     }
 
-    /* CORRECTION : Maintenir le rapport d'aspect 16:10 sur mobile */
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: center; /* Centrer la description sur mobile */
+        max-width: 100%;
+    }
+
+    /* Labels à gauche, valeurs à droite sur mobile - même style que iPad */
+    .info-container div {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        margin-bottom: 12px;
+    }
+
+    .info-container div p:first-child {
+        flex: 0 0 48%;
+        margin-bottom: 0;
+        margin-right: 4%;
+        text-align: left; /* Alignement à gauche comme sur iPad */
+        font-size: 0.7rem;
+    }
+
+    .info-container div p:last-child {
+        flex: 0 0 48%;
+        text-align: left; /* Alignement à gauche comme sur iPad */
+        font-size: 0.7rem;
+    }
+
     .slide img {
-        width: 360px;  /* Largeur adaptée pour tous les petits écrans */
-        height: 225px; /* Hauteur calculée pour maintenir le ratio 16:10 */
-        object-fit: contain;
+        width: 340px;
+        height: 227px;
+        object-fit: cover;
     }
 
     .slider {
-        width: 360px;  /* Largeur du slider adaptée */
-        height: 225px; /* Hauteur adaptée */
+        width: 340px;
+        height: 227px;
     }
 
     .slides {
-        height: 225px; /* Hauteur des slides adaptée */
+        height: 227px;
     }
 
     .navigation-manual {
-        width: 360px;  /* Largeur de la navigation adaptée */
-        margin-left: 0px; /* Centrage ajusté */
-        margin-top: -33px;  /* Position des boutons ajustée */
+        width: 340px;
+        margin-left: 0px;
+        margin-top: -30px;
+        display: flex;
+        justify-content: center;
     }
 
-    /* Rapprocher les points sur petits écrans */
     .manual-btn:not(:last-child) {
-        margin-right: 15px; /* Réduit de 40px à 15px */
+        margin-right: 15px;
+    }
+
+    .same-domain-grid {
+        gap: 20px;
+        padding: 20px 15px 20px;
     }
 }
 
@@ -406,6 +631,188 @@ article {
     font-style: italic;
 }
 
+/* Section références du même domaine - Reprise exacte du système references.php */
+.same-domain-section {
+    width: 100%;
+    max-width: 1400px;
+    margin: 30px auto 0; /* Réduction pour mode desktop */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Responsive pour la section références du même domaine */
+@media (max-width: 1200px) {
+    .same-domain-section {
+        margin: 40px auto 0;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .same-domain-section {
+        margin: 30px auto 0;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .same-domain-section {
+        margin: 25px auto 0;
+        padding: 0 15px;
+    }
+}
+
+.same-domain-title {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+}
+
+/* Responsive pour le titre - Système cohérent */
+@media (max-width: 1200px) {
+    .same-domain-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .same-domain-title {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .same-domain-title {
+        font-size: 1.2rem;
+    }
+}
+
+.same-domain-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: var(--gap-article);
+    padding: 20px var(--gap-article) 20px; 
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Card styling - Copie exacte de references.css */
+.same-domain-card {
+    width: 280px;
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: var(--card-transition);
+    border: var(--card-border);
+    height: auto;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Ajustement pour tablette - garder proportions 3:2 */
+@media (max-width: 1200px) {
+    .same-domain-card {
+        width: 280px; /* Largeur standard maintenue */
+    }
+}
+
+/* Lien invisible couvrant toute la carte */
+.same-domain-card a.card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.same-domain-card:hover {
+    transform: var(--card-hover-transform);
+    box-shadow: var(--card-hover-shadow);
+}
+
+/* Image container */
+.same-domain-card > div:first-child {
+    width: 100%;
+}
+
+.same-domain-card > div > div:first-child {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-bottom: var(--image-border);
+}
+
+.same-domain-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.same-domain-card:hover .same-domain-image {
+    transform: scale(1.05);
+}
+
+.no-image {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    color: #999;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* Text container */
+.same-domain-desc {
+    padding: 16px;
+    text-align: center;
+    background-color: var(--card-background);
+}
+
+.same-domain-desc .text-wrapper {
+    margin-bottom: 5px;
+}
+
+.same-domain-desc .text-wrapper:last-child {
+    margin-bottom: 0;
+}
+
+/* Title styling - Copie exacte */
+.same-domain-desc .text-wrapper p {
+    margin: 0;
+    font-weight: 600;
+    color: var(--title-color);
+    font-size: 18px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    line-height: 1.5;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
+/* Commune styling - Copie exacte */
+.same-domain-desc .text-wrapper p.commune {
+    font-weight: normal;
+    color: var(--subtitle-color);
+    font-size: 16px;
+    margin-top: 5px;
+    line-height: 1.5;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
 .pb {
     padding-bottom: 4px;
     display: flex;
@@ -413,5 +820,30 @@ article {
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: auto;
+    margin-top: 25px; /* Réduction pour mode desktop */
 }
+
+/* Responsive pour l'espacement du slogan */
+@media (max-width: 1200px) {
+    .pb {
+        margin-top: 35px;
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 768px) {
+    .pb {
+        margin-top: 30px;
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pb {
+        margin-top: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+} 

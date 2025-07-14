@@ -201,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     <option value="8" <?= ($reference['domaine'] ?? '') == '8' ? 'selected' : '' ?>>Centre d'Incendie et de Secours</option>
                     <option value="9" <?= ($reference['domaine'] ?? '') == '9' ? 'selected' : '' ?>>Hôpitaux publics</option>
                     <option value="10" <?= ($reference['domaine'] ?? '') == '10' ? 'selected' : '' ?>>Logements sociaux</option>
-                    <option value="11" <?= ($reference['domaine'] ?? '') == '11' ? 'selected' : '' ?>>Monuments Historiques et bâtiments à caractère patrimonial</option>
+                    <option value="11" <?= ($reference['domaine'] ?? '') == '11' ? 'selected' : '' ?>>Monuments Historiques et Sites Patrimoniaux</option>
                     <option value="12" <?= ($reference['domaine'] ?? '') == '12' ? 'selected' : '' ?>>Restructuration et réhabilitation en site occupé (phasage)</option>
                 </select>
                 <?php if (isset($errorsValidation['domaine'])): ?>

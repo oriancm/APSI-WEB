@@ -243,7 +243,7 @@ function dernierChantier($db) {
                     <option value="8">Centre d'Incendie et de Secours</option>
                     <option value="9">Santé</option>
                     <option value="10">Logements sociaux</option>
-                    <option value="11">Monuments Historiques et bâtiments à caractère patrimonial</option>
+                    <option value="11">Monuments Historiques et Sites Patrimoniaux</option>
                     <option value="12">Restructuration et réhabilitation en site occupé (phasage)</option>
                 </select>
                 <?php if (isset($errorsValidation['domaine'])): ?>
