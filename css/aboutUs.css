@@ -121,6 +121,20 @@ p {
     /* On utilise svh pour les petits écrans */
     height: calc(100svh - 114px);
   }
+
+  /* Passer la carte sous le texte sur mobile */
+  .departements {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* Media query pour iPad */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .departements {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 @media screen and (min-width: 1021px) {
