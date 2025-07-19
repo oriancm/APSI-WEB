@@ -3,8 +3,9 @@ FROM php:8.2-fpm
 # Installer les extensions nécessaires
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Installer nginx
+# Installer nginx et outils d'optimisation
 RUN apt-get update && apt-get install -y nginx \
+    nginx-extras \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -14,8 +15,9 @@ COPY . /var/www/html
 # Définir le dossier de travail
 WORKDIR /var/www/html
 
-# Copier la configuration nginx avec rewrite
+# Copier les configurations nginx
 COPY ./nginx.conf /etc/nginx/sites-available/default
+COPY ./nginx-global.conf /etc/nginx/conf.d/global.conf
 
 # Copier le script de démarrage
 COPY ./start.sh /start.sh
