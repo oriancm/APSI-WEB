@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://apsi-btp.fr/sitemap.xml
+
+# Disallow admin area
+Disallow: /admin/
+
+# Allow all other content
+Allow: /css/
+Allow: /js/
+Allow: /img/
+Allow: /font/ 

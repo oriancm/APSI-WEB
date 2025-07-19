@@ -5,7 +5,25 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>APSI BTP - Qui sommes-nous</title>
+    <title>APSI BTP - Qui sommes-nous | Spécialiste OPC et MOEX depuis 2007</title>
+    <meta name="description" content="Découvrez APSI BTP, créée en 2007 par Ludovic MESSY. Spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX) avec plus de 100 références en Provence-Alpes-Côte d'Azur.">
+    <meta name="keywords" content="APSI BTP, Ludovic MESSY, Laurent MÉTAYER, OPC, ordonnancement pilotage coordination, MOEX, maîtrise d'œuvre, construction, réhabilitation, Provence, PACA">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apsi-btp.fr/aboutUs">
+    <meta property="og:title" content="APSI BTP - Qui sommes-nous">
+    <meta property="og:description" content="Découvrez APSI BTP, spécialiste en OPC et MOEX depuis 2007 avec plus de 100 références en Provence-Alpes-Côte d'Azur.">
+    <meta property="og:image" content="/img/APSI.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="/css/aboutUs.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
@@ -64,7 +82,7 @@
                     <li>Var (83)</li>                   
                 </ul>
                 <div class="divCarte">
-                    <img class="carte" src="/img/carte.png" alt="" >
+                    <img class="carte" src="/img/carte.png" alt="Carte des départements d'intervention APSI BTP : Vaucluse, Alpes-de-Haute-Provence, Hautes-Alpes, Bouches du Rhône, Gard, Var" >
                 </div>
                 </div>
                 

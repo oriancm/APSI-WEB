@@ -12,7 +12,7 @@
 
 <?php $pagename = basename($_SERVER['PHP_SELF']); ?>
     <nav id="nav">
-        <a href="/" class="logo-wrapper"><img class="logo" src="/img/APSI.png" alt=""></a>
+        <a href="/" class="logo-wrapper"><img class="logo" src="/img/APSI.png" alt="APSI BTP - Vos projets en toute sérénité"></a>
 
         <div class="menu">
             <ul>
@@ -23,7 +23,7 @@
                 <li><a <?php if ($pagename == 'contact.php' || $pagename == 'mailSent.php') {echo ' class="active"';} ?> href="/contact">Nous contacter</a></li>
             </ul>
         </div>
-        <a href="/" class="a-btn-menu"><img src="/img/menu.png" alt="" class="btn-menu"></a>
+        <a href="/" class="a-btn-menu"><img src="/img/menu.png" alt="Menu de navigation" class="btn-menu"></a>
 
     </nav>
 </body>
