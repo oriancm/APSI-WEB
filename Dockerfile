@@ -15,9 +15,8 @@ COPY . /var/www/html
 # Définir le dossier de travail
 WORKDIR /var/www/html
 
-# Copier les configurations nginx
+# Copier la configuration nginx
 COPY ./nginx.conf /etc/nginx/sites-available/default
-COPY ./nginx-global.conf /etc/nginx/conf.d/global.conf
 
 # Copier le script de démarrage
 COPY ./start.sh /start.sh
