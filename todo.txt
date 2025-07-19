@@ -6,6 +6,6 @@ changer login coolify, bdd, backoffice, git privé
 onglet info et logo
 migration bdd
 slogan au meme niveau tt les pages
-seo opti
 
 card nos ref et ref differentes police
+icone site
