@@ -17,6 +17,11 @@
     --accent-color: dodgerblue;
     --gap-article: 40px;
     --image-border: 1px solid #f0f0f0;
+    
+    /* Variables d'espacement par défaut */
+    --top-section-margin: 20px;
+    --same-domain-margin: 25px;
+    --pb-margin: 20px;
 }
 
 body {
@@ -54,20 +59,7 @@ main::-webkit-scrollbar {
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
-    box-sizing: border-box; /* Assurer que le padding est inclus dans la largeur */
-}
-
-/* Responsive pour le container principal */
-@media (max-width: 768px) {
-    .page-container {
-        padding: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .page-container {
-        padding: 10px;
-    }
+    box-sizing: border-box;
 }
 
 /* Navigation et titre au même niveau - parfaitement centré */
@@ -75,13 +67,13 @@ main::-webkit-scrollbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px; /* Espacement fixe et conséquent */
+    margin-bottom: var(--top-section-margin);
     width: 100%;
 }
 
 .back-navigation {
     flex: 0 0 150px;
-    margin-left: 20px;
+    padding-left: 20px;
 }
 
 .back-link {
@@ -114,6 +106,7 @@ main::-webkit-scrollbar {
 /* Spacer pour équilibrer */
 .spacer {
     flex: 0 0 150px;
+    padding-right: 20px;
 }
 
 .content-wrapper {
@@ -129,10 +122,10 @@ a {
 .mainSection {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     margin-left: 2%;
     margin-right: 2%;
-    margin-top: 0px;
+    margin-top: 1%;
     flex: 1;
 }
 
@@ -165,7 +158,7 @@ article {
 .grid2 {
     flex: 1;
     text-align: justify;
-    max-width: 283px; /* Augmentation de 2px */
+    max-width: 283px;
     padding: 20px;
 }
 
@@ -306,325 +299,6 @@ article {
     }
 }
 
-@media (min-width:1500px) {
-    .mainSection {
-        margin-top: 0px;
-    }
-}
-
-@media (min-width: 1300px) {
-    .grid2 {
-        flex: 0 0 40%;
-        margin-right: 3%;
-    }
-
-}
-
-@media (max-width: 1500px) {
-    .slide img {
-        width: 720px;
-        height: 480px;
-        object-fit: cover;
-    }
-
-    .slider {
-        width: 720px;
-        height: 480px;
-    }
-}
-
-
-
-@media (max-width: 1200px) {
-    .infos p {
-        text-align: left;
-    }
-
-    .justify {
-        display: flex;
-        justify-content: center;
-    }
-
-    .infos {
-        text-align: justify;
-    }
-
-    .reference-card {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .grid1, .grid2 {
-        margin-top: 0;
-        flex: 0 0 auto;
-        width: 100%;
-    }
-
-    .grid2 {
-        max-width: 100%;
-        padding: 20px;
-    }
-
-    .info-container {
-        max-width: 100%;
-        text-align: left; /* Alignement à gauche pour les labels */
-    }
-
-    .info-container .desc,
-    .divDesc .desc {
-        text-align: center; /* Centrer la description sur tablette */
-    }
-
-    /* Labels à gauche, valeurs à droite sur tablette/iPad */
-    .info-container div {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        margin-bottom: 12px;
-    }
-
-    .info-container div p:first-child {
-        min-width: 140px;
-        flex-shrink: 0;
-        margin-bottom: 0;
-        margin-right: 15px;
-        text-align: left;
-    }
-
-    .info-container div p:last-child {
-        flex-grow: 1;
-        text-align: left;
-    }
-
-    .slide img {
-        width: 670px;
-        height: 447px;
-        object-fit: cover;
-    }
-
-    .slider {
-        margin-left: 0px;
-        width: 670px;
-        height: 447px;
-    }
-
-    .slides {
-        width: 500%;
-    }
-
-    .navigation-manual {
-        width: 670px;
-        margin-left: 0px; /* Centrer les boutons */
-        margin-top: -50px; /* Ajuster la hauteur */
-        display: flex;
-        justify-content: center;
-    }
-    
-    .scrolled {
-        height: calc(100dvh - 114px);
-    }
-
-    .manual-btn:not(:last-child) {
-        margin-right: 25px;
-    }
-
-    .same-domain-grid {
-        gap: 20px; /* Optimisé pour 3 cartes sur 1024px */
-        padding: 20px 15px 20px;
-    }
-
-    .top-section {
-        margin-bottom: 35px;
-    }
-}
-
-/* Spécifique iPad (769px-1200px) - Ajustements slider uniquement */
-@media (max-width: 1200px) and (min-width: 769px) {
-    .slide img {
-        width: 660px;
-        height: 440px;
-        object-fit: cover;
-    }
-
-    .slider {
-        width: 660px;
-        height: 440px;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .slides {
-        width: 500%;
-        height: 440px;
-        display: flex;
-    }
-
-    .navigation-manual {
-        width: 660px;
-        margin-left: 0;
-        margin-top: -40px; /* Remonter pour être sur l'image */
-        display: flex;
-        justify-content: center;
-        position: absolute;
-        z-index: 2;
-    }
-
-    .grid1 {
-        position: relative; /* Pour le positionnement des boutons */
-    }
-
-    .grid2 {
-        max-width: 660px; /* Limiter à la largeur de l'image iPad */
-    }
-
-    .info-container .desc,
-    .divDesc .desc {
-        text-align: center; /* Centrer la description sur iPad */
-        max-width: 100%;
-    }
-}
-
-
-
-@media (min-width: 1021px) {
-    .scrolled {
-        height: calc(100lvh - 114px);
-    }
-    
-    main {
-        height: calc(100lvh - -2px);
-        display: flex;
-        flex-direction: column;
-    }
-    
-    /* Optimisations pour garder tout visible sans scroll en mode desktop */
-    .same-domain-section {
-        margin: 25px auto 0;
-    }
-    
-    .pb {
-        margin-top: 20px;
-    }
-    
-    .top-section {
-        margin-bottom: 20px;
-    }
-}
-
-/* Mobile spécifique (≤768px) - Layout modifications */
-@media (max-width: 768px) {
-    .scrolled {
-        height: calc(100svh - 114px);
-    }
-    
-    main {
-        height: calc(100svh - -2px);
-        display: flex;
-        flex-direction: column;
-    }
-
-    .top-section {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 25px;
-    }
-    
-    .back-navigation {
-        align-self: flex-start;
-        flex: none;
-    }
-    
-    .spacer {
-        display: none;
-    }
-
-    .reference-title {
-        font-size: 1.4rem;
-    }
-
-    .mainSection {
-        margin-top: 0px;
-    }
-
-    .reference-card {
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-    }
-
-    .grid2 {
-        margin-top: 0;
-        max-width: 340px; /* Limiter à la largeur de l'image mobile */
-        padding: 15px;
-    }
-
-    .info-container {
-        max-width: 100%;
-        text-align: left; /* Alignement à gauche pour les labels comme sur iPad */
-    }
-
-    .info-container .desc,
-    .divDesc .desc {
-        text-align: center; /* Centrer la description sur mobile */
-        max-width: 100%;
-    }
-
-    /* Labels à gauche, valeurs à droite sur mobile - même style que iPad */
-    .info-container div {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        margin-bottom: 12px;
-    }
-
-    .info-container div p:first-child {
-        flex: 0 0 48%;
-        margin-bottom: 0;
-        margin-right: 4%;
-        text-align: left; /* Alignement à gauche comme sur iPad */
-        font-size: 0.7rem;
-    }
-
-    .info-container div p:last-child {
-        flex: 0 0 48%;
-        text-align: left; /* Alignement à gauche comme sur iPad */
-        font-size: 0.7rem;
-    }
-
-    .slide img {
-        width: 340px;
-        height: 227px;
-        object-fit: cover;
-    }
-
-    .slider {
-        width: 340px;
-        height: 227px;
-    }
-
-    .slides {
-        height: 227px;
-    }
-
-    .navigation-manual {
-        width: 340px;
-        margin-left: 0px;
-        margin-top: -30px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .manual-btn:not(:last-child) {
-        margin-right: 15px;
-    }
-
-    .same-domain-grid {
-        gap: 20px;
-        padding: 20px 15px 20px;
-    }
-}
-
 .slogan {
     text-align: center;
     color: #000000;
@@ -635,31 +309,9 @@ article {
 .same-domain-section {
     width: 100%;
     max-width: 1400px;
-    margin: 30px auto 0; /* Réduction pour mode desktop */
+    margin: var(--same-domain-margin) auto 0;
     padding: 0 20px;
     box-sizing: border-box;
-}
-
-/* Responsive pour la section références du même domaine */
-@media (max-width: 1200px) {
-    .same-domain-section {
-        margin: 40px auto 0;
-        padding: 0 15px;
-    }
-}
-
-@media (max-width: 768px) {
-    .same-domain-section {
-        margin: 30px auto 0;
-        padding: 0 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .same-domain-section {
-        margin: 25px auto 0;
-        padding: 0 15px;
-    }
 }
 
 .same-domain-title {
@@ -669,25 +321,6 @@ article {
     font-weight: 600;
     text-align: center;
     display: block;
-}
-
-/* Responsive pour le titre - Système cohérent */
-@media (max-width: 1200px) {
-    .same-domain-title {
-        font-size: 1.6rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .same-domain-title {
-        font-size: 1.4rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .same-domain-title {
-        font-size: 1.2rem;
-    }
 }
 
 .same-domain-grid {
@@ -713,13 +346,6 @@ article {
     height: auto;
     cursor: pointer;
     position: relative;
-}
-
-/* Ajustement pour tablette - garder proportions 3:2 */
-@media (max-width: 1200px) {
-    .same-domain-card {
-        width: 280px; /* Largeur standard maintenue */
-    }
 }
 
 /* Lien invisible couvrant toute la carte */
@@ -820,30 +446,1158 @@ article {
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 25px; /* Réduction pour mode desktop */
+    margin-top: var(--pb-margin);
 }
 
-/* Responsive pour l'espacement du slogan */
-@media (max-width: 1200px) {
-    .pb {
-        margin-top: 35px;
-        max-width: 95%;
+/* =============================================================================
+   BREAKPOINTS SPÉCIFIQUES PAR FORMAT D'ÉCRAN
+   ============================================================================= */
+
+/* PETIT TÉLÉPHONE (320px-359px) - Ex: iPhone SE 1ère génération */
+@media (max-width: 359px) {
+    :root {
+        --top-section-margin: 30px;
+        --same-domain-margin: 25px;
+        --pb-margin: 20px;
     }
-}
+    
+    .scrolled {
+        height: calc(100svh - 114px);
+    }
+    
+    main {
+        height: calc(100svh - -2px);
+    }
+    
+    .page-container {
+        padding: 8px;
+    }
 
-@media (max-width: 768px) {
-    .pb {
-        margin-top: 30px;
+    .top-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .back-navigation {
+        align-self: flex-start;
+        flex: none;
+        padding-left: 0;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 1.2rem;
+    }
+
+    .reference-card {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
         max-width: 100%;
-        padding-left: 15px;
-        padding-right: 15px;
+    }
+
+    .grid2 {
+        margin-top: 0;
+        max-width: 300px;
+        padding: 12px;
+    }
+
+    /* Slider très petit pour 320px */
+    .slide img {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 300px;
+        height: 200px;
+    }
+
+    .slides {
+        height: 200px;
+    }
+
+    .navigation-manual {
+        width: 300px;
+        margin-left: 0;
+        margin-top: -25px;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 12px;
+    }
+
+    .info-container div {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-container div p:first-child,
+    .info-container div p:last-child {
+        font-size: 0.65rem;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: center;
+        font-size: 0.65rem;
+    }
+
+    .same-domain-title {
+        font-size: 1.1rem;
+    }
+
+    .same-domain-grid {
+        gap: 15px;
+        padding: 15px 10px;
+    }
+
+    .same-domain-card {
+        width: 260px;
     }
 }
 
-@media (max-width: 480px) {
-    .pb {
-        margin-top: 25px;
-        padding-left: 15px;
-        padding-right: 15px;
+/* MOYEN TÉLÉPHONE (360px-413px) - Ex: Galaxy S21, iPhone 12 mini */
+@media (min-width: 360px) and (max-width: 413px) {
+    :root {
+        --top-section-margin: 30px;
+        --same-domain-margin: 22px;
+        --pb-margin: 18px;
+    }
+    
+    .scrolled {
+        height: calc(100svh - 114px);
+    }
+    
+    main {
+        height: calc(100svh - -2px);
+    }
+    
+    .page-container {
+        padding: 10px;
+    }
+
+    .top-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .back-navigation {
+        align-self: flex-start;
+        flex: none;
+        padding-left: 0;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 1.3rem;
+    }
+
+    .reference-card {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .grid2 {
+        margin-top: 0;
+        max-width: 340px;
+        padding: 15px;
+    }
+
+    /* Slider optimisé pour 360px */
+    .slide img {
+        width: 340px;
+        height: 227px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 340px;
+        height: 227px;
+    }
+
+    .slides {
+        height: 227px;
+    }
+
+    .navigation-manual {
+        width: 340px;
+        margin-left: 0;
+        margin-top: -30px;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 15px;
+    }
+
+    .info-container div {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .info-container div p:first-child {
+        flex: 0 0 48%;
+        margin-right: 4%;
+        font-size: 0.7rem;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        flex: 0 0 48%;
+        font-size: 0.7rem;
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: center;
+        font-size: 0.7rem;
+    }
+
+    .same-domain-title {
+        font-size: 1.2rem;
+    }
+
+    .same-domain-grid {
+        gap: 18px;
+        padding: 18px 12px;
+    }
+
+    .same-domain-card {
+        width: 270px;
+    }
+}
+
+/* GRAND TÉLÉPHONE (414px-767px) - Ex: iPhone Pro, Galaxy S21+ */
+@media (min-width: 414px) and (max-width: 767px) {
+    :root {
+        --top-section-margin: 15px;
+        --same-domain-margin: 20px;
+        --pb-margin: 15px;
+    }
+    
+    .scrolled {
+        height: calc(100svh - 114px);
+    }
+    
+    main {
+        height: calc(100svh - -2px);
+    }
+    
+    .page-container {
+        padding: 15px;
+    }
+
+    .top-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .back-navigation {
+        align-self: flex-start;
+        flex: none;
+        padding-left: 0;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 1.4rem;
+    }
+
+    .reference-card {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .grid2 {
+        margin-top: 0;
+        max-width: 380px;
+        padding: 18px;
+    }
+
+    /* Slider optimisé pour grands téléphones */
+    .slide img {
+        width: 380px;
+        height: 253px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 380px;
+        height: 253px;
+    }
+
+    .slides {
+        height: 253px;
+    }
+
+    .navigation-manual {
+        width: 380px;
+        margin-left: 0;
+        margin-top: -32px;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 18px;
+    }
+
+    .info-container div {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .info-container div p:first-child {
+        flex: 0 0 45%;
+        margin-right: 5%;
+        font-size: 0.75rem;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        flex: 0 0 50%;
+        font-size: 0.75rem;
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: center;
+        font-size: 0.75rem;
+    }
+
+    .same-domain-title {
+        font-size: 1.3rem;
+    }
+
+    .same-domain-grid {
+        gap: 20px;
+        padding: 20px 15px;
+    }
+
+    .same-domain-card {
+        width: 280px;
+    }
+}
+
+/* IPAD MINI (768px-833px) */
+@media (min-width: 768px) and (max-width: 833px) {
+    :root {
+        --top-section-margin: 15px;
+        --same-domain-margin: 20px;
+        --pb-margin: 18px;
+    }
+    
+    .scrolled {
+        height: calc(100dvh - 114px);
+    }
+    
+    main {
+        height: calc(100dvh - -2px);
+    }
+    
+    .page-container {
+        padding: 15px;
+    }
+
+    .top-section {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+    }
+    
+    .back-navigation {
+        flex: initial;
+        padding-left: 0;
+        justify-self: start;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 1.5rem;
+        flex: initial;
+        grid-column: 2;
+    }
+
+    .reference-card {
+        flex-direction: column;
+        align-items: center;
+        max-width: 90%;
+    }
+
+    .grid2 {
+        max-width: 580px;
+        padding: 20px;
+    }
+
+    /* Slider optimisé pour iPad Mini */
+    .slide img {
+        width: 580px;
+        height: 387px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 580px;
+        height: 387px;
+        position: relative;
+    }
+
+    .slides {
+        height: 387px;
+    }
+
+    .navigation-manual {
+        width: 580px;
+        margin-left: 0;
+        margin-top: -35px;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 22px;
+    }
+
+    .info-container div {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .info-container div p:first-child {
+        min-width: 140px;
+        margin-right: 15px;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: center;
+    }
+
+    .same-domain-title {
+        font-size: 1.4rem;
+    }
+
+    .same-domain-grid {
+        gap: 25px;
+        padding: 20px 20px;
+    }
+
+    .same-domain-card {
+        width: 280px;
+    }
+}
+
+/* IPAD AIR (834px-1023px) */
+@media (min-width: 834px) and (max-width: 1023px) {
+    :root {
+        --top-section-margin: 15px;
+        --same-domain-margin: 20px;
+        --pb-margin: 18px;
+    }
+    
+    .scrolled {
+        height: calc(100dvh - 114px);
+    }
+    
+    main {
+        height: calc(100dvh - -2px);
+    }
+
+    .top-section {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+    }
+    
+    .back-navigation {
+        flex: initial;
+        padding-left: 0;
+        justify-self: start;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 1.6rem;
+        flex: initial;
+        grid-column: 2;
+    }
+
+    .reference-card {
+        flex-direction: column;
+        align-items: center;
+        max-width: 85%;
+    }
+
+    .grid2 {
+        max-width: 660px;
+        padding: 20px;
+    }
+
+    /* Slider optimisé pour iPad Air */
+    .slide img {
+        width: 660px;
+        height: 440px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 660px;
+        height: 440px;
+        position: relative;
+    }
+
+    .slides {
+        height: 440px;
+    }
+
+    .navigation-manual {
+        width: 660px;
+        margin-left: 0;
+        margin-top: -38px;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 25px;
+    }
+
+    .info-container div {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .info-container div p:first-child {
+        min-width: 150px;
+        margin-right: 15px;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: center;
+    }
+
+    .same-domain-title {
+        font-size: 1.5rem;
+    }
+
+    .same-domain-grid {
+        gap: 30px;
+        padding: 20px 25px;
+    }
+
+    .same-domain-card {
+        width: 280px;
+    }
+}
+
+/* ÉCRANS MOYENS (1024px-1299px) - Format iPad Pro et petits laptops */
+@media (min-width: 1024px) and (max-width: 1299px) {
+    :root {
+        --top-section-margin: 15px;
+        --same-domain-margin: 20px;
+        --pb-margin: 18px;
+    }
+    
+    .scrolled {
+        height: calc(100lvh - 114px);
+    }
+    
+    main {
+        height: calc(100lvh - -2px);
+    }
+
+    .top-section {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+    }
+    
+    .back-navigation {
+        flex: initial;
+        padding-left: 0;
+        justify-self: start;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 1.7rem;
+        flex: initial;
+        grid-column: 2;
+    }
+
+    .reference-card {
+        flex-direction: column;
+        align-items: center;
+        max-width: 90%;
+    }
+
+    .grid2 {
+        max-width: 650px;
+        padding: 20px;
+    }
+
+    /* Slider optimisé pour écrans moyens */
+    .slide img {
+        width: 650px;
+        height: 433px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 650px;
+        height: 433px;
+        position: relative;
+    }
+
+    .slides {
+        height: 433px;
+    }
+
+    .navigation-manual {
+        width: 650px;
+        margin-left: 0;
+        margin-top: -38px;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 30px;
+    }
+
+    .info-container div {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .info-container div p:first-child {
+        min-width: 150px;
+        margin-right: 15px;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: center;
+    }
+
+    .same-domain-title {
+        font-size: 1.6rem;
+    }
+
+    .same-domain-grid {
+        gap: 35px;
+        padding: 20px 30px;
+    }
+
+    .same-domain-card {
+        width: 280px;
+    }
+}
+
+/* LAPTOP (1300px-1365px) */
+@media (min-width: 1300px) and (max-width: 1365px) {
+    :root {
+        --top-section-margin: 20px;
+        --same-domain-margin: 22px;
+        --pb-margin: 18px;
+    }
+    
+    .scrolled {
+        height: calc(100lvh - 114px);
+    }
+    
+    main {
+        height: calc(100lvh - -2px);
+    }
+
+    .top-section {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+    }
+    
+    .back-navigation {
+        flex: initial;
+        padding-left: 20px;
+        justify-self: start;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 1.8rem;
+        flex: initial;
+        grid-column: 2;
+    }
+
+    .reference-card {
+        flex-direction: row;
+        align-items: center;
+        max-width: 90%;
+    }
+
+    .grid2 {
+        flex: 0 0 40%;
+        margin-right: 3%;
+        max-width: 320px;
+        padding: 20px;
+    }
+
+    /* Slider optimisé pour laptop */
+    .slide img {
+        width: 700px;
+        height: 467px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 700px;
+        height: 467px;
+    }
+
+    .slides {
+        height: 467px;
+    }
+
+    .navigation-manual {
+        width: 700px;
+        margin-top: -38px;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 35px;
+    }
+
+    .info-container div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-container div p:first-child {
+        margin-bottom: 3px;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: justify;
+    }
+
+    .same-domain-title {
+        font-size: 1.7rem;
+        margin-bottom: 25px;
+    }
+
+    .same-domain-grid {
+        gap: 35px;
+        padding: 18px 35px;
+    }
+
+    .same-domain-card {
+        width: 280px;
+    }
+}
+
+/* ÉCRAN FIXE (1366px-1919px) */
+@media (min-width: 1366px) and (max-width: 1919px) {
+    :root {
+        --top-section-margin: 20px;
+        --same-domain-margin: 25px;
+        --pb-margin: 20px;
+    }
+    
+    .scrolled {
+        height: calc(100lvh - 114px);
+    }
+    
+    main {
+        height: calc(100lvh - -2px);
+    }
+
+    .top-section {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+    }
+    
+    .back-navigation {
+        flex: initial;
+        padding-left: 20px;
+        justify-self: start;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 1.8rem;
+        flex: initial;
+        grid-column: 2;
+    }
+
+    .reference-card {
+        flex-direction: row;
+        align-items: center;
+        max-width: 90%;
+    }
+
+    .grid2 {
+        flex: 0 0 40%;
+        margin-right: 3%;
+        max-width: 350px;
+        padding: 20px;
+    }
+
+    /* Slider format standard - Réduit de 10px en hauteur pour 1536x695 */
+    .slide img {
+        width: 672px;
+        height: 448px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 672px;
+        height: 448px;
+    }
+
+    .slides {
+        height: 448px;
+    }
+
+    .navigation-manual {
+        width: 672px;
+        margin-top: -39px;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 39px;
+    }
+
+    .info-container div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-container div p:first-child {
+        margin-bottom: 3px;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        text-align: justify;
+    }
+
+    .same-domain-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    .same-domain-grid {
+        gap: 40px;
+        padding: 20px 40px;
+    }
+
+    .same-domain-card {
+        width: 280px;
+    }
+}
+
+/* GRAND ÉCRAN (1920px-2559px) - Optimisé pour 1920x1080 à 125% */
+@media (min-width: 1920px) and (max-width: 2559px) {
+    :root {
+        --top-section-margin: 15px;
+        --same-domain-margin: 22px;
+        --pb-margin: 18px;
+    }
+    
+    .scrolled {
+        height: calc(100lvh - 114px);
+    }
+    
+    main {
+        height: calc(100lvh - -2px);
+    }
+
+    .top-section {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+    }
+    
+    .back-navigation {
+        flex: initial;
+        padding-left: 25px;
+        justify-self: start;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 2rem;
+        flex: initial;
+        grid-column: 2;
+    }
+
+    .reference-card {
+        flex-direction: row;
+        align-items: center;
+        max-width: 85%;
+    }
+
+    .grid2 {
+        flex: 0 0 35%;
+        margin-right: 4%;
+        max-width: 400px;
+        padding: 25px;
+    }
+
+    /* Slider grand format */
+    .slide img {
+        width: 800px;
+        height: 533px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 800px;
+        height: 533px;
+    }
+
+    .slides {
+        height: 533px;
+    }
+
+    .navigation-manual {
+        width: 800px;
+        margin-top: -45px;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 45px;
+    }
+
+    .info-container div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+
+    .info-container div p:first-child {
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        font-size: 0.8rem;
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        font-size: 0.8rem;
+        text-align: justify;
+    }
+
+    .same-domain-title {
+        font-size: 2rem;
+        margin-bottom: 35px;
+    }
+
+    .same-domain-grid {
+        gap: 45px;
+        padding: 25px 45px;
+    }
+
+    .same-domain-card {
+        width: 300px;
+    }
+}
+
+/* ÉCRAN D'ARCHITECTE (2560px+) */
+@media (min-width: 2560px) {
+    :root {
+        --top-section-margin: 15px;
+        --same-domain-margin: 20px;
+        --pb-margin: 15px;
+    }
+    
+    .scrolled {
+        height: calc(100lvh - 114px);
+    }
+    
+    main {
+        height: calc(100lvh - -2px);
+    }
+
+    .top-section {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+    }
+    
+    .back-navigation {
+        flex: initial;
+        padding-left: 30px;
+        justify-self: start;
+    }
+    
+    .spacer {
+        display: none;
+    }
+
+    .reference-title {
+        font-size: 2.2rem;
+        flex: initial;
+        grid-column: 2;
+    }
+
+    .reference-card {
+        flex-direction: row;
+        align-items: center;
+        max-width: 80%;
+    }
+
+    .grid2 {
+        flex: 0 0 30%;
+        margin-right: 5%;
+        max-width: 450px;
+        padding: 30px;
+    }
+
+    /* Slider très grand format */
+    .slide img {
+        width: 1000px;
+        height: 667px;
+        object-fit: cover;
+    }
+
+    .slider {
+        width: 1000px;
+        height: 667px;
+    }
+
+    .slides {
+        height: 667px;
+    }
+
+    .navigation-manual {
+        width: 1000px;
+        margin-top: -50px;
+    }
+
+    .manual-btn:not(:last-child) {
+        margin-right: 50px;
+    }
+
+    .info-container div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 18px;
+    }
+
+    .info-container div p:first-child {
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    .info-container div p:last-child {
+        font-size: 0.85rem;
+        text-align: left;
+    }
+
+    .info-container .desc,
+    .divDesc .desc {
+        font-size: 0.85rem;
+        text-align: justify;
+    }
+
+    .same-domain-title {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+    }
+
+    .same-domain-grid {
+        gap: 50px;
+        padding: 30px 50px;
+    }
+
+    .same-domain-card {
+        width: 320px;
+    }
+
+    .same-domain-card > div > div:first-child {
+        height: 200px;
+    }
+
+    .same-domain-image,
+    .no-image {
+        height: 200px;
     }
 } 

@@ -5,6 +5,8 @@ changer login coolify, bdd, backoffice, git privé
 
 onglet info et logo
 migration bdd
-responsive: carte au dessus departement
 slogan au meme niveau tt les pages
 seo opti
+
+titre template ref pas bien centre 20 px back link
+fhd 125 card trop grande
