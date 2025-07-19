@@ -23,13 +23,41 @@ $picTab = getAllPic($db);
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Nos Références - APSI BTP | Projets BTP en Provence-Alpes-Côte d'Azur</title>
+    <meta name="description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX). Plus de 100 projets BTP réalisés en PACA.">
+    <meta name="keywords" content="références BTP, projets construction, OPC, maîtrise d'œuvre, Provence, PACA, chantier, réhabilitation">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apsi-btp.fr/references">
+    <meta property="og:title" content="Nos Références - APSI BTP">
+    <meta property="og:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX).">
+    <meta property="og:image" content="/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://apsi-btp.fr/references">
+    <meta property="twitter:title" content="Nos Références - APSI BTP">
+    <meta property="twitter:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX).">
+    <meta property="twitter:image" content="/img/APSI.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
     <link rel="stylesheet" href="/css/references.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
     <!-- Iconscout Link For Icons -->

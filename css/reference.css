@@ -416,7 +416,7 @@ article {
 /* Title styling - Copie exacte */
 .same-domain-desc .text-wrapper p {
     margin: 0;
-    font-weight: 600;
+    font-weight: bold;
     color: var(--title-color);
     font-size: 18px;
     white-space: normal;
@@ -426,6 +426,7 @@ article {
     line-height: 1.5;
     padding-bottom: 2px;
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Commune styling - Copie exacte */
@@ -437,6 +438,7 @@ article {
     line-height: 1.5;
     padding-bottom: 2px;
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .pb {

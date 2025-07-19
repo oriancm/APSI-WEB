@@ -56,13 +56,40 @@ if (!empty($sameDomainRefs)) {
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    
+    <!-- SEO Meta Tags -->
+    <title><?= htmlspecialchars($ref['titre']) ?> - APSI BTP | Référence BTP en <?= htmlspecialchars($ref['commune']) ?></title>
+    <meta name="description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune']) ?>. <?= htmlspecialchars(substr($ref['description'], 0, 150)) ?>...">
+    <meta name="keywords" content="<?= htmlspecialchars($ref['titre']) ?>, <?= htmlspecialchars($ref['commune']) ?>, APSI BTP, OPC, maîtrise d'œuvre, construction, Provence, PACA">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://apsi-btp.fr/reference/<?= $ref['id'] ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($ref['titre']) ?> - APSI BTP">
+    <meta property="og:description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune']) ?>.">
+    <meta property="og:image" content="/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://apsi-btp.fr/reference/<?= $ref['id'] ?>">
+    <meta property="twitter:title" content="<?= htmlspecialchars($ref['titre']) ?> - APSI BTP">
+    <meta property="twitter:description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune']) ?>.">
+    <meta property="twitter:image" content="/img/APSI.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
     <link rel="stylesheet" href="/css/reference.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">

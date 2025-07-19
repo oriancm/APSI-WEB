@@ -1,8 +1,18 @@
 {
     "name": "APSI BTP - Vos projets en toute sérénité",
     "short_name": "APSI BTP",
-    "description": "Spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX)",
+    "description": "Spécialiste en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX) depuis 2007",
     "icons": [
+        {
+            "src": "/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
         {
             "src": "/android-chrome-192x192.png",
             "sizes": "192x192",
@@ -17,5 +27,9 @@
     "theme_color": "#ff6600",
     "background_color": "#ffffff",
     "display": "standalone",
-    "start_url": "/"
+    "start_url": "/",
+    "scope": "/",
+    "orientation": "portrait-primary",
+    "categories": ["business", "productivity"],
+    "lang": "fr"
 } 

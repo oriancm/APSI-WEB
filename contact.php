@@ -41,13 +41,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Nous Contacter - APSI BTP | Contactez-nous pour vos projets BTP</title>
+    <meta name="description" content="Contactez APSI BTP pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX) en Provence-Alpes-Côte d'Azur.">
+    <meta name="keywords" content="contact APSI BTP, devis OPC, maîtrise d'œuvre, projet BTP, Provence, PACA">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apsi-btp.fr/contact">
+    <meta property="og:title" content="Nous Contacter - APSI BTP">
+    <meta property="og:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX).">
+    <meta property="og:image" content="/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://apsi-btp.fr/contact">
+    <meta property="twitter:title" content="Nous Contacter - APSI BTP">
+    <meta property="twitter:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX).">
+    <meta property="twitter:image" content="/img/APSI.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">

@@ -1,11 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Nos Clients - APSI BTP | Partenaires et Maîtres d'Ouvrage</title>
+    <meta name="description" content="Découvrez nos clients et partenaires : collectivités, institutions publiques et privées qui nous font confiance pour leurs projets BTP en Provence-Alpes-Côte d'Azur.">
+    <meta name="keywords" content="clients APSI BTP, partenaires, maîtres d'ouvrage, collectivités, institutions, Provence, PACA">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apsi-btp.fr/clients">
+    <meta property="og:title" content="Nos Clients - APSI BTP">
+    <meta property="og:description" content="Découvrez nos clients et partenaires qui nous font confiance pour leurs projets BTP.">
+    <meta property="og:image" content="/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://apsi-btp.fr/clients">
+    <meta property="twitter:title" content="Nos Clients - APSI BTP">
+    <meta property="twitter:description" content="Découvrez nos clients et partenaires qui nous font confiance pour leurs projets BTP.">
+    <meta property="twitter:image" content="/img/APSI.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
     <link rel="stylesheet" href="/css/clients.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
 </head>
