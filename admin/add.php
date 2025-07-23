@@ -317,7 +317,7 @@ function dernierChantier($db) {
         </form>
     </main>
 
-    <script src="../script/search-cities.js"></script>
+    <script src="/script/search-cities.js"></script>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Les références aux éléments du DOM

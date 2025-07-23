@@ -93,3 +93,18 @@ section {
         margin-right: 2%;
     }
 }
+
+@media (min-width: 1600px) {
+    .logo-gallery {
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    h1 {
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        border-bottom: 2px solid dodgerblue;
+        padding-bottom: 10px;
+    }
+}
