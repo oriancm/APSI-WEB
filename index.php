@@ -83,7 +83,7 @@ function getFirstPicForRefs($db, $refIds) {
     .carousel-card {
         display: inline-block;
         vertical-align: top;
-        width: 140px;
+        width: 180px;
         background-color: var(--card-background);
         border-radius: var(--card-border-radius);
         box-shadow: var(--card-shadow);
@@ -115,7 +115,7 @@ function getFirstPicForRefs($db, $refIds) {
     }
     .carousel-card > div > div:first-child {
         width: 100%;
-        height: 90px;
+        height: 120px;
         overflow: hidden;
         border-bottom: var(--image-border);
         border-top-left-radius: var(--card-border-radius);
@@ -123,7 +123,7 @@ function getFirstPicForRefs($db, $refIds) {
     }
     .same-domain-image {
         width: 100%;
-        height: 90px;
+        height: 120px;
         object-fit: cover;
         transition: transform 0.5s;
         display: block;
@@ -135,7 +135,7 @@ function getFirstPicForRefs($db, $refIds) {
     }
     .no-image {
         width: 100%;
-        height: 90px;
+        height: 120px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -147,7 +147,7 @@ function getFirstPicForRefs($db, $refIds) {
         border-top-right-radius: var(--card-border-radius);
     }
     .same-domain-desc {
-        padding: 8px 6px;
+        padding: 12px 8px;
         text-align: center;
         background-color: var(--card-background);
         border: none;
@@ -165,7 +165,7 @@ function getFirstPicForRefs($db, $refIds) {
         margin: 0;
         font-weight: bold;
         color: var(--title-color);
-        font-size: 11px;
+        font-size: 13px;
         white-space: normal;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -182,7 +182,7 @@ function getFirstPicForRefs($db, $refIds) {
     .same-domain-desc .text-wrapper p.commune {
         font-weight: normal;
         color: var(--subtitle-color);
-        font-size: 10px;
+        font-size: 11px;
         margin-top: 2px;
         min-height: unset;
         display: block;
@@ -194,21 +194,21 @@ function getFirstPicForRefs($db, $refIds) {
             padding-bottom: 12px;
         }
         .carousel-card {
-            width: 100px;
+            width: 130px;
             margin-right: 8px;
         }
         .carousel-card > div > div:first-child, .same-domain-image, .no-image {
-            height: 60px;
+            height: 80px;
         }
         .same-domain-desc {
-            padding: 5px;
+            padding: 6px;
         }
         .same-domain-desc .text-wrapper p {
-            font-size: 8px;
+            font-size: 10px;
             min-height: 2.1em;
         }
         .same-domain-desc .text-wrapper p.commune {
-            font-size: 7px;
+            font-size: 8px;
         }
     }
     .carousel-btn-animated {

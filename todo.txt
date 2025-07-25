@@ -7,8 +7,3 @@ icone flou et mal gere
 changer login coolify, bdd, backoffice, git privé
 migration bdd
 
-
-Fatal error: Uncaught PDOException: SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'domaine' at row 1 in /var/www/html/admin/mod.php:71 Stack trace: #0 /var/www/html/admin/mod.php(71): PDOStatement->execute(Array) #1 {main} thrown in /var/www/html/admin/mod.php on line 71
-https://apsi.ovh/admin/mod.php?id=22
-
-qui sommes nous espace entre les p
