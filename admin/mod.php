@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $titre = ($_POST['titre']);
         $commune = ($_POST['villeChoisieHidden']);
         $description = empty($_POST['description']) ? null : ($_POST['description']);
-        $domaine = ($_POST['domaine']);
+        $domaine = empty($_POST['domaine']) ? null : (int)$_POST['domaine'];
         $anneeD = empty($_POST['anneeD']) ? null : ($_POST['anneeD']);
         $anneeF = empty($_POST['anneeF']) ? null : ($_POST['anneeF']);
         $moa = empty($_POST['moa']) ? null : ($_POST['moa']);

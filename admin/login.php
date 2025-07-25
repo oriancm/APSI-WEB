@@ -2,6 +2,10 @@
 //phpinfo();
 require('./db.php');
 session_start();
+if (isset($_SESSION["session"]) && $_SESSION["session"] == "valide") {
+    header("Location:admin.php");
+    exit;
+}
 
 if (!empty($_POST['login']) && !empty($_POST['pass']))
 {

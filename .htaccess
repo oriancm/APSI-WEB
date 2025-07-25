@@ -7,3 +7,9 @@ RewriteRule ^([^/]+)$ $1.php [L]
 
 # Exemple pour référence propre : /reference/8
 RewriteRule ^reference/([0-9]+)$ reference.php?id=$1 [L]
+
+# Rediriger toute URL non trouvée sous /admin/ vers /admin/admin.php
+RewriteCond %{REQUEST_URI} ^/admin/.*
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^admin/.*$ /admin/admin.php [L]

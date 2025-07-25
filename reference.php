@@ -36,6 +36,10 @@ function formatNumber($number) {
 }
 
 $ref = getTheRef($db, $id);
+if (!$ref) {
+    header('Location: /references.php');
+    exit;
+}
 $picTab = getThePic($db, $id);
 $showCarousel = count($picTab) > 1;
 
