@@ -312,6 +312,16 @@ window.addEventListener('DOMContentLoaded', function() {
     for (let i = 0; i < cards.length / 2; i++) {
         blockWidth += cards[i].offsetWidth;
     }
+    // Créer un espace vide au début
+    const offsetVW = 25; // % de la largeur de la fenêtre
+    const offsetPx = Math.round(window.innerWidth * offsetVW / 100);
+    const spacer = document.createElement('div');
+    spacer.style.display = 'inline-block';
+    spacer.style.width = offsetPx + 'px';
+    spacer.style.height = '1px';
+    spacer.style.verticalAlign = 'top';
+    track.insertBefore(spacer, track.firstChild);
+
     // Animation CSS : translate de -blockWidth px à 0 (droite -> gauche)
     track.style.animation = `train-scroll ${(blockWidth/35).toFixed(1)}s linear infinite`;
     // Créer dynamiquement la keyframes

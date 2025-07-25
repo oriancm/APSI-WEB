@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $titre = ($_POST['titre']);
         $commune = ($_POST['villeChoisieHidden']);
         $description = empty($_POST['description']) ? null : ($_POST['description']);
-        $domaine = ($_POST['domaine']);
+        $domaine = empty($_POST['domaine']) ? null : (int)$_POST['domaine'];
         $anneeD = empty($_POST['anneeD']) ? null : ($_POST['anneeD']);
         $anneeF = empty($_POST['anneeF']) ? null : ($_POST['anneeF']);
         $moa = empty($_POST['moa']) ? null : ($_POST['moa']);
@@ -77,20 +77,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         $pic = $fileMap[$fileName];
                         $extPic = pathinfo($pic['name'], PATHINFO_EXTENSION);
                         $extValid = ['jpg', 'jpeg', 'png'];
-                        $localPath = dirname(__DIR__);
-                        $uploadDir = $localPath . '/pic/';
-                        
+                        $localPath = __DIR__ . '/../pic/';
                         // Vérifier si le dossier existe, sinon le créer
-                        if (!is_dir($uploadDir)) {
-                            mkdir($uploadDir, 0755, true);
+                        if (!is_dir($localPath)) {
+                            mkdir($localPath, 0755, true);
                         }
-                        
-                        $uploadPath = $uploadDir . $pic['name'];
+                        $uploadFileName = basename($pic['name']);
+                        $uploadPath = $localPath . $uploadFileName;
+                        $relativePath = 'pic/' . $uploadFileName;
 
                         if (in_array(strtolower($extPic), $extValid) && move_uploaded_file($pic['tmp_name'], $uploadPath)) {
                             $sql = "INSERT INTO photo (titre, dir, idR, orderPic) VALUES (?, ?, ?, ?)";
                             $stmt = $db->prepare($sql);
-                            if (!$stmt->execute([$pic['name'], $uploadPath, $idRef, $orderPic])) {
+                            if (!$stmt->execute([$pic['name'], $relativePath, $idRef, $orderPic])) {
                                 $imageErrors[] = "Erreur BDD pour l'image " . htmlspecialchars($pic['name']);
                             }
                             $orderPic++;

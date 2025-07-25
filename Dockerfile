@@ -22,6 +22,11 @@ COPY ./nginx.conf /etc/nginx/sites-available/default
 COPY ./start.sh /start.sh
 RUN chmod +x /start.sh
 
+# S'assurer que le dossier pic existe et a les bonnes permissions
+RUN mkdir -p /var/www/html/pic \
+    && chown -R www-data:www-data /var/www/html/pic \
+    && chmod 775 /var/www/html/pic
+
 # Exposer le port 3000 (Nginx écoutera dessus)
 EXPOSE 3000
 

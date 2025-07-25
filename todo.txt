@@ -1,11 +1,8 @@
-Toute les pages : verifier coherence des couleurs et gras
-
-
-accueil nos ref dessus
 accueil responsive menus burger caché
 
 slogan nos clents, nos ref, mentions legale
 
 icone flou et mal gere
+
 changer login coolify, bdd, backoffice, git privé
 migration bdd
