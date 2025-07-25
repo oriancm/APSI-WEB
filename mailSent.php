@@ -31,14 +31,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
+    <meta http-equiv="refresh" content="5;url=index.php">
+    <script>
+        setTimeout(function() {
+            window.location.href = 'index.php';
+        }, 5000);
+    </script>
     <link rel="stylesheet" href="css/mailSent.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
+    <style>
+      .hidden-until-loaded {
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .show-after-load {
+        opacity: 1 !important;
+      }
+    </style>
 </head>
 <body>
 
     <?php include "./nav.php"; ?>
 
-    <main id="main" class="scrolled">   
+    <main id="main" class="scrolled hidden-until-loaded">   
 
         <div">
             <div style="text-align: center; width: 100%">
@@ -72,11 +87,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link rel="stylesheet" href="/css/styleGlobalNotIndex.css">
 </html>
 <script>
-    addEventListener('load', (event) => {
-        var navElement = document.getElementById('nav');
-        var navHeight = navElement.offsetHeight;
-        
-        var mainElement = document.getElementById('main');
+window.addEventListener('load', function() {
+    var navElement = document.getElementById('nav');
+    var navHeight = navElement ? navElement.offsetHeight : 0;
+    var mainElement = document.getElementById('main');
+    if (mainElement) {
         mainElement.style.marginTop = navHeight + 'px';
-    });
+        mainElement.classList.remove('hidden-until-loaded');
+        mainElement.classList.add('show-after-load');
+    }
+    if (navElement) {
+        navElement.classList.add('show-after-load');
+    }
+});
 </script>

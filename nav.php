@@ -11,7 +11,7 @@
 <body>
 
 <?php $pagename = basename($_SERVER['PHP_SELF']); ?>
-    <nav id="nav">
+    <nav id="nav" class="hidden-until-loaded">
         <a href="/" class="logo-wrapper"><img class="logo" src="/img/APSI.png" alt="APSI BTP - Vos projets en toute sérénité"></a>
 
         <div class="menu">

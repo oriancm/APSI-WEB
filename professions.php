@@ -8,11 +8,20 @@
     <link rel="stylesheet" href="/css/professions.css">
     <link rel="stylesheet" href="/css/dropdown-menus.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
+    <style>
+      .hidden-until-loaded {
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .show-after-load {
+        opacity: 1 !important;
+      }
+    </style>
 </head>
 <body>
     <?php include "./nav.php"; ?>
 
-    <main id="main" class="scrolled">
+    <main id="main" class="scrolled hidden-until-loaded">
         <section>
             <div class="content">
                 <h1>Nos Métiers</h1>
@@ -193,12 +202,19 @@
             }
         }
 
-        addEventListener('load', (event) => {
+        window.addEventListener('load', function() {
             var navElement = document.getElementById('nav');
-            var navHeight = navElement.offsetHeight;
+            var navHeight = navElement ? navElement.offsetHeight : 0;
             
             var mainElement = document.getElementById('main');
-            mainElement.style.marginTop = navHeight + 'px';
+            if (mainElement) {
+                mainElement.style.marginTop = navHeight + 'px';
+                mainElement.classList.remove('hidden-until-loaded');
+                mainElement.classList.add('show-after-load');
+            }
+            if (navElement) {
+                navElement.classList.add('show-after-load');
+            }
         });
     </script>
 </body>

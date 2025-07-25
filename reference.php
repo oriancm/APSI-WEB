@@ -93,12 +93,21 @@ if (!empty($sameDomainRefs)) {
 
     <link rel="stylesheet" href="/css/reference.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
+    <style>
+      .hidden-until-loaded {
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .show-after-load {
+        opacity: 1 !important;
+      }
+    </style>
 </head>
 <body>
 
 <?php include "./nav.php"; ?>
 
-<main id="main" class="scrolled" style="margin-top: 114px;">
+<main id="main" class="scrolled hidden-until-loaded">
     <div class="content-wrapper">
         <!-- Titre et navigation au même niveau -->
         <div class="top-section">
@@ -245,6 +254,21 @@ if (!empty($sameDomainRefs)) {
 </main>
 
 <link rel="stylesheet" href="/css/styleGlobalNotIndex.css">
+<script>
+window.addEventListener('load', function() {
+    var navElement = document.getElementById('nav');
+    var navHeight = navElement ? navElement.offsetHeight : 0;
+    var mainElement = document.getElementById('main');
+    if (mainElement) {
+        mainElement.style.marginTop = navHeight + 'px';
+        mainElement.classList.remove('hidden-until-loaded');
+        mainElement.classList.add('show-after-load');
+    }
+    if (navElement) {
+        navElement.classList.add('show-after-load');
+    }
+});
+</script>
 </body>
 </html>
 

@@ -62,12 +62,21 @@ $picTab = getAllPic($db);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
     <!-- Iconscout Link For Icons -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+      .hidden-until-loaded {
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .show-after-load {
+        opacity: 1 !important;
+      }
+    </style>
 </head>
 <body>
 
     <?php include "./nav.php"; ?>
     
-    <main id="main" class="scrolled">
+    <main id="main" class="scrolled hidden-until-loaded">
         <div class="references-container">
             <!-- Fixed Filter Button -->
             <div class="fixed-filter">
@@ -84,6 +93,12 @@ $picTab = getAllPic($db);
             </div>
             
             <h1 id="references-title">Nos Références</h1>
+                
+                <!-- Message affiché quand aucune référence n'est trouvée -->
+                <div class="no-references-message" id="no-references-message">
+                    Aucune référence trouvée pour ce domaine.
+                </div>
+                
                 <section id="references-section">
                 <?php foreach($refTab as $ref): ?>
                     <article data-domain="<?= isset($ref['domaine']) ? $ref['domaine'] : '0' ?>">
@@ -235,6 +250,8 @@ function updateDomainName(selectedLi) {
 function filterReferences(selectedDomain) {
     const articles = document.querySelectorAll('#references-section article');
     const domainValue = domainMapping[selectedDomain];
+    const noReferencesMessage = document.getElementById('no-references-message');
+    let visibleArticles = 0;
     
     articles.forEach(article => {
         const articleDomain = article.getAttribute('data-domain');
@@ -242,15 +259,24 @@ function filterReferences(selectedDomain) {
         if (domainValue === "all") {
             // Show all articles
             article.style.display = 'block';
+            visibleArticles++;
         } else {
             // Show only articles matching the selected domain
             if (articleDomain === domainValue) {
                 article.style.display = 'block';
+                visibleArticles++;
             } else {
                 article.style.display = 'none';
             }
         }
     });
+    
+    // Afficher/masquer le message "aucune référence"
+    if (visibleArticles === 0) {
+        noReferencesMessage.classList.add('show');
+    } else {
+        noReferencesMessage.classList.remove('show');
+    }
     
     // Update title width after filtering
     setTimeout(() => {
@@ -271,6 +297,20 @@ closeFilter.addEventListener("click", () => {
 document.addEventListener("click", (e) => {
     if (!fixedFilter.contains(e.target)) {
         fixedFilter.classList.remove("active");
+    }
+});
+
+window.addEventListener('load', function() {
+    var navElement = document.getElementById('nav');
+    var navHeight = navElement ? navElement.offsetHeight : 0;
+    var mainElement = document.getElementById('main');
+    if (mainElement) {
+        mainElement.style.marginTop = navHeight + 'px';
+        mainElement.classList.remove('hidden-until-loaded');
+        mainElement.classList.add('show-after-load');
+    }
+    if (navElement) {
+        navElement.classList.add('show-after-load');
     }
 });
 </script>

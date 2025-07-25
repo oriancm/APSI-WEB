@@ -1,12 +1,11 @@
 Toute les pages : verifier coherence des couleurs et gras
 
 
+accueil nos ref dessus
+accueil responsive menus burger caché
+
+slogan nos clents, nos ref, mentions legale
+
+icone flou et mal gere
 changer login coolify, bdd, backoffice, git privé
-
-onglet info et logo
 migration bdd
-
-
-card nos ref et ref differentes police
-icone site
-document au dessus onglet

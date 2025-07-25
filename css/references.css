@@ -12,6 +12,7 @@
     --accent-color: dodgerblue;
     --gap-article: 40px; /* Espacement uniforme */
     --image-border: 1px solid #f0f0f0; /* Bordure légère pour l'image */
+    --max-container-width: 1700px; /* Largeur max pour 5 cartes + gaps + padding */
 }
 
 .references-container {
@@ -23,6 +24,20 @@
     position: relative;
 }
 
+/* Message "aucune référence" */
+.no-references-message {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-size: 18px;
+    font-style: italic;
+    margin: 40px auto;
+}
+
+.no-references-message.show {
+    display: block;
+}
 
 
 /* Fixed Filter Styles */
@@ -170,6 +185,7 @@ h1#references-title {
     margin: 0 auto;
     box-sizing: border-box;
     width: 100%;
+    max-width: var(--max-container-width);
 }
 
 /* Card styling */
@@ -372,5 +388,32 @@ body::-webkit-scrollbar {
     #references-section {
         gap: 20px;
         padding: 20px 20px 20px;
+    }
+}
+
+/* Responsive adjustments pour les très larges écrans */
+@media screen and (min-width: 1800px) {
+    .references-container {
+        max-width: var(--max-container-width);
+        margin: 0 auto;
+    }
+    
+    #references-section {
+        max-width: var(--max-container-width);
+        padding: 20px 60px 20px; /* Plus de padding sur les côtés */
+    }
+    
+    h1#references-title {
+        max-width: calc(var(--max-container-width) - 120px); /* Aligné avec le padding du conteneur */
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .references-container {
+        padding: 10px 80px 0; /* Encore plus d'espace sur les très très larges écrans */
+    }
+    
+    #references-section {
+        padding: 20px 80px 20px;
     }
 }

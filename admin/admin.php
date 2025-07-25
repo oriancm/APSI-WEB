@@ -3,7 +3,7 @@ require('./db.php');
 session_start();
 
 if ($_SESSION["session"] != "valide") {
-    header("Location:login");
+    header("Location:login.php");
     exit;
 }
 
