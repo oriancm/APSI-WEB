@@ -61,3 +61,20 @@ nav ul li {
     text-align: center;
     font-family: 'Inter', sans-serif;
   }
+
+/* Media query for mobile and tablet devices */
+@media screen and (max-width: 1200px) {
+    nav {
+        padding: 0;
+    }
+
+    .btn-menu {
+        right: 25px;
+        top: 36px;
+        display: block;
+    }
+
+    .menu {
+        display: none;
+    }
+}

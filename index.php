@@ -55,6 +55,7 @@ function getFirstPicForRefs($db, $refIds) {
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/references.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
     <style>
     /* ... styles du carrousel et du bouton ... */
     .carousel-container {
@@ -239,7 +240,14 @@ function getFirstPicForRefs($db, $refIds) {
     <?php include "./nav.php"; ?>
     <main id="main" class="hidden-until-loaded" style="padding-top: 110px; height: calc(100vh - 110px); width: 100vw; overflow: hidden;">
         <aside>
-            <h1>APSI BTP</h1>
+            <h1>
+                <span class="text-base">APSI BTP</span>
+                <span class="text-animated" id="animated-text">APSI BTP</span>
+            </h1>
+            <div class="quote">
+                <p>"De tous les actes, le plus complet est celui de construire."</p>
+                <span class="author">Paul Valéry</span>
+            </div>
         </aside>
         <section style="margin:0; padding:0;">
             <div class="carousel-container" style="margin:0; padding:0; margin-top:200px; border:none; box-shadow:none; overflow:visible; height:auto; padding-bottom:12x; max-width:100vw; width:100%;">
@@ -340,6 +348,23 @@ window.addEventListener('load', function() {
     }
     if (navElement) {
         navElement.classList.add('show-after-load');
+    }
+});
+
+// Gestion de la restriction de l'animation sur BTP pour le deuxième tour
+window.addEventListener('DOMContentLoaded', function() {
+    const animatedText = document.getElementById('animated-text');
+    
+    if (animatedText) {
+        // Calculer le timing: premier tour = 2s, délai = 0.313s, début du 2ème tour
+        const firstAnimationDuration = 1500; // 2s
+        const delayBeforeSecond = 313; // 0.313s
+        const startSecondTour = firstAnimationDuration + delayBeforeSecond;
+        
+        // Restreindre l'animation à la partie APSI uniquement au début du 2ème tour
+        setTimeout(() => {
+            animatedText.classList.add('restrict-animation');
+        }, startSecondTour);
     }
 });
 </script>
