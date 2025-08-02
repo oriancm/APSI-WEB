@@ -242,7 +242,7 @@ function getFirstPicForRefs($db, $refIds) {
             <h1>APSI BTP</h1>
         </aside>
         <section style="margin:0; padding:0;">
-            <div class="carousel-container" style="margin:0; padding:0; margin-top:120px; border:none; box-shadow:none; overflow:visible; height:auto; padding-bottom:24px; max-width:100vw; width:100%;">
+            <div class="carousel-container" style="margin:0; padding:0; margin-top:200px; border:none; box-shadow:none; overflow:visible; height:auto; padding-bottom:12x; max-width:100vw; width:100%;">
                 <div class="carousel-track" id="carousel-track" style="overflow:visible; height:auto;">
                 <?php
                 $refs = getHomeReferences($db, 12);

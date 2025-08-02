@@ -44,7 +44,8 @@
                     <p>Site web : <strong><a href="https://www.ovh.com" target="_blank">https://www.ovh.com</a></strong></p>
                     <p>Téléphone : <strong>1007</strong> (gratuit depuis un poste fixe en France)</p>
                 </div>
-                
+            </div>
+            <div class="pb">
                 <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
             </div>
         </section>

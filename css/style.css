@@ -46,7 +46,7 @@ h1 {
     font-family: 'poppins', sans-serif;
     color: transparent;
     -webkit-text-stroke: 1px #000;
-    background: url("/img/APSIcss.png");
+    background: url("/img/APSIcss1.png");
     -webkit-background-clip: text;
     background-position: 0 0;
     animation: back 22s linear infinite;

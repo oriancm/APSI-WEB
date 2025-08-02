@@ -76,10 +76,11 @@
                     <a href="https://www.apt.fr/" target="_blank" rel="noopener"><img src="/img/logo/ville.png" alt="Ville Logo" class="tropGrand"></a>
                 </div>
             </div>
+            <div class="pb">
+                <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
+            </div>
         </section>
-        <div class="pb">
-            <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
-        </div>
+        
     </main>
 
 

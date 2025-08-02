@@ -15,6 +15,11 @@
     --max-container-width: 1700px; /* Largeur max pour 5 cartes + gaps + padding */
 }
 
+.flex-column {	
+    display: flex;
+    flex-direction: column;
+}
+
 .references-container {
     display: flex;
     flex-direction: column;
@@ -308,6 +313,9 @@ body::-webkit-scrollbar {
 }
 
 .pb {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 90%;
     padding-bottom: 4px;
 }

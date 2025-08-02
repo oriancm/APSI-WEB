@@ -16,11 +16,21 @@
     height: auto;
 }
 
+main {
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
+
 section {
+    display: flex;
+    flex-direction: column;
     box-sizing: content-box;
     padding-top: 10px;
     margin-left: 5%;
     margin-right: 5%;
+    min-height: calc(100dvh - 114px);
+    width: 100%;
 }
   
   .scrolled::-webkit-scrollbar {
@@ -30,6 +40,7 @@ section {
   .content {
     color: #000;
     line-height: 1.6;
+    flex: 1;
     }
 
     h1 {
@@ -62,12 +73,17 @@ section {
 }
 
 .pb {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    width: 100%;
     padding-bottom: 4px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 90%;
+}
 
-
+.slogan {
+    text-align: center;
+    color: #000000;
+    font-style: italic;
 }
 
 @media (max-width: 600px) {
@@ -83,6 +99,9 @@ section {
     }
     .scrolled {
         height: calc(100svh - 114px);
+    }
+    section {
+        min-height: calc(100svh - 114px);
     }
 }
 
@@ -106,5 +125,11 @@ section {
         margin-right: auto;
         border-bottom: 2px solid dodgerblue;
         padding-bottom: 10px;
+    }
+}
+
+@media screen and (min-width: 1021px) {
+    section {
+        min-height: calc(100lvh - 114px);
     }
 }

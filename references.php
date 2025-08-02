@@ -77,6 +77,7 @@ $picTab = getAllPic($db);
     <?php include "./nav.php"; ?>
     
     <main id="main" class="scrolled hidden-until-loaded">
+        <section class="flex-column">
         <div class="references-container">
             <!-- Fixed Filter Button -->
             <div class="fixed-filter">
@@ -122,11 +123,13 @@ $picTab = getAllPic($db);
                     </article>
                 <?php endforeach ?>
                 </section>
+                </div>
                 <div class="pb">
                     <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
                 </div>
+        </section>                
                 
-        </div>
+        
         
     </main>
 </body>

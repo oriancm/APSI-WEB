@@ -1,6 +1,5 @@
-accueil responsive menus burger caché
-
 slogan nos clents, nos ref, mentions legale
+
 
 icone flou et mal gere
 
