@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         $new_name = uniqid() . '.' . $ext;
                         $destination = $_SERVER['DOCUMENT_ROOT'] . '/pic/' . $new_name;
                         if (move_uploaded_file($files['tmp_name'][$i], $destination)) {
-                            $uploaded_files[$files['name'][$i]] = '/pic/' . $new_name;
+                            $uploaded_files[$files['name'][$i]] = 'pic/' . $new_name;
                         }
                     }
                 }
@@ -278,7 +278,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG. Faites glisser les images pour changer l'ordre</p>
                 <div id="image-container" class="image-container mb-4 flex flex-wrap mt-2 border border-gray-300 p-4 rounded">
                     <?php foreach ($photos as $index => $photo): ?>
-                        <div class="image-item existing-image" data-id="<?= $photo['id'] ?>" data-index="<?= $index ?>" data-type="existing" style="background-image: url('<?= htmlspecialchars($photo['dir']) ?>');" draggable="true">
+                        <div class="image-item existing-image" data-id="<?= $photo['id'] ?>" data-index="<?= $index ?>" data-type="existing" style="background-image: url('/pic/<?= htmlspecialchars($photo['titre']) ?>');" draggable="true">
                             <div class="order-number"><?= $index + 1 ?></div>
                             <div class="delete-btn" onclick="deleteExistingImage(<?= $photo['id'] ?>)">×</div>
                             <input type="hidden" name="order[]" value="existing_<?= $photo['id'] ?>">
