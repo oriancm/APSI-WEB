@@ -95,18 +95,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
             // Handle image order and new uploads
             $order = $_POST['order'] ?? [];
-            $new_images = $_FILES['images']['name'] ?? [];
-            $new_images_tmp = $_FILES['images']['tmp_name'] ?? [];
+            $files = $_FILES['images'] ?? [];
             $uploaded_files = [];
 
-            // Process new images
-            foreach ($new_images as $index => $name) {
-                if ($name && $new_images_tmp[$index]) {
-                    $ext = pathinfo($name, PATHINFO_EXTENSION);
-                    $new_name = uniqid() . '.' . $ext;
-                    $destination = $_SERVER['DOCUMENT_ROOT'] . '/pic/' . $new_name;
-                    if (move_uploaded_file($new_images_tmp[$index], $destination)) {
-                        $uploaded_files[$name] = '/pic/' . $new_name;
+            // Process new images if any
+            if (!empty($files['name'][0])) {
+                for ($i = 0; $i < count($files['name']); $i++) {
+                    if ($files['error'][$i] === 0) {
+                        $ext = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
+                        $new_name = uniqid() . '.' . $ext;
+                        $destination = $_SERVER['DOCUMENT_ROOT'] . '/pic/' . $new_name;
+                        if (move_uploaded_file($files['tmp_name'][$i], $destination)) {
+                            $uploaded_files[$files['name'][$i]] = '/pic/' . $new_name;
+                        }
                     }
                 }
             }
@@ -270,24 +271,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 </div>
             </div>
 
-            <!-- Unified Images Section -->
+            <!-- Images Section -->
             <div class="mb-4">
-                <label for="image-upload">Images</label>
+                <label for="image-upload" class="text-sm font-medium text-gray-700 mb-1">Images</label>
                 <input type="file" id="image-upload" name="images[]" multiple accept="image/jpeg,image/png" class="mt-1 block w-full">
-                <p class="text-sm text-gray-500">Faites glisser pour réorganiser, cochez pour supprimer, ou ajoutez de nouvelles images</p>
-                <div id="image-container" class="image-container mb-4 flex flex-wrap mt-2">
+                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG. Faites glisser les images pour changer l'ordre</p>
+                <div id="image-container" class="image-container mb-4 flex flex-wrap mt-2 border border-gray-300 p-4 rounded">
                     <?php foreach ($photos as $index => $photo): ?>
-                        <?php
-                        $imagePath = '/pic/' . htmlspecialchars(basename($photo['dir']));
-                        ?>
-                        <div class="image-item" data-id="<?= $photo['id'] ?>" data-index="<?= $index ?>" data-type="existing" style="background-image: url('<?= $imagePath ?>'); width: 100px; height: 100px;" draggable="true">
+                        <div class="image-item existing-image" data-id="<?= $photo['id'] ?>" data-index="<?= $index ?>" data-type="existing" style="background-image: url('<?= htmlspecialchars($photo['dir']) ?>');" draggable="true">
                             <div class="order-number"><?= $index + 1 ?></div>
-                            <label class="delete-checkbox-label">
-                                <input type="checkbox" name="delete_photos[]" value="<?= $photo['id'] ?>" class="delete-checkbox">
-                                Supprimer
-                            </label>
+                            <div class="delete-btn" onclick="deleteExistingImage(<?= $photo['id'] ?>)">×</div>
                             <input type="hidden" name="order[]" value="existing_<?= $photo['id'] ?>">
-                            <img src="<?= $imagePath ?>" style="display: none;" alt="Existing image">
                         </div>
                     <?php endforeach; ?>
                     <p id="no-images" class="text-gray-400 w-full text-center <?= !empty($photos) ? 'hidden' : '' ?>">Aucune image sélectionnée</p>
@@ -305,82 +299,107 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <script src="../script/search-cities.js"></script>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Les références aux éléments du DOM
     let imageUpload = document.getElementById('image-upload');
     const imageContainer = document.getElementById('image-container');
     const imagesData = document.getElementById('images-data');
-    const noImagesText = document.getElementById('no-images');
     let images = []; // Tracks new images
     let draggedItem = null;
-
-    // Debugging: Log initial state
-    const initialItems = imageContainer.querySelectorAll('.image-item');
-    initialItems.forEach(item => {
-        const bgImage = item.style.backgroundImage;
-        const orderNumber = item.querySelector('.order-number');
-        const computedStyle = window.getComputedStyle(orderNumber);
-        console.log('Initial image:', {
-            type: item.dataset.type,
-            id: item.dataset.id || item.dataset.fileName,
-            background: bgImage,
-            orderNumberStyles: {
-                position: computedStyle.position,
-                width: computedStyle.width,
-                height: computedStyle.height,
-                fontSize: computedStyle.fontSize,
-                zIndex: computedStyle.zIndex
-            }
-        });
-    });
-    const cssLoaded = Array.from(document.styleSheets).some(sheet => sheet.href && sheet.href.includes('add.css'));
-    console.log('add.css loaded:', cssLoaded ? 'Yes' : 'No');
 
     // Initialize drag-and-drop for existing images
     updateIndices();
     attachDragListeners();
 
-    // Handle new image uploads
-    function handleFileChange(e) {
-        const files = Array.from(e.target.files);
-        if (files.length > 0) {
-            files.forEach(file => {
-                if (file.type.match('image/jpeg') || file.type.match('image/png')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const exists = images.some(img => img.file.name === file.name);
-                        if (!exists) {
-                            images.push({ file, preview: e.target.result });
-                            displayImages();
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            clearFileInput();
-        }
-    }
-
-    // Clear file input
+    // Fonction pour vider complètement le champ de fichier
     function clearFileInput() {
         try {
+            // Cloner le champ avec une copie vide
             const newInput = imageUpload.cloneNode(true);
             newInput.value = '';
+            
+            // Remplacer l'ancien champ par le nouveau
             imageUpload.parentNode.replaceChild(newInput, imageUpload);
             imageUpload = newInput;
+            
+            // Réattacher l'écouteur d'événement
             imageUpload.addEventListener('change', handleFileChange);
         } catch (e) {
             console.error("Erreur lors de la réinitialisation du champ de fichier:", e);
         }
     }
 
-    // Display all images
-    function displayImages() {
-        const existingItems = Array.from(imageContainer.querySelectorAll('.image-item[data-type="existing"]'));
-        imageContainer.innerHTML = '';
+    // Fonction pour gérer la sélection de fichiers
+    function handleFileChange(e) {
+        const files = Array.from(e.target.files);
+        
+        if (files.length > 0) {
+            // Traiter tous les fichiers de manière synchrone
+            let processedCount = 0;
+            const totalFiles = files.length;
+            
+            files.forEach(file => {
+                if (file.type.match('image/jpeg') || file.type.match('image/png')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Vérifier si cette image existe déjà (par nom)
+                        const exists = images.some(img => img.file.name === file.name);
+                        if (!exists) {
+                            images.push({ file, preview: e.target.result });
+                        }
+                        
+                        processedCount++;
+                        if (processedCount === totalFiles) {
+                            displayImages();
+                            // Mettre à jour le champ de fichier avec tous les fichiers
+                            updateFileInput();
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    processedCount++;
+                    if (processedCount === totalFiles) {
+                        displayImages();
+                        updateFileInput();
+                    }
+                }
+            });
+        }
+    }
 
-        // Add existing images
+    // Fonction pour mettre à jour le champ de fichier avec tous les fichiers
+    function updateFileInput() {
+        if (images.length > 0) {
+            const dataTransfer = new DataTransfer();
+            images.forEach(image => {
+                dataTransfer.items.add(image.file);
+            });
+            imageUpload.files = dataTransfer.files;
+        }
+    }
+
+    // Fonction pour afficher les images
+    function displayImages() {
+        // Récupérer les images existantes
+        const existingItems = Array.from(imageContainer.querySelectorAll('.image-item[data-type="existing"]'));
+        
+        // Vider le conteneur d'images
+        imageContainer.innerHTML = '';
+        imagesData.innerHTML = '';
+
+        // Ajouter les images existantes
         existingItems.forEach(item => imageContainer.appendChild(item));
 
-        // Add new images
+        // Si aucune image (ni existante ni nouvelle), afficher le texte "Aucune image sélectionnée"
+        if (images.length === 0 && existingItems.length === 0) {
+            const noImages = document.createElement('p');
+            noImages.id = 'no-images';
+            noImages.className = 'text-gray-400 w-full text-center';
+            noImages.textContent = 'Aucune image sélectionnée';
+            imageContainer.appendChild(noImages);
+            return;
+        }
+
+        // Afficher chaque nouvelle image
         images.forEach((image, index) => {
             const globalIndex = existingItems.length + index;
             const imageItem = document.createElement('div');
@@ -389,38 +408,44 @@ document.addEventListener('DOMContentLoaded', function() {
             imageItem.setAttribute('data-index', globalIndex);
             imageItem.setAttribute('data-type', 'new');
             imageItem.setAttribute('data-file-name', image.file.name);
-            imageItem.draggable = true;
 
+            // Numéro d'ordre
             const orderNumber = document.createElement('div');
             orderNumber.className = 'order-number';
             orderNumber.textContent = globalIndex + 1;
             imageItem.appendChild(orderNumber);
 
-            const deleteLabel = document.createElement('label');
-            deleteLabel.className = 'delete-checkbox-label';
-            const deleteCheckbox = document.createElement('input');
-            deleteCheckbox.type = 'checkbox';
-            deleteCheckbox.name = 'delete_photos[]';
-            deleteCheckbox.value = `new_${image.file.name}`;
-            deleteCheckbox.className = 'delete-checkbox';
-            deleteLabel.appendChild(deleteCheckbox);
-            deleteLabel.appendChild(document.createTextNode('Supprimer'));
-            imageItem.appendChild(deleteLabel);
+            // Bouton de suppression
+            const deleteBtn = document.createElement('div');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.textContent = '×';
+            deleteBtn.onclick = function(e) {
+                e.stopPropagation();
+                images.splice(index, 1);
+                displayImages();
+                // Mettre à jour le champ de fichier après suppression
+                updateFileInput();
+            };
+            imageItem.appendChild(deleteBtn);
 
-            const orderInput = document.createElement('input');
-            orderInput.type = 'hidden';
-            orderInput.name = 'order[]';
-            orderInput.value = `new_${image.file.name}`;
-            imageItem.appendChild(orderInput);
+            // Événements de glisser-déposer
+            imageItem.draggable = true;
+            imageItem.addEventListener('dragstart', handleDragStart);
+            imageItem.addEventListener('dragend', handleDragEnd);
+            imageItem.addEventListener('dragover', handleDragOver);
+            imageItem.addEventListener('dragenter', handleDragEnter);
+            imageItem.addEventListener('dragleave', handleDragLeave);
+            imageItem.addEventListener('drop', handleDrop);
 
             imageContainer.appendChild(imageItem);
-        });
 
-        // Update no-images text
-        noImagesText.classList.toggle('hidden', imageContainer.children.length > 0);
-        if (imageContainer.children.length === 0) {
-            imageContainer.appendChild(noImagesText);
-        }
+            // Créer un champ caché pour chaque image pour l'ordre
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = `picOrder[]`;
+            hiddenInput.value = image.file.name;
+            imagesData.appendChild(hiddenInput);
+        });
 
         updateIndices();
         attachDragListeners();
@@ -452,7 +477,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Drag-and-drop handlers
+    // Attacher l'écouteur d'événement au champ de fichier
+    imageUpload.addEventListener('change', handleFileChange);
+
+    // Fonctions pour le glisser-déposer
     function handleDragStart(e) {
         this.classList.add('dragging');
         draggedItem = this;
@@ -480,46 +508,98 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleDrop(e) {
         e.preventDefault();
         this.classList.remove('bg-blue-100');
+        
         if (draggedItem !== this) {
             const allItems = Array.from(imageContainer.querySelectorAll('.image-item'));
             const fromIndex = parseInt(draggedItem.getAttribute('data-index'));
             const toIndex = parseInt(this.getAttribute('data-index'));
+            const existingItems = Array.from(imageContainer.querySelectorAll('.image-item[data-type="existing"]'));
+            
+            // Déplacer l'élément dans le tableau d'images
+            if (draggedItem.dataset.type === 'new') {
+                const movedItem = images.splice(fromIndex - existingItems.length, 1)[0];
+                images.splice(toIndex - existingItems.length, 0, movedItem);
+            }
+            
+            // Réorganiser visuellement
             const movedItem = allItems.splice(fromIndex, 1)[0];
             allItems.splice(toIndex, 0, movedItem);
 
             imageContainer.innerHTML = '';
             allItems.forEach(item => imageContainer.appendChild(item));
-            updateIndices();
-            attachDragListeners();
-
-            // Update new images array
-            if (draggedItem.dataset.type === 'new' || this.dataset.type === 'new') {
-                const newItems = allItems.filter(item => item.dataset.type === 'new');
-                images = newItems.map(item => {
-                    const fileName = item.dataset.fileName;
-                    return images.find(img => img.file.name === fileName);
-                }).filter(img => img);
-            }
+            
+            // Mettre à jour l'affichage
+            displayImages();
+            // Mettre à jour le champ de fichier après réorganisation
+            updateFileInput();
         }
     }
 
-    // Handle file input
-    if (imageUpload) {
-        imageUpload.addEventListener('change', handleFileChange);
-    }
-
-    // Form submission
+    // Ajouter un écouteur d'événement au formulaire pour reconstruire le tableau de fichiers avant l'envoi
     document.querySelector('form').addEventListener('submit', function(e) {
-        imagesData.innerHTML = '';
+        if (images.length === 0) {
+            return; // Ne rien faire s'il n'y a pas d'images
+        }
+
+        // Créer un nouveau DataTransfer pour reconstruire le champ de fichier
+        const dataTransfer = new DataTransfer();
+        
+        // Ajouter chaque fichier dans l'ordre actuel
         images.forEach((image, index) => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = `new_images[${index}]`;
-            input.value = image.file.name;
-            imagesData.appendChild(input);
+            dataTransfer.items.add(image.file);
         });
+        
+        // Mettre à jour le champ de fichier avec les fichiers dans le bon ordre
+        imageUpload.files = dataTransfer.files;
     });
 });
+
+// Fonction globale pour supprimer une image existante
+function deleteExistingImage(photoId) {
+    const imageItem = document.querySelector(`[data-id="${photoId}"][data-type="existing"]`);
+    if (imageItem) {
+        // Créer un champ caché pour marquer l'image comme supprimée
+        const deleteInput = document.createElement('input');
+        deleteInput.type = 'hidden';
+        deleteInput.name = 'delete_photos[]';
+        deleteInput.value = photoId;
+        document.querySelector('form').appendChild(deleteInput);
+        
+        // Supprimer visuellement l'image
+        imageItem.remove();
+        
+        // Mettre à jour les indices manuellement
+        const allItems = document.querySelectorAll('.image-item');
+        allItems.forEach((item, index) => {
+            item.setAttribute('data-index', index);
+            const orderNumber = item.querySelector('.order-number');
+            if (orderNumber) {
+                orderNumber.textContent = index + 1;
+            }
+            const orderInput = item.querySelector('input[name="order[]"]');
+            if (orderInput) {
+                orderInput.value = item.dataset.type === 'existing' ? `existing_${item.dataset.id}` : `new_${item.dataset.fileName}`;
+            }
+        });
+        
+        // Vérifier s'il reste des images
+        const remainingImages = document.querySelectorAll('.image-item');
+        const noImagesText = document.getElementById('no-images');
+        if (remainingImages.length === 0) {
+            if (!noImagesText) {
+                const noImages = document.createElement('p');
+                noImages.id = 'no-images';
+                noImages.className = 'text-gray-400 w-full text-center';
+                noImages.textContent = 'Aucune image sélectionnée';
+                document.getElementById('image-container').appendChild(noImages);
+            }
+        } else {
+            if (noImagesText) {
+                noImagesText.remove();
+            }
+        }
+    }
+}
     </script>
 </body>
 </html>
