@@ -1,7 +1,4 @@
-slogan nos clents, nos ref, mentions legale
-
-
-icone flou et mal gere
+admin gestion nouvelle photo et ancienne
 
 changer login coolify, bdd, backoffice, git privé
 migration bdd
