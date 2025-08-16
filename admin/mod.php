@@ -1,4 +1,12 @@
 <?php
+// Configuration pour les uploads de gros fichiers
+ini_set('upload_max_filesize', '100M');
+ini_set('post_max_size', '100M');
+ini_set('max_file_uploads', '20');
+ini_set('max_execution_time', '300');
+ini_set('memory_limit', '256M');
+ini_set('max_input_time', '300');
+
 require('./db.php');
 session_start();
 
@@ -102,14 +110,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             if (!empty($files['name'][0])) {
                 for ($i = 0; $i < count($files['name']); $i++) {
                     if ($files['error'][$i] === 0) {
-                        $ext = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
-                        $new_name = uniqid() . '.' . $ext;
-                        $destination = $_SERVER['DOCUMENT_ROOT'] . '/pic/' . $new_name;
-                        if (move_uploaded_file($files['tmp_name'][$i], $destination)) {
-                            $uploaded_files[$files['name'][$i]] = [
-                                'dir' => 'pic/' . $new_name,
-                                'titre' => $new_name
-                            ];
+                        $ext = strtolower(pathinfo($files['name'][$i], PATHINFO_EXTENSION));
+                        $extValid = ['jpg', 'jpeg', 'png'];
+                        
+                        if (in_array($ext, $extValid)) {
+                            $new_name = uniqid() . '.' . $ext;
+                            $destination = $_SERVER['DOCUMENT_ROOT'] . '/pic/' . $new_name;
+                            if (move_uploaded_file($files['tmp_name'][$i], $destination)) {
+                                $uploaded_files[$files['name'][$i]] = [
+                                    'dir' => 'pic/' . $new_name,
+                                    'titre' => $new_name
+                                ];
+                            }
                         }
                     }
                 }
@@ -278,7 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             <div class="mb-4">
                 <label for="image-upload" class="text-sm font-medium text-gray-700 mb-1">Images</label>
                 <input type="file" id="image-upload" name="images[]" multiple accept="image/jpeg,image/png" class="mt-1 block w-full">
-                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG. Faites glisser les images pour changer l'ordre</p>
+                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG (JPG, jpg, PNG, png). Limite : 100MB par fichier, 400MB au total. Faites glisser les images pour changer l'ordre</p>
                 <div id="image-container" class="image-container mb-4 flex flex-wrap mt-2 border border-gray-300 p-4 rounded">
                     <?php foreach ($photos as $index => $photo): ?>
                         <div class="image-item existing-image" data-id="<?= $photo['id'] ?>" data-index="<?= $index ?>" data-type="existing" style="background-image: url('/pic/<?= htmlspecialchars($photo['titre']) ?>');" draggable="true">
@@ -309,6 +321,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let newImages = []; // Tracks new images
     let draggedItem = null;
 
+    // Fonction pour réinitialiser le champ de fichier
+    function clearFileInput() {
+        imageUpload.value = '';
+    }
+
     // Initialize drag-and-drop for existing images
     updateIndices();
     attachDragListeners();
@@ -316,13 +333,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fonction pour gérer la sélection de fichiers
     function handleFileChange(e) {
         const files = Array.from(e.target.files);
+        const maxFileSize = 100 * 1024 * 1024; // 100MB en bytes
+        const maxTotalSize = 400 * 1024 * 1024; // 400MB total en bytes
         
         if (files.length > 0) {
+            // Vérifier la taille totale des fichiers
+            const totalSize = files.reduce((sum, file) => sum + file.size, 0);
+            if (totalSize > maxTotalSize) {
+                alert(`Erreur : La taille totale des fichiers (${(totalSize / 1024 / 1024).toFixed(1)}MB) dépasse la limite de ${maxTotalSize / 1024 / 1024}MB`);
+                imageUpload.value = '';
+                return;
+            }
+            
             // Traiter tous les fichiers de manière synchrone
             let processedCount = 0;
             const totalFiles = files.length;
             
             files.forEach(file => {
+                // Vérifier la taille individuelle de chaque fichier
+                if (file.size > maxFileSize) {
+                    alert(`Erreur : Le fichier "${file.name}" (${(file.size / 1024 / 1024).toFixed(1)}MB) dépasse la limite de ${maxFileSize / 1024 / 1024}MB par fichier`);
+                    processedCount++;
+                    if (processedCount === totalFiles) {
+                        displayImages();
+                        updateFileInput();
+                    }
+                    return;
+                }
+                
                 if (file.type.match('image/jpeg') || file.type.match('image/png')) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
@@ -340,6 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     };
                     reader.readAsDataURL(file);
                 } else {
+                    alert(`Erreur : Le fichier "${file.name}" n'est pas un format d'image valide (JPEG ou PNG uniquement)`);
                     processedCount++;
                     if (processedCount === totalFiles) {
                         displayImages();

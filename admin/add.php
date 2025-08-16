@@ -1,4 +1,12 @@
 <?php
+// Configuration pour les uploads de gros fichiers
+ini_set('upload_max_filesize', '100M');
+ini_set('post_max_size', '100M');
+ini_set('max_file_uploads', '20');
+ini_set('max_execution_time', '300');
+ini_set('memory_limit', '256M');
+ini_set('max_input_time', '300');
+
 require('./db.php');
 session_start();
 
@@ -75,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 foreach ($picOrderList as $fileName) {
                     if (isset($fileMap[$fileName]) && $fileMap[$fileName]['error'] === 0) {
                         $pic = $fileMap[$fileName];
-                        $extPic = pathinfo($pic['name'], PATHINFO_EXTENSION);
+                        $extPic = strtolower(pathinfo($pic['name'], PATHINFO_EXTENSION));
                         $extValid = ['jpg', 'jpeg', 'png'];
                         $localPath = __DIR__ . '/../pic/';
                         // Vérifier si le dossier existe, sinon le créer
@@ -86,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         $uploadPath = $localPath . $uploadFileName;
                         $relativePath = 'pic/' . $uploadFileName;
 
-                        if (in_array(strtolower($extPic), $extValid) && move_uploaded_file($pic['tmp_name'], $uploadPath)) {
+                        if (in_array($extPic, $extValid) && move_uploaded_file($pic['tmp_name'], $uploadPath)) {
                             $sql = "INSERT INTO photo (titre, dir, idR, orderPic) VALUES (?, ?, ?, ?)";
                             $stmt = $db->prepare($sql);
                             if (!$stmt->execute([$pic['name'], $relativePath, $idRef, $orderPic])) {
@@ -301,7 +309,7 @@ function dernierChantier($db) {
             <div class="mb-4">
                 <label for="image-upload" class="text-sm font-medium text-gray-700 mb-1">Images  <span class="text-red-500">*</span></label>
                 <input type="file" id="image-upload" name="images[]" multiple accept="image/jpeg,image/png" required class="mt-1 block w-full <?php echo isset($errorsValidation['images']) ? 'border-red-500' : ''; ?>">
-                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG. Faites glisser les images pour changer l'ordre</p>
+                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG (JPG, jpg, PNG, png). Limite : 100MB par fichier, 400MB au total. Faites glisser les images pour changer l'ordre</p>
                 <div id="image-container" class="image-container mb-4 flex flex-wrap mt-2 border border-gray-300 p-4 rounded">
                     <p id="no-images" class="text-gray-400 w-full text-center">Aucune image sélectionnée</p>
                 </div>
@@ -347,13 +355,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fonction pour gérer la sélection de fichiers
     function handleFileChange(e) {
         const files = Array.from(e.target.files);
+        const maxFileSize = 100 * 1024 * 1024; // 100MB en bytes
+        const maxTotalSize = 400 * 1024 * 1024; // 400MB total en bytes
         
         if (files.length > 0) {
+            // Vérifier la taille totale des fichiers
+            const totalSize = files.reduce((sum, file) => sum + file.size, 0);
+            if (totalSize > maxTotalSize) {
+                alert(`Erreur : La taille totale des fichiers (${(totalSize / 1024 / 1024).toFixed(1)}MB) dépasse la limite de ${maxTotalSize / 1024 / 1024}MB`);
+                clearFileInput();
+                return;
+            }
+            
             // Traiter tous les fichiers de manière synchrone
             let processedCount = 0;
             const totalFiles = files.length;
+            let validFiles = [];
             
             files.forEach(file => {
+                // Vérifier la taille individuelle de chaque fichier
+                if (file.size > maxFileSize) {
+                    alert(`Erreur : Le fichier "${file.name}" (${(file.size / 1024 / 1024).toFixed(1)}MB) dépasse la limite de ${maxFileSize / 1024 / 1024}MB par fichier`);
+                    processedCount++;
+                    if (processedCount === totalFiles) {
+                        displayImages();
+                        updateFileInput();
+                    }
+                    return;
+                }
+                
                 if (file.type.match('image/jpeg') || file.type.match('image/png')) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
@@ -372,6 +402,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     };
                     reader.readAsDataURL(file);
                 } else {
+                    alert(`Erreur : Le fichier "${file.name}" n'est pas un format d'image valide (JPEG ou PNG uniquement)`);
                     processedCount++;
                     if (processedCount === totalFiles) {
                         displayImages();
