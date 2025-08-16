@@ -107,14 +107,20 @@ $picTab = getAllPic($db);
                     <a class="card-link" href="/reference/<?= $ref['id'] ?>"></a>
                         <div>
                             <?php
+                                $picOfRef = null;
                                 foreach($picTab as $pic) {
                                     if($pic['idR'] == $ref['id'] && $pic['orderPic'] == 1) {
                                         $picOfRef = $pic;
+                                        break;
                                     }
                                 }
                             ?>
                             <div>
-                                <img class="image-ref" src="/pic/<?= $picOfRef["titre"]; ?>" alt="">
+                                <?php if ($picOfRef): ?>
+                                    <img class="image-ref" src="/pic/<?= $picOfRef["titre"]; ?>" alt="">
+                                <?php else: ?>
+                                    <div class="no-image">Aucune image disponible</div>
+                                <?php endif; ?>
                             </div>
                             <div class="desc-ref">
                                 <div class="text-wrapper"><p><?= $ref["titre"]; ?></p></div>

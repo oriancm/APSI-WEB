@@ -425,3 +425,17 @@ body::-webkit-scrollbar {
         padding: 20px 80px 20px;
     }
 }
+
+/* Style pour les images manquantes */
+.no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-size: 14px;
+    font-style: italic;
+    border: 1px dashed #dee2e6;
+    border-radius: var(--card-border-radius);
+}
