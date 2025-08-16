@@ -106,16 +106,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             if (!empty($files['name'][0])) {
                 for ($i = 0; $i < count($files['name']); $i++) {
                     if ($files['error'][$i] === 0) {
-                        $ext = strtolower(pathinfo($files['name'][$i], PATHINFO_EXTENSION));
-                        $extValid = ['jpg', 'jpeg', 'png'];
+                        $ext = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
+                        $extValid = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
                         
-                        if (in_array($ext, $extValid)) {
-                            $new_name = uniqid() . '.' . $ext;
-                            $destination = $_SERVER['DOCUMENT_ROOT'] . '/pic/' . $new_name;
+                        if (in_array(strtolower($ext), array_map('strtolower', $extValid))) {
+                            // Nettoyer et sécuriser le nom de fichier pour nginx
+                            $original_name = $files['name'][$i];
+                            
+                            // Remplacer les caractères problématiques pour nginx
+                            $safe_name = preg_replace('/[^a-zA-Z0-9._-]/', '_', $original_name);
+                            $safe_name = preg_replace('/_+/', '_', $safe_name); // Éviter les underscores multiples
+                            $safe_name = trim($safe_name, '_'); // Enlever les underscores en début/fin
+                            
+                            // S'assurer que le nom n'est pas vide après nettoyage
+                            if (empty($safe_name)) {
+                                $safe_name = 'image_' . time();
+                            }
+                            
+                            // Normaliser l'extension en minuscules pour la compatibilité nginx
+                            $ext_normalized = strtolower($ext);
+                            $name_without_ext = pathinfo($safe_name, PATHINFO_FILENAME);
+                            $final_name = $name_without_ext . '.' . $ext_normalized;
+                            $destination = $_SERVER['DOCUMENT_ROOT'] . '/pic/' . $final_name;
+                            
+                            // Vérifier si le fichier existe déjà et ajouter un suffixe si nécessaire
+                            $counter = 1;
+                            while (file_exists($destination)) {
+                                $final_name = $name_without_ext . '_' . $counter . '.' . $ext_normalized;
+                                $destination = $_SERVER['DOCUMENT_ROOT'] . '/pic/' . $final_name;
+                                $counter++;
+                            }
+                            
                             if (move_uploaded_file($files['tmp_name'][$i], $destination)) {
                                 $uploaded_files[$files['name'][$i]] = [
-                                    'dir' => 'pic/' . $new_name,
-                                    'titre' => $new_name
+                                    'dir' => 'pic/' . $final_name,
+                                    'titre' => $final_name
                                 ];
                             }
                         }

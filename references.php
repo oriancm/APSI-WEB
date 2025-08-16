@@ -104,7 +104,7 @@ $picTab = getAllPic($db);
                 <section id="references-section">
                 <?php foreach($refTab as $ref): ?>
                     <article data-domain="<?= isset($ref['domaine']) ? $ref['domaine'] : '0' ?>">
-                    <a class="card-link" href="reference/<?= $ref['id'] ?>"></a>
+                    <a class="card-link" href="/reference/<?= $ref['id'] ?>"></a>
                         <div>
                             <?php
                                 foreach($picTab as $pic) {
@@ -114,7 +114,7 @@ $picTab = getAllPic($db);
                                 }
                             ?>
                             <div>
-                                <img class="image-ref" src="pic/<?= $picOfRef["titre"]; ?>" alt="">
+                                <img class="image-ref" src="/pic/<?= $picOfRef["titre"]; ?>" alt="">
                             </div>
                             <div class="desc-ref">
                                 <div class="text-wrapper"><p><?= $ref["titre"]; ?></p></div>

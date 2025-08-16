@@ -74,13 +74,13 @@ function checkUploadCapability() {
 
 // Fonction pour valider les extensions de fichiers
 function validateFileExtensions($files) {
-    $validExtensions = ['jpg', 'jpeg', 'png'];
+    $validExtensions = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
     $errors = [];
     
     foreach ($files['name'] as $index => $filename) {
         if ($files['error'][$index] === UPLOAD_ERR_OK) {
-            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-            if (!in_array($extension, $validExtensions)) {
+            $extension = pathinfo($filename, PATHINFO_EXTENSION);
+            if (!in_array(strtolower($extension), array_map('strtolower', $validExtensions))) {
                 $errors[] = "Extension non autorisée pour $filename: $extension";
             }
         }

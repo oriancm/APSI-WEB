@@ -258,11 +258,11 @@ function getFirstPicForRefs($db, $refIds) {
                 $pics = getFirstPicForRefs($db, $refIds);
                 foreach($refs as $ref): ?>
                     <article class="carousel-card same-domain-card">
-                        <a class="card-link" href="reference.php?id=<?= $ref['id'] ?>"></a>
+                        <a class="card-link" href="/reference/<?= $ref['id'] ?>"></a>
                         <div>
                             <div>
                                 <?php if (!empty($pics[$ref['id']])): ?>
-                                    <img class="same-domain-image" src="pic/<?= htmlspecialchars($pics[$ref['id']]['titre']) ?>" alt="">
+                                    <img class="same-domain-image" src="/pic/<?= htmlspecialchars($pics[$ref['id']]['titre']) ?>" alt="">
                                 <?php else: ?>
                                     <div class="no-image">Aucune image disponible</div>
                                 <?php endif; ?>
@@ -277,11 +277,11 @@ function getFirstPicForRefs($db, $refIds) {
                 <?php // Dupliquer la séquence de base une seule fois pour la boucle infinie
                 foreach($refs as $ref): ?>
                     <article class="carousel-card same-domain-card">
-                        <a class="card-link" href="reference.php?id=<?= $ref['id'] ?>"></a>
+                        <a class="card-link" href="/reference/<?= $ref['id'] ?>"></a>
                         <div>
                             <div>
                                 <?php if (!empty($pics[$ref['id']])): ?>
-                                    <img class="same-domain-image" src="pic/<?= htmlspecialchars($pics[$ref['id']]['titre']) ?>" alt="">
+                                    <img class="same-domain-image" src="/pic/<?= htmlspecialchars($pics[$ref['id']]['titre']) ?>" alt="">
                                 <?php else: ?>
                                     <div class="no-image">Aucune image disponible</div>
                                 <?php endif; ?>
@@ -296,7 +296,7 @@ function getFirstPicForRefs($db, $refIds) {
                 </div>
             </div>
             <div style="text-align:center;">
-                <a href="references.php" class="carousel-btn-animated">Découvrir nos références</a>
+                <a href="/references" class="carousel-btn-animated">Découvrir nos références</a>
             </div>
         </section>
     </main>

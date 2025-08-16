@@ -91,22 +91,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 foreach ($picOrderList as $fileName) {
                     if (isset($fileMap[$fileName]) && $fileMap[$fileName]['error'] === 0) {
                         $pic = $fileMap[$fileName];
-                        $extPic = strtolower(pathinfo($pic['name'], PATHINFO_EXTENSION));
-                        $extValid = ['jpg', 'jpeg', 'png'];
+                        $extPic = pathinfo($pic['name'], PATHINFO_EXTENSION);
+                        $extValid = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
                         $localPath = __DIR__ . '/../pic/';
                         // Vérifier si le dossier existe, sinon le créer
                         if (!is_dir($localPath)) {
                             mkdir($localPath, 0755, true);
                         }
-                        $uploadFileName = basename($pic['name']);
-                        $uploadPath = $localPath . $uploadFileName;
-                        $relativePath = 'pic/' . $uploadFileName;
+                        
+                        // Nettoyer et sécuriser le nom de fichier pour nginx
+                        $original_name = basename($pic['name']);
+                        
+                        // Remplacer les caractères problématiques pour nginx
+                        $safe_name = preg_replace('/[^a-zA-Z0-9._-]/', '_', $original_name);
+                        $safe_name = preg_replace('/_+/', '_', $safe_name); // Éviter les underscores multiples
+                        $safe_name = trim($safe_name, '_'); // Enlever les underscores en début/fin
+                        
+                        // S'assurer que le nom n'est pas vide après nettoyage
+                        if (empty($safe_name)) {
+                            $safe_name = 'image_' . time();
+                        }
+                        
+                        // Normaliser l'extension en minuscules pour la compatibilité nginx
+                        $ext_normalized = strtolower($extPic);
+                        $name_without_ext = pathinfo($safe_name, PATHINFO_FILENAME);
+                        $final_name = $name_without_ext . '.' . $ext_normalized;
+                        $uploadPath = $localPath . $final_name;
+                        
+                        // Vérifier si le fichier existe déjà et ajouter un suffixe si nécessaire
+                        $counter = 1;
+                        while (file_exists($uploadPath)) {
+                            $final_name = $name_without_ext . '_' . $counter . '.' . $ext_normalized;
+                            $uploadPath = $localPath . $final_name;
+                            $counter++;
+                        }
+                        
+                        $relativePath = 'pic/' . $final_name;
 
-                        if (in_array($extPic, $extValid) && move_uploaded_file($pic['tmp_name'], $uploadPath)) {
+                        if (in_array(strtolower($extPic), array_map('strtolower', $extValid)) && move_uploaded_file($pic['tmp_name'], $uploadPath)) {
                             $sql = "INSERT INTO photo (titre, dir, idR, orderPic) VALUES (?, ?, ?, ?)";
                             $stmt = $db->prepare($sql);
-                            if (!$stmt->execute([$pic['name'], $relativePath, $idRef, $orderPic])) {
-                                $imageErrors[] = "Erreur BDD pour l'image " . htmlspecialchars($pic['name']);
+                            if (!$stmt->execute([$final_name, $relativePath, $idRef, $orderPic])) {
+                                $imageErrors[] = "Erreur BDD pour l'image " . htmlspecialchars($final_name);
                             }
                             $orderPic++;
                         } else {
