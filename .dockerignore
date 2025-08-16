@@ -1,0 +1,38 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers de développement
+.git
+.gitignore
+.idea
+.vscode
+*.log
+
+# Fichiers de sauvegarde
+backups/
+*.tar.gz
+
+# Fichiers temporaires
+tmp/
+temp/
+
+# Fichiers de configuration locaux
+.env.local
+.env.development
+
+# Documentation
+README.md
+*.md
+
+# Fichiers de test
+tests/
+test/
+
+# Fichiers de build
+node_modules/
+vendor/
+
+# Fichiers de cache
+.cache/
+*.cache 

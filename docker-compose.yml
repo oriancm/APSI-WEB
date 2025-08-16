@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  apsi-web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      # Volume pour persister les images uploadées
+      - apsi_images:/var/www/html/pic
+      # Volume optionnel pour les logs
+      - apsi_logs:/var/log/nginx
+    environment:
+      - PHP_UPLOAD_MAX_FILESIZE=100M
+      - PHP_POST_MAX_SIZE=100M
+      - PHP_MAX_EXECUTION_TIME=300
+      - PHP_MEMORY_LIMIT=256M
+    restart: unless-stopped
+    networks:
+      - apsi-network
+
+volumes:
+  apsi_images:
+    driver: local
+  apsi_logs:
+    driver: local
+
+networks:
+  apsi-network:
+    driver: bridge 
