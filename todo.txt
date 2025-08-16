@@ -1,4 +1,5 @@
-admin gestion nouvelle photo et ancienne
+formatr ipad centré les infos
+format pc info a lhorizontal
 
 changer login coolify, bdd, backoffice, git privé
 migration bdd

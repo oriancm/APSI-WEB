@@ -361,7 +361,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
                 
-                if (file.type.match('image/jpeg') || file.type.match('image/png')) {
+                // Vérifier le type MIME ET l'extension du fichier
+                const fileName = file.name.toLowerCase();
+                const isValidType = file.type.match('image/jpeg') || file.type.match('image/png');
+                const isValidExtension = fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png');
+                
+                if (isValidType || isValidExtension) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         // Vérifier si cette image existe déjà (par nom)
@@ -378,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     };
                     reader.readAsDataURL(file);
                 } else {
-                    alert(`Erreur : Le fichier "${file.name}" n'est pas un format d'image valide (JPEG ou PNG uniquement)`);
+                    alert(`Erreur : Le fichier "${file.name}" n'est pas un format d'image valide (JPG, JPEG ou PNG uniquement)`);
                     processedCount++;
                     if (processedCount === totalFiles) {
                         displayImages();
