@@ -240,10 +240,10 @@ function getFirstPicForRefs($db, $refIds) {
     <?php include "./nav.php"; ?>
     <main id="main" class="hidden-until-loaded" style="padding-top: 110px; height: calc(100vh - 110px); width: 100vw; overflow: hidden;">
         <aside>
-            <h1>
+            <!-- <h1>
                 <span class="text-base">APSI BTP</span>
                 <span class="text-animated" id="animated-text">APSI BTP</span>
-            </h1>
+            </h1> -->
             <div class="quote">
                 <p>"De tous les actes, le plus complet est celui de construire."</p>
                 <span class="author">Paul Valéry</span>
