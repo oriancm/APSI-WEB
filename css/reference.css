@@ -852,6 +852,13 @@ article {
     .grid2 {
         max-width: 580px;
         padding: 20px;
+        margin: 0 auto;
+    }
+
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     /* Slider optimisé pour iPad Mini */
@@ -1188,6 +1195,13 @@ article {
     .grid2 {
         max-width: 580px;
         padding: 20px;
+        margin: 0 auto;
+    }
+
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     /* Slider optimisé pour iPad Mini */
@@ -1303,6 +1317,12 @@ article {
         padding: 20px;
     }
 
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     /* Slider optimisé pour iPad Air */
     .slide img {
         width: 660px;
@@ -1412,19 +1432,26 @@ article {
     }
 
     .grid2 {
-        max-width: 650px;
+        max-width: 660px;
         padding: 20px;
+        margin: 0 auto;
+    }
+
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     /* Slider optimisé pour écrans moyens */
     .slide img {
-        width: 650px;
+        width: 660px;
         height: 433px;
         object-fit: cover;
     }
 
     .slider {
-        width: 650px;
+        width: 660px;
         height: 433px;
         position: relative;
     }
@@ -1434,7 +1461,7 @@ article {
     }
 
     .navigation-manual {
-        width: 650px;
+        width: 660px;
         margin-left: 0;
         margin-top: -38px;
         position: absolute;
@@ -1525,9 +1552,9 @@ article {
     }
 
     .grid2 {
-        flex: 0 0 40%;
+        flex: 0 0 45%;
         margin-right: 3%;
-        max-width: 320px;
+        max-width: 380px;
         padding: 20px;
     }
 
@@ -1558,17 +1585,21 @@ article {
 
     .info-container div {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 15px;
     }
 
     .info-container div p:first-child {
-        margin-bottom: 3px;
-        margin-right: 0;
+        flex: 0 0 45%;
+        margin-bottom: 0;
+        margin-right: 10px;
         text-align: left;
     }
 
     .info-container div p:last-child {
+        flex: 0 0 55%;
         text-align: left;
     }
 
@@ -1636,9 +1667,9 @@ article {
     }
 
     .grid2 {
-        flex: 0 0 40%;
+        flex: 0 0 45%;
         margin-right: 3%;
-        max-width: 350px;
+        max-width: 400px;
         padding: 20px;
     }
 
@@ -1669,17 +1700,21 @@ article {
 
     .info-container div {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 15px;
     }
 
     .info-container div p:first-child {
-        margin-bottom: 3px;
-        margin-right: 0;
+        flex: 0 0 45%;
+        margin-bottom: 0;
+        margin-right: 10px;
         text-align: left;
     }
 
     .info-container div p:last-child {
+        flex: 0 0 55%;
         text-align: left;
     }
 
@@ -1747,9 +1782,9 @@ article {
     }
 
     .grid2 {
-        flex: 0 0 35%;
+        flex: 0 0 40%;
         margin-right: 4%;
-        max-width: 400px;
+        max-width: 450px;
         padding: 25px;
     }
 
@@ -1780,18 +1815,22 @@ article {
 
     .info-container div {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
-        margin-bottom: 15px;
+        justify-content: space-between;
+        margin-bottom: 18px;
     }
 
     .info-container div p:first-child {
+        flex: 0 0 45%;
         font-size: 0.8rem;
-        margin-bottom: 4px;
+        margin-bottom: 0;
+        margin-right: 15px;
         text-align: left;
     }
 
     .info-container div p:last-child {
+        flex: 0 0 55%;
         font-size: 0.8rem;
         text-align: left;
     }
@@ -1861,9 +1900,9 @@ article {
     }
 
     .grid2 {
-        flex: 0 0 30%;
+        flex: 0 0 35%;
         margin-right: 5%;
-        max-width: 450px;
+        max-width: 500px;
         padding: 30px;
     }
 
@@ -1894,18 +1933,22 @@ article {
 
     .info-container div {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
-        margin-bottom: 18px;
+        justify-content: space-between;
+        margin-bottom: 20px;
     }
 
     .info-container div p:first-child {
+        flex: 0 0 45%;
         font-size: 0.85rem;
-        margin-bottom: 5px;
+        margin-bottom: 0;
+        margin-right: 20px;
         text-align: left;
     }
 
     .info-container div p:last-child {
+        flex: 0 0 55%;
         font-size: 0.85rem;
         text-align: left;
     }
