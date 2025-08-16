@@ -20,9 +20,11 @@ ini_set('upload_tmp_dir', '/tmp');
 set_time_limit(300);
 ignore_user_abort(true);
 
-// Headers pour éviter les problèmes de cache
-header('Cache-Control: no-cache, must-revalidate');
-header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+// Headers pour éviter les problèmes de cache (optionnels)
+if (!headers_sent()) {
+    header('Cache-Control: no-cache, must-revalidate');
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+}
 
 // Fonction pour vérifier si l'upload est possible
 function checkUploadCapability() {

@@ -1,9 +1,10 @@
 <?php
+session_start();
+
 // Configuration pour les uploads sur nginx
 require_once('./php_upload_config.php');
 
 require('./db.php');
-session_start();
 
 if ($_SESSION["session"] != "valide") {
     header("Location:login.php");

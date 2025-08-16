@@ -1,4 +1,9 @@
 <?php
+// Démarrer la session si nécessaire
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once('./php_upload_config.php');
 
 echo "<h1>Test d'upload sur nginx</h1>";
