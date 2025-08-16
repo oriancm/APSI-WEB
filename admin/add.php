@@ -1,11 +1,6 @@
 <?php
-// Configuration pour les uploads de gros fichiers
-ini_set('upload_max_filesize', '100M');
-ini_set('post_max_size', '100M');
-ini_set('max_file_uploads', '20');
-ini_set('max_execution_time', '300');
-ini_set('memory_limit', '256M');
-ini_set('max_input_time', '300');
+// Configuration pour les uploads sur nginx
+require_once('./php_upload_config.php');
 
 require('./db.php');
 session_start();
@@ -25,9 +20,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $errorsValidation['commune'] = 'Erreur : La commune est requise';
     }
     
-    // Validation des images
+    // Validation des images avec diagnostic
     if (empty($_FILES['images']['name'][0]) || !isset($_POST['picOrder']) || empty($_POST['picOrder'])) {
         $errorsValidation['images'] = 'Erreur : Au moins une image est requise';
+    } else {
+        // Vérifier les erreurs d'upload
+        $uploadErrors = checkUploadCapability();
+        if (!empty($uploadErrors)) {
+            $errorsValidation['images'] = 'Erreur upload : ' . implode(', ', $uploadErrors);
+        }
+        
+        // Vérifier les extensions
+        $extensionErrors = validateFileExtensions($_FILES['images']);
+        if (!empty($extensionErrors)) {
+            $errorsValidation['images'] = 'Erreur extension : ' . implode(', ', $extensionErrors);
+        }
     }
 
     if (empty($errorsValidation)) {

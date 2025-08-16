@@ -1,11 +1,6 @@
 <?php
-// Configuration pour les uploads de gros fichiers
-ini_set('upload_max_filesize', '100M');
-ini_set('post_max_size', '100M');
-ini_set('max_file_uploads', '20');
-ini_set('max_execution_time', '300');
-ini_set('memory_limit', '256M');
-ini_set('max_input_time', '300');
+// Configuration pour les uploads sur nginx
+require_once('./php_upload_config.php');
 
 require('./db.php');
 session_start();
