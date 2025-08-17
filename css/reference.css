@@ -160,6 +160,7 @@ article {
     text-align: justify;
     max-width: 283px;
     padding: 20px;
+    width: auto;
 }
 
 /* Suppression de l'ancienne card info */
@@ -188,27 +189,31 @@ article {
 
 .info-container div {
     display: flex;
-    flex-direction: column;
-    justify-content: initial;
+    flex-direction: row;
+    align-items: flex-start;
     margin-bottom: 12px;
 }
 
 .info-container div p:first-child {
-    min-width: auto;
+    width: 120px;
     flex-shrink: 0;
     color: #000;
     font-size: 0.75rem;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
-    margin-bottom: 3px;
+    margin-right: 10px;
+    text-align: left;
 }
 
 .info-container div p:last-child {
-    flex-grow: 1;
+    flex: 1;
     white-space: normal;
     font-size: 0.75rem;
     color: #333;
     font-family: 'Inter', sans-serif;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .divDesc {
@@ -1552,14 +1557,14 @@ article {
     }
 
     .grid2 {
-        flex: 0 0 45%;
-        margin-right: 4%;
-        max-width: 480px;
+        width: 400px !important;
+        flex: 0 0 400px !important;
+        max-width: 400px !important;
         padding: 30px;
     }
 
     .info-container {
-        flex: 1;
+        width: 100%;
         min-width: 400px;
     }
 
@@ -1592,30 +1597,35 @@ article {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
-        justify-content: space-between;
         margin-bottom: 15px;
-        flex-wrap: wrap;
     }
 
     .info-container div p:first-child {
-        flex: 0 0 45%;
-        margin-bottom: 0;
-        margin-right: 15px;
+        width: 180px;
+        flex-shrink: 0;
+        margin-right: 20px;
         text-align: left;
-        min-width: 120px;
+        font-size: 0.75rem;
+        font-weight: 600;
     }
 
     .info-container div p:last-child {
-        flex: 1 1 55%;
+        flex: 1;
         text-align: left;
+        font-size: 0.75rem;
         word-wrap: break-word;
         overflow-wrap: break-word;
         hyphens: auto;
+        line-height: 1.4;
     }
 
     .info-container .desc,
     .divDesc .desc {
         text-align: justify;
+        font-size: 0.75rem;
+        line-height: 1.5;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .same-domain-title {
@@ -1677,15 +1687,15 @@ article {
     }
 
     .grid2 {
-        flex: 0 0 35%;
-        margin-right: 4%;
-        max-width: 400px;
-        padding: 20px;
+        width: 400px !important;
+        flex: 0 0 400px !important;
+        max-width: 400px !important;
+        padding: 25px;
     }
 
     .info-container {
-        flex: 1;
-        min-width: 450px;
+        width: 100%;
+        min-width: 355px;
     }
 
     /* Slider format standard - Réduit de 10px en hauteur pour 1536x695 */
@@ -1717,25 +1727,34 @@ article {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
-        justify-content: space-between;
         margin-bottom: 15px;
     }
 
     .info-container div p:first-child {
-        flex: 0 0 45%;
-        margin-bottom: 0;
-        margin-right: 10px;
+        width: 150px;
+        flex-shrink: 0;
         text-align: left;
+        font-size: 0.75rem;
+        font-weight: 600;
     }
 
     .info-container div p:last-child {
-        flex: 0 0 55%;
+        flex: 1;
         text-align: left;
+        font-size: 0.75rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        line-height: 1.4;
     }
 
     .info-container .desc,
     .divDesc .desc {
         text-align: justify;
+        font-size: 0.75rem;
+        line-height: 1.5;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .same-domain-title {
@@ -1797,15 +1816,16 @@ article {
     }
 
     .grid2 {
-        flex: 0 0 30%;
+        width: 400px !important;
+        flex: 0 0 400px !important;
+        max-width: 400px !important;
         margin-right: 5%;
-        max-width: 450px;
         padding: 25px;
     }
 
     .info-container {
-        flex: 1;
-        min-width: 500px;
+        width: 100%;
+        min-width: 400px;
     }
 
     /* Slider grand format */
@@ -1837,28 +1857,34 @@ article {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
-        justify-content: space-between;
         margin-bottom: 18px;
     }
 
     .info-container div p:first-child {
-        flex: 0 0 45%;
-        font-size: 0.8rem;
-        margin-bottom: 0;
-        margin-right: 15px;
+        width: 150px;
+        flex-shrink: 0;
         text-align: left;
+        font-size: 0.8rem;
+        font-weight: 600;
     }
 
     .info-container div p:last-child {
-        flex: 0 0 55%;
-        font-size: 0.8rem;
+        flex: 1;
         text-align: left;
+        font-size: 0.8rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        line-height: 1.4;
     }
 
     .info-container .desc,
     .divDesc .desc {
         font-size: 0.8rem;
         text-align: justify;
+        line-height: 1.5;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .same-domain-title {
@@ -1920,15 +1946,15 @@ article {
     }
 
     .grid2 {
-        flex: 0 0 25%;
-        margin-right: 5%;
-        max-width: 500px;
+        width: 400px !important;
+        flex: 0 0 400px !important;
+        max-width: 400px !important;
         padding: 30px;
     }
 
     .info-container {
-        flex: 1;
-        min-width: 600px;
+        width: 100%;
+        min-width: 400px;
     }
 
     /* Slider très grand format */
@@ -1960,28 +1986,34 @@ article {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
-        justify-content: space-between;
         margin-bottom: 20px;
     }
 
     .info-container div p:first-child {
-        flex: 0 0 45%;
-        font-size: 0.85rem;
-        margin-bottom: 0;
-        margin-right: 20px;
+        width: 150px;
+        flex-shrink: 0;
         text-align: left;
+        font-size: 0.85rem;
+        font-weight: 600;
     }
 
     .info-container div p:last-child {
-        flex: 0 0 55%;
-        font-size: 0.85rem;
+        flex: 1;
         text-align: left;
+        font-size: 0.85rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        line-height: 1.4;
     }
 
     .info-container .desc,
     .divDesc .desc {
         font-size: 0.85rem;
         text-align: justify;
+        line-height: 1.5;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .same-domain-title {
