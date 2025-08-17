@@ -1547,23 +1547,20 @@ article {
 
     .reference-card {
         flex-direction: row;
-        align-items: flex-start;
+        align-items: center;
         max-width: 90%;
-        flex-wrap: wrap;
     }
 
     .grid2 {
-        flex: 0 0 38%;
-        min-width: 450px;
-        max-width: 500px;
-        margin-right: 3%;
+        flex: 0 0 45%;
+        margin-right: 4%;
+        max-width: 480px;
         padding: 30px;
     }
 
     .info-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+        flex: 1;
+        min-width: 400px;
     }
 
     /* Slider optimisé pour laptop */
@@ -1601,11 +1598,11 @@ article {
     }
 
     .info-container div p:first-child {
-        flex: 0 0 40%;
+        flex: 0 0 45%;
         margin-bottom: 0;
         margin-right: 15px;
         text-align: left;
-        min-width: 130px;
+        min-width: 120px;
     }
 
     .info-container div p:last-child {
@@ -1614,7 +1611,6 @@ article {
         word-wrap: break-word;
         overflow-wrap: break-word;
         hyphens: auto;
-        max-width: 300px;
     }
 
     .info-container .desc,
@@ -1676,23 +1672,20 @@ article {
 
     .reference-card {
         flex-direction: row;
-        align-items: flex-start;
+        align-items: center;
         max-width: 90%;
-        flex-wrap: wrap;
     }
 
     .grid2 {
-        flex: 0 0 38%;
-        min-width: 450px;
-        max-width: 500px;
-        margin-right: 3%;
+        flex: 0 0 35%;
+        margin-right: 4%;
+        max-width: 400px;
         padding: 20px;
     }
 
     .info-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+        flex: 1;
+        min-width: 450px;
     }
 
     /* Slider format standard - Réduit de 10px en hauteur pour 1536x695 */
@@ -1726,23 +1719,18 @@ article {
         align-items: flex-start;
         justify-content: space-between;
         margin-bottom: 15px;
-        flex-wrap: wrap;
     }
 
     .info-container div p:first-child {
-        flex: 0 0 40%;
+        flex: 0 0 45%;
         margin-bottom: 0;
-        margin-right: 15px;
+        margin-right: 10px;
         text-align: left;
-        min-width: 140px;
     }
 
     .info-container div p:last-child {
-        flex: 1 1 55%;
+        flex: 0 0 55%;
         text-align: left;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        max-width: 320px;
     }
 
     .info-container .desc,
@@ -1804,23 +1792,20 @@ article {
 
     .reference-card {
         flex-direction: row;
-        align-items: flex-start;
+        align-items: center;
         max-width: 85%;
-        flex-wrap: wrap;
     }
 
     .grid2 {
-        flex: 0 0 35%;
-        min-width: 500px;
-        max-width: 550px;
-        margin-right: 4%;
+        flex: 0 0 30%;
+        margin-right: 5%;
+        max-width: 450px;
         padding: 25px;
     }
 
     .info-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+        flex: 1;
+        min-width: 500px;
     }
 
     /* Slider grand format */
@@ -1854,25 +1839,20 @@ article {
         align-items: flex-start;
         justify-content: space-between;
         margin-bottom: 18px;
-        flex-wrap: wrap;
     }
 
     .info-container div p:first-child {
-        flex: 0 0 40%;
+        flex: 0 0 45%;
         font-size: 0.8rem;
         margin-bottom: 0;
         margin-right: 15px;
         text-align: left;
-        min-width: 150px;
     }
 
     .info-container div p:last-child {
-        flex: 1 1 55%;
+        flex: 0 0 55%;
         font-size: 0.8rem;
         text-align: left;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        max-width: 350px;
     }
 
     .info-container .desc,
@@ -1935,23 +1915,20 @@ article {
 
     .reference-card {
         flex-direction: row;
-        align-items: flex-start;
+        align-items: center;
         max-width: 80%;
-        flex-wrap: wrap;
     }
 
     .grid2 {
-        flex: 0 0 32%;
-        min-width: 550px;
-        max-width: 600px;
+        flex: 0 0 25%;
         margin-right: 5%;
+        max-width: 500px;
         padding: 30px;
     }
 
     .info-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+        flex: 1;
+        min-width: 600px;
     }
 
     /* Slider très grand format */
@@ -1985,25 +1962,20 @@ article {
         align-items: flex-start;
         justify-content: space-between;
         margin-bottom: 20px;
-        flex-wrap: wrap;
     }
 
     .info-container div p:first-child {
-        flex: 0 0 38%;
+        flex: 0 0 45%;
         font-size: 0.85rem;
         margin-bottom: 0;
         margin-right: 20px;
         text-align: left;
-        min-width: 160px;
     }
 
     .info-container div p:last-child {
-        flex: 1 1 58%;
+        flex: 0 0 55%;
         font-size: 0.85rem;
         text-align: left;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        max-width: 400px;
     }
 
     .info-container .desc,
