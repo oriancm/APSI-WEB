@@ -21,7 +21,9 @@ set_time_limit(300);
 ignore_user_abort(true);
 
 // Headers pour éviter les problèmes de cache (optionnels)
-if (!headers_sent()) {
+// Ces headers ne sont envoyés que si aucune sortie n'a été générée
+// et si on est dans un contexte où on peut encore envoyer des headers
+if (!headers_sent() && !defined('HEADERS_SENT_CHECK')) {
     header('Cache-Control: no-cache, must-revalidate');
     header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 }

@@ -1,15 +1,16 @@
 <?php
 session_start();
 
-// Configuration pour les uploads sur nginx
-require_once('./php_upload_config.php');
-
-require('./db.php');
-
+// Vérifier la session AVANT d'inclure les fichiers de configuration
 if (!isset($_SESSION["session"]) || $_SESSION["session"] != "valide") {
     header("Location:login.php");
     exit;
 }
+
+// Configuration pour les uploads sur nginx
+require_once('./php_upload_config.php');
+
+require('./db.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     // Validations
