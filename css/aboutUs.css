@@ -1,0 +1,164 @@
+main {
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  box-sizing: content-box;
+  padding-top: 10px;
+  /* padding-bottom: 100px; */
+  max-width: 800px;
+}
+
+.scrolled {
+  overflow: scroll;
+  /* Utilisation de dvh (Dynamic Viewport Height) qui s'ajuste dynamiquement */
+  height: calc(100dvh - 114px);
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Fallback pour les navigateurs qui ne supportent pas dvh */
+@supports not (height: 100dvh) {
+  .scrolled {
+    height: calc(100vh - 114px);
+  }
+}
+
+.scrolled::-webkit-scrollbar {
+  display: none;
+}
+
+.content {
+  color: #000;
+  line-height: 1.6;
+  text-align: justify;
+  font-family: 'Inter', sans-serif;
+}
+
+.content p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+/* Override the global list-style: none for content lists */
+.content ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.content ul li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.content ul li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background-color: dodgerblue;
+  border-radius: 50%;
+}
+
+h1 {
+  color: dodgerblue;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+  border-bottom: 2px solid dodgerblue;
+  padding-bottom: 10px;
+}
+
+h2 {
+  color: dodgerblue;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+}
+
+.content p {
+  margin-bottom: 15px;
+}
+
+.pb {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+    padding-bottom: 4px;
+}
+
+.slogan {
+    text-align: center;
+    color: #000000;
+    font-style: italic;
+}
+
+.divCarte {
+  text-align: center;
+}
+
+.carte {
+  width: 56%;
+}
+
+.departements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+ .content {
+    margin: 10px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+  
+  /* Ajustement spÃ©cifique pour les petits Ã©crans */
+  .scrolled {
+    /* On utilise svh pour les petits Ã©crans */
+    height: calc(100svh - 114px);
+  }
+
+  /* Passer la carte sous le texte sur mobile */
+  .departements {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* Media query pour iPad */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .departements {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media screen and (min-width: 1021px) {
+  /* Pour les grands Ã©crans, on peut utiliser lvh */
+  .scrolled {
+    height: calc(100lvh - 114px);
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  main {
+    background-position: center;
+  }
+}

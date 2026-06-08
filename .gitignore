@@ -1,0 +1,6 @@
+admin/.env
+.env
+secrets/
+.idea/
+.vscode/
+
