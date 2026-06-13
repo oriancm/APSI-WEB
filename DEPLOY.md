@@ -67,7 +67,7 @@ Pour le compte admin, choisissez un mot de passe fort puis genere son hash PHP d
 ```bash
 mkdir -p secrets
 docker run --rm -v "$PWD:/app" -w /app php:8.2-cli php scripts/generate-password-hash.php '<mot-de-passe-admin-fort>' > secrets/admin-password-hash
-chmod 600 secrets/admin-password-hash
+chmod 644 secrets/admin-password-hash
 ```
 
 Le mot de passe en clair n'est jamais stocke dans le repo. Le fichier `secrets/admin-password-hash` reste sur le serveur.
