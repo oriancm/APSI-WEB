@@ -90,6 +90,8 @@ docker compose -f docker-compose.prod.yml logs -f apsi-web
 
 Le site sera disponible sur `https://$DOMAIN` quand les DNS pointeront vers le VPS et que Caddy aura obtenu le certificat.
 
+Tant que les DNS ne pointent pas encore vers le VPS, le site peut aussi etre teste en HTTP via l'IP du serveur.
+
 ## 4. Mise a jour
 
 ```bash

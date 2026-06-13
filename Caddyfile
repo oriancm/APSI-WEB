@@ -10,3 +10,7 @@ www.{$DOMAIN} {
     encode gzip zstd
     reverse_proxy apsi-web:3000
 }
+
+:80 {
+    reverse_proxy apsi-web:3000
+}
