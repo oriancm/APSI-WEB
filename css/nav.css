@@ -51,6 +51,10 @@ nav ul li {
 
 .a-btn-menu {
     position: absolute;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
 }
 
 .slogan {

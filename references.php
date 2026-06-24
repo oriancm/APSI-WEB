@@ -1,326 +1,166 @@
 <?php
-
 require('admin/db.php');
-require('functions/htmlPrint.php');
 
 function getAllRef($db) {
-    $sql = "SELECT * FROM reference";
-    $stmt= $db->prepare($sql);
+    $sql = "SELECT * FROM reference ORDER BY id ASC";
+    $stmt = $db->prepare($sql);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $refs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (empty($refs) && $db instanceof NullDb) {
+        return [
+            ['id' => 10001, 'titre' => 'Groupe scolaire en site occupé', 'commune' => 'Avignon', 'domaine' => '4'],
+            ['id' => 10002, 'titre' => 'Réhabilitation de logements collectifs', 'commune' => 'Apt', 'domaine' => '10'],
+            ['id' => 10003, 'titre' => 'Pôle santé et services publics', 'commune' => 'Manosque', 'domaine' => '9'],
+            ['id' => 10004, 'titre' => 'Gymnase intercommunal', 'commune' => 'Pertuis', 'domaine' => '2'],
+            ['id' => 10005, 'titre' => 'Équipement culturel et médiathèque', 'commune' => 'Cavaillon', 'domaine' => '3'],
+            ['id' => 10006, 'titre' => 'Maison des associations', 'commune' => 'Forcalquier', 'domaine' => '6'],
+            ['id' => 10007, 'titre' => 'Extension administrative', 'commune' => 'Sisteron', 'domaine' => '6'],
+            ['id' => 10008, 'titre' => 'Équipement petite enfance', 'commune' => 'Salon-de-Provence', 'domaine' => '7'],
+        ];
+    }
+    return $refs;
 }
 
 function getAllPic($db) {
     $sql = "SELECT * FROM photo ORDER BY orderPic ASC";
-    $stmt= $db->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (empty($pics) && $db instanceof NullDb) {
+        $localPics = ['img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.jpg', 'img7.jpeg', 'img8.png'];
+        $fallbackPics = [];
+        foreach ($localPics as $index => $pic) {
+            $fallbackPics[] = ['idR' => 10001 + $index, 'titre' => $pic, 'orderPic' => 1];
+        }
+        return $fallbackPics;
+    }
+    return $pics;
 }
 
 $refTab = getAllRef($db);
 $picTab = getAllPic($db);
+$picByRef = [];
+foreach ($picTab as $pic) {
+    if (!isset($picByRef[$pic['idR']])) {
+        $picByRef[$pic['idR']] = $pic['titre'];
+    } elseif ((int)($pic['orderPic'] ?? 1) === 1) {
+        $picByRef[$pic['idR']] = $pic['titre'];
+    }
+}
 
+$domains = [
+    'all' => 'Tous les domaines',
+    '1' => 'Résidences Universitaires',
+    '2' => 'Équipements sportifs',
+    '3' => 'Équipements culturels',
+    '4' => 'Groupes scolaires et collèges',
+    '5' => 'Aménagements urbains',
+    '6' => 'Bâtiments publics',
+    '7' => 'Crèches',
+    '8' => "Centre d'Incendie et de Secours",
+    '9' => 'Santé',
+    '10' => 'Logements sociaux',
+    '11' => 'Monuments Historiques',
+    '12' => 'Restructuration et réhabilitation',
+];
+
+$activePage = 'references';
 ?>
-
 <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <!-- SEO Meta Tags -->
     <title>Nos Références - APSI BTP | Projets BTP en Provence-Alpes-Côte d'Azur</title>
-    <meta name="description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX). Plus de 100 projets BTP réalisés en PACA.">
-    <meta name="keywords" content="références BTP, projets construction, OPC, maîtrise d'œuvre, Provence, PACA, chantier, réhabilitation">
-    <meta name="author" content="APSI BTP">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://apsi-btp.fr/references">
-    <meta property="og:title" content="Nos Références - APSI BTP">
-    <meta property="og:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX).">
-    <meta property="og:image" content="/img/APSI.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://apsi-btp.fr/references">
-    <meta property="twitter:title" content="Nos Références - APSI BTP">
-    <meta property="twitter:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX).">
-    <meta property="twitter:image" content="/img/APSI.png">
-    
-    <!-- Favicon -->
+    <meta name="description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    
-    <link rel="stylesheet" href="/css/references.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <!-- Iconscout Link For Icons -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <style>
-      .hidden-until-loaded {
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-      .show-after-load {
-        opacity: 1 !important;
-      }
-    </style>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/references.css?v=20260623-1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/site.js" defer></script>
 </head>
-<body>
+<body class="references-page">
+    <main class="references-shell site-shell-bg">
+        <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-    <?php include "./nav.php"; ?>
-    
-    <main id="main" class="scrolled hidden-until-loaded">
-        <section class="flex-column">
-        <div class="references-container">
-            <!-- Fixed Filter Button -->
-            <div class="fixed-filter">
-                <div class="filter-trigger">
-                    <i class="uil uil-filter"></i>
+        <section class="references-hero site-container">
+            <h1 class="page-title">Nos Références</h1>
+            <span class="page-line"></span>
+            <p>Découvrez une sélection de projets accompagnés par APSI BTP dans les secteurs <b>publics</b> et <b>privés</b>.</p>
+        </section>
+
+        <section class="references-layout site-container">
+            <button class="filter-toggle" type="button" aria-expanded="false" aria-controls="references-filter">
+                <i data-lucide="filter" aria-hidden="true"></i>
+                Filtrer par domaine
+            </button>
+
+            <aside class="references-filter" id="references-filter" aria-label="Filtrer les références">
+                <div class="filter-title">
+                    <h2>Filtrer par domaine</h2>
+                    <i data-lucide="filter" aria-hidden="true"></i>
                 </div>
-                <div class="filter-panel">
-                    <div class="filter-header">
-                        <span>Filtrer par domaine</span>
-                        <i class="uil uil-times close-filter"></i>
-                    </div>
-                    <ul class="filter-options"></ul>
-                </div>
-            </div>
-            
-            <h1 id="references-title">Nos Références</h1>
-                
-                <!-- Message affiché quand aucune référence n'est trouvée -->
-                <div class="no-references-message" id="no-references-message">
-                    Aucune référence trouvée pour ce domaine.
-                </div>
-                
-                <section id="references-section">
-                <?php foreach($refTab as $ref): ?>
-                    <article data-domain="<?= isset($ref['domaine']) ? $ref['domaine'] : '0' ?>">
-                    <a class="card-link" href="/reference/<?= $ref['id'] ?>"></a>
+                <ul>
+                    <?php foreach ($domains as $value => $label): ?>
+                        <li><button class="<?= $value === 'all' ? 'active' : '' ?>" type="button" data-filter="<?= htmlspecialchars($value) ?>"><?= htmlspecialchars($label) ?></button></li>
+                    <?php endforeach; ?>
+                </ul>
+            </aside>
+
+            <div class="references-grid" id="references-grid">
+                <?php foreach ($refTab as $ref): ?>
+                    <?php $img = $picByRef[$ref['id']] ?? null; ?>
+                    <article class="reference-tile" data-domain="<?= htmlspecialchars($ref['domaine'] ?? '0') ?>">
+                        <a href="/reference/<?= htmlspecialchars($ref['id']) ?>" aria-label="<?= htmlspecialchars($ref['titre']) ?>"></a>
+                        <?php if ($img): ?>
+                            <img src="/pic/<?= htmlspecialchars($img) ?>" alt="">
+                        <?php else: ?>
+                            <div class="reference-tile-empty">Aucune image disponible</div>
+                        <?php endif; ?>
                         <div>
-                            <?php
-                                $picOfRef = null;
-                                foreach($picTab as $pic) {
-                                    if($pic['idR'] == $ref['id'] && $pic['orderPic'] == 1) {
-                                        $picOfRef = $pic;
-                                        break;
-                                    }
-                                }
-                            ?>
-                            <div>
-                                <?php if ($picOfRef): ?>
-                                    <img class="image-ref" src="/pic/<?= $picOfRef["titre"]; ?>" alt="">
-                                <?php else: ?>
-                                    <div class="no-image">Aucune image disponible</div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="desc-ref">
-                                <div class="text-wrapper"><p><?= $ref["titre"]; ?></p></div>
-                                <div class="text-wrapper"><p class="commune"><?= $ref["commune"]; ?></p></div>
-                            </div>
+                            <h2><?= htmlspecialchars($ref['titre']) ?></h2>
+                            <p><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($ref['commune']) ?></p>
                         </div>
                     </article>
-                <?php endforeach ?>
-                </section>
-                </div>
-                <div class="pb">
-                    <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
-                </div>
-        </section>                
-                
-        
-        
+                <?php endforeach; ?>
+            </div>
+        </section>
     </main>
-</body>
-<link rel="stylesheet" href="/css/styleGlobalNotIndex.css">
-</html>
 
-<script>
+    <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
-    const article = document.querySelector('article');
-
-    addEventListener('load', (event) => {
-        var navElement = document.getElementById('nav');
-        var navHeight = navElement.offsetHeight;
-        // console.warn(navHeight);
-
-        var mainElement = document.getElementById('main');
-        mainElement.style.marginTop = navHeight + 'px';
+    <script>
+    window.addEventListener('load', function() {
+        if (window.lucide) window.lucide.createIcons();
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-    function updateTitleWidth() {
-        const section = document.getElementById('references-section');
-        const title = document.getElementById('references-title');
-        
-        // Get all articles (reference items)
-        const articles = section.querySelectorAll('article');
-        
-        if (articles.length > 0) {
-            // Find the leftmost and rightmost positions
-            let minLeft = Infinity;
-            let maxRight = 0;
-            
-            articles.forEach(article => {
-                const rect = article.getBoundingClientRect();
-                minLeft = Math.min(minLeft, rect.left);
-                maxRight = Math.max(maxRight, rect.right);
+        const buttons = document.querySelectorAll('.references-filter button[data-filter]');
+        const cards = document.querySelectorAll('.reference-tile');
+        const filterPanel = document.getElementById('references-filter');
+        const filterToggle = document.querySelector('.filter-toggle');
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                buttons.forEach((item) => item.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.dataset.filter;
+                cards.forEach((card) => {
+                    card.hidden = filter !== 'all' && card.dataset.domain !== filter;
+                });
+                filterPanel?.classList.remove('is-open');
+                filterToggle?.setAttribute('aria-expanded', 'false');
             });
-            
-            // Calculate the total width of the displayed references
-            const totalWidth = maxRight - minLeft;
-            
-            // Set the title width and center it
-            title.style.width = totalWidth + 'px';
-            title.style.marginLeft = 'auto';
-            title.style.marginRight = 'auto';
-        }
-    }
-    
-    // Initial update
-    // Add a slight delay to ensure layout is complete
-    setTimeout(() => {
-        updateTitleWidth();
-    }, 100);
-    
-    // Update on resize
-    window.addEventListener('resize', function() {
-        setTimeout(() => {
-            updateTitleWidth();
-        }, 100);
+        });
+
+        filterToggle?.addEventListener('click', () => {
+            const isOpen = filterPanel.classList.toggle('is-open');
+            filterToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
     });
-});
-
-// Custom Select for Domain Filter
-const fixedFilter = document.querySelector(".fixed-filter"),
-filterTrigger = fixedFilter.querySelector(".filter-trigger"),
-filterPanel = fixedFilter.querySelector(".filter-panel"),
-closeFilter = fixedFilter.querySelector(".close-filter"),
-filterOptions = fixedFilter.querySelector(".filter-options");
-
-let domains = [
-    "Tous les domaines",
-    "Résidences Universitaires", 
-    "Équipements sportifs", 
-    "Équipements culturels", 
-    "Groupes scolaires et collèges", 
-    "Aménagements urbains", 
-    "Bâtiments publics", 
-    "Crèches", 
-    "Centre d'Incendie et de Secours", 
-    "Santé", 
-    "Logements sociaux", 
-    "Monuments Historiques", 
-    "Restructuration et réhabilitation"
-];
-
-// Mapping between domain names and their numeric values in database
-const domainMapping = {
-    "Tous les domaines": "all",
-    "Résidences Universitaires": "1", 
-    "Équipements sportifs": "2", 
-    "Équipements culturels": "3", 
-    "Groupes scolaires et collèges": "4", 
-    "Aménagements urbains": "5", 
-    "Bâtiments publics": "6", 
-    "Crèches": "7", 
-    "Centre d'Incendie et de Secours": "8", 
-    "Santé": "9", 
-    "Logements sociaux": "10", 
-    "Monuments Historiques": "11", 
-    "Restructuration et réhabilitation": "12"
-};
-
-function addDomain(selectedDomain) {
-    filterOptions.innerHTML = "";
-    domains.forEach(domain => {
-        let isSelected = domain == selectedDomain ? "selected" : "";
-        let li = `<li onclick="updateDomainName(this)" class="${isSelected}">${domain}</li>`;
-        filterOptions.insertAdjacentHTML("beforeend", li);
-    });
-}
-addDomain();
-
-function updateDomainName(selectedLi) {
-    addDomain(selectedLi.innerText);
-    fixedFilter.classList.remove("active");
-    
-    // Filter references based on selected domain
-    filterReferences(selectedLi.innerText);
-}
-
-function filterReferences(selectedDomain) {
-    const articles = document.querySelectorAll('#references-section article');
-    const domainValue = domainMapping[selectedDomain];
-    const noReferencesMessage = document.getElementById('no-references-message');
-    let visibleArticles = 0;
-    
-    articles.forEach(article => {
-        const articleDomain = article.getAttribute('data-domain');
-        
-        if (domainValue === "all") {
-            // Show all articles
-            article.style.display = 'block';
-            visibleArticles++;
-        } else {
-            // Show only articles matching the selected domain
-            if (articleDomain === domainValue) {
-                article.style.display = 'block';
-                visibleArticles++;
-            } else {
-                article.style.display = 'none';
-            }
-        }
-    });
-    
-    // Afficher/masquer le message "aucune référence"
-    if (visibleArticles === 0) {
-        noReferencesMessage.classList.add('show');
-    } else {
-        noReferencesMessage.classList.remove('show');
-    }
-    
-    // Update title width after filtering
-    setTimeout(() => {
-        updateTitleWidth();
-    }, 100);
-}
-
-// Event listeners for opening and closing the filter
-filterTrigger.addEventListener("click", () => {
-    fixedFilter.classList.toggle("active");
-});
-
-closeFilter.addEventListener("click", () => {
-    fixedFilter.classList.remove("active");
-});
-
-// Close filter when clicking outside
-document.addEventListener("click", (e) => {
-    if (!fixedFilter.contains(e.target)) {
-        fixedFilter.classList.remove("active");
-    }
-});
-
-window.addEventListener('load', function() {
-    var navElement = document.getElementById('nav');
-    var navHeight = navElement ? navElement.offsetHeight : 0;
-    var mainElement = document.getElementById('main');
-    if (mainElement) {
-        mainElement.style.marginTop = navHeight + 'px';
-        mainElement.classList.remove('hidden-until-loaded');
-        mainElement.classList.add('show-after-load');
-    }
-    if (navElement) {
-        navElement.classList.add('show-after-load');
-    }
-});
-</script>
+    </script>
+</body>
+</html>

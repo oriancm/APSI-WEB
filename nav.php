@@ -23,7 +23,7 @@
                 <li><a <?php if ($pagename == 'contact.php' || $pagename == 'mailSent.php') {echo ' class="active"';} ?> href="/contact">Nous contacter</a></li>
             </ul>
         </div>
-        <a href="/" class="a-btn-menu"><img src="/img/menu.png" alt="Menu de navigation" class="btn-menu"></a>
+        <button type="button" class="a-btn-menu" aria-label="Menu de navigation"><img src="/img/menu.png" alt="" class="btn-menu"></button>
 
     </nav>
 </body>

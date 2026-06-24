@@ -6,10 +6,26 @@
 }
 
 body {
-    background-color: #0b0f12;
+    background-color: #eef2f3;
     font-family: 'Montserrat';
-    background-image: url("/img/background2.png");
+    background-image:
+        linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.12) 18%, rgba(238,242,243,0) 36%, rgba(238,242,243,0.16) 100%),
+        url("/img/home-cloud-long.png");
     background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+}
+
+main {
+    background: transparent;
+}
+
+main h1 {
+    color: #111820;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(42px, 7vw, 84px);
+    line-height: 0.95;
+    letter-spacing: 0;
 }
 
 @media screen and (max-width: 1200px) {

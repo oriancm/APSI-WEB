@@ -9,8 +9,16 @@
         display: none;
     }
 
-    section {
+    main > section {
         display: none;
+    }
+
+    .home-hero-content {
+        display: block;
+    }
+
+    .home-references-panel {
+        display: block;
     }
 
     nav {

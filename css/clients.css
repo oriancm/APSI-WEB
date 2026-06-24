@@ -1,135 +1,101 @@
-.scrolled {
-    overflow: scroll;
-    height: calc(100dvh - 114px);
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-
-  @supports not (height: 100dvh) {
-    .scrolled {
-        height: calc(100vh - 114px);
-    }
+body.clients-page {
+    background: var(--apsi-bg);
 }
 
-.tropGrand {
-    max-width: 100px !important;
-    height: auto;
+.clients-shell {
+    min-height: calc(100svh - var(--apsi-footer-height));
+    padding-bottom: clamp(24px, 3vw, 42px);
+    --clients-subtitle-width: min(420px, min(1120px, var(--apsi-content-width)));
+    --apsi-bg-fade-start: calc(var(--apsi-page-edge) + ((var(--apsi-page-width) - min(1120px, var(--apsi-content-width))) / 2) + var(--clients-subtitle-width) - clamp(52px, 3.8vw, 74px));
+    background-image:
+        linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) calc(var(--apsi-crane-height) - 26px), rgba(255,255,255,0.14) var(--apsi-crane-height), rgba(255,255,255,0.92) calc(var(--apsi-crane-height) + 108px), #fff 100%),
+        linear-gradient(90deg, #fff 0, #fff var(--apsi-bg-fade-start), rgba(255,255,255,0.76) calc(var(--apsi-bg-fade-start) + 70px), rgba(255,255,255,0.42) calc(var(--apsi-bg-fade-start) + 175px), rgba(255,255,255,0.13) calc(var(--apsi-bg-fade-start) + 300px), rgba(255,255,255,0) calc(var(--apsi-bg-fade-start) + 420px), rgba(255,255,255,0) 100%),
+        url("/img/home-building-crane-wide.png");
 }
 
-main {
-    display: flex;
-    justify-content: center;
-    height: auto;
+body.clients-page .site-footer {
+    margin-top: 0;
 }
 
-section {
-    display: flex;
-    flex-direction: column;
-    box-sizing: content-box;
-    padding-top: 10px;
-    margin-left: 5%;
-    margin-right: 5%;
-    min-height: calc(100dvh - 114px);
-    width: 100%;
+.clients-hero {
+    width: min(1120px, var(--apsi-content-width));
+    padding-inline: 0;
+    margin-top: var(--apsi-page-top);
+    margin-bottom: var(--apsi-page-gap);
 }
-  
-  .scrolled::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .content {
-    color: #000;
-    line-height: 1.6;
-    flex: 1;
-    }
 
-    h1 {
-        color: dodgerblue;
-        margin-bottom: 30px;
-        font-size: 2.5em;
-        border-bottom: 2px solid dodgerblue;
-        padding-bottom: 10px;
-      }
+.clients-hero .page-line {
+    margin: 18px 0 18px;
+}
 
+.clients-hero p {
+    max-width: var(--clients-subtitle-width);
+    margin: 0;
+    color: var(--apsi-ink);
+    font-size: clamp(15px, 1.15vw, 18px);
+    line-height: 1.62;
+}
 
-.logo-gallery {
+.clients-hero strong {
+    color: var(--apsi-blue);
+    font-weight: 800;
+}
+
+.clients-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    justify-items: center;
-    align-items: center;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px 16px;
+    width: min(1120px, var(--apsi-content-width));
+    padding-inline: 0;
 }
 
-.logo-gallery img {
-    max-width: 150px;
+.clients-grid article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 112px;
+    padding: 16px 18px;
+    border-radius: var(--apsi-radius);
+    background: var(--apsi-card);
+    box-shadow: var(--apsi-shadow);
+}
+
+.clients-grid a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.clients-grid img {
+    display: block;
+    max-width: 148px;
+    max-height: 72px;
+    width: auto;
     height: auto;
     object-fit: contain;
-    /* transition: transform 0.3s ease; */
 }
 
-.logo-gallery img:hover {
-    /* transform: scale(1.1); */
-}
-
-.pb {
-    display: flex;
-    justify-content: center;
-    margin-top: auto;
-    width: 100%;
-    padding-bottom: 4px;
-}
-
-.slogan {
-    text-align: center;
-    color: #000000;
-    font-style: italic;
-}
-
-@media (max-width: 600px) {
-    .logo-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 10px;
-        margin-left: 3%;
-        margin-right: 3%;
-    }
-
-    .logo-gallery img {
-        max-width: 120px;
-    }
-    .scrolled {
-        height: calc(100svh - 114px);
-    }
-    section {
-        min-height: calc(100svh - 114px);
+@media (max-width: 1180px) {
+    .clients-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
-@media (max-width: 400px) {
-    .logo-gallery {
-        grid-template-columns: 1fr;
-        margin-left: 2%;
-        margin-right: 2%;
+@media (max-width: 720px) {
+    .clients-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
     }
-}
 
-@media (min-width: 1600px) {
-    .logo-gallery {
-        max-width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
+    .clients-grid article {
+        min-height: 128px;
+        padding: 18px;
     }
-    h1 {
-        max-width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
-        border-bottom: 2px solid dodgerblue;
-        padding-bottom: 10px;
-    }
-}
 
-@media screen and (min-width: 1021px) {
-    section {
-        min-height: calc(100lvh - 114px);
+    .clients-grid img {
+        max-width: 130px;
+        max-height: 78px;
     }
 }
