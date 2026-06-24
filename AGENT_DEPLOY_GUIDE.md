@@ -185,7 +185,8 @@ curl -fsS -I http://127.0.0.1/professions
 curl -fsS -I http://127.0.0.1/references
 curl -fsS -I http://127.0.0.1/clients
 curl -fsS -I http://127.0.0.1/contact
-curl -fsS -I http://127.0.0.1/reference/10001
+first_ref=$(curl -fsS http://127.0.0.1/references | grep -oE 'href="/reference/[0-9]+"' | head -n 1 | sed -E 's/href="([^"]+)"/\1/')
+curl -fsS -I "http://127.0.0.1${first_ref}"
 ```
 
 Verification HTML minimale :
@@ -196,7 +197,8 @@ curl -fsS http://127.0.0.1/professions | grep -q 'professions-page'
 curl -fsS http://127.0.0.1/references | grep -q 'references-page'
 curl -fsS http://127.0.0.1/clients | grep -q 'clients-page'
 curl -fsS http://127.0.0.1/contact | grep -q 'contact-body'
-curl -fsS http://127.0.0.1/reference/10001 | grep -q 'reference-page'
+first_ref=$(curl -fsS http://127.0.0.1/references | grep -oE 'href="/reference/[0-9]+"' | head -n 1 | sed -E 's/href="([^"]+)"/\1/')
+curl -fsS "http://127.0.0.1${first_ref}" | grep -q 'reference-page'
 ```
 
 ## Sauvegardes
