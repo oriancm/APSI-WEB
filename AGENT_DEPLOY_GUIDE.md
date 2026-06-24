@@ -149,6 +149,56 @@ git pull
 docker compose -f docker-compose.prod.yml up -d --build
 ```
 
+## Procedure utilisee pour ce deploiement
+
+Contexte verifie sur le VPS :
+
+```bash
+cd /opt/apsi-web
+git branch --show-current
+git status --short --branch
+docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"
+```
+
+Branche de production utilisee :
+
+```text
+codex/secure-contabo-deploy
+```
+
+Commandes de deploiement :
+
+```bash
+cd /opt/apsi-web
+git fetch origin
+git pull --ff-only origin codex/secure-contabo-deploy
+docker compose -f docker-compose.prod.yml up -d --build
+docker compose -f docker-compose.prod.yml ps
+```
+
+Verification HTTP apres deploiement :
+
+```bash
+curl -fsS -I http://127.0.0.1/
+curl -fsS -I http://127.0.0.1/aboutUs
+curl -fsS -I http://127.0.0.1/professions
+curl -fsS -I http://127.0.0.1/references
+curl -fsS -I http://127.0.0.1/clients
+curl -fsS -I http://127.0.0.1/contact
+curl -fsS -I http://127.0.0.1/reference/10001
+```
+
+Verification HTML minimale :
+
+```bash
+curl -fsS http://127.0.0.1/aboutUs | grep -q 'about-page'
+curl -fsS http://127.0.0.1/professions | grep -q 'professions-page'
+curl -fsS http://127.0.0.1/references | grep -q 'references-page'
+curl -fsS http://127.0.0.1/clients | grep -q 'clients-page'
+curl -fsS http://127.0.0.1/contact | grep -q 'contact-body'
+curl -fsS http://127.0.0.1/reference/10001 | grep -q 'reference-page'
+```
+
 ## Sauvegardes
 
 Base de donnees :
