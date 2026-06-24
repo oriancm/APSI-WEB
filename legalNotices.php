@@ -1,73 +1,65 @@
+<?php $activePage = 'contact'; ?>
 <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>APSI BTP - Mentions Légales</title>
-    <link rel="stylesheet" href="css/legalNotices.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <style>
-      .hidden-until-loaded {
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-      .show-after-load {
-        opacity: 1 !important;
-      }
-    </style>
+    <title>APSI BTP - Mentions légales</title>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/legalNotices.css?v=20260622-3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/site.js" defer></script>
 </head>
-<body>
+<body class="legal-page-body">
+    <main class="legal-page site-shell-bg">
+        <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-    <?php include "./nav.php"; ?>
+        <section class="legal-hero site-container">
+            <h1 class="page-title">Mentions légales</h1>
+            <span class="page-line"></span>
 
-    <main id="main" class="scrolled hidden-until-loaded">
-        <section>
-            <div class="content">
-                <h1>Mentions légales</h1>
-                
-                <div class="legal-section">
-                    <h2>Éditeur du site</h2>
-                    <p>Le présent site est édité par <strong>APSI BTP</strong>, société de type <strong>SARL</strong>, au capital de <strong>6 800,00 €</strong></p>
-                    <p>Siège social : Quartier Pierrefeu, chemin de Saint Jean, 84750 CASENEUVE</p>
-                    <p>RCS Avignon : <strong> 2007 B 498</strong></p>
-                    <p>Numéro de TVA : <strong>FR 40 495 392 557</strong></p>
-                    <p>Directeur de la publication : <strong>Ludovic MESSY</strong></p>
-                    <p>Contact : l.messy@apsi-btp.fr</p>
-                </div>
-                
-                <div class="legal-section">
-                    <h2>Hébergement</h2>
-                    <p>Le site est hébergé par : <strong>OVH</strong></p>
-                    <p>Adresse : 2 rue Kellermann, 59100 Roubaix, France</p>
-                    <p>Site web : <strong><a href="https://www.ovh.com" target="_blank">https://www.ovh.com</a></strong></p>
-                    <p>Téléphone : <strong>1007</strong> (gratuit depuis un poste fixe en France)</p>
-                </div>
-            </div>
-            <div class="pb">
-                <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
+            <div class="legal-panel">
+                <article class="legal-row">
+                    <div class="legal-icon"><i data-lucide="file-text" aria-hidden="true"></i></div>
+                    <div class="legal-content">
+                        <h2>Éditeur du site</h2>
+                        <span class="small-line"></span>
+                        <p>Le présent site est édité par <strong>APSI BTP</strong>, société de type <strong>SARL</strong>, au capital de <strong>6 800,00 €</strong></p>
+                        <ul>
+                            <li>Siège social : Quartier Pierrefeu, chemin de Saint Jean, 84750 CASENEUVE</li>
+                            <li>RCS Avignon : <strong>2007 B 498</strong></li>
+                            <li>Numéro de TVA : <strong>FR 40 495 392 557</strong></li>
+                            <li>Directeur de la publication : <strong>Ludovic MESSY</strong></li>
+                            <li>Contact : <strong>test@apsi-btp.fr</strong></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="legal-row">
+                    <div class="legal-icon"><i data-lucide="server" aria-hidden="true"></i></div>
+                    <div class="legal-content">
+                        <h2>Hébergement</h2>
+                        <span class="small-line"></span>
+                        <p>Le site est hébergé par : <strong>OVH</strong></p>
+                        <ul>
+                            <li>Adresse : 2 rue Kellermann, 59100 Roubaix, France</li>
+                            <li>Site web : <a href="https://www.ovh.com" target="_blank" rel="noopener"><strong>https://www.ovh.com</strong></a></li>
+                            <li>Téléphone : <strong>1007</strong> (gratuit depuis un poste fixe en France)</li>
+                        </ul>
+                    </div>
+                </article>
             </div>
         </section>
     </main>
 
-</body>
-<link rel="stylesheet" href="/css/styleGlobalNotIndex.css">
-</html>
+    <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
-<script>
-window.addEventListener('load', function() {
-    var navElement = document.getElementById('nav');
-    var navHeight = navElement ? navElement.offsetHeight : 0;
-    var mainElement = document.getElementById('main');
-    if (mainElement) {
-        mainElement.style.marginTop = navHeight + 'px';
-        mainElement.classList.remove('hidden-until-loaded');
-        mainElement.classList.add('show-after-load');
-    }
-    if (navElement) {
-        navElement.classList.add('show-after-load');
-    }
-});
-</script>
+    <script>
+        window.addEventListener('load', function () {
+            if (window.lucide) window.lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

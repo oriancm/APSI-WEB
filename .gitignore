@@ -3,4 +3,9 @@ admin/.env
 secrets/
 .idea/
 .vscode/
+node_modules/
+dist/
+dev.log
+php-dev.log
+tmp-*.png
 

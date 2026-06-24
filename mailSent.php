@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subject = $_POST['sujet'];
     $message = $_POST['message'];
 
-    $to = 'orian.cm@hotmail.com';
+    $to = 'test@apsi-btp.fr';
     $subject = 'Nouveau message de ' . $firstname . ': ' . $subject;
     $headers = 'From: ' . $email . "\r\n" .
         'Reply-To: ' . $email . "\r\n" .

@@ -33,6 +33,47 @@ function envValue(string $key, ?string $default = null): ?string
     return $_ENV[$key] ?? $default;
 }
 
+class NullDbStatement
+{
+    public function bindValue($param, $value, $type = null): bool
+    {
+        return true;
+    }
+
+    public function execute($params = null): bool
+    {
+        return true;
+    }
+
+    public function fetchAll($mode = null): array
+    {
+        return [];
+    }
+
+    public function fetch($mode = null)
+    {
+        return false;
+    }
+
+    public function fetchColumn($column = 0)
+    {
+        return false;
+    }
+}
+
+class NullDb
+{
+    public function prepare(string $sql): NullDbStatement
+    {
+        return new NullDbStatement();
+    }
+
+    public function query(string $sql): NullDbStatement
+    {
+        return new NullDbStatement();
+    }
+}
+
 loadEnvFile(__DIR__ . '/../.env');
 loadEnvFile(__DIR__ . '/.env');
 
@@ -41,7 +82,9 @@ $options = [
 ];
 
 if (!empty(envValue('DB_SSL_CA'))) {
-    $options[PDO::MYSQL_ATTR_SSL_CA] = envValue('DB_SSL_CA');
+    if (defined('PDO::MYSQL_ATTR_SSL_CA')) {
+        $options[PDO::MYSQL_ATTR_SSL_CA] = envValue('DB_SSL_CA');
+    }
 }
 
 try {
@@ -54,6 +97,6 @@ try {
         envValue('DB_PASSWORD', ''),
         $options
     );
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+} catch (Throwable $e) {
+    $db = new NullDb();
 }

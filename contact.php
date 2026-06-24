@@ -24,9 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $form_error = "La configuration email du site est incomplète.";
     } else {
         $mail = new PHPMailer(true);
-
         try {
-            // Config SMTP
             $mail->isSMTP();
             $mail->Host = $smtpHost;
             $mail->SMTPAuth = true;
@@ -35,79 +33,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = $smtpPort;
             $mail->CharSet = 'UTF-8';
-
-            // Infos email
             $mail->setFrom($smtpFrom, $smtpFromName);
             $mail->addAddress($smtpTo);
             $mail->Subject = "Message de $name : $objet";
             $mail->Body = $message;
-
             $mail->send();
             header('Location: mailSent');
             exit;
-
         } catch (Exception $e) {
-            echo "Erreur : {$mail->ErrorInfo}";
+            $form_error = "Erreur lors de l'envoi du message.";
         }
     }
 }
+
+$activePage = 'contact';
 ?>
-
-
 <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <!-- SEO Meta Tags -->
     <title>Nous Contacter - APSI BTP | Contactez-nous pour vos projets BTP</title>
-    <meta name="description" content="Contactez APSI BTP pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX) en Provence-Alpes-Côte d'Azur.">
-    <meta name="keywords" content="contact APSI BTP, devis OPC, maîtrise d'œuvre, projet BTP, Provence, PACA">
+    <meta name="description" content="Contactez APSI BTP pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
+    <meta name="keywords" content="contact APSI BTP, devis OPC, maîtrise d'oeuvre, projet BTP, Provence, PACA">
     <meta name="author" content="APSI BTP">
     <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://apsi-btp.fr/contact">
     <meta property="og:title" content="Nous Contacter - APSI BTP">
-    <meta property="og:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX).">
+    <meta property="og:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
     <meta property="og:image" content="/img/APSI.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://apsi-btp.fr/contact">
-    <meta property="twitter:title" content="Nous Contacter - APSI BTP">
-    <meta property="twitter:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Œuvre d'Exécution (MOEX).">
-    <meta property="twitter:image" content="/img/APSI.png">
-    
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <style>
-      .hidden-until-loaded {
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-      .show-after-load {
-        opacity: 1 !important;
-      }
-    </style>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/site.js" defer></script>
 </head>
-<body>
-
-    <?php include "./nav.php"; ?>
-
-    <!-- Loading overlay -->
+<body class="contact-body">
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-container">
             <div class="loading-spinner"></div>
@@ -115,75 +79,89 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <main id="main" class="scrolled hidden-until-loaded">
+    <main id="main" class="contact-page hidden-until-loaded">
+        <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-    <section>
-        <div class="container">
-            <h1>Nous Contacter</h1>
-            <div class="contact">
-            <?php if (isset($form_error)) { echo '<div style="color:red; margin-bottom:10px;">' . htmlspecialchars($form_error) . '</div>'; } ?>
-            <form action="contact.php" method="POST" id="contactForm">
-                <label for="fname">NOM Prénom</label>
-                <input type="text" id="fname" name="name" placeholder="ex: VALERY Paul" value="<?php echo isset($name) ? htmlspecialchars($name) : '' ?>">
+        <section class="contact-hero site-narrow-container">
+            <div class="contact-copy">
+                <h1>Nous Contacter</h1>
+                <p>
+                    Une question, un projet ?<br>
+                    Notre équipe est à <strong>votre écoute</strong> pour<br>
+                    vous accompagner dans la <strong>réussite<br>
+                    de vos opérations.</strong>
+                </p>
+            </div>
+
+            <form action="/contact" method="POST" id="contactForm" class="contact-form">
+                <?php if (isset($form_error)) : ?>
+                    <p class="form-error"><?php echo htmlspecialchars($form_error); ?></p>
+                <?php endif; ?>
+
+                <label for="fname">Nom Prénom</label>
+                <div class="field">
+                    <i data-lucide="user-round" aria-hidden="true"></i>
+                    <input type="text" id="fname" name="name" placeholder="Ex : MARTY Paul" value="<?php echo isset($name) ? htmlspecialchars($name) : '' ?>">
+                </div>
 
                 <label for="sujet">Objet</label>
-                <input type="text" id="sujet" name="objet" placeholder="L'objet de votre message" value="<?php echo isset($objet) ? htmlspecialchars($objet) : '' ?>">
+                <div class="field">
+                    <i data-lucide="clipboard-list" aria-hidden="true"></i>
+                    <input type="text" id="sujet" name="objet" placeholder="Ex : Demande d'information" value="<?php echo isset($objet) ? htmlspecialchars($objet) : '' ?>">
+                </div>
 
                 <label for="subject">Message</label>
-                <textarea id="subject" name="message" placeholder="Votre message" style="height:140px"><?php echo isset($message) ? htmlspecialchars($message) : '' ?></textarea>
+                <textarea id="subject" name="message" placeholder="Votre message..."><?php echo isset($message) ? htmlspecialchars($message) : '' ?></textarea>
 
-                <div class="form-footer">
-                    <div class="email-contact">l.messy@apsi-btp.fr</div>
-                    <input type="submit" value="Envoyer" id="submitBtn">
+                <div class="contact-form-footer">
+                    <a href="mailto:test@apsi-btp.fr" class="mail-link">
+                        <i data-lucide="mail" aria-hidden="true"></i>
+                        test@apsi-btp.fr
+                    </a>
+                    <button type="submit" id="submitBtn">
+                        Envoyer
+                        <i data-lucide="send" aria-hidden="true"></i>
+                    </button>
                 </div>
             </form>
-            </div>
-            
-        </div>
-        <div class="pb">
-            <p class="slogan">APSI BTP, vos projets en toute sérénité…</p>
-        </div>
-    </section>
-
+        </section>
     </main>
 
+    <?php include __DIR__ . '/partials/siteFooter.php'; ?>
+
     <script>
-    window.addEventListener('load', function() {
-        var navElement = document.getElementById('nav');
-        var navHeight = navElement ? navElement.offsetHeight : 0;
-        var mainElement = document.getElementById('main');
-        if (mainElement) {
-            mainElement.style.marginTop = navHeight + 'px';
-            mainElement.classList.remove('hidden-until-loaded');
-            mainElement.classList.add('show-after-load');
-        }
-        if (navElement) {
-            navElement.classList.add('show-after-load');
-        }
-    });
+        window.addEventListener('load', function () {
+            var navElement = document.getElementById('nav');
+            var mainElement = document.getElementById('main');
+            if (mainElement) {
+                mainElement.classList.remove('hidden-until-loaded');
+                mainElement.classList.add('show-after-load');
+            }
+            if (navElement) {
+                navElement.classList.remove('hidden-until-loaded');
+                navElement.classList.add('show-after-load');
+            }
+            if (window.lucide) window.lucide.createIcons();
+        });
 
-    // Gestion du loading
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        // Afficher le loading
-        document.getElementById('loadingOverlay').style.display = 'flex';
-        // Désactiver le bouton pour éviter les double-clics
+        const contactForm = document.getElementById('contactForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
         const submitBtn = document.getElementById('submitBtn');
-        submitBtn.disabled = true;
-        submitBtn.value = 'Envoi...';
-        // Le formulaire continue son envoi normal
-        // Le loading sera caché automatiquement lors de la redirection
-    });
 
-    // Cacher le loading si on revient sur la page (bouton retour du navigateur)
-    window.addEventListener('pageshow', function(event) {
-        if (event.persisted) {
-            document.getElementById('loadingOverlay').style.display = 'none';
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = false;
-            submitBtn.value = 'Envoyer';
-        }
-    });
+        contactForm.addEventListener('submit', function () {
+            loadingOverlay.style.display = 'flex';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Envoi...';
+        });
+
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                loadingOverlay.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Envoyer <i data-lucide="send" aria-hidden="true"></i>';
+                if (window.lucide) window.lucide.createIcons();
+            }
+        });
     </script>
-    <link rel="stylesheet" href="/css/styleGlobalNotIndex.css">
 </body>
 </html>
