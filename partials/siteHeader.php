@@ -9,7 +9,7 @@ $navItems = [
 ?>
 <header class="site-header" id="site-header">
     <a class="site-header__logo" href="/" aria-label="APSI BTP - Accueil">
-        <img src="/img/apsi-logo-maquette.png" alt="APSI BTP">
+        <img src="/img/logo-nav.png" alt="APSI BTP">
     </a>
 
     <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav">

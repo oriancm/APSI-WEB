@@ -280,6 +280,7 @@ $activePage = 'references';
                             <div class="footer-col footer-col--periode">
                                 <i data-lucide="calendar" class="footer-icon" aria-hidden="true"></i>
                                 <div class="footer-text-group">
+                                    <span class="footer-sub-label">Période</span>
                                     <?php if (!empty($ref['anneeD'])): ?>
                                         <span class="footer-val"><?= htmlspecialchars($ref['anneeD']) ?><?= !empty($ref['anneeF']) ? ' - ' . htmlspecialchars($ref['anneeF']) : '' ?></span>
                                         <?php if (!empty($ref['duree_travaux_mois'])): ?>
@@ -295,19 +296,20 @@ $activePage = 'references';
                             <div class="footer-col footer-col--statut">
                                 <i data-lucide="check-circle" class="footer-icon" aria-hidden="true"></i>
                                 <div class="footer-text-group">
+                                    <span class="footer-sub-label">Statut</span>
                                     <span class="footer-val"><?= !empty($ref['statut']) ? htmlspecialchars(statutLabel($ref['statut'])) : '—' ?></span>
                                 </div>
                             </div>
 
                             <!-- Montant Column -->
                             <div class="footer-col footer-col--montant">
-                                <div class="euro-badge">€</div>
+                                <i data-lucide="euro" class="footer-icon" aria-hidden="true"></i>
                                 <div class="footer-text-group">
                                     <span class="footer-sub-label">Montant des travaux</span>
                                     <?php if (!empty($ref['montant'])): ?>
-                                        <span class="footer-val-large"><?= htmlspecialchars(formatNumber($ref['montant'])) ?> € HT</span>
+                                        <span class="footer-val"><?= htmlspecialchars(formatNumber($ref['montant'])) ?> € HT</span>
                                     <?php else: ?>
-                                        <span class="footer-val-large">—</span>
+                                        <span class="footer-val">—</span>
                                     <?php endif; ?>
                                 </div>
                             </div>

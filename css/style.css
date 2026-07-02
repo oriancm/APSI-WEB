@@ -1,58 +1,92 @@
+/* ==========================================================================
+   HOMEPAGE CUSTOM PREMIUM STYLES (VIEWPORT HERO WITH SCROLLABLE FOOTER)
+   ========================================================================== */
+
 body.home-page {
-    --apsi-footer-height: 142px;
-    height: 100svh;
-    overflow: hidden;
+    --apsi-footer-height: 142px; /* Restored standard footer height */
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
     background: #fff;
 }
 
 html:has(body.home-page) {
-    height: 100svh;
-    min-height: 100svh;
-    overflow: hidden;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
+/* Homepage Header Overlay */
+body.home-page .site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    z-index: 100;
+}
+
+/* Main Shell Container (Hero Area constrained to around 6/7 of the screen height) */
 .home-shell {
-    --home-shell-height: calc(100svh - var(--apsi-footer-height));
-    --home-copy-scale: min(0.92vw, 1.08svh);
+    --home-shell-height: 83svh; /* 6/7 of the page height (approx 85%) */
+    --home-copy-scale: min(1.02vw, 1.22svh);
     --home-card-height: 206px;
-    --home-card-half: calc(var(--home-card-height) / 2);
-    --home-cards-footer-gap: clamp(18px, 4.2svh, 56px);
-    --home-cards-edge-offset: clamp(42px, 7.4svh, 86px);
-    --home-cards-y: min(calc(var(--apsi-crane-height) + var(--home-cards-edge-offset)), calc(var(--home-shell-height) - var(--home-card-half) - var(--home-cards-footer-gap)));
-    --apsi-title-size: clamp(28px, calc(var(--home-copy-scale) * 3.05), 44px);
-    --apsi-title-related-text: clamp(14px, calc(var(--home-copy-scale) * 1.18), 24px);
-    --apsi-title-related-button: clamp(13px, calc(var(--home-copy-scale) * 0.98), 15px);
-    --apsi-title-related-gap: clamp(6px, calc(var(--home-copy-scale) * 1.1), 34px);
-    --apsi-page-top: clamp(10px, calc(var(--home-copy-scale) * 2.2), 54px);
-    --apsi-crane-height: clamp(380px, min(calc(var(--home-shell-height) - var(--home-card-half) - var(--home-cards-footer-gap)), calc(100svh - var(--apsi-footer-height) - 118px)), 760px);
+    
+    /* Elegant Spacious Slogan Typography to guarantee 3 lines without wrapping */
+    --apsi-title-size: 38px; /* Increased fixed size */
+    --apsi-title-related-text: 24px; /* Fixed to maximum size */
+    --apsi-title-related-button: 15px; /* Fixed to maximum size */
+    --apsi-title-related-gap: clamp(16px, 2.2vh, 32px); /* Beautiful spacing */
+    --apsi-page-top: 0px;
+    
     position: relative;
     height: var(--home-shell-height);
     min-height: 0;
     padding-bottom: 0;
-    overflow: hidden;
+    overflow: visible; /* Allows the bottom half of the overlapping cards to protrude below the fold */
     background-color: #fff;
     background-image:
-        linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.02) calc(var(--apsi-crane-height) - 8px), rgba(255,255,255,0.12) var(--apsi-crane-height), rgba(255,255,255,0.94) calc(var(--apsi-crane-height) + 112px), #fff 100%),
-        linear-gradient(90deg, #fff 0, #fff var(--apsi-bg-fade-start), rgba(255,255,255,0.42) var(--apsi-bg-fade-mid), rgba(255,255,255,0) var(--apsi-bg-fade-end), rgba(255,255,255,0) 100%),
+        /* Correct Diagonal Sense Gradient (125deg): From Top-Left to Bottom-Right, with sharp and highly visible transition */
+        linear-gradient(125deg, #ffffff 0%, #ffffff 35%, rgba(255,255,255,0.9) 42%, rgba(255,255,255,0) 52%),
         url("/img/home-building-crane-wide.png");
     background-repeat: no-repeat;
-    background-size: 100% 100%, 100% 100%, var(--apsi-crane-size);
-    background-position: center top, center top, right var(--apsi-scene-side) top;
+    background-size: 100% 100%, cover; /* Highly zoomed cover background */
+    background-position: center top, right center;
 }
 
+/* Adjust hero height on shorter or highly zoomed displays to guarantee cards are 100% visible on load */
+@media (max-height: 700px) {
+    .home-shell {
+        --home-shell-height: 78svh;
+    }
+}
+@media (max-height: 600px) {
+    .home-shell {
+        --home-shell-height: 74svh;
+    }
+}
+
+/* Slogan Container - Perfectly Vertically Centered between Header & Top of Overlapping Cards */
 .home-hero {
+    position: absolute;
+    top: var(--apsi-header-height);
+    bottom: calc(var(--home-card-height) / 2 + 24px); /* Bounding box excludes cards' top halves + safety margin */
+    left: 50%;
+    transform: translateX(-50%);
     width: var(--apsi-page-width);
-    margin: 0 auto;
-    min-height: calc(var(--apsi-crane-height) - var(--apsi-header-height));
     padding-inline: var(--apsi-page-pad);
     display: flex;
-    align-items: flex-start;
+    align-items: center; /* Vertical alignment */
+    justify-content: flex-start;
+    margin: 0;
+    min-height: 0;
 }
 
 .home-hero__copy {
-    width: var(--apsi-title-measure);
+    width: min(800px, 100%); /* Generous width to prevent any premature line wrapping of the 3-line slogan */
     margin-left: clamp(28px, 2vw, 40px);
-    padding-top: var(--apsi-page-top);
+    padding-top: 0;
 }
 
 .home-hero__copy h1 {
@@ -62,26 +96,27 @@ html:has(body.home-page) {
     font-family: "Montserrat", "Inter", Arial, sans-serif;
     font-size: var(--apsi-title-size);
     font-weight: 700;
-    line-height: var(--apsi-title-leading);
+    line-height: 1.38; /* Increased line-height for elegant letter/line height */
     letter-spacing: 0.012em;
 }
 
 .home-hero__copy p {
-    margin: clamp(6px, calc(var(--home-copy-scale) * 0.55), 13px) 0 var(--apsi-title-related-gap);
+    margin: clamp(14px, 2svh, 28px) 0 var(--apsi-title-related-gap); /* Spacious vertical margins */
     color: var(--apsi-navy);
     font-family: Georgia, "Times New Roman", serif;
     font-size: var(--apsi-title-related-text);
     line-height: 1.22;
 }
 
+/* Premium large call-to-action button with slide hover effect */
 .home-reference-button {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    gap: clamp(10px, calc(var(--home-copy-scale) * 1.15), 24px);
-    min-width: clamp(174px, calc(var(--home-copy-scale) * 17.5), 286px);
-    min-height: clamp(36px, calc(var(--home-copy-scale) * 3.35), 56px);
-    padding: 0 clamp(14px, calc(var(--home-copy-scale) * 1.35), 24px) 0 clamp(16px, calc(var(--home-copy-scale) * 1.55), 28px);
+    gap: 22px;
+    min-width: clamp(220px, 18vw, 320px);
+    min-height: clamp(48px, 5.5vh, 64px);
+    padding: 0 28px;
     border-radius: 4px;
     background: var(--apsi-blue);
     color: #fff;
@@ -89,34 +124,59 @@ html:has(body.home-page) {
     font-size: var(--apsi-title-related-button);
     font-weight: 500;
     box-shadow: 0 14px 28px rgba(0, 94, 200, 0.22);
-    margin-top: clamp(4px, 0.8vw, 14px);
+    margin-top: 10px;
+    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-reference-button:hover {
+    background-color: #0054b8;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 36px rgba(0, 94, 200, 0.32);
 }
 
 .home-reference-button svg {
-    width: clamp(13px, calc(var(--home-copy-scale) * 1.35), 22px);
-    height: clamp(13px, calc(var(--home-copy-scale) * 1.35), 22px);
+    width: 18px;
+    height: 18px;
     flex: 0 0 auto;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.home-reference-button:hover svg {
+    transform: translateX(4px);
+}
+
+/* Service Cards Container - Half-overlapping the bottom fold of the image */
 .home-service-cards {
     position: absolute;
     left: 50%;
-    top: var(--home-cards-y);
+    bottom: 0; /* Anchored directly to the bottom of the home shell */
+    transform: translate(-50%, 50%); /* Shifts the container down by exactly half its height to create the unbreakable overlap */
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(18px, 2.4vw, 30px);
-    width: min(1080px, calc(var(--apsi-page-width) - var(--apsi-page-pad) - var(--apsi-page-pad)));
+    gap: clamp(18px, 2.4vw, 36px);
+    width: min(1080px, calc(100vw - var(--apsi-page-pad) * 2)); /* Max width matching original desktop grid width */
     margin: 0;
-    transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
+/* Individual Service Cards - Premium and Spacious */
 .home-service-cards article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-height: var(--home-card-height);
-    padding: 28px 30px 24px;
+    padding: clamp(24px, 2.8svh, 34px) clamp(20px, 2vw, 32px);
     border-radius: var(--apsi-radius);
-    background: rgba(255, 255, 255, 0.96);
+    background: #ffffff;
     box-shadow: var(--apsi-shadow);
     text-align: center;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-service-cards article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(6, 23, 51, 0.16);
 }
 
 .home-service-cards svg {
@@ -154,70 +214,28 @@ html:has(body.home-page) {
     line-height: 1.62;
 }
 
+/* Scrollable Footer on Homepage: starts immediately below the fold without any gaps */
 body.home-page .site-footer {
-    height: var(--apsi-footer-height);
-    margin: 0 auto;
-    overflow: hidden;
+    display: block;
+    width: 100% !important; /* Use the whole width even if the screen is really large */
+    max-width: none !important;
+    margin: clamp(140px, 16svh, 180px) auto 0 !important; /* White margin-top creates scrollable white space under image */
+    padding-top: 24px !important; /* Reset normal footer padding */
+    background: var(--apsi-footer-blue);
+    position: relative;
+    z-index: 1;
 }
 
 body.home-page .site-footer__inner {
-    min-height: 100%;
-    padding-top: 14px;
-    padding-bottom: 14px;
+    width: var(--apsi-page-width) !important; /* Keep content centered and aligned with the page container */
+    max-width: var(--apsi-container) !important;
+    margin: 0 auto;
+    padding-inline: var(--apsi-page-pad);
 }
 
-body.home-page .site-footer__drawing {
-    max-height: 96px;
-}
-
-@media (min-width: 1700px) {
-    .home-shell {
-        background-size: 100% 100%, 100% 100%, var(--apsi-crane-size);
-    }
-}
-
-@media (max-width: 1180px) {
-    .home-shell {
-        background-size: 100% 100%, 100% 100%, var(--apsi-crane-size);
-        background-position: center top, center top, right var(--apsi-scene-side) top;
-    }
-
-    .home-hero {
-        min-height: 380px;
-    }
-
-    .home-service-cards {
-        width: min(960px, calc(var(--apsi-page-width) - var(--apsi-page-pad) - var(--apsi-page-pad)));
-    }
-}
-
-@media (max-height: 900px) and (min-width: 981px) {
-    .home-shell {
-        --home-copy-scale: min(0.86vw, 0.98svh);
-        --home-cards-footer-gap: clamp(18px, 3.6svh, 42px);
-        --apsi-page-top: clamp(6px, calc(var(--home-copy-scale) * 1.55), 24px);
-        --apsi-title-related-gap: clamp(12px, calc(var(--home-copy-scale) * 1.1), 24px);
-        --home-cards-edge-offset: clamp(44px, 7svh, 72px);
-        --apsi-crane-height: clamp(330px, min(calc(var(--home-shell-height) - var(--home-card-half) - var(--home-cards-footer-gap)), calc(100svh - var(--apsi-footer-height) - 178px)), 590px);
-    }
-
-    .home-hero {
-        min-height: calc(var(--apsi-crane-height) - var(--apsi-header-height));
-    }
-
-}
-
-@media (max-height: 780px) and (min-width: 981px) {
-    .home-shell {
-        --home-cards-footer-gap: clamp(20px, 3.8svh, 42px);
-        --home-cards-edge-offset: clamp(38px, 6.4svh, 58px);
-        --apsi-crane-height: clamp(336px, min(calc(var(--home-shell-height) - var(--home-card-half) - var(--home-cards-footer-gap)), calc(100svh - var(--apsi-footer-height) - 202px)), 560px);
-        background-image:
-            linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.02) calc(var(--apsi-crane-height) - 18px), rgba(255,255,255,0.58) var(--apsi-crane-height), rgba(255,255,255,0.98) calc(var(--apsi-crane-height) + 70px), #fff 100%),
-            linear-gradient(90deg, #fff 0, #fff var(--apsi-bg-fade-start), rgba(255,255,255,0.42) var(--apsi-bg-fade-mid), rgba(255,255,255,0) var(--apsi-bg-fade-end), rgba(255,255,255,0) 100%),
-            url("/img/home-building-crane-wide.png");
-    }
-}
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE & TABLET STACKING)
+   ========================================================================== */
 
 @media (max-width: 980px) {
     html:has(body.home-page) {
@@ -230,12 +248,28 @@ body.home-page .site-footer__drawing {
         overflow: auto;
     }
 
+    body.home-page .site-header {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        transform: none;
+        background: #fff; /* Solid white background for mobile header readability */
+    }
+
     body.home-page .site-footer {
+        display: block;
         height: auto;
+        width: 100% !important;
+        max-width: none !important;
         overflow: visible;
+        margin-top: 48px !important;
+        padding-top: 34px; /* Reset luxurious desktop spacing to normal mobile padding */
     }
 
     body.home-page .site-footer__inner {
+        width: 100% !important;
+        max-width: none !important;
         padding-top: 34px;
         padding-bottom: 34px;
     }
@@ -246,60 +280,68 @@ body.home-page .site-footer__drawing {
 
     .home-shell {
         --home-copy-scale: min(4.2vw, 2.9svh);
-        --apsi-title-size: clamp(22px, calc(var(--home-copy-scale) * 1.28), 38px);
-        --apsi-title-related-text: clamp(13px, calc(var(--home-copy-scale) * 0.58), 18px);
-        --apsi-title-related-button: clamp(9px, calc(var(--home-copy-scale) * 0.44), 13px);
-        --apsi-title-related-gap: 8px;
+        --apsi-title-size: clamp(16px, 4.5vw, 22px); /* Moderately increased slogan size */
+        --apsi-title-related-text: clamp(13px, 3.5vw, 15px); /* Preserved author font size exactly */
+        --apsi-title-related-button: clamp(8px, 2.1vw, 9.5px); /* Decreased button text size further */
+        --apsi-title-related-gap: 14px;
+        
         height: auto;
-        min-height: 380px;
-        padding-bottom: 34px;
-        background-image:
-            linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.88) 31%, rgba(255,255,255,0.26) 54%, rgba(255,255,255,0.02) 100%),
-            linear-gradient(180deg, #fff 0, #fff 52px, rgba(255,255,255,0) 53px, rgba(255,255,255,0.03) 68%, rgba(255,255,255,0.68) 100%),
+        min-height: 100vh;
+        padding-bottom: 48px;
+        background: #fff; /* Solid white background on mobile */
+    }
+
+    .home-hero {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        padding-inline: 16px; /* Align margin with logo and burger menu spacing */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin-top: 0;
+        margin-bottom: 36px;
+        min-height: clamp(260px, 35vh, 320px); /* Decreased min-height */
+        box-sizing: border-box;
+        /* Beautiful diagonal crane background like desktop with responsive clamp stops for a perfectly fluid transition on all mobile screen widths */
+        background-image: 
+            linear-gradient(125deg, #ffffff 0%, #ffffff clamp(170px, 35%, 230px), rgba(255, 255, 255, 0.75) clamp(260px, 58%, 390px), rgba(255, 255, 255, 0) clamp(350px, 80%, 550px)),
             url("/img/home-building-crane-wide.png");
-        background-size: 100% 100%, 100% 100%, auto 240px;
-        background-position: center top, center top, right 0 top 52px;
         background-repeat: no-repeat;
-        background-color: #fff;
-    }
-
-    .home-hero,
-    .home-service-cards {
-        width: var(--apsi-page-width);
-    }
-
-    .home-hero {
-        padding-inline: 0;
-    }
-
-    .home-hero {
-        min-height: 280px;
-        align-items: center;
-        padding-top: 0;
+        background-size: 100% 100%, auto 90%;
+        background-position: center top, clamp(100%, calc(100% + (500px - 100vw) * 0.25), 120%) center;
+        padding-top: clamp(30px, 6vw, 44px); /* Decreased top padding */
+        padding-bottom: clamp(34px, 7vw, 48px); /* Decreased bottom padding */
     }
 
     .home-hero__copy {
+        width: 100%;
         margin-left: 0;
         padding-top: 0;
     }
 
     .home-hero__copy h1 {
-        max-width: min(330px, 78vw);
-        line-height: 1.12;
+        max-width: 100%;
+        font-size: var(--apsi-title-size);
+        line-height: 1.15;
     }
 
     .home-hero__copy p {
-        margin-top: 6px;
-        margin-bottom: 16px;
+        margin-top: 8px;
+        margin-bottom: 24px;
     }
 
     .home-reference-button {
-        min-width: 130px;
-        min-height: 26px;
+        display: inline-flex;
+        min-width: 125px; /* Decreased button width further */
+        min-height: 28px; /* Decreased button height further */
         margin-top: 0;
-        gap: 10px;
-        padding-inline: 10px;
-        box-shadow: 0 10px 20px rgba(0, 94, 200, 0.2);
+        padding-inline: 10px; /* Decreased padding further */
     }
 
     .home-reference-button svg {
@@ -310,13 +352,24 @@ body.home-page .site-footer__drawing {
     .home-service-cards {
         position: relative;
         left: auto;
-        top: auto;
+        bottom: auto;
         transform: none;
+        width: calc(100% - 40px);
         margin: 0 auto;
         grid-template-columns: 1fr;
+        gap: 16px;
     }
 
     .home-service-cards article {
-        min-height: 0;
+        min-height: auto;
+        padding: 24px 20px;
+    }
+}
+
+/* Dezoom crane image on small mobile screens */
+@media (max-width: 600px) {
+    .home-hero {
+        background-size: 100% 100%, auto 78% !important;
+        background-position: center top, right center !important;
     }
 }

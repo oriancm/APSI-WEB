@@ -285,3 +285,10 @@ a {
         height: 64px;
     }
 }
+
+@media (max-width: 980px) {
+    .legal-page {
+        background-image: none !important;
+        background-color: var(--apsi-bg, #f7fbff) !important;
+    }
+}

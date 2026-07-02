@@ -1,0 +1,305 @@
+body.home-page {
+    --apsi-footer-height: 142px;
+    height: 100svh;
+    overflow: hidden;
+    background: #fff;
+}
+
+html:has(body.home-page) {
+    height: 100svh;
+    min-height: 100svh;
+    overflow: hidden;
+}
+
+.home-shell {
+    --home-shell-height: calc(100svh - var(--apsi-footer-height));
+    --home-copy-scale: min(1.02vw, 1.22svh);
+    --home-card-height: 206px;
+    --home-card-half: calc(var(--home-card-height) / 2);
+    --home-cards-footer-gap: clamp(12px, 5svh - 15px, 48px);
+    --home-cards-edge-offset: clamp(42px, 7.4svh, 86px);
+    --apsi-crane-height: clamp(200px, calc(var(--home-shell-height) - var(--home-card-half) - var(--home-cards-footer-gap)), 760px);
+    --apsi-crane-size: auto var(--apsi-crane-height);
+    --home-cards-y: var(--apsi-crane-height);
+    --apsi-title-size: clamp(31px, calc(var(--home-copy-scale) * 3.4), 50px);
+    --apsi-title-related-text: clamp(18px, calc(var(--home-copy-scale) * 1.5), 30px);
+    --apsi-title-related-button: clamp(13px, calc(var(--home-copy-scale) * 0.98), 15px);
+    --apsi-title-related-gap: clamp(12px, calc(var(--home-copy-scale) * 1.4), 38px);
+    --apsi-page-top: clamp(10px, calc(var(--home-copy-scale) * 2.2), 54px);
+    position: relative;
+    height: var(--home-shell-height);
+    min-height: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+    background-color: #fff;
+    background-image:
+        linear-gradient(125deg, #ffffff 0%, #ffffff 32%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0) 55%),
+        url("/img/home-building-crane-wide.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%, var(--apsi-crane-size);
+    background-position: center top, right var(--apsi-scene-side) top;
+}
+
+.home-hero {
+    width: var(--apsi-page-width);
+    margin: 0 auto;
+    min-height: calc(var(--apsi-crane-height) - var(--apsi-header-height));
+    padding-inline: var(--apsi-page-pad);
+    display: flex;
+    align-items: flex-start;
+}
+
+.home-hero__copy {
+    width: var(--apsi-title-measure);
+    margin-left: clamp(28px, 2vw, 40px);
+    padding-top: var(--apsi-page-top);
+}
+
+.home-hero__copy h1 {
+    display: inline-block;
+    margin: 0;
+    color: var(--apsi-navy);
+    font-family: "Montserrat", "Inter", Arial, sans-serif;
+    font-size: var(--apsi-title-size);
+    font-weight: 700;
+    line-height: var(--apsi-title-leading);
+    letter-spacing: 0.012em;
+}
+
+.home-hero__copy p {
+    margin: clamp(6px, calc(var(--home-copy-scale) * 0.55), 13px) 0 var(--apsi-title-related-gap);
+    color: var(--apsi-navy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: var(--apsi-title-related-text);
+    line-height: 1.22;
+}
+
+.home-reference-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(10px, calc(var(--home-copy-scale) * 1.15), 24px);
+    min-width: clamp(174px, calc(var(--home-copy-scale) * 17.5), 286px);
+    min-height: clamp(36px, calc(var(--home-copy-scale) * 3.35), 56px);
+    padding: 0 clamp(14px, calc(var(--home-copy-scale) * 1.35), 24px) 0 clamp(16px, calc(var(--home-copy-scale) * 1.55), 28px);
+    border-radius: 4px;
+    background: var(--apsi-blue);
+    color: #fff;
+    font-family: "Montserrat", "Inter", Arial, sans-serif;
+    font-size: var(--apsi-title-related-button);
+    font-weight: 500;
+    box-shadow: 0 14px 28px rgba(0, 94, 200, 0.22);
+    margin-top: clamp(4px, 0.8vw, 14px);
+    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-reference-button:hover {
+    background-color: #0054b8;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 36px rgba(0, 94, 200, 0.32);
+}
+
+.home-reference-button svg {
+    width: clamp(13px, calc(var(--home-copy-scale) * 1.35), 22px);
+    height: clamp(13px, calc(var(--home-copy-scale) * 1.35), 22px);
+    flex: 0 0 auto;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-reference-button:hover svg {
+    transform: translateX(4px);
+}
+
+.home-service-cards {
+    position: absolute;
+    left: 50%;
+    top: var(--home-cards-y);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(18px, 2.4vw, 30px);
+    width: min(1080px, calc(var(--apsi-page-width) - var(--apsi-page-pad) - var(--apsi-page-pad)));
+    margin: 0;
+    transform: translate(-50%, -50%);
+}
+
+.home-service-cards article {
+    min-height: var(--home-card-height);
+    padding: 28px 30px 24px;
+    border-radius: var(--apsi-radius);
+    background: #ffffff;
+    box-shadow: var(--apsi-shadow);
+    text-align: center;
+}
+
+.home-service-cards svg {
+    width: 46px;
+    height: 46px;
+    color: var(--apsi-blue);
+    stroke-width: 1.9;
+}
+
+.home-service-cards h2 {
+    margin: 14px 0 0;
+    color: var(--apsi-navy);
+    font-family: "Montserrat", "Inter", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.28;
+    text-transform: uppercase;
+}
+
+.home-service-cards h2::after {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 3px;
+    margin: 11px auto;
+    border-radius: 999px;
+    background: var(--apsi-blue);
+}
+
+.home-service-cards p {
+    margin: 0 auto;
+    max-width: 280px;
+    color: var(--apsi-ink);
+    font-size: 14px;
+    line-height: 1.62;
+}
+
+body.home-page .site-footer {
+    height: var(--apsi-footer-height);
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+body.home-page .site-footer__inner {
+    min-height: 100%;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+body.home-page .site-footer__drawing {
+    max-height: 96px;
+}
+
+@media (min-width: 1700px) {
+    .home-shell {
+        background-size: 100% 100%, var(--apsi-crane-size);
+    }
+}
+
+@media (max-width: 1180px) {
+    .home-shell {
+        background-size: 100% 100%, var(--apsi-crane-size);
+        background-position: center top, right var(--apsi-scene-side) top;
+    }
+
+    .home-hero {
+        min-height: 380px;
+    }
+
+    .home-service-cards {
+        width: min(960px, calc(var(--apsi-page-width) - var(--apsi-page-pad) - var(--apsi-page-pad)));
+    }
+}
+
+@media (max-width: 768px) {
+    html:has(body.home-page) {
+        height: auto;
+        overflow: auto;
+    }
+
+    body.home-page {
+        height: auto;
+        overflow: auto;
+    }
+
+    body.home-page .site-footer {
+        height: auto;
+        overflow: visible;
+    }
+
+    body.home-page .site-footer__inner {
+        padding-top: 34px;
+        padding-bottom: 34px;
+    }
+
+    body.home-page .site-footer__drawing {
+        max-height: 122px;
+    }
+
+    .home-shell {
+        --home-copy-scale: min(4.2vw, 2.9svh);
+        --apsi-title-size: clamp(22px, calc(var(--home-copy-scale) * 1.28), 38px);
+        --apsi-title-related-text: clamp(13px, calc(var(--home-copy-scale) * 0.58), 18px);
+        --apsi-title-related-button: clamp(9px, calc(var(--home-copy-scale) * 0.44), 13px);
+        --apsi-title-related-gap: 8px;
+        height: auto;
+        min-height: 380px;
+        padding-bottom: 34px;
+        background-image:
+            linear-gradient(125deg, #ffffff 0%, #ffffff 42%, rgba(255,255,255,0.3) 55%, rgba(255,255,255,0) 68%),
+            url("/img/home-building-crane-wide.png");
+        background-size: 100% 100%, auto 240px;
+        background-position: center top, right 0 top 52px;
+        background-repeat: no-repeat;
+        background-color: #fff;
+    }
+
+    .home-hero,
+    .home-service-cards {
+        width: var(--apsi-page-width);
+    }
+
+    .home-hero {
+        padding-inline: 0;
+    }
+
+    .home-hero {
+        min-height: 280px;
+        align-items: center;
+        padding-top: 0;
+    }
+
+    .home-hero__copy {
+        margin-left: 0;
+        padding-top: 0;
+    }
+
+    .home-hero__copy h1 {
+        max-width: min(330px, 78vw);
+        line-height: 1.12;
+    }
+
+    .home-hero__copy p {
+        margin-top: 6px;
+        margin-bottom: 16px;
+    }
+
+    .home-reference-button {
+        min-width: 130px;
+        min-height: 26px;
+        margin-top: 0;
+        gap: 10px;
+        padding-inline: 10px;
+        box-shadow: 0 10px 20px rgba(0, 94, 200, 0.2);
+    }
+
+    .home-reference-button svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .home-service-cards {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: 0 auto;
+        grid-template-columns: 1fr;
+    }
+
+    .home-service-cards article {
+        min-height: 0;
+    }
+}

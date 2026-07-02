@@ -93,22 +93,27 @@ $activePage = 'references';
         </section>
 
         <section class="references-layout site-container">
-            <button class="filter-toggle" type="button" aria-expanded="false" aria-controls="references-filter">
-                <i data-lucide="filter" aria-hidden="true"></i>
-                Filtrer par domaine
-            </button>
+            <div class="references-filter-wrap">
+                <button class="filter-toggle" type="button" aria-expanded="false" aria-controls="references-filter">
+                    <span class="btn-content">
+                        <i data-lucide="filter" aria-hidden="true"></i>
+                        Filtrer par domaine
+                    </span>
+                    <i data-lucide="chevron-down" class="toggle-chevron" aria-hidden="true"></i>
+                </button>
 
-            <aside class="references-filter" id="references-filter" aria-label="Filtrer les références">
-                <div class="filter-title">
-                    <h2>Filtrer par domaine</h2>
-                    <i data-lucide="filter" aria-hidden="true"></i>
-                </div>
-                <ul>
-                    <?php foreach ($domains as $value => $label): ?>
-                        <li><button class="<?= $value === 'all' ? 'active' : '' ?>" type="button" data-filter="<?= htmlspecialchars($value) ?>"><?= htmlspecialchars($label) ?></button></li>
-                    <?php endforeach; ?>
-                </ul>
-            </aside>
+                <aside class="references-filter" id="references-filter" aria-label="Filtrer les références">
+                    <div class="filter-title">
+                        <h2>Filtrer par domaine</h2>
+                        <i data-lucide="filter" aria-hidden="true"></i>
+                    </div>
+                    <ul>
+                        <?php foreach ($domains as $value => $label): ?>
+                            <li><button class="<?= $value === 'all' ? 'active' : '' ?>" type="button" data-filter="<?= htmlspecialchars($value) ?>"><?= htmlspecialchars($label) ?></button></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </aside>
+            </div>
 
             <div class="references-grid" id="references-grid">
                 <?php foreach ($refTab as $ref): ?>
@@ -156,9 +161,20 @@ $activePage = 'references';
             });
         });
 
-        filterToggle?.addEventListener('click', () => {
+        filterToggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
             const isOpen = filterPanel.classList.toggle('is-open');
             filterToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (filterPanel?.classList.contains('is-open')) {
+                if (!filterPanel.contains(e.target) && !filterToggle?.contains(e.target)) {
+                    filterPanel.classList.remove('is-open');
+                    filterToggle?.setAttribute('aria-expanded', 'false');
+                }
+            }
         });
     });
     </script>

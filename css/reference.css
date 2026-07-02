@@ -219,7 +219,7 @@ body.reference-page {
     right: 0;
     z-index: 5;
     padding: clamp(32px, 5svh, 60px) clamp(20px, 3vw, 36px) clamp(20px, 3svh, 36px) clamp(20px, 3vw, 36px);
-    background: linear-gradient(180deg, transparent 0%, rgba(6, 23, 51, 0.45) 40%, rgba(6, 23, 51, 0.95) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.7) 100%);
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -382,7 +382,7 @@ body.reference-page {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
     padding-right: 8px;
 }
 
@@ -406,15 +406,15 @@ body.reference-page {
 .footer-text-group {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
 }
 
 .footer-val {
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 700;
     color: #061733;
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
 .footer-sub {
@@ -430,34 +430,16 @@ body.reference-page {
     font-weight: 600;
     color: #8c9eb0;
     line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 .footer-val-large {
     font-family: "Montserrat", sans-serif;
-    font-size: 14.5px;
-    font-weight: 800;
-    color: var(--apsi-blue);
-    line-height: 1.3;
-}
-
-/* Euro Blue circular badge */
-.euro-badge {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: var(--apsi-blue);
-    color: #ffffff;
-    display: grid;
-    place-items: center;
-    font-family: "Montserrat", sans-serif;
     font-size: 13.5px;
-    font-weight: 800;
-    flex-shrink: 0;
-}
-
-.footer-col--montant {
-    flex-direction: row !important;
-    align-items: center !important;
+    font-weight: 700;
+    color: #061733;
+    line-height: 1.35;
 }
 
 
@@ -596,6 +578,69 @@ body.reference-page {
     .reference-main-image-container {
         min-height: 420px;
     }
+
+    /* Elegant left-aligned structured layout for the card header */
+    .reference-info-card .card-header {
+        text-align: left;
+    }
+
+    /* Stacking card row label and value on mobile and tablets with beautiful left-alignment */
+    .card-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding-block: 16px;
+    }
+
+    .row-label-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .row-label-container svg {
+        display: block;
+        margin: 0;
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+    }
+
+    .row-value {
+        text-align: left;
+        width: 100%;
+        padding-left: 28px; /* Alignment with label text: 18px icon + 10px gap */
+        box-sizing: border-box;
+        font-size: 14.5px;
+        line-height: 1.45;
+    }
+
+    /* Stacking Card footer fields vertically and left-aligning them on mobile/tablets */
+    .card-footer {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .footer-col {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 12px;
+        padding-right: 0;
+        padding-bottom: 14px;
+    }
+
+    .footer-col:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid rgba(6, 23, 51, 0.08);
+    }
+
+    .footer-col:last-child {
+        padding-left: 0;
+        padding-bottom: 0;
+    }
 }
 
 @media (max-width: 600px) {
@@ -625,63 +670,6 @@ body.reference-page {
 
     .reference-image-overlay {
         padding: 40px 20px 20px 20px;
-    }
-
-    /* Center-align card header on mobile */
-    .reference-info-card .card-header {
-        text-align: center;
-    }
-
-    /* Stacking Card footer fields vertically and centering them on mobile */
-    .card-footer {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .footer-col {
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        padding-right: 0;
-        padding-bottom: 12px;
-    }
-
-    .footer-col:not(:last-child) {
-        border-right: none;
-        border-bottom: 1px solid rgba(6, 23, 51, 0.08);
-    }
-
-    .footer-col:last-child {
-        padding-left: 0;
-        padding-bottom: 0;
-    }
-
-    /* Stacking card row label and value on mobile and centering them horizontally */
-    .card-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        padding-block: 14px;
-    }
-
-    .row-label-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .row-label-container svg {
-        display: block;
-        margin: 0;
-        flex-shrink: 0;
-    }
-
-    .row-value {
-        text-align: center;
-        width: 100%;
     }
 
     /* Stacking related reference cards (one card per row) on mobile */

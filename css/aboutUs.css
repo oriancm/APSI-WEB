@@ -11,20 +11,40 @@ body.about-page {
     --about-block-gap: clamp(24px, 3vw, 36px);
     padding-bottom: clamp(30px, 4vw, 56px);
     overflow-x: hidden;
-    --apsi-subtitle-measure: min(500px, 100%);
+    --apsi-subtitle-measure: min(480px, 100%);
     --apsi-title-width: min(500px, min(1120px, var(--apsi-content-width)));
     --apsi-bg-fade-start: calc(var(--apsi-page-edge) + ((var(--apsi-page-width) - min(1120px, var(--apsi-content-width))) / 2) + var(--apsi-title-width) - clamp(54px, 4vw, 78px));
-    background-image:
-        linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) calc(var(--apsi-crane-height) - 26px), rgba(255,255,255,0.14) var(--apsi-crane-height), rgba(255,255,255,0.92) calc(var(--apsi-crane-height) + 108px), #fff 100%),
-        linear-gradient(90deg, #fff 0, #fff var(--apsi-bg-fade-start), rgba(255,255,255,0.78) calc(var(--apsi-bg-fade-start) + 72px), rgba(255,255,255,0.44) calc(var(--apsi-bg-fade-start) + 180px), rgba(255,255,255,0.14) calc(var(--apsi-bg-fade-start) + 310px), rgba(255,255,255,0) calc(var(--apsi-bg-fade-start) + 430px), rgba(255,255,255,0) 100%),
-        url("/img/home-building-crane-wide.png");
+}
+
+.about-page-shell.site-shell-bg {
+    background-image: none !important; /* Disable default sub-page background on desktop */
 }
 
 .about-hero {
+    position: relative;
     width: min(1120px, var(--apsi-content-width));
     margin: var(--apsi-page-top) auto 0;
-    min-height: max(330px, calc(var(--apsi-crane-height) - var(--apsi-header-height) - var(--apsi-page-top)));
+    min-height: max(260px, calc(var(--apsi-crane-height) - var(--apsi-header-height) - var(--apsi-page-top) - 80px));
     padding-inline: 0;
+    padding-bottom: 24px; /* Reduced vertical space to make image less high and decrease gap below paragraph */
+    z-index: 1;
+}
+
+.about-hero::after {
+    content: "";
+    position: absolute;
+    top: calc(-1 * var(--apsi-header-height) - var(--apsi-page-top));
+    bottom: 0;
+    left: 0;
+    right: calc(50% - 50vw);
+    background-image: 
+        linear-gradient(to right, #ffffff 0%, #ffffff 440px, rgba(255,255,255,0.92) 520px, rgba(255,255,255,0) 740px),
+        url("/img/home-building-crane-wide.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right center;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .about-hero-copy {
@@ -41,7 +61,7 @@ body.about-page {
 }
 
 .about-hero h1 {
-    font-size: var(--apsi-title-size);
+    font-size: 38px; /* Fixed premium size matching home page slogan */
     line-height: var(--apsi-title-leading);
 }
 
@@ -60,8 +80,8 @@ body.about-page {
     max-width: var(--apsi-subtitle-measure);
     margin: 26px 0 0;
     color: var(--apsi-ink);
-    font-size: clamp(15px, 1.15vw, 18px);
-    line-height: 1.72;
+    font-size: 15.5px;
+    line-height: 1.62;
     text-align: justify;
 }
 
@@ -350,14 +370,10 @@ body.about-page {
 }
 
 @media (max-width: 1180px) {
-    .about-hero {
-        min-height: 0;
-    }
-
     .about-badges {
         width: min(500px, calc(100vw - 32px));
         transform: none;
-        margin-left: var(--apsi-page-edge);
+        margin-left: calc((100% - min(1120px, var(--apsi-content-width))) / 2);
         margin-right: auto;
     }
 
@@ -398,17 +414,32 @@ body.about-page {
 
     .about-hero {
         min-height: auto;
-        padding-bottom: 24px;
-        padding-inline: 0;
-        margin-top: 34px;
-        margin-bottom: 0;
+        padding: 24px 20px; /* Matches padding of other sections like .about-missions, etc. */
+        margin-top: 24px;
+        margin-bottom: var(--about-block-gap);
+        border: 1px solid rgba(6, 23, 51, 0.07);
+        border-radius: var(--apsi-radius);
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: var(--apsi-shadow);
+        box-sizing: border-box;
+    }
+
+    .about-hero::after {
+        display: none !important;
+    }
+
+    .about-hero-copy {
+        width: 100%;
+        max-width: none;
     }
 
     .about-hero h1 {
-        /* font-size inherits var(--apsi-title-size) from site.css */
+        font-size: clamp(22px, 5.5vw, 26px);
     }
 
     .about-hero p {
+        width: 100%;
+        max-width: none;
         font-size: 16px;
         line-height: 1.68;
     }
