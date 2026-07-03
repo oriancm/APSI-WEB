@@ -21,8 +21,8 @@
     --apsi-title-related-button: clamp(11px, min(1.25vw, 1.75svh), 15px);
     --apsi-title-related-gap: clamp(14px, min(2.6vw, 4.4svh), 42px);
     --apsi-header-height: 108px;
-    --apsi-page-top: clamp(28px, 3.2vw, 54px);
-    --apsi-page-gap: clamp(38px, 5vw, 72px);
+    --apsi-page-top: 34px;
+    --apsi-page-gap: 42px;
     --apsi-title-line-gap: 20px;
     --apsi-title-measure: min(640px, 100%);
     --apsi-subtitle-measure: var(--apsi-title-measure);
@@ -236,7 +236,8 @@ img {
 .site-footer {
     position: relative;
     z-index: 2;
-    width: var(--apsi-page-width);
+    width: 100%;
+    max-width: none;
     margin: clamp(34px, 5vw, 68px) auto 0;
     background: var(--apsi-footer-blue);
     color: #fff;
@@ -248,7 +249,8 @@ img {
     grid-template-columns: minmax(160px, 292px) 1.2fr 1fr auto;
     gap: 34px;
     align-items: center;
-    width: 100%;
+    width: var(--apsi-page-width);
+    max-width: var(--apsi-container);
     min-height: var(--apsi-footer-height);
     margin: 0 auto;
     padding: 22px var(--apsi-page-pad);

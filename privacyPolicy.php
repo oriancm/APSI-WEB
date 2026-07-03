@@ -35,7 +35,7 @@
                 </article>
                 <article>
                     <div class="privacy-icon"><i data-lucide="mail" aria-hidden="true"></i></div>
-                    <p>Si vous avez des questions concernant le traitement de vos données, vous pouvez contacter :<br><strong>oriancm.pro@gmail.com</strong></p>
+                    <p>Si vous avez des questions concernant le traitement de vos données, vous pouvez contacter :<br><strong>test@apsi-btp.fr</strong></p>
                 </article>
             </div>
         </section>

@@ -77,9 +77,61 @@ body.reference-page {
 /* Showcase two-column layout */
 .reference-showcase {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 480px;
+    grid-template-columns: minmax(0, 1fr) 420px;
     gap: clamp(20px, 3.5vw, 44px);
     align-items: stretch;
+}
+
+@media (max-width: 1200px) and (min-width: 981px) {
+    .reference-showcase {
+        grid-template-columns: minmax(0, 1fr) 370px; /* Bring down width of sidebar on smaller desktops so gallery stays wide enough */
+        gap: 20px;
+        max-height: 510px; /* Cap vertical height on smaller desktops to keep gallery proportions elegant */
+    }
+
+    .reference-info-card {
+        padding: 20px !important;
+    }
+
+    .reference-info-card .card-header {
+        margin-bottom: 12px !important;
+    }
+
+    .card-row {
+        grid-template-columns: 155px 1fr !important;
+        gap: 12px !important;
+        padding-block: 8px !important;
+    }
+
+    .row-label-container {
+        gap: 8px !important;
+    }
+
+    .row-label-container strong {
+        font-size: 11.5px !important;
+    }
+
+    .row-value {
+        font-size: 13px !important;
+    }
+
+    .card-footer {
+        margin-top: 14px !important;
+        padding-top: 12px !important;
+        gap: 8px !important;
+    }
+
+    .footer-col {
+        gap: 4px !important;
+    }
+
+    .footer-val {
+        font-size: 12px !important;
+    }
+
+    .footer-sub-label {
+        font-size: 9.5px !important;
+    }
 }
 
 @media (min-width: 981px) {
@@ -92,7 +144,7 @@ body.reference-page {
     .reference-showcase {
         flex: 1 1 0;
         min-height: 0;
-        max-height: 650px;
+        max-height: clamp(480px, 60vh, 650px); /* Responsive viewport height cap instead of hardcoded 650px */
         height: 100%;
     }
 
@@ -119,6 +171,21 @@ body.reference-page {
     overflow: hidden;
     background-color: #061733;
     box-shadow: 0 20px 48px rgba(6, 23, 51, 0.08);
+}
+
+@media (max-width: 980px) {
+    .reference-main-image-container {
+        min-height: unset !important;
+        aspect-ratio: 16 / 10 !important; /* Cap gallery height relative to its dynamic width on larger tablets and phones */
+        max-height: 480px !important; /* Cap absolute height so it never pushes content too far down */
+    }
+}
+
+@media (max-width: 600px) {
+    .reference-main-image-container {
+        aspect-ratio: 4 / 3 !important; /* Switch to a tighter aspect ratio on small mobile */
+        max-height: 320px !important;
+    }
 }
 
 @media (min-width: 981px) {
@@ -268,7 +335,7 @@ body.reference-page {
     flex-direction: column;
     background-color: #ffffff;
     border-radius: 20px;
-    padding: clamp(16px, 3.2svh, 36px);
+    padding: clamp(20px, 2.8svh, 28px);
     box-shadow: 0 15px 45px rgba(6, 23, 51, 0.04);
     box-sizing: border-box;
     height: 100%;
@@ -281,7 +348,7 @@ body.reference-page {
 }
 
 .reference-info-card .card-header {
-    margin-bottom: clamp(16px, 3svh, 24px);
+    margin-bottom: clamp(12px, 2.2svh, 18px);
 }
 
 .reference-info-card .card-header h2 {
@@ -300,7 +367,6 @@ body.reference-page {
     flex-grow: 1;
 }
 
-/* Card row distributed evenly and centered vertically */
 .card-row {
     display: flex;
     justify-content: space-between;
@@ -308,13 +374,13 @@ body.reference-page {
     gap: 16px;
     flex-grow: 1;
     border-bottom: 1px solid rgba(6, 23, 51, 0.05);
-    padding-block: clamp(12px, 1.8svh, 24px);
+    padding-block: clamp(8px, 1.4svh, 15px);
 }
 
 @media (min-width: 981px) {
     .card-row {
         display: grid;
-        grid-template-columns: 210px 1fr;
+        grid-template-columns: 155px 1fr;
         align-items: center;
         gap: 16px;
         flex-grow: 1;
@@ -644,11 +710,6 @@ body.reference-page {
 }
 
 @media (max-width: 600px) {
-    .reference-main-image-container {
-        min-height: 300px;
-        aspect-ratio: 4 / 3;
-    }
-
     .reference-badge {
         top: 16px;
         left: 16px;

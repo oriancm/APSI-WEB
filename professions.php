@@ -74,7 +74,7 @@
                     <p>Du conseil à la livraison, <b>APSI BTP</b><br>vous accompagne à chaque étape.</p>
                 </div>
             </div>
-            <a href="/contact" class="profession-cta-btn"><span aria-hidden="true">→</span>Nous contacter</a>
+            <a href="/contact" class="profession-cta-btn"><span>Nous contacter</span><i data-lucide="arrow-right" aria-hidden="true"></i></a>
         </section>
 
     </main>

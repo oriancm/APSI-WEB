@@ -28,12 +28,10 @@ a {
 .legal-page {
     min-height: 100svh;
     padding-bottom: clamp(24px, 3vw, 42px);
-    --apsi-title-width: min(640px, min(1120px, var(--apsi-content-width)));
-    --apsi-bg-fade-start: calc(var(--apsi-page-edge) + ((var(--apsi-page-width) - min(1120px, var(--apsi-content-width))) / 2) + var(--apsi-title-width) - clamp(54px, 5vw, 92px));
-    background-image:
-        linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) calc(var(--apsi-crane-height) - 26px), rgba(255,255,255,0.14) var(--apsi-crane-height), rgba(255,255,255,0.92) calc(var(--apsi-crane-height) + 108px), #fff 100%),
-        linear-gradient(90deg, #fff 0, #fff var(--apsi-bg-fade-start), rgba(255,255,255,0.10) calc(var(--apsi-bg-fade-start) + 96px), rgba(255,255,255,0) calc(var(--apsi-bg-fade-start) + 210px), rgba(255,255,255,0) 100%),
-        url("/img/home-building-crane-wide.png");
+}
+
+.legal-page.site-shell-bg {
+    background-image: none !important; /* Disable default sub-page background on desktop */
 }
 
 .legal-header {
@@ -100,10 +98,29 @@ a {
 }
 
 .legal-hero {
+    position: relative;
     width: min(1120px, var(--apsi-content-width));
     max-width: none;
     padding-inline: 0;
     margin: var(--apsi-page-top) auto 0;
+    z-index: 1;
+}
+
+.legal-hero::after {
+    content: "";
+    position: absolute;
+    top: calc(-1 * var(--apsi-header-height) - var(--apsi-page-top));
+    height: var(--apsi-crane-height);
+    left: 0;
+    right: calc(50% - 50vw);
+    background-image: 
+        linear-gradient(to right, #ffffff 0%, #ffffff 440px, rgba(255,255,255,0.92) 520px, rgba(255,255,255,0) 740px),
+        url("/img/home-building-crane-wide.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right center;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .legal-hero h1 {
@@ -290,5 +307,9 @@ a {
     .legal-page {
         background-image: none !important;
         background-color: var(--apsi-bg, #f7fbff) !important;
+    }
+
+    .legal-hero::after {
+        display: none !important;
     }
 }
