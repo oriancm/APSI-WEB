@@ -6,6 +6,24 @@ require 'phpmailer6.10/src/PHPMailer.php';
 require 'phpmailer6.10/src/SMTP.php';
 require 'phpmailer6.10/src/Exception.php';
 
+// Load .env file if it exists
+if (file_exists(__DIR__ . '/.env')) {
+    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if (str_starts_with($line, '#') || !str_contains($line, '=')) {
+            continue;
+        }
+        [$key, $value] = explode('=', $line, 2);
+        $key = trim($key);
+        $value = trim(trim($value), "\"'");
+        if (getenv($key) === false && !isset($_ENV[$key])) {
+            $_ENV[$key] = $value;
+            putenv($key . '=' . $value);
+        }
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = isset($_POST['name']) ? trim($_POST['name']) : '';
     $objet = isset($_POST['objet']) ? trim($_POST['objet']) : '';
