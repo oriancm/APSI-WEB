@@ -270,23 +270,25 @@
     <section class="profession-deliverables">
         <div class="profession-deliverables-left">
             <h2>Documents et suivi de mission</h2>
-            <p>
-                Nos missions s’appuient sur des outils de suivi clairs, partagés avec les acteurs du projet.
-            </p>
             <div class="deliverables-image-wrap">
                 <img src="/img/illustrations-articles-de-blog.png" alt="Outils de documents et suivi de mission - APSI BTP">
             </div>
         </div>
 
-        <ul>
-            <li>Calendrier général de l’opération</li>
-            <li>Planning détaillé d’exécution</li>
-            <li>Calendrier des études d’exécution</li>
-            <li>Comptes-rendus de réunions de chantier</li>
-            <li>Pointage de l’avancement et analyse des écarts</li>
-            <li>Planning <span class="acronym" data-definition="Opérations Préalables à la Réception">OPR</span>, réception et levée des réserves</li>
-            <li>Suivi des <span class="acronym" data-definition="Dossiers des Ouvrages Exécutés">DOE</span> et clôture administrative</li>
-        </ul>
+        <div class="profession-deliverables-right">
+            <p>
+                Nos missions s’appuient sur des outils de suivi clairs, partagés avec les acteurs du projet.
+            </p>
+            <ul>
+                <li>Calendrier général de l’opération</li>
+                <li>Planning détaillé d’exécution</li>
+                <li>Calendrier des études d’exécution</li>
+                <li>Comptes-rendus de réunions de chantier</li>
+                <li>Pointage de l’avancement et analyse des écarts</li>
+                <li>Planning <span class="acronym" data-definition="Opérations Préalables à la Réception">OPR</span>, réception et levée des réserves</li>
+                <li>Suivi des <span class="acronym" data-definition="Dossiers des Ouvrages Exécutés">DOE</span> et clôture administrative</li>
+            </ul>
+        </div>
     </section>
 
     <section class="profession-assets">

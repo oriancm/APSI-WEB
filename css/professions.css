@@ -518,6 +518,12 @@ body.professions-page .site-shell-bg {
     flex-direction: column;
 }
 
+.profession-deliverables-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .deliverables-image-wrap {
     margin-top: 24px;
     border-radius: 12px;
