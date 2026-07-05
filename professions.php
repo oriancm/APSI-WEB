@@ -268,11 +268,14 @@
     </section>
 
     <section class="profession-deliverables">
-        <div>
+        <div class="profession-deliverables-left">
             <h2>Documents et suivi de mission</h2>
             <p>
                 Nos missions s’appuient sur des outils de suivi clairs, partagés avec les acteurs du projet.
             </p>
+            <div class="deliverables-image-wrap">
+                <img src="/img/illustrations-articles-de-blog.png" alt="Outils de documents et suivi de mission - APSI BTP">
+            </div>
         </div>
 
         <ul>

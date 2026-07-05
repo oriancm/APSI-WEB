@@ -513,6 +513,33 @@ body.professions-page .site-shell-bg {
     align-items: start;
 }
 
+.profession-deliverables-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.deliverables-image-wrap {
+    margin-top: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 103, 214, 0.06);
+    box-shadow: 0 10px 30px rgba(0, 94, 200, 0.06);
+    background: #ffffff;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.deliverables-image-wrap:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 36px rgba(0, 94, 200, 0.1);
+}
+
+.deliverables-image-wrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
 .profession-deliverables ul {
     margin: 0;
     padding: 0;
