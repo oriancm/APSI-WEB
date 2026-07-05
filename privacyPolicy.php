@@ -5,7 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>APSI BTP - Politique de confidentialité</title>
+    <title>Politique de Confidentialité - APSI BTP</title>
+    <meta name="description" content="Consultez la politique de confidentialité d'APSI BTP concernant l'usage du formulaire de contact et la protection de vos données.">
+    <meta name="keywords" content="politique de confidentialité, APSI BTP, protection des données, rgpd">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    <link class="canonical" rel="canonical" href="https://apsi-btp.fr/privacyPolicy">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apsi-btp.fr/privacyPolicy">
+    <meta property="og:title" content="Politique de Confidentialité - APSI BTP">
+    <meta property="og:description" content="Consultez la politique de confidentialité d'APSI BTP concernant l'usage du formulaire de contact et la protection de vos données.">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Politique de Confidentialité - APSI BTP">
+    <meta name="twitter:description" content="Consultez la politique de confidentialité d'APSI BTP concernant la protection de vos données.">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="/css/policyPrivacy.css?v=20260622-3">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
@@ -22,7 +41,7 @@
 
             <div class="privacy-panel">
                 <article>
-                    <div class="privacy-icon"><i data-lucide="shield-lock" aria-hidden="true"></i></div>
+                    <div class="privacy-icon"><i data-lucide="shield-check" aria-hidden="true"></i></div>
                     <p>Ce site ne collecte <strong>pas de données personnelles</strong> en dehors de celles fournies via le formulaire de contact.</p>
                 </article>
                 <article>

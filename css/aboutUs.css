@@ -62,33 +62,67 @@ body.about-page {
 }
 
 .about-founders-row {
-    display: none !important;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    width: 440px;
+    flex-shrink: 0;
+    margin: 0 0 0 auto; /* Push it to the right of the flex container! */
+    box-sizing: border-box;
+    z-index: 2;
+    position: relative;
 }
 
 .about-founder-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Center content vertically inside the square */
     text-align: center;
     flex-shrink: 0;
-    width: 180px;
-    margin-top: 14px;
+    flex: 1;
+    min-width: 0;
+    margin-top: 0;
+    aspect-ratio: 1 / 1; /* Forces a perfect square card ratio */
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(8px); /* Elegant glass blur */
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    padding: 12px 10px; /* Tighter padding to maximize avatar space */
+    box-sizing: border-box;
+    box-shadow:
+        0 10px 24px -10px rgba(0, 94, 200, 0.06),
+        0 16px 36px -8px rgba(6, 23, 51, 0.04);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, border-color 0.4s ease;
+}
+
+.about-founder-profile:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.88);
+    border-color: rgba(0, 94, 200, 0.15);
+    box-shadow:
+        0 16px 36px -8px rgba(0, 94, 200, 0.12),
+        0 24px 54px -6px rgba(6, 23, 51, 0.06);
 }
 
 .about-founder-photo-frame {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 135px; /* Scaled up from 110px to take up more space in the card */
+    height: 135px; /* Scaled up from 110px to take up more space in the card */
+    border-radius: 12px; /* Beautiful rounded square avatar frame */
     overflow: hidden;
-    border: 4px solid #ffffff;
-    box-shadow: 0 16px 36px rgba(0, 94, 200, 0.14);
-    margin-bottom: 16px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 6px 18px rgba(0, 94, 200, 0.1);
+    margin-bottom: 8px; /* Tighter margin to fit the larger photo frame */
     background: #f8fafc;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
-.about-founder-photo-frame:hover {
-    transform: scale(1.03);
+.about-founder-profile:hover .about-founder-photo-frame {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 94, 200, 0.15);
 }
 
 .about-founder-photo-frame img {
@@ -107,7 +141,7 @@ body.about-page {
 .founder-placeholder-logo {
     color: #ffffff !important;
     font-family: "Montserrat", "Inter", sans-serif;
-    font-size: 38px;
+    font-size: 38px; /* Scaled up monogram for larger square frame */
     font-weight: 800;
     letter-spacing: 1px;
     user-select: none;
@@ -116,17 +150,18 @@ body.about-page {
 .about-founder-info strong {
     display: block;
     font-family: "Montserrat", sans-serif;
-    font-size: 16px;
+    font-size: 14px; /* Slightly more compact for a perfect balance */
+    line-height: 1.3;
     color: var(--apsi-navy);
     font-weight: 700;
 }
 
 .about-founder-info span {
     display: block;
-    font-size: 13px;
+    font-size: 11px; /* Slightly more compact for a perfect balance */
     color: var(--apsi-blue);
     font-weight: 500;
-    margin-top: 5px;
+    margin-top: 2px; /* Tighter margin */
 }
 
 .about-hero h1,
@@ -160,7 +195,7 @@ body.about-page {
     color: var(--apsi-ink);
     font-size: 15.5px;
     line-height: 1.62;
-    text-align: left;
+    text-align: justify;
 }
 
 .about-page-shell b {
@@ -213,6 +248,15 @@ body.about-page {
     border-radius: var(--apsi-radius);
     background: rgba(255, 255, 255, 0.96);
     box-shadow: var(--apsi-shadow);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+}
+
+.about-badges article:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 94, 200, 0.15);
+    box-shadow: 
+        0 10px 24px -10px rgba(0, 94, 200, 0.08),
+        0 20px 36px -6px rgba(6, 23, 51, 0.06);
 }
 
 .about-badges svg {
@@ -220,6 +264,12 @@ body.about-page {
     height: 44px;
     color: var(--apsi-blue);
     stroke-width: 2.2;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+}
+
+.about-badges article:hover svg {
+    transform: scale(1.08);
+    color: var(--apsi-navy);
 }
 
 .about-badges strong {
@@ -252,9 +302,6 @@ body.about-page {
     padding: clamp(26px, 3vw, 36px);
 }
 
-.about-missions-mobile-image {
-    display: none !important;
-}
 
 .about-section-title h2 {
     font-size: clamp(25px, 2.4vw, 34px);
@@ -280,13 +327,58 @@ body.about-page {
     border-right: 1px solid rgba(6, 23, 51, 0.14);
 }
 
+.about-missions-bg-container {
+    position: relative;
+    padding: clamp(18px, 3vw, 24px);
+    border-radius: var(--apsi-radius);
+    overflow: hidden;
+    background: url('/img/opc-chantier.jpg') no-repeat center center / cover;
+    border: 1px solid rgba(6, 23, 51, 0.08);
+    box-shadow: 0 4px 18px rgba(0, 94, 200, 0.04);
+    margin-top: 16px;
+    box-sizing: border-box;
+}
+
+/* Dark overlay filter inspired by references cards, covering the whole image */
+.about-missions-bg-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(3, 16, 35, 0.58); /* Increased filter opacity for references cards level text pop */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.about-missions-bg-container .mission-item {
+    position: relative;
+    z-index: 2;
+    margin: 16px 0;
+}
+
+/* Extra bold white text matching references cards headers */
+.about-missions-bg-container .mission-item strong {
+    color: #ffffff !important;
+    font-family: "Montserrat", "Inter", Arial, sans-serif !important;
+    font-weight: 800 !important; /* Matches references cards font-weight */
+    font-size: clamp(16px, 4.2vw, 18px) !important;
+    text-shadow: none !important;
+}
+
+.about-missions-bg-container .mission-item:first-child {
+    margin-top: 0;
+}
+
+.about-missions-bg-container .mission-item:last-child {
+    margin-bottom: 0;
+}
+
 .about-missions-left > p,
 .about-card > p {
     margin: 0 0 28px;
     color: var(--apsi-ink);
     font-size: 15.5px;
     line-height: 1.62;
-    text-align: left;
+    text-align: justify;
 }
 
 .mission-item {
@@ -330,7 +422,7 @@ body.about-page {
     color: var(--apsi-ink);
     font-size: 15.4px;
     line-height: 1.58;
-    text-align: left;
+    text-align: justify;
 }
 
 .about-missions-text p:last-child {
@@ -511,23 +603,6 @@ body.about-page {
         max-width: none;
     }
 
-    .about-missions-mobile-image {
-        display: block !important;
-        width: 100% !important;
-        margin: 16px 0 28px 0 !important;
-        border-radius: 12px !important;
-        overflow: hidden !important;
-        border: 1px solid rgba(6, 23, 51, 0.06) !important;
-        box-shadow: 0 12px 28px rgba(0, 94, 200, 0.06) !important;
-    }
-
-    .about-missions-mobile-image img {
-        width: 100% !important;
-        height: auto !important;
-        max-height: 280px !important;
-        object-fit: cover !important;
-        display: block !important;
-    }
 }
 
 @media (max-width: 980px) {
@@ -581,9 +656,15 @@ body.about-page {
         display: flex !important;
         flex-direction: row !important; /* Side-by-side! */
         gap: 16px !important; /* Beautiful space between cards */
-        width: 100% !important; /* Fits perfectly inside parent hero card container */
-        margin: 24px 0 0 !important;
+        width: 100% !important;
+        margin: 24px 0 0 0 !important; /* Spacing below subtitle paragraph */
         box-sizing: border-box !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        transform: none !important;
     }
 
     .about-founder-profile {
@@ -595,6 +676,15 @@ body.about-page {
         align-items: stretch !important;
         text-align: left !important;
         box-sizing: border-box !important;
+        background: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: none !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        transform: none !important;
+        aspect-ratio: auto !important; /* Reset desktop square card ratio */
     }
 
     .about-founder-photo-frame {
@@ -643,7 +733,7 @@ body.about-page {
         max-width: none;
         font-size: 16px;
         line-height: 1.68;
-        text-align: left; /* Left align! */
+        text-align: justify; /* Justified on mobile too */
     }
 
     .about-intro-quote {
@@ -659,7 +749,8 @@ body.about-page {
         max-width: none;
         gap: 14px;
         margin-left: auto;
-        margin-top: var(--about-block-gap);
+        margin-right: auto;
+        margin-top: 16px !important;
         margin-bottom: var(--about-block-gap);
     }
 
@@ -782,7 +873,4 @@ body.about-page {
         gap: 12px !important; /* Slightly more compact gap on narrow mobile screens */
     }
 
-    .about-missions-mobile-image {
-        margin: 12px 0 20px 0 !important;
-    }
 }

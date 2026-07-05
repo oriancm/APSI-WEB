@@ -10,11 +10,47 @@
     <meta name="keywords" content="APSI BTP, OPC, ordonnancement pilotage coordination, maîtrise d'oeuvre, construction, réhabilitation, chantier, Provence, PACA">
     <meta name="author" content="APSI BTP">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apsi-btp.fr/">
+    
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://apsi-btp.fr/">
-    <meta property="og:title" content="APSI BTP - Vos projets en toute sérénité">
-    <meta property="og:description" content="Spécialiste en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007.">
-    <meta property="og:image" content="/img/APSI.png">
+    <meta property="og:title" content="APSI BTP - Vos projets en toute sérénité | Ordonnancement Pilotage Coordination">
+    <meta property="og:description" content="APSI BTP, spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007.">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="APSI BTP - Vos projets en toute sérénité">
+    <meta name="twitter:description" content="Spécialiste en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007.">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "APSI BTP",
+      "alternateName": "Ordonnancement Pilotage Coordination BTP",
+      "url": "https://apsi-btp.fr/",
+      "logo": "https://apsi-btp.fr/img/APSI.png",
+      "image": "https://apsi-btp.fr/img/APSI.png",
+      "description": "APSI BTP, spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007 en région Provence-Alpes-Côte d'Azur.",
+      "foundingDate": "2007",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Caseneuve",
+        "postalCode": "84750",
+        "addressCountry": "FR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "test@apsi-btp.fr",
+        "contactType": "customer service"
+      }
+    }
+    </script>
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="/css/site.css?v=<?= time() ?>">

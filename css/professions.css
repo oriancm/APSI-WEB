@@ -2,7 +2,7 @@ body.professions-page {
     min-height: 100vh;
     overflow-x: hidden;
     background: #f6f9fc;
-    color: #000000;
+    color: #000;
     font-family: 'Inter', sans-serif;
 }
 
@@ -25,7 +25,6 @@ body.professions-page .site-shell-bg {
     width: min(1120px, var(--apsi-content-width));
     margin: var(--apsi-page-top) auto var(--apsi-page-gap);
     min-height: max(260px, calc(var(--apsi-crane-height) - var(--apsi-header-height) - var(--apsi-page-top) - 80px));
-    padding-inline: 0;
     padding-bottom: 24px;
     z-index: 1;
 }
@@ -66,9 +65,9 @@ body.professions-page .site-shell-bg {
 
 .professions-hero h1::after,
 .profession-card h2::after,
-.profession-assets h2::after,
-.profession-scope h2::after,
-.profession-deliverables h2::after {
+.section-heading h2::after,
+.profession-deliverables h2::after,
+.profession-assets h2::after {
     content: "";
     display: block;
     width: 48px;
@@ -87,16 +86,18 @@ body.professions-page .site-shell-bg {
 .professions-hero-copy p {
     max-width: min(480px, 100%);
     margin: 26px 0 0;
-    color: #000000;
+    color: #000;
     font-size: 15.5px;
     line-height: 1.62;
+    text-align: justify;
 }
 
 .profession-card,
+.profession-opc-pillars,
+.profession-project-flow,
+.profession-deliverables,
 .profession-assets,
-.profession-cta,
-.profession-scope,
-.profession-deliverables {
+.profession-cta {
     width: min(1120px, calc(100vw - 32px), var(--apsi-content-width));
     margin: 0 auto 32px;
     background: var(--apsi-card);
@@ -153,9 +154,9 @@ body.professions-page .site-shell-bg {
 }
 
 .profession-card h2,
-.profession-assets h2,
-.profession-scope h2,
+.section-heading h2,
 .profession-deliverables h2,
+.profession-assets h2,
 .profession-cta h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: clamp(24px, 2.2vw, 32px);
@@ -176,13 +177,14 @@ body.professions-page .site-shell-bg {
 }
 
 .profession-card p,
-.profession-scope-heading p,
+.section-heading p,
 .profession-deliverables p,
 .profession-assets-heading p {
     font-size: 16px;
     line-height: 1.6;
-    color: #000000;
+    color: #000;
     margin: 0;
+    text-align: justify;
 }
 
 .profession-card p {
@@ -195,7 +197,8 @@ body.professions-page .site-shell-bg {
     gap: 16px;
 }
 
-.profession-points > div {
+.profession-points > div,
+.profession-assets-grid > div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -206,12 +209,13 @@ body.professions-page .site-shell-bg {
     border-radius: 10px;
     padding: 16px 12px;
     min-height: 118px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .profession-points > div:hover,
 .profession-assets-grid > div:hover,
-.profession-scope-grid > div:hover {
+.opc-pillar:hover,
+.project-step:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 24px rgba(0, 103, 214, 0.05);
     border-color: rgba(0, 103, 214, 0.14);
@@ -232,63 +236,273 @@ body.professions-page .site-shell-bg {
     height: 26px;
 }
 
-.profession-points span {
+.profession-points span,
+.profession-assets-grid span {
     font-size: 13.5px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.35;
     color: var(--apsi-navy);
 }
 
-.profession-scope {
+.profession-opc-pillars,
+.profession-project-flow {
     padding: 48px;
 }
 
-.profession-scope-heading {
-    max-width: 720px;
+.section-heading {
+    max-width: 760px;
     margin-bottom: 34px;
 }
 
-.profession-scope-heading p,
-.profession-assets-heading p,
-.profession-deliverables p {
+.section-heading p,
+.profession-deliverables p,
+.profession-assets-heading p {
     margin-top: 18px;
 }
 
-.profession-scope-grid {
+.opc-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.opc-pillar,
+.project-step {
+    appearance: none;
+    border: 1px solid rgba(0, 103, 214, 0.08);
+    background: #fbfdff;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.opc-pillar {
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: left;
+}
+
+.opc-pillar.active,
+.project-step.active {
+    background: rgba(0, 103, 214, 0.06);
+    border-color: rgba(0, 103, 214, 0.24);
+}
+
+.opc-pillar i,
+.opc-pillar svg {
+    width: 30px;
+    height: 30px;
+    color: var(--apsi-blue);
+    margin-bottom: 16px;
+    stroke-width: 1.8;
+}
+
+.opc-pillar span {
+    display: block;
+    color: var(--apsi-navy);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.opc-pillar small {
+    display: block;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.opc-panel,
+.project-panel {
+    display: none;
+    padding: 30px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
+    border: 1px solid rgba(0, 103, 214, 0.08);
+}
+
+.opc-panel.active,
+.project-panel.active {
+    display: block;
+    animation: panelFade 0.25s ease both;
+}
+
+@keyframes panelFade {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.opc-panel h3,
+.project-panel h3 {
+    margin: 0 0 14px;
+    color: var(--apsi-navy);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.opc-panel p,
+.project-panel p {
+    max-width: 86ch;
+    margin: 0 0 14px;
+    color: #000;
+    font-size: 15.5px;
+    line-height: 1.65;
+    text-align: justify;
+}
+
+.opc-panel p:last-child,
+.project-panel p:last-child {
+    margin-bottom: 0;
+}
+
+.project-steps {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 18px;
+    margin-bottom: 24px;
 }
 
-.profession-scope-grid > div {
-    background: #fbfdff;
-    border: 1px solid rgba(0, 103, 214, 0.06);
-    border-radius: 12px;
-    padding: 24px 20px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+.project-steps::before {
+    content: "";
+    position: absolute;
+    top: 34px;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(0, 103, 214, 0.12), rgba(0, 103, 214, 0.28), rgba(0, 103, 214, 0.12));
+    z-index: 0;
 }
 
-.profession-scope-grid span {
-    display: inline-block;
+.project-step {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 132px;
+    padding: 22px 18px;
+    border-radius: 14px;
+    text-align: left;
+}
+
+.project-step span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid rgba(0, 103, 214, 0.22);
+    color: var(--apsi-blue);
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
     font-weight: 800;
-    color: var(--apsi-blue);
-    margin-bottom: 14px;
 }
 
-.profession-scope-grid h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
+.project-step.active span {
+    background: var(--apsi-blue);
+    color: #ffffff;
+    border-color: var(--apsi-blue);
+}
+
+.project-step strong {
     color: var(--apsi-navy);
-    margin: 0 0 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 7px;
 }
 
-.profession-scope-grid p {
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: #000000;
-    margin: 0;
+.project-step small {
+    color: #000;
+    font-size: 13.5px;
+    line-height: 1.35;
+}
+
+.project-acronyms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.project-acronyms > span {
+    display: inline-flex;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(0, 103, 214, 0.06);
+    border: 1px solid rgba(0, 103, 214, 0.12);
+}
+
+.acronym {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    color: var(--apsi-blue);
+    font-weight: 700;
+    cursor: help;
+    border-bottom: 1px dotted currentColor;
+}
+
+.acronym::after {
+    content: attr(data-definition);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    width: max-content;
+    max-width: 260px;
+    padding: 9px 11px;
+    border-radius: 8px;
+    background: var(--apsi-navy);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: left;
+    box-shadow: 0 12px 28px rgba(0, 35, 80, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(4px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 20;
+}
+
+.acronym::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 4px);
+    border: 6px solid transparent;
+    border-top-color: var(--apsi-navy);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%);
+    transition: opacity 0.18s ease;
+    z-index: 21;
+}
+
+.acronym:hover::after,
+.acronym:hover::before,
+.acronym:focus::after,
+.acronym:focus::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.acronym:hover::before,
+.acronym:focus::before {
+    transform: translateX(-50%);
 }
 
 .profession-deliverables {
@@ -312,7 +526,7 @@ body.professions-page .site-shell-bg {
     padding-left: 28px;
     font-size: 15.5px;
     line-height: 1.55;
-    color: #000000;
+    color: #000;
 }
 
 .profession-deliverables li::before {
@@ -349,34 +563,18 @@ body.professions-page .site-shell-bg {
 }
 
 .profession-assets-grid > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #fbfdff;
-    border: 1px solid rgba(0, 103, 214, 0.06);
     border-radius: 12px;
     padding: 24px 16px;
     min-height: 150px;
     flex: 1 1 calc((100% - 4 * 18px) / 5);
     max-width: calc((100% - 4 * 18px) / 5);
     min-width: 170px;
-    text-align: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .profession-assets-grid i,
 .profession-assets-grid svg {
     width: 34px;
     height: 34px;
-}
-
-.profession-assets-grid span {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.4;
-    color: var(--apsi-navy);
-    text-align: center;
 }
 
 .profession-cta {
@@ -386,7 +584,9 @@ body.professions-page .site-shell-bg {
     align-items: center;
     gap: 32px;
     padding: 48px;
-    background: linear-gradient(90deg, var(--apsi-footer-blue) 0%, var(--apsi-footer-blue) 30%, rgba(0, 103, 214, 0.85) 42%, rgba(0, 103, 214, 0.4) 55%, rgba(0, 103, 214, 0) 70%), url('/img/profession-cta.jpg') no-repeat right center / cover;
+    background:
+        linear-gradient(90deg, var(--apsi-footer-blue) 0%, var(--apsi-footer-blue) 30%, rgba(0, 103, 214, 0.85) 42%, rgba(0, 103, 214, 0.4) 55%, rgba(0, 103, 214, 0) 70%),
+        url('/img/profession-cta.jpg') no-repeat right center / cover;
     border: none;
     color: #ffffff;
     position: relative;
@@ -476,10 +676,11 @@ body.professions-page .site-shell-bg {
     }
 
     .profession-card,
+    .profession-opc-pillars,
+    .profession-project-flow,
+    .profession-deliverables,
     .profession-assets,
-    .profession-cta,
-    .profession-scope,
-    .profession-deliverables {
+    .profession-cta {
         width: calc(100% - 32px);
         margin-left: 16px;
         margin-right: 16px;
@@ -501,8 +702,12 @@ body.professions-page .site-shell-bg {
         order: 2;
     }
 
-    .profession-scope-grid {
+    .project-steps {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-steps::before {
+        display: none;
     }
 
     .profession-assets-grid > div {
@@ -512,6 +717,15 @@ body.professions-page .site-shell-bg {
 }
 
 @media screen and (max-width: 850px) {
+    .opc-pillars-grid,
+    .project-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .project-step {
+        min-height: auto;
+    }
+
     .profession-assets-grid > div {
         flex: 1 1 calc((100% - 18px) / 2) !important;
         max-width: calc((100% - 18px) / 2) !important;
@@ -522,7 +736,9 @@ body.professions-page .site-shell-bg {
         flex-direction: column !important;
         align-items: center !important;
         gap: 28px;
-        background: linear-gradient(180deg, rgba(0, 103, 214, 0.95) 0%, rgba(0, 103, 214, 0.85) 100%), url('/img/profession-cta.jpg') no-repeat center center / cover;
+        background:
+            linear-gradient(180deg, rgba(0, 103, 214, 0.95) 0%, rgba(0, 103, 214, 0.85) 100%),
+            url('/img/profession-cta.jpg') no-repeat center center / cover;
         text-align: center;
     }
 
@@ -541,43 +757,6 @@ body.professions-page .site-shell-bg {
     .profession-cta-btn {
         width: 100%;
         max-width: 280px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .professions-hero {
-        margin-top: 24px;
-        margin-bottom: 24px;
-    }
-
-    .profession-card,
-    .profession-assets,
-    .profession-cta,
-    .profession-scope,
-    .profession-deliverables {
-        padding: 24px 20px;
-    }
-
-    .profession-points,
-    .profession-scope-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .profession-assets-grid {
-        flex-direction: column !important;
-        gap: 12px !important;
-    }
-
-    .profession-assets-grid > div {
-        flex: 1 1 100% !important;
-        max-width: 100% !important;
-        min-height: 110px !important;
-        padding: 16px !important;
-    }
-
-    .profession-title-row {
-        gap: 16px;
-        margin-bottom: 16px;
     }
 }
 
@@ -638,6 +817,75 @@ body.professions-page .site-shell-bg {
         max-width: none !important;
         font-size: 16px !important;
         line-height: 1.68 !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .professions-hero {
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .profession-card,
+    .profession-opc-pillars,
+    .profession-project-flow,
+    .profession-deliverables,
+    .profession-assets,
+    .profession-cta {
+        padding: 24px 20px;
+    }
+
+    .profession-points {
+        grid-template-columns: 1fr;
+    }
+
+    .opc-panel,
+    .project-panel {
+        padding: 22px 18px;
+    }
+
+    .project-step span {
+        width: 38px;
+        height: 38px;
+        margin-bottom: 12px;
+    }
+
+    .profession-assets-grid {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    .profession-assets-grid > div {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        min-height: 110px !important;
+        padding: 16px !important;
+    }
+
+    .profession-title-row {
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .acronym::after {
+        left: 0;
+        transform: translateX(0) translateY(4px);
+        max-width: 220px;
+    }
+
+    .acronym:hover::after,
+    .acronym:focus::after {
+        transform: translateX(0) translateY(0);
+    }
+
+    .acronym::before {
+        left: 12px;
+        transform: translateX(0);
+    }
+
+    .acronym:hover::before,
+    .acronym:focus::before {
+        transform: translateX(0);
     }
 }
 

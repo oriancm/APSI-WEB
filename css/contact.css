@@ -78,6 +78,7 @@ body.contact-body {
     color: var(--apsi-ink);
     font-size: 15.5px;
     line-height: 1.62;
+    text-align: justify;
 }
 
 .contact-copy strong,

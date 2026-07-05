@@ -111,7 +111,27 @@ $activePage = 'references';
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Nos Références - APSI BTP | Projets BTP en Provence-Alpes-Côte d'Azur</title>
     <meta name="description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="keywords" content="références BTP, réalisations BTP, projets construction, OPC, MOEX, APSI BTP, chantiers Provence, PACA">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apsi-btp.fr/references">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apsi-btp.fr/references">
+    <meta property="og:title" content="Nos Références - APSI BTP | Projets BTP en Provence-Alpes-Côte d'Azur">
+    <meta property="og:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nos Références - APSI BTP">
+    <meta name="twitter:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="/css/references.css?v=20260623-1">
@@ -158,7 +178,7 @@ $activePage = 'references';
                     <article class="reference-tile" data-domain="<?= htmlspecialchars($ref['domaine'] ?? '0') ?>">
                         <a href="/reference/<?= htmlspecialchars($ref['id']) ?>" aria-label="<?= htmlspecialchars($ref['titre']) ?>"></a>
                         <?php if ($img): ?>
-                            <img src="/pic/<?= htmlspecialchars($img) ?>" alt="">
+                            <img src="/pic/<?= htmlspecialchars($img) ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" loading="lazy">
                         <?php else: ?>
                             <div class="reference-tile-empty">Aucune image disponible</div>
                         <?php endif; ?>

@@ -86,7 +86,7 @@ body.references-page .site-shell-bg {
     .references-layout {
         position: relative;
         z-index: 10;
-        margin-top: 34px !important; /* Fixed vertical spacing to prevent vertical shifting */
+        margin-top: 56px !important; /* Added more space between subtitle and cards + filter on desktop */
     }
 
     .references-filter-wrap {

@@ -8,7 +8,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>APSI BTP - Qui sommes-nous | OPC et MOEX depuis 2007</title>
-    <meta name="description" content="APSI BTP accompagne les maîtres d’ouvrage publics et privés en OPC et MOEX depuis 2007, avec plus de 100 opérations suivies en construction et réhabilitation.">
+    <meta name="description" content="Découvrez APSI BTP, créé en 2007 par Ludovic Messy et rejoint par Laurent Métayer. Plus de 100 opérations de construction neuve, réhabilitation en site occupé, hôtellerie de charme, patrimoine provençal et aménagement urbain en Provence (84, 13, 04, 05, 83, 30).">
+    <meta name="keywords" content="APSI BTP, Ludovic Messy, Laurent Métayer, OPC, MOEX, construction neuve, réhabilitation site occupé, hôtellerie haut de gamme, patrimoine provençal, demeures de caractère, aménagement urbain, Vaucluse 84, Alpes-de-Haute-Provence 04, Hautes-Alpes 05, Bouches du Rhône 13, Gard 30, Var 83, suivi de chantier, coordination travaux, ordonnancement pilotage coordination">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apsi-btp.fr/aboutUs">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apsi-btp.fr/aboutUs">
+    <meta property="og:title" content="APSI BTP - Qui sommes-nous | OPC et MOEX depuis 2007">
+    <meta property="og:description" content="APSI BTP accompagne les maîtres d’ouvrage publics et privés en OPC et MOEX depuis 2007, avec plus de 100 opérations suivies en construction et réhabilitation.">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="APSI BTP - Qui sommes-nous">
+    <meta name="twitter:description" content="Découvrez notre équipe et notre expertise d'accompagnement de vos projets d'ingénierie et de coordination de travaux depuis 2007.">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
 
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="/css/aboutUs.css?v=20260623-2">
@@ -29,15 +46,18 @@
                 <h1>Qui sommes-nous</h1>
 
                 <p>
-                    Créée en 2007 par <b>Ludovic MESSY</b>, APSI BTP accompagne les maîtres d’ouvrage,
-                    architectes et équipes de maîtrise d’œuvre dans le suivi de leurs opérations.
+                    La société <b>APSI BTP</b> a été créée en 2007 par <b>Ludovic MESSY</b>.
                 </p>
 
                 <p>
-                    Depuis 2021, <b>Laurent MÉTAYER</b> a rejoint la société pour renforcer son développement
-                    et poursuivre l’accompagnement des projets en construction et réhabilitation.
+                    Après une période de développement, elle a reçu du renfort avec l'arrivée en avril 2021 de <b>Laurent MÉTAYER</b>.
+                </p>
+
+                <p>
+                    Depuis cette date, notre équipe continue à soutenir activement nos clients et nos partenaires maîtres d'œuvre dans leurs projets.
                 </p>
             </div>
+
             <div class="about-founders-row">
                 <div class="about-founder-profile">
                     <div class="about-founder-photo-frame">
@@ -91,21 +111,20 @@
                     de deux missions complémentaires.
                 </p>
 
-                <div class="mission-item">
-                    <i data-lucide="calendar-clock" aria-hidden="true"></i>
-                    <strong>Ordonnancement, Pilotage<br>et Coordination (OPC)</strong>
-                </div>
+                <div class="about-missions-bg-container">
+                    <div class="mission-item">
+                        <i data-lucide="calendar-clock" aria-hidden="true"></i>
+                        <strong>Ordonnancement, Pilotage<br>et Coordination (OPC)</strong>
+                    </div>
 
-                <div class="mission-item">
-                    <i data-lucide="building-2" aria-hidden="true"></i>
-                    <strong>Maîtrise d’Œuvre<br>d’Exécution (MOEX)</strong>
+                    <div class="mission-item">
+                        <i data-lucide="building-2" aria-hidden="true"></i>
+                        <strong>Maîtrise d’Œuvre<br>d’Exécution (MOEX)</strong>
+                    </div>
                 </div>
             </div>
 
-            <!-- Mobile Image Section -->
-            <div class="about-missions-mobile-image">
-                <img src="/img/opc-chantier.jpg" alt="Suivi de chantier et Ordonnancement, Pilotage, Coordination (OPC) - APSI BTP">
-            </div>
+
 
             <div class="about-missions-text">
                 <p>

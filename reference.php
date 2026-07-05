@@ -274,7 +274,27 @@ $activePage = 'references';
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= htmlspecialchars($ref['titre']) ?> - APSI BTP</title>
     <meta name="description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune'] ?? '') ?>.">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="keywords" content="<?= htmlspecialchars($ref['titre']) ?>, <?= htmlspecialchars($ref['commune'] ?? '') ?>, OPC, MOEX, APSI BTP, chantier, suivi de travaux, PACA">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apsi-btp.fr/reference/<?= (int)$id ?>">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://apsi-btp.fr/reference/<?= (int)$id ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($ref['titre']) ?> - APSI BTP">
+    <meta property="og:description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune'] ?? '') ?>.">
+    <meta property="og:image" content="https://apsi-btp.fr/pic/<?= htmlspecialchars($mainPic) ?>">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($ref['titre']) ?> - APSI BTP">
+    <meta name="twitter:description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune'] ?? '') ?>.">
+    <meta name="twitter:image" content="https://apsi-btp.fr/pic/<?= htmlspecialchars($mainPic) ?>">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="/css/reference.css?v=<?= time() ?>">
@@ -312,7 +332,7 @@ $activePage = 'references';
                                 <i data-lucide="chevron-left" aria-hidden="true"></i>
                             </button>
                             
-                            <img id="main-reference-image" src="/pic/<?= htmlspecialchars($mainPic) ?>" alt="">
+                            <img id="main-reference-image" src="/pic/<?= htmlspecialchars($mainPic) ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune'] ?? '') ?> - APSI BTP">
 
                             <button type="button" class="gallery-arrow gallery-arrow--right" aria-label="Image suivante">
                                 <i data-lucide="chevron-right" aria-hidden="true"></i>
@@ -340,7 +360,7 @@ $activePage = 'references';
                         <div class="reference-thumbs" style="display: none;">
                             <?php foreach ($picTab as $index => $pic): ?>
                                 <button type="button" class="<?= $index === 0 ? 'active' : '' ?>" data-src="/pic/<?= htmlspecialchars($pic['titre']) ?>">
-                                    <img src="/pic/<?= htmlspecialchars($pic['titre']) ?>" alt="">
+                                    <img src="/pic/<?= htmlspecialchars($pic['titre']) ?>" alt="Photo <?= $index + 1 ?> - <?= htmlspecialchars($ref['titre']) ?>">
                                 </button>
                             <?php endforeach; ?>
                         </div>
@@ -458,7 +478,7 @@ $activePage = 'references';
                             <article class="same-domain-card">
                                 <a href="/reference/<?= htmlspecialchars($sameRef['id']) ?>" aria-label="<?= htmlspecialchars($sameRef['titre']) ?>"></a>
                                 <?php if ($img): ?>
-                                    <img src="/pic/<?= htmlspecialchars($img) ?>" alt="">
+                                    <img src="/pic/<?= htmlspecialchars($img) ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
                                 <?php else: ?>
                                     <div class="same-empty">Aucune image disponible</div>
                                 <?php endif; ?>

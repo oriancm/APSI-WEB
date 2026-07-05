@@ -77,11 +77,43 @@ $activePage = 'contact';
     <meta name="keywords" content="contact APSI BTP, devis OPC, maîtrise d'oeuvre, projet BTP, Provence, PACA">
     <meta name="author" content="APSI BTP">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apsi-btp.fr/contact">
+    
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://apsi-btp.fr/contact">
     <meta property="og:title" content="Nous Contacter - APSI BTP">
     <meta property="og:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta property="og:image" content="/img/APSI.png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nous Contacter - APSI BTP">
+    <meta name="twitter:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+
+    <!-- Schema.org ContactPage JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Nous Contacter - APSI BTP",
+      "description": "Page de contact pour l'entreprise APSI BTP, spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).",
+      "url": "https://apsi-btp.fr/contact",
+      "mainEntity": {
+        "@type": "LocalBusiness",
+        "name": "APSI BTP",
+        "email": "test@apsi-btp.fr",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Caseneuve",
+          "postalCode": "84750",
+          "addressCountry": "FR"
+        }
+      }
+    }
+    </script>
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="/css/contact.css">

@@ -5,7 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>APSI BTP - Mentions légales</title>
+    <title>Mentions Légales - APSI BTP</title>
+    <meta name="description" content="Consultez les mentions légales de la société APSI BTP, éditeur du site et coordinateur d'ordonnancement de chantier.">
+    <meta name="keywords" content="mentions légales, APSI BTP, informations légales, éditeur du site">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apsi-btp.fr/legalNotices">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apsi-btp.fr/legalNotices">
+    <meta property="og:title" content="Mentions Légales - APSI BTP">
+    <meta property="og:description" content="Consultez les mentions légales de la société APSI BTP, éditeur du site et coordinateur d'ordonnancement de chantier.">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mentions Légales - APSI BTP">
+    <meta name="twitter:description" content="Consultez les mentions légales de la société APSI BTP, éditeur du site.">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="/css/legalNotices.css?v=20260622-3">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">

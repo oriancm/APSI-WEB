@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>APSI BTP - Nos Métiers</title>
+
+    <title>Nos Métiers : OPC & MOEX - APSI BTP</title>
+    <meta name="description" content="Découvrez les missions OPC et MOEX d'APSI BTP : coordination de chantier, planification, suivi d'exécution, réunions, OPR et levée des réserves.">
+
     <link rel="stylesheet" href="/css/site.css">
-    <link rel="stylesheet" href="/css/professions.css?v=20260623-3">
+    <link rel="stylesheet" href="/css/professions.css?v=20260623-5">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="/js/site.js" defer></script>
 </head>
@@ -21,13 +25,20 @@
     <section class="professions-hero">
         <div class="professions-hero-copy">
             <h1>Nos Métiers</h1>
-            
+
             <div class="professions-hero-mobile-image">
                 <img src="/img/professions-title-mobile.jpg" alt="APSI BTP - Nos Métiers">
             </div>
 
-            <p>APSI BTP accompagne les maîtres d'ouvrage publics et privés dans le suivi de leurs opérations de <b>construction</b> et de <b>réhabilitation</b>.</p>
-            <p>Nous intervenons sur les missions <b>OPC</b> et <b>MOEX</b>, de la préparation du chantier jusqu'à la réception des travaux.</p>
+            <p>
+                APSI BTP accompagne les maîtres d’ouvrage publics et privés dans l’organisation,
+                le pilotage et le suivi de leurs opérations de <b>construction</b> et de <b>réhabilitation</b>.
+            </p>
+
+            <p>
+                Nos missions s’articulent autour de deux expertises complémentaires :
+                <b>OPC</b> et <b>MOEX</b>.
+            </p>
         </div>
     </section>
 
@@ -37,10 +48,13 @@
                 <h2>Ordonnancement,<br>Pilotage et Coordination<br><span>(OPC)</span></h2>
             </div>
 
-            <p>La mission OPC organise les différentes phases du chantier et coordonne les interventions des entreprises selon le planning établi.</p>
+            <p>
+                La mission OPC organise les phases du chantier, coordonne les intervenants
+                et suit l’avancement selon le planning établi.
+            </p>
 
             <div class="profession-points">
-                <div><i data-lucide="calendar-days" aria-hidden="true"></i><span>Planning<br>d'exécution</span></div>
+                <div><i data-lucide="calendar-days" aria-hidden="true"></i><span>Planning<br>d’exécution</span></div>
                 <div><i data-lucide="workflow" aria-hidden="true"></i><span>Coordination<br>des intervenants</span></div>
                 <div><i data-lucide="clock-3" aria-hidden="true"></i><span>Suivi des délais<br>et ajustements</span></div>
             </div>
@@ -54,10 +68,13 @@
 
         <div class="profession-card-copy">
             <div class="profession-title-row">
-                <h2>Maîtrise d'Œuvre<br>d'Exécution <span>(MOEX)</span></h2>
+                <h2>Maîtrise d’Œuvre<br>d’Exécution <span>(MOEX)</span></h2>
             </div>
 
-            <p>La mission MOEX assure le suivi de l'exécution des travaux, vérifie leur conformité et accompagne le maître d'ouvrage jusqu'à la réception.</p>
+            <p>
+                La mission MOEX assure le suivi technique, administratif et financier
+                des travaux jusqu’à la réception.
+            </p>
 
             <div class="profession-points">
                 <div><i data-lucide="shield-check" aria-hidden="true"></i><span>Contrôle<br>de conformité</span></div>
@@ -67,75 +84,233 @@
         </div>
     </section>
 
-    <section class="profession-scope">
-        <div class="profession-scope-heading">
-            <h2>Concrètement, notre intervention</h2>
-            <p>Nos missions s’adaptent à l’avancement du projet, depuis la préparation du chantier jusqu’aux opérations de réception.</p>
+    <section class="profession-opc-pillars">
+        <div class="section-heading">
+            <h2>Comprendre la mission OPC</h2>
+            <p>
+                L’OPC repose sur trois fonctions complémentaires : préparer, piloter
+                et coordonner le chantier dans le temps et dans l’espace.
+            </p>
         </div>
 
-        <div class="profession-scope-grid">
-            <div>
+        <div class="opc-pillars-grid">
+            <button class="opc-pillar active" type="button" data-panel="ordonnancement">
+                <i data-lucide="list-checks" aria-hidden="true"></i>
+                <span>Ordonnancement</span>
+                <small>Analyser, phaser, planifier</small>
+            </button>
+
+            <button class="opc-pillar" type="button" data-panel="pilotage">
+                <i data-lucide="activity" aria-hidden="true"></i>
+                <span>Pilotage</span>
+                <small>Suivre, ajuster, décider</small>
+            </button>
+
+            <button class="opc-pillar" type="button" data-panel="coordination">
+                <i data-lucide="network" aria-hidden="true"></i>
+                <span>Coordination</span>
+                <small>Organiser les échanges</small>
+            </button>
+        </div>
+
+        <div class="opc-panel active" id="ordonnancement">
+            <h3>Ordonnancement</h3>
+            <p>
+                L’ordonnancement intervient en amont du chantier. Il consiste à analyser les tâches,
+                les demandes administratives, les contraintes du site et les dépendances entre les entreprises.
+            </p>
+            <p>
+                Cette phase permet d’établir un <b>calendrier prévisionnel</b>, d’anticiper les enchaînements
+                entre prestataires et d’identifier une date de livraison réaliste.
+            </p>
+        </div>
+
+        <div class="opc-panel" id="pilotage">
+            <h3>Pilotage</h3>
+            <p>
+                Le pilotage correspond au suivi opérationnel du chantier. Il permet de contrôler l’avancement réel,
+                de repérer les écarts et de proposer les ajustements nécessaires.
+            </p>
+            <p>
+                Cette mission se poursuit jusqu’à la livraison, aux opérations préalables à la réception
+                et à la <b>levée des réserves</b>.
+            </p>
+        </div>
+
+        <div class="opc-panel" id="coordination">
+            <h3>Coordination</h3>
+            <p>
+                La coordination s’exerce avec l’ensemble des acteurs du projet : architecte,
+                <span class="acronym" data-definition="Bureau d’Études Techniques">BET</span>,
+                bureau de contrôle,
+                <span class="acronym" data-definition="Sécurité et Protection de la Santé">SPS</span>,
+                entreprises, exploitants en site occupé et concessionnaires.
+            </p>
+            <p>
+                Elle s’appuie sur le planning établi, mais s’adapte en permanence à la
+                <b>réalité du chantier</b> et à l’avancement des interventions.
+            </p>
+        </div>
+    </section>
+
+    <section class="profession-project-flow">
+        <div class="section-heading">
+            <h2>Notre intervention au fil du projet</h2>
+            <p>
+                De la conception à la réception, APSI BTP structure l’organisation du chantier,
+                suit l’avancement et accompagne les acteurs du projet.
+            </p>
+        </div>
+
+        <div class="project-steps" aria-label="Étapes d'intervention">
+            <button class="project-step active" type="button" data-step="conception">
                 <span>01</span>
-                <h3>Préparer</h3>
-                <p>Analyse des contraintes, organisation des phases et mise en place des premiers calendriers.</p>
-            </div>
+                <strong>Conception</strong>
+                <small>Anticiper l’organisation</small>
+            </button>
 
-            <div>
+            <button class="project-step" type="button" data-step="preparation">
                 <span>02</span>
-                <h3>Coordonner</h3>
-                <p>Organisation des interventions entre les entreprises, la maîtrise d’œuvre et la maîtrise d’ouvrage.</p>
-            </div>
+                <strong>Préparation</strong>
+                <small>Structurer le démarrage</small>
+            </button>
 
-            <div>
+            <button class="project-step" type="button" data-step="execution">
                 <span>03</span>
-                <h3>Suivre</h3>
-                <p>Contrôle de l’avancement, animation des réunions et identification des écarts éventuels.</p>
-            </div>
+                <strong>Exécution</strong>
+                <small>Suivre et ajuster</small>
+            </button>
 
-            <div>
+            <button class="project-step" type="button" data-step="reception">
                 <span>04</span>
-                <h3>Réceptionner</h3>
-                <p>Accompagnement lors des opérations préalables à la réception, levée des réserves et clôture du chantier.</p>
-            </div>
+                <strong>Réception</strong>
+                <small>Clôturer l’opération</small>
+            </button>
+        </div>
+
+        <div class="project-panel active" id="conception">
+            <h3>Conception</h3>
+            <p>
+                En phase de conception, APSI BTP accompagne la maîtrise d’ouvrage et la maîtrise d’œuvre
+                pour intégrer les contraintes d’organisation dans le projet.
+            </p>
+            <p>
+                Cette étape permet de travailler sur le <b>calendrier général</b>, le phasage des travaux,
+                les contraintes de site, les accès, les demandes administratives et les délais liés aux études
+                ou aux autorisations.
+            </p>
+            <p>
+                L’objectif est d’anticiper les conditions d’exécution avant le
+                <span class="acronym" data-definition="Dossier de Consultation des Entreprises">DCE</span>,
+                afin de limiter les aléas techniques, financiers et calendaires pendant le chantier.
+            </p>
+        </div>
+
+        <div class="project-panel" id="preparation">
+            <h3>Préparation de chantier</h3>
+            <p>
+                Pendant la période de préparation, APSI BTP établit et suit les premiers calendriers
+                opérationnels du chantier.
+            </p>
+            <p>
+                Cette phase comprend notamment le calendrier des études
+                <span class="acronym" data-definition="Études d’exécution">EXE</span>,
+                l’organisation des réunions de préparation, la coordination des entreprises,
+                la diffusion des comptes-rendus et l’identification des points à traiter avant le démarrage effectif.
+            </p>
+            <p>
+                Elle permet de clarifier les responsabilités, les délais de transmission des documents,
+                les contraintes d’intervention et l’<b>enchaînement des premiers travaux</b>.
+            </p>
+        </div>
+
+        <div class="project-panel" id="execution">
+            <h3>Exécution des travaux</h3>
+            <p>
+                En phase travaux, APSI BTP assure le suivi opérationnel du chantier.
+            </p>
+            <p>
+                Cette mission repose sur l’animation des réunions de coordination, le pointage régulier
+                de l’avancement, l’analyse des écarts entre le planning prévu et la réalité du terrain,
+                ainsi que la proposition de <b>mesures correctives</b> en cas de retard ou de difficulté.
+            </p>
+            <p>
+                Le planning est recalé lorsque nécessaire pour tenir compte des contraintes techniques,
+                des interfaces entre entreprises, des aléas de chantier ou des évolutions demandées
+                par le maître d’ouvrage.
+            </p>
+            <p>
+                Cette phase implique des échanges réguliers avec l’architecte, les
+                <span class="acronym" data-definition="Bureaux d’Études Techniques">BET</span>,
+                le bureau de contrôle, le coordonnateur
+                <span class="acronym" data-definition="Sécurité et Protection de la Santé">SPS</span>,
+                les entreprises et, lorsque le site reste occupé, les exploitants ou utilisateurs.
+            </p>
+        </div>
+
+        <div class="project-panel" id="reception">
+            <h3>Réception</h3>
+            <p>
+                En fin d’opération, APSI BTP accompagne les opérations préalables à la réception
+                et la clôture du chantier.
+            </p>
+            <p>
+                Cette étape comprend l’établissement des calendriers de réception, le suivi des essais
+                et vérifications techniques, l’organisation des visites, le suivi des réserves,
+                la coordination des interventions correctives et la collecte des documents de fin de chantier.
+            </p>
+            <p>
+                L’objectif est d’assurer une transition claire entre la fin des travaux,
+                la réception officielle, la <b>levée des réserves</b> et la remise des documents
+                nécessaires au maître d’ouvrage.
+            </p>
         </div>
     </section>
 
     <section class="profession-deliverables">
         <div>
             <h2>Documents et suivi de mission</h2>
-            <p>APSI BTP assure un suivi structuré du chantier à travers des outils clairs, partagés avec les différents acteurs du projet.</p>
+            <p>
+                Nos missions s’appuient sur des outils de suivi clairs, partagés avec les acteurs du projet.
+            </p>
         </div>
 
         <ul>
-            <li>Calendriers généraux et plannings détaillés</li>
+            <li>Calendrier général de l’opération</li>
+            <li>Planning détaillé d’exécution</li>
+            <li>Calendrier des études d’exécution</li>
             <li>Comptes-rendus de réunions de chantier</li>
-            <li>Suivi des études d’exécution et des interventions</li>
             <li>Pointage de l’avancement et analyse des écarts</li>
-            <li>Suivi des réserves jusqu’à leur levée</li>
+            <li>Planning <span class="acronym" data-definition="Opérations Préalables à la Réception">OPR</span>, réception et levée des réserves</li>
+            <li>Suivi des <span class="acronym" data-definition="Dossiers des Ouvrages Exécutés">DOE</span> et clôture administrative</li>
         </ul>
     </section>
 
     <section class="profession-assets">
         <div class="profession-assets-heading">
-            <h2>Notre approche</h2>
-            <p>Assurer un suivi clair, coordonné et adapté aux réalités du chantier.</p>
+            <h2>Une coordination de terrain</h2>
+            <p>
+                APSI BTP assure une présence régulière, des échanges quotidiens avec les intervenants
+                et une adaptation constante aux réalités du chantier.
+            </p>
         </div>
 
         <div class="profession-assets-grid">
             <div><i data-lucide="hard-hat" aria-hidden="true"></i><span>Présence<br>terrain</span></div>
-            <div><i data-lucide="timer" aria-hidden="true"></i><span>Organisation<br>du chantier</span></div>
+            <div><i data-lucide="messages-square" aria-hidden="true"></i><span>Échanges<br>quotidiens</span></div>
             <div><i data-lucide="search" aria-hidden="true"></i><span>Anticipation<br>des contraintes</span></div>
-            <div><i data-lucide="clipboard-check" aria-hidden="true"></i><span>Comptes-rendus<br>structurés</span></div>
-            <div><i data-lucide="handshake" aria-hidden="true"></i><span>Interface<br>projet</span></div>
+            <div><i data-lucide="timer" aria-hidden="true"></i><span>Suivi<br>des délais</span></div>
+            <div><i data-lucide="clipboard-check" aria-hidden="true"></i><span>Réception<br>des travaux</span></div>
         </div>
     </section>
 
     <section class="profession-cta">
         <div class="profession-cta-content">
             <i data-lucide="messages-square" aria-hidden="true"></i>
+
             <div class="profession-cta-text">
                 <h2>Un accompagnement dédié<br>pour vos opérations</h2>
-                <p><b>APSI BTP</b> vous accompagne dans le pilotage<br>et le suivi de vos chantiers.</p>
+                <p><b>APSI BTP</b> vous accompagne dans l’organisation,<br>le pilotage et le suivi de vos chantiers.</p>
             </div>
         </div>
 
@@ -167,6 +342,32 @@ window.addEventListener('load', function() {
     if (window.lucide) {
         window.lucide.createIcons();
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    function initToggleGroup(buttonSelector, panelSelector, dataKey) {
+        const buttons = document.querySelectorAll(buttonSelector);
+        const panels = document.querySelectorAll(panelSelector);
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', function() {
+                const target = this.dataset[dataKey];
+
+                buttons.forEach((btn) => btn.classList.remove('active'));
+                panels.forEach((panel) => panel.classList.remove('active'));
+
+                this.classList.add('active');
+
+                const panel = document.getElementById(target);
+                if (panel) {
+                    panel.classList.add('active');
+                }
+            });
+        });
+    }
+
+    initToggleGroup('.opc-pillar', '.opc-panel', 'panel');
+    initToggleGroup('.project-step', '.project-panel', 'step');
 });
 </script>
 </body>

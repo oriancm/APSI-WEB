@@ -10,11 +10,19 @@
     <meta name="keywords" content="clients APSI BTP, partenaires, maîtres d'ouvrage, collectivités, institutions, Provence, PACA">
     <meta name="author" content="APSI BTP">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apsi-btp.fr/clients">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://apsi-btp.fr/clients">
     <meta property="og:title" content="Nos Clients - APSI BTP">
     <meta property="og:description" content="Découvrez nos clients et partenaires qui nous font confiance pour leurs projets BTP.">
-    <meta property="og:image" content="/img/APSI.png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nos Clients - APSI BTP">
+    <meta name="twitter:description" content="Découvrez nos clients et partenaires qui nous font confiance pour leurs projets BTP.">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="/css/clients.css?v=20260623-1">
