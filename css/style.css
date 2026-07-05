@@ -370,6 +370,6 @@ body.home-page .site-footer__inner {
 @media (max-width: 600px) {
     .home-hero {
         background-size: 100% 100%, auto 78% !important;
-        background-position: center top, right center !important;
+        background-position: center top, right top !important;
     }
 }
