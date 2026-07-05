@@ -10,14 +10,14 @@ body.about-page {
     min-height: 100svh;
     --about-block-gap: clamp(24px, 3vw, 36px);
     padding-bottom: clamp(30px, 4vw, 56px);
-    overflow-x: hidden;
+    overflow-x: clip;
     --apsi-subtitle-measure: min(480px, 100%);
     --apsi-title-width: min(500px, min(1120px, var(--apsi-content-width)));
     --apsi-bg-fade-start: calc(var(--apsi-page-edge) + ((var(--apsi-page-width) - min(1120px, var(--apsi-content-width))) / 2) + var(--apsi-title-width) - clamp(54px, 4vw, 78px));
 }
 
 .about-page-shell.site-shell-bg {
-    background-image: none !important; /* Disable default sub-page background on desktop */
+    background-image: none !important;
 }
 
 .about-hero {
@@ -26,7 +26,7 @@ body.about-page {
     margin: var(--apsi-page-top) auto 0;
     min-height: max(260px, calc(var(--apsi-crane-height) - var(--apsi-header-height) - var(--apsi-page-top) - 80px));
     padding-inline: 0;
-    padding-bottom: 24px; /* Reduced vertical space to make image less high and decrease gap below paragraph */
+    padding-bottom: 24px;
     z-index: 1;
 }
 
@@ -37,7 +37,7 @@ body.about-page {
     bottom: 0;
     left: 0;
     right: calc(50% - 50vw);
-    background-image: 
+    background-image:
         linear-gradient(to right, #ffffff 0%, #ffffff 440px, rgba(255,255,255,0.92) 520px, rgba(255,255,255,0) 740px),
         url("/img/home-building-crane-wide.png");
     background-repeat: no-repeat;
@@ -47,8 +47,86 @@ body.about-page {
     pointer-events: none;
 }
 
+.about-hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 48px;
+    width: 100%;
+}
+
 .about-hero-copy {
-    width: var(--apsi-title-measure);
+    flex: 1;
+    min-width: 0;
+    max-width: 68ch;
+}
+
+.about-founders-row {
+    display: none !important;
+}
+
+.about-founder-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-shrink: 0;
+    width: 180px;
+    margin-top: 14px;
+}
+
+.about-founder-photo-frame {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #ffffff;
+    box-shadow: 0 16px 36px rgba(0, 94, 200, 0.14);
+    margin-bottom: 16px;
+    background: #f8fafc;
+    transition: transform 0.3s ease;
+}
+
+.about-founder-photo-frame:hover {
+    transform: scale(1.03);
+}
+
+.about-founder-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-frame {
+    background: linear-gradient(135deg, var(--apsi-blue) 0%, var(--apsi-navy) 100%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.founder-placeholder-logo {
+    color: #ffffff !important;
+    font-family: "Montserrat", "Inter", sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    user-select: none;
+}
+
+.about-founder-info strong {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    color: var(--apsi-navy);
+    font-weight: 700;
+}
+
+.about-founder-info span {
+    display: block;
+    font-size: 13px;
+    color: var(--apsi-blue);
+    font-weight: 500;
+    margin-top: 5px;
 }
 
 .about-hero h1,
@@ -61,7 +139,7 @@ body.about-page {
 }
 
 .about-hero h1 {
-    font-size: 38px; /* Fixed premium size matching home page slogan */
+    font-size: 38px;
     line-height: var(--apsi-title-leading);
 }
 
@@ -82,7 +160,7 @@ body.about-page {
     color: var(--apsi-ink);
     font-size: 15.5px;
     line-height: 1.62;
-    text-align: justify;
+    text-align: left;
 }
 
 .about-page-shell b {
@@ -91,9 +169,26 @@ body.about-page {
 
 .about-badges,
 .about-card,
-.about-lower-grid {
+.about-lower-grid,
+.about-intro-quote {
     width: min(1120px, calc(100vw - 32px), var(--apsi-content-width));
     margin-inline: auto;
+}
+
+.about-intro-quote {
+    width: min(820px, calc(100vw - 32px));
+    margin-top: var(--about-block-gap);
+    margin-bottom: var(--about-block-gap);
+    text-align: center;
+}
+
+.about-intro-quote p {
+    margin: 0;
+    font-family: "Montserrat", "Inter", Arial, sans-serif;
+    font-size: clamp(22px, 2.3vw, 34px);
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--apsi-navy);
 }
 
 .about-badges {
@@ -150,10 +245,15 @@ body.about-page {
     border-radius: var(--apsi-radius);
     background: rgba(255, 255, 255, 0.96);
     box-shadow: var(--apsi-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .about-missions {
     padding: clamp(26px, 3vw, 36px);
+}
+
+.about-missions-mobile-image {
+    display: none !important;
 }
 
 .about-section-title h2 {
@@ -170,8 +270,8 @@ body.about-page {
 
 .about-missions-grid {
     display: grid;
-    grid-template-columns: minmax(0, 42%) minmax(0, 58%);
-    gap: 32px;
+    grid-template-columns: minmax(320px, 40%) minmax(0, 60%);
+    gap: 42px;
     margin-top: 0;
 }
 
@@ -186,7 +286,7 @@ body.about-page {
     color: var(--apsi-ink);
     font-size: 15.5px;
     line-height: 1.62;
-    text-align: justify;
+    text-align: left;
 }
 
 .mission-item {
@@ -210,17 +310,31 @@ body.about-page {
 }
 
 .mission-item strong {
-    color: var(--apsi-ink);
+    color: var(--apsi-blue);
     font-size: 18px;
     line-height: 1.34;
+    font-weight: 700;
+}
+
+.mission-item strong span {
+    opacity: 0.8;
+    font-weight: 600;
+}
+
+.about-missions-text {
+    max-width: 68ch;
 }
 
 .about-missions-text p {
-    margin: 0 0 18px;
+    margin: 0 0 22px;
     color: var(--apsi-ink);
     font-size: 15.4px;
-    line-height: 1.55;
-    text-align: justify;
+    line-height: 1.58;
+    text-align: left;
+}
+
+.about-missions-text p:last-child {
+    margin-bottom: 0;
 }
 
 .about-lower-grid {
@@ -244,7 +358,7 @@ body.about-page {
 
 .about-experience ul {
     display: grid;
-    gap: 18px;
+    gap: 22px;
     margin: 18px 0 0;
     padding: 0;
 }
@@ -252,12 +366,18 @@ body.about-page {
 .about-experience li {
     display: grid;
     grid-template-columns: 62px 1fr;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
+    padding: 10px 0;
     color: var(--apsi-ink);
     font-size: 14.5px;
     line-height: 1.38;
     list-style: none;
+}
+
+.about-experience li span {
+    display: block;
+    padding-top: 4px;
 }
 
 .about-experience li svg {
@@ -313,7 +433,7 @@ body.about-page {
 
 .interactive-map {
     position: relative;
-    min-height: 330px;
+    min-height: 360px;
     overflow: hidden;
     border-radius: 0 0 var(--apsi-radius) var(--apsi-radius);
     background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(221,241,255,0.82) 100%);
@@ -323,7 +443,7 @@ body.about-page {
     display: block;
     width: 100%;
     max-width: 100%;
-    height: 320px;
+    height: 350px;
     overflow: hidden;
     filter: drop-shadow(0 10px 18px rgba(25, 90, 160, 0.18));
 }
@@ -372,7 +492,6 @@ body.about-page {
 @media (max-width: 1180px) {
     .about-badges {
         width: min(500px, calc(100vw - 32px));
-        transform: none;
         margin-left: calc((100% - min(1120px, var(--apsi-content-width))) / 2);
         margin-right: auto;
     }
@@ -388,8 +507,26 @@ body.about-page {
         border-right: 0;
     }
 
-    .about-missions-text p {
-        text-align: justify;
+    .about-missions-text {
+        max-width: none;
+    }
+
+    .about-missions-mobile-image {
+        display: block !important;
+        width: 100% !important;
+        margin: 16px 0 28px 0 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        border: 1px solid rgba(6, 23, 51, 0.06) !important;
+        box-shadow: 0 12px 28px rgba(0, 94, 200, 0.06) !important;
+    }
+
+    .about-missions-mobile-image img {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 280px !important;
+        object-fit: cover !important;
+        display: block !important;
     }
 }
 
@@ -408,13 +545,14 @@ body.about-page {
     .about-hero,
     .about-badges,
     .about-card,
-    .about-lower-grid {
+    .about-lower-grid,
+    .about-intro-quote {
         width: var(--apsi-page-width);
     }
 
     .about-hero {
         min-height: auto;
-        padding: 24px 20px; /* Matches padding of other sections like .about-missions, etc. */
+        padding: 24px 20px;
         margin-top: 24px;
         margin-bottom: var(--about-block-gap);
         border: 1px solid rgba(6, 23, 51, 0.07);
@@ -422,6 +560,12 @@ body.about-page {
         background: rgba(255, 255, 255, 0.96);
         box-shadow: var(--apsi-shadow);
         box-sizing: border-box;
+    }
+
+    .about-hero-content {
+        flex-direction: column;
+        gap: 32px;
+        text-align: left; /* Left align! */
     }
 
     .about-hero::after {
@@ -433,8 +577,65 @@ body.about-page {
         max-width: none;
     }
 
+    .about-founders-row {
+        display: flex !important;
+        flex-direction: row !important; /* Side-by-side! */
+        gap: 16px !important; /* Beautiful space between cards */
+        width: 100% !important; /* Fits perfectly inside parent hero card container */
+        margin: 24px 0 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .about-founder-profile {
+        margin: 0 !important;
+        flex: 1 !important; /* Distribute 50/50 width */
+        max-width: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        text-align: left !important;
+        box-sizing: border-box !important;
+    }
+
+    .about-founder-photo-frame {
+        width: 100% !important; /* Full width of the card half */
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important; /* Perfect square portraits */
+        border-radius: 12px !important; /* Premium rounded card corners */
+        border: 1px solid rgba(6, 23, 51, 0.05) !important; /* Elegant subtle border */
+        box-shadow: 0 10px 24px rgba(0, 94, 200, 0.08) !important; /* Soft card shadow */
+        margin-bottom: 12px !important;
+        overflow: hidden;
+    }
+
+    .placeholder-frame .founder-placeholder-logo {
+        font-size: clamp(32px, 10vw, 54px) !important; /* Clean monogram logo */
+    }
+
+    .about-founder-info {
+        padding: 4px 0 0 0 !important; /* Align flush with the left of the image */
+        box-sizing: border-box !important;
+    }
+
+    .about-founder-info strong {
+        font-size: clamp(14px, 4vw, 16px) !important; /* Highly readable heading size */
+        color: var(--apsi-navy) !important;
+        font-weight: 700 !important;
+    }
+
+    .about-founder-info span {
+        font-size: clamp(12px, 3.5vw, 13px) !important;
+        color: var(--apsi-blue) !important;
+        margin-top: 4px !important;
+    }
+
     .about-hero h1 {
         font-size: clamp(22px, 5.5vw, 26px);
+    }
+
+    .about-hero h1::after {
+        margin-left: 0; /* Left align underline! */
+        margin-right: auto;
     }
 
     .about-hero p {
@@ -442,6 +643,15 @@ body.about-page {
         max-width: none;
         font-size: 16px;
         line-height: 1.68;
+        text-align: left; /* Left align! */
+    }
+
+    .about-intro-quote {
+        margin-top: 0;
+    }
+
+    .about-intro-quote p {
+        font-size: clamp(20px, 4vw, 28px);
     }
 
     .about-badges {
@@ -477,10 +687,6 @@ body.about-page {
         padding: 24px 20px;
     }
 
-    .about-missions-text p {
-        text-align: justify;
-    }
-
     .mission-item {
         grid-template-columns: 62px 1fr;
     }
@@ -489,6 +695,14 @@ body.about-page {
     .about-lower-grid,
     .about-missions-grid {
         gap: 20px;
+    }
+
+    .interactive-map {
+        min-height: 330px;
+    }
+
+    .interactive-map svg {
+        height: 320px;
     }
 }
 
@@ -502,7 +716,73 @@ body.about-page {
         padding-bottom: 16px;
     }
 
-    .about-card {
-        border-radius: 8px;
+
+
+    .about-section-title h2 {
+        font-size: 24px !important;
+    }
+
+    .about-section-title::after {
+        margin-top: 10px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .about-badges {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 16px !important;
+        margin-top: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .about-badges article {
+        background: rgba(255, 255, 255, 0.96) !important;
+        border: 1px solid rgba(6, 23, 51, 0.08) !important;
+        box-shadow: var(--apsi-shadow) !important;
+        border-radius: var(--apsi-radius) !important;
+        padding: 12px 10px !important;
+        min-height: 72px !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 10px !important;
+        text-align: left !important;
+    }
+
+    .about-badges svg {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .about-badges strong {
+        font-size: 18px !important;
+    }
+
+    .about-badges span {
+        font-size: 9.5px !important;
+        margin-top: 2px !important;
+    }
+
+    .mission-item {
+        grid-template-columns: 54px 1fr;
+        gap: 14px;
+        margin: 24px 0;
+    }
+
+    .mission-item svg,
+    .about-experience li svg {
+        width: 46px;
+        height: 46px;
+        padding: 12px;
+    }
+
+    .about-experience li {
+        grid-template-columns: 54px 1fr;
+    }
+
+    .about-founders-row {
+        gap: 12px !important; /* Slightly more compact gap on narrow mobile screens */
+    }
+
+    .about-missions-mobile-image {
+        margin: 12px 0 20px 0 !important;
     }
 }

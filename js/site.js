@@ -106,10 +106,56 @@ document.addEventListener('DOMContentLoaded', function () {
         fadeAnchor.querySelectorAll?.('h1, p').forEach((element) => fadeObserver.observe(element));
     }
 
-    if (!header || !toggle) return;
+    if (header && toggle) {
+        toggle.addEventListener('click', function () {
+            const isOpen = header.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            document.body.classList.toggle('nav-open', isOpen);
+        });
+    }
 
-    toggle.addEventListener('click', function () {
-        const isOpen = header.classList.toggle('is-open');
-        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    // Progressive Scroll Reveal Logic (IntersectionObserver)
+    const revealSelector = 'section, .home-service-cards article, .about-card, .about-badges article, .mission-item, .about-experience li, .about-founders-row > div, .profession-card, .reference-tile, .clients-grid article';
+    const revealElements = document.querySelectorAll(revealSelector);
+    
+    // Add class to non-hero elements to prepare them for reveal
+    revealElements.forEach((element) => {
+        // Skip elements that are above the fold or in a hero so they load instantly
+        if (element.closest('.home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero') || element.matches('.home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero')) {
+            element.classList.add('scroll-reveal', 'is-visible');
+            return;
+        }
+        element.classList.add('scroll-reveal');
     });
+
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            // Filter elements that are intersecting
+            const intersecting = entries.filter(entry => entry.isIntersecting);
+            
+            intersecting.forEach((entry, index) => {
+                const el = entry.target;
+                // If multiple elements intersect at once (e.g. grids, lists), stagger them beautifully
+                if (intersecting.length > 1) {
+                    el.style.transitionDelay = `${index * 80}ms`;
+                } else {
+                    el.style.transitionDelay = '0ms';
+                }
+                el.classList.add('is-visible');
+                observer.unobserve(el);
+            });
+        }, {
+            threshold: 0.05,
+            rootMargin: '0px 0px -20px 0px'
+        });
+
+        revealElements.forEach((el) => {
+            if (!el.classList.contains('is-visible')) {
+                revealObserver.observe(el);
+            }
+        });
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        revealElements.forEach(el => el.classList.add('is-visible'));
+    }
 });

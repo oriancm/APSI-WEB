@@ -378,29 +378,44 @@ img {
     }
 
     .site-header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
         min-height: 72px;
         padding: 10px 16px;
-        background: #fff;
+        background: var(--apsi-blue); /* Solid premium blue mobile header */
+        box-shadow: 0 4px 20px rgba(0, 103, 214, 0.12);
         box-sizing: border-box;
     }
 
     .site-header__logo {
-        width: 118px; /* Proportional compact logo size on mobile */
-        height: 42px;
         display: flex;
         align-items: center;
-        margin-left: -12px; /* Pull the logo's visible boundaries to the left to align with the left margin */
+        justify-content: center;
+        background: #ffffff; /* Premium white background badge */
+        height: 72px; /* Matches the mobile header's height exactly to be a flush corner */
+        padding: 0 20px 0 16px; /* Elegant side padding inside the badge */
+        margin-left: -16px; /* Flush to the left edge of the header */
+        margin-top: -10px; /* Flush to the top edge of the header */
+        margin-bottom: -10px; /* Flush to the bottom edge of the header */
+        border-radius: 0; /* Sharp, clean rectangle corner */
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.05); /* Subtle drop shadow on the right boundary */
+        width: auto;
+        z-index: 1001; /* Layer securely above header background */
     }
 
     .site-header__logo img {
-        width: 100%;
-        height: 100%;
+        width: 100px; /* Proportional elegant logo sizing */
+        height: 44px;
         object-fit: contain;
         display: block;
+        filter: none !important; /* Fully restore the original colored logo design on its white canvas */
     }
 
     .site-header__toggle {
@@ -411,14 +426,14 @@ img {
         margin-top: 0;
         border: 0;
         border-radius: 10px;
-        background: #f1f5f9;
+        background: rgba(255, 255, 255, 0.15); /* Translucent white button */
         box-shadow: none;
         cursor: pointer;
         transition: background-color 0.2s ease, transform 0.15s ease;
     }
 
     .site-header__toggle:active {
-        background-color: #e2e8f0;
+        background-color: rgba(255, 255, 255, 0.25);
         transform: scale(0.95);
     }
 
@@ -429,7 +444,7 @@ img {
     .site-header__toggle svg {
         width: 24px;
         height: 24px;
-        color: var(--apsi-blue);
+        color: #fff; /* Crisp white icon */
         stroke-width: 2.5;
     }
 
@@ -556,6 +571,22 @@ img {
         gap: 12px;
     }
 }
+
+/* ==========================================================================
+   PROGRESSIVE SCROLL REVEAL (FADE-AND-SLIDE)
+   ========================================================================== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 
 

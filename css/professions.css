@@ -1,15 +1,13 @@
-/* CSS pour la page "Nos métiers" modernisé et premium */
-
 body.professions-page {
     min-height: 100vh;
     overflow-x: hidden;
     background: #f6f9fc;
-    color: var(--apsi-ink);
+    color: #000000;
     font-family: 'Inter', sans-serif;
 }
 
 body.professions-page .site-shell-bg {
-    background-image: none !important; /* Disable default sub-page background on desktop */
+    background-image: none !important;
 }
 
 .professions-shell {
@@ -17,20 +15,18 @@ body.professions-page .site-shell-bg {
     padding-bottom: clamp(40px, 6vw, 80px);
 }
 
-/* Make all black bold text blue in professions shell */
 .professions-shell b {
     color: var(--apsi-blue);
     font-weight: 700;
 }
 
-/* Hero Section */
 .professions-hero {
     position: relative;
     width: min(1120px, var(--apsi-content-width));
     margin: var(--apsi-page-top) auto var(--apsi-page-gap);
     min-height: max(260px, calc(var(--apsi-crane-height) - var(--apsi-header-height) - var(--apsi-page-top) - 80px));
     padding-inline: 0;
-    padding-bottom: 24px; /* Reduced vertical space to make image less high and decrease gap below paragraph */
+    padding-bottom: 24px;
     z-index: 1;
 }
 
@@ -41,7 +37,7 @@ body.professions-page .site-shell-bg {
     bottom: 0;
     left: 0;
     right: calc(50% - 50vw);
-    background-image: 
+    background-image:
         linear-gradient(to right, #ffffff 0%, #ffffff 440px, rgba(255,255,255,0.92) 520px, rgba(255,255,255,0) 740px),
         url("/img/home-building-crane-wide.png");
     background-repeat: no-repeat;
@@ -55,39 +51,52 @@ body.professions-page .site-shell-bg {
     width: var(--apsi-title-measure, min(500px, 100%));
 }
 
+.professions-hero-mobile-image {
+    display: none !important;
+}
+
 .professions-hero h1 {
     margin: 0;
     color: var(--apsi-navy);
     font-family: "Montserrat", "Inter", Arial, sans-serif;
     font-weight: 700;
-    letter-spacing: 0;
     font-size: var(--apsi-title-size);
     line-height: var(--apsi-title-leading);
 }
 
-.professions-hero h1::after {
+.professions-hero h1::after,
+.profession-card h2::after,
+.profession-assets h2::after,
+.profession-scope h2::after,
+.profession-deliverables h2::after {
     content: "";
     display: block;
+    width: 48px;
+    height: 3.5px;
+    background: var(--apsi-blue);
+    border-radius: 999px;
+    margin-top: 14px;
+}
+
+.professions-hero h1::after {
     width: 58px;
     height: 4px;
     margin-top: 18px;
-    border-radius: 999px;
-    background: var(--apsi-blue);
 }
 
 .professions-hero-copy p {
     max-width: min(480px, 100%);
     margin: 26px 0 0;
-    color: var(--apsi-ink);
+    color: #000000;
     font-size: 15.5px;
     line-height: 1.62;
-    text-align: justify;
 }
 
-/* Cards & Sections Layout */
 .profession-card,
 .profession-assets,
-.profession-cta {
+.profession-cta,
+.profession-scope,
+.profession-deliverables {
     width: min(1120px, calc(100vw - 32px), var(--apsi-content-width));
     margin: 0 auto 32px;
     background: var(--apsi-card);
@@ -102,33 +111,19 @@ body.professions-page .site-shell-bg {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 48px;
-    padding: 42px;
+    padding: 42px 48px;
     align-items: center;
-}
-
-.profession-card--opc {
-    padding-left: 48px;
-    padding-right: 48px; /* Symmetrical padding */
-}
-
-.profession-card--moex {
-    padding-left: 48px;
-    padding-right: 48px;
 }
 
 .profession-card--opc img {
     display: block;
-    width: 86% !important; /* Decreased size */
+    width: 86% !important;
     height: auto !important;
     border-radius: 12px;
-    margin-left: auto; /* Push more to the right but stop with margin-right */
-    margin-right: 18px !important; /* Generous extra margin to avoid right border crowding */
+    margin-left: auto;
+    margin-right: 18px !important;
     box-shadow: 0 12px 30px rgba(0, 103, 214, 0.08);
     transition: transform 0.3s ease;
-}
-
-.profession-card--opc img:hover {
-    transform: scale(1.02);
 }
 
 .profession-card--moex img {
@@ -140,7 +135,7 @@ body.professions-page .site-shell-bg {
     transition: transform 0.3s ease;
 }
 
-.profession-card--moex img:hover {
+.profession-card img:hover {
     transform: scale(1.02);
 }
 
@@ -157,33 +152,21 @@ body.professions-page .site-shell-bg {
     margin-bottom: 24px;
 }
 
-.profession-title-row .profession-main-icon {
-    margin-bottom: 0;
-    flex-shrink: 0;
-}
-
-.profession-main-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 82px;
-    height: 82px;
-    padding: 18px;
-    color: var(--apsi-blue);
-    background: rgba(0, 103, 214, 0.04);
-    border: 1.5px solid rgba(0, 103, 214, 0.22);
-    border-radius: 50%;
-    stroke-width: 1.8;
-    margin-bottom: 24px;
-}
-
-.profession-card h2 {
+.profession-card h2,
+.profession-assets h2,
+.profession-scope h2,
+.profession-deliverables h2,
+.profession-cta h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: clamp(24px, 2.2vw, 32px);
     font-weight: 800;
     color: var(--apsi-navy);
     line-height: 1.15;
-    margin: 0 0 20px;
+    margin: 0;
+}
+
+.profession-card h2 {
+    margin-bottom: 20px;
 }
 
 .profession-card h2 span {
@@ -192,25 +175,20 @@ body.professions-page .site-shell-bg {
     font-weight: 700;
 }
 
-.profession-card h2::after {
-    content: "";
-    display: block;
-    width: 48px;
-    height: 3.5px;
-    background: var(--apsi-blue);
-    border-radius: 2px;
-    margin-top: 14px;
+.profession-card p,
+.profession-scope-heading p,
+.profession-deliverables p,
+.profession-assets-heading p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #000000;
+    margin: 0;
 }
 
 .profession-card p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--apsi-muted);
-    margin: 0 0 28px;
-    text-align: justify; /* Justified paragraph */
+    margin-bottom: 28px;
 }
 
-/* Points Grid (Inside cards) - Styled both i and generated svg tags to support Lucide loading */
 .profession-points {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -220,27 +198,38 @@ body.professions-page .site-shell-bg {
 .profession-points > div {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     background: #fbfdff;
     border: 1px solid rgba(0, 103, 214, 0.06);
     border-radius: 10px;
     padding: 16px 12px;
+    min-height: 118px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.profession-points > div:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 103, 214, 0.04);
-    border-color: rgba(0, 103, 214, 0.12);
+.profession-points > div:hover,
+.profession-assets-grid > div:hover,
+.profession-scope-grid > div:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 103, 214, 0.05);
+    border-color: rgba(0, 103, 214, 0.14);
+}
+
+.profession-points i,
+.profession-points svg,
+.profession-assets-grid i,
+.profession-assets-grid svg {
+    color: var(--apsi-blue);
+    stroke-width: 1.8;
+    margin-bottom: 14px;
 }
 
 .profession-points i,
 .profession-points svg {
-    width: 24px;
-    height: 24px;
-    color: var(--apsi-blue);
-    margin-bottom: 12px;
-    stroke-width: 1.8;
+    width: 26px;
+    height: 26px;
 }
 
 .profession-points span {
@@ -250,37 +239,113 @@ body.professions-page .site-shell-bg {
     color: var(--apsi-navy);
 }
 
-/* Atouts Section (Our advantages) */
+.profession-scope {
+    padding: 48px;
+}
+
+.profession-scope-heading {
+    max-width: 720px;
+    margin-bottom: 34px;
+}
+
+.profession-scope-heading p,
+.profession-assets-heading p,
+.profession-deliverables p {
+    margin-top: 18px;
+}
+
+.profession-scope-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.profession-scope-grid > div {
+    background: #fbfdff;
+    border: 1px solid rgba(0, 103, 214, 0.06);
+    border-radius: 12px;
+    padding: 24px 20px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.profession-scope-grid span {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--apsi-blue);
+    margin-bottom: 14px;
+}
+
+.profession-scope-grid h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: var(--apsi-navy);
+    margin: 0 0 10px;
+}
+
+.profession-scope-grid p {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: #000000;
+    margin: 0;
+}
+
+.profession-deliverables {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 48px;
+    padding: 48px;
+    align-items: start;
+}
+
+.profession-deliverables ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 14px;
+}
+
+.profession-deliverables li {
+    position: relative;
+    padding-left: 28px;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: #000000;
+}
+
+.profession-deliverables li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--apsi-blue);
+}
+
 .profession-assets {
     padding: 48px;
     text-align: center;
 }
 
-.profession-assets h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(24px, 2.2vw, 32px);
-    font-weight: 800;
-    color: var(--apsi-navy);
-    margin: 0 0 36px;
+.profession-assets-heading {
+    max-width: 720px;
+    margin: 0 auto 36px;
 }
 
 .profession-assets h2::after {
-    content: "";
-    display: block;
-    width: 48px;
-    height: 3.5px;
-    background: var(--apsi-blue);
-    border-radius: 2px;
-    margin: 14px auto 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Advantages Grid - Styled both i and generated svg tags */
 .profession-assets-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 18px;
-    margin-bottom: 32px;
 }
 
 .profession-assets-grid > div {
@@ -296,22 +361,14 @@ body.professions-page .site-shell-bg {
     flex: 1 1 calc((100% - 4 * 18px) / 5);
     max-width: calc((100% - 4 * 18px) / 5);
     min-width: 170px;
+    text-align: center;
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-.profession-assets-grid > div:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 103, 214, 0.05);
-    border-color: rgba(0, 103, 214, 0.15);
 }
 
 .profession-assets-grid i,
 .profession-assets-grid svg {
-    width: 32px;
-    height: 32px;
-    color: var(--apsi-blue);
-    margin-bottom: 16px;
-    stroke-width: 1.8;
+    width: 34px;
+    height: 34px;
 }
 
 .profession-assets-grid span {
@@ -322,38 +379,18 @@ body.professions-page .site-shell-bg {
     text-align: center;
 }
 
-.profession-assets p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--apsi-muted);
-    margin: 0;
-}
-
-/* Call to Action (CTA) - Restored gorgeous blue-navy gradient overlay on top of blueprint background image */
 .profession-cta {
     display: grid;
     grid-template-columns: auto auto;
     justify-content: flex-start;
     align-items: center;
-    gap: 32px; /* Close, premium gap bringing the button right next to the title and text block */
+    gap: 32px;
     padding: 48px;
     background: linear-gradient(90deg, var(--apsi-footer-blue) 0%, var(--apsi-footer-blue) 30%, rgba(0, 103, 214, 0.85) 42%, rgba(0, 103, 214, 0.4) 55%, rgba(0, 103, 214, 0) 70%), url('/img/profession-cta.jpg') no-repeat right center / cover;
     border: none;
     color: #ffffff;
     position: relative;
     overflow: hidden;
-}
-
-.profession-cta::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%);
-    pointer-events: none;
 }
 
 .profession-cta-content {
@@ -364,17 +401,8 @@ body.professions-page .site-shell-bg {
     position: relative;
 }
 
-.profession-cta-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
 .profession-cta i,
 .profession-cta svg {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 64px;
     height: 64px;
     padding: 16px;
@@ -383,42 +411,26 @@ body.professions-page .site-shell-bg {
     border: 1.5px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     stroke-width: 1.8;
-    margin-bottom: 0;
     flex-shrink: 0;
-    margin-top: 2px; /* Vertically align icon with first line of the header */
 }
 
 .profession-cta h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(24px, 2.2vw, 32px);
-    font-weight: 800;
     color: #ffffff;
-    line-height: 1.2;
-    margin: 0;
 }
 
 .profession-cta h2::after {
-    content: "";
-    display: block;
-    width: 48px;
-    height: 3px;
     background: #ffffff;
-    border-radius: 2px;
-    margin-top: 14px;
 }
 
 .profession-cta p {
     font-size: 16px;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.9);
-    margin: 16px 0 0; /* Clean margin-top below the heading, clearing bottom margin */
-    text-align: justify; /* Justified paragraph */
+    margin: 16px 0 0;
 }
 
-/* Override general blue bold styling to keep it white/bold in CTA section */
 .profession-cta b {
     color: #ffffff;
-    font-weight: 700;
 }
 
 .profession-cta-btn {
@@ -434,7 +446,7 @@ body.professions-page .site-shell-bg {
     font-weight: 700;
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0, 50, 110, 0.15);
-    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.25s, transform 0.25s, box-shadow 0.25s;
     z-index: 1;
 }
 
@@ -447,27 +459,15 @@ body.professions-page .site-shell-bg {
 
 .profession-cta-btn i,
 .profession-cta-btn svg {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     width: 18px !important;
     height: 18px !important;
     padding: 0 !important;
     background: none !important;
     border: none !important;
     border-radius: 0 !important;
-    margin: 0 !important;
     color: currentColor !important;
-    stroke-width: 2.2 !important;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.profession-cta-btn:hover i,
-.profession-cta-btn:hover svg {
-    transform: translateX(4px) !important;
-}
-
-/* Responsive Queries */
 @media screen and (max-width: 1100px) {
     .professions-hero {
         width: calc(100% - 32px);
@@ -477,30 +477,32 @@ body.professions-page .site-shell-bg {
 
     .profession-card,
     .profession-assets,
-    .profession-cta {
+    .profession-cta,
+    .profession-scope,
+    .profession-deliverables {
         width: calc(100% - 32px);
         margin-left: 16px;
         margin-right: 16px;
         padding: 32px;
     }
 
-    .profession-card {
+    .profession-card,
+    .profession-deliverables {
         grid-template-columns: 1fr;
-        gap: 32px;
     }
 
     .profession-card img,
     .profession-card--opc img {
         width: 100% !important;
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-        height: auto !important;
+        margin: 0 !important;
     }
 
     .profession-card--moex img {
-        order: 2; /* Image on bottom */
-        width: 100% !important;
-        height: auto !important;
+        order: 2;
+    }
+
+    .profession-scope-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .profession-assets-grid > div {
@@ -511,8 +513,8 @@ body.professions-page .site-shell-bg {
 
 @media screen and (max-width: 850px) {
     .profession-assets-grid > div {
-        flex: 1 1 calc((100% - 1 * 18px) / 2) !important;
-        max-width: calc((100% - 1 * 18px) / 2) !important;
+        flex: 1 1 calc((100% - 18px) / 2) !important;
+        max-width: calc((100% - 18px) / 2) !important;
     }
 
     .profession-cta {
@@ -531,18 +533,12 @@ body.professions-page .site-shell-bg {
         width: 100%;
     }
 
-    .profession-cta-text {
-        align-items: center;
-        text-align: center;
-        width: 100%;
-    }
-
     .profession-cta h2::after {
-        margin: 14px auto 0; /* Center the line */
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .profession-cta-btn {
-        align-self: center;
         width: 100%;
         max-width: 280px;
     }
@@ -556,22 +552,18 @@ body.professions-page .site-shell-bg {
 
     .profession-card,
     .profession-assets,
-    .profession-cta {
+    .profession-cta,
+    .profession-scope,
+    .profession-deliverables {
         padding: 24px 20px;
     }
 
-    .profession-points {
+    .profession-points,
+    .profession-scope-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .profession-points > div {
-        align-items: center;
-        text-align: center;
     }
 
     .profession-assets-grid {
-        display: flex !important;
         flex-direction: column !important;
         gap: 12px !important;
     }
@@ -583,26 +575,12 @@ body.professions-page .site-shell-bg {
         padding: 16px !important;
     }
 
-
-    
     .profession-title-row {
         gap: 16px;
         margin-bottom: 16px;
     }
-
-    .profession-title-row .profession-main-icon {
-        margin-bottom: 0 !important;
-    }
-
-    .profession-main-icon {
-        width: 64px;
-        height: 64px;
-        padding: 14px;
-        margin-bottom: 18px;
-    }
 }
 
-/* Match responsive heading and copy sizes with Qui sommes nous page (with white card rectangle and no background crane image on mobile) */
 @media (max-width: 980px) {
     .professions-page .site-shell-bg {
         background-image: none !important;
@@ -633,6 +611,24 @@ body.professions-page .site-shell-bg {
         max-width: none !important;
     }
 
+    .professions-hero-mobile-image {
+        display: block !important;
+        width: 100% !important;
+        margin: 16px 0 20px 0 !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+        border: 1px solid rgba(6, 23, 51, 0.05) !important;
+        box-shadow: 0 10px 24px rgba(0, 94, 200, 0.06) !important;
+    }
+
+    .professions-hero-mobile-image img {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 240px !important;
+        object-fit: cover !important;
+        display: block !important;
+    }
+
     .professions-hero h1 {
         font-size: clamp(22px, 5.5vw, 26px) !important;
     }
@@ -645,7 +641,6 @@ body.professions-page .site-shell-bg {
     }
 }
 
-/* Ensure the spacing above the footer has a pure white background (no grey break) */
 body.professions-page .site-footer {
     margin-top: 0 !important;
 }

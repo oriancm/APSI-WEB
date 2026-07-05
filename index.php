@@ -17,8 +17,8 @@
     <meta property="og:image" content="/img/APSI.png">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/css/site.css?v=20260629-8">
-    <link rel="stylesheet" href="/css/style.css?v=20260629-8">
+    <link rel="stylesheet" href="/css/site.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/css/style.css?v=<?= time() ?>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="/js/site.js" defer></script>
@@ -40,19 +40,19 @@
 
         <section class="home-service-cards" aria-label="Domaines d'intervention">
             <article>
-                <i data-lucide="pencil-ruler" aria-hidden="true"></i>
-                <h2>Conception & ingénierie</h2>
-                <p>Nous concevons des solutions techniques adaptées à vos besoins.</p>
+                <i data-lucide="users" aria-hidden="true"></i>
+                <h2>Coordination de chantier</h2>
+                <p>Organisation des interventions et coordination des entreprises.</p>
             </article>
             <article>
-                <i data-lucide="workflow" aria-hidden="true"></i>
-                <h2>Pilotage de chantier</h2>
-                <p>Nous pilotons vos projets avec rigueur et méthode, de la planification à la livraison.</p>
+                <i data-lucide="calendar" aria-hidden="true"></i>
+                <h2>Planification des travaux</h2>
+                <p>Suivi des délais, phasage et anticipation des contraintes d’exécution.</p>
             </article>
             <article>
-                <i data-lucide="building-2" aria-hidden="true"></i>
-                <h2>Construction générale</h2>
-                <p>Nous réalisons vos ouvrages avec qualité, sécurité et durabilité.</p>
+                <i data-lucide="hard-hat" aria-hidden="true"></i>
+                <h2>Suivi opérationnel</h2>
+                <p>Présence terrain, dialogue constant et suivi du chantier jusqu’à la livraison.</p>
             </article>
         </section>
     </main>

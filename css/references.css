@@ -307,9 +307,13 @@ body.references-page .site-shell-bg {
 
     .references-filter-wrap {
         position: sticky;
-        top: 12px;
+        top: 84px !important; /* Adjusted to sit nicely below the 72px fixed global header */
         z-index: 100;
         margin-bottom: 24px;
+    }
+
+    body.nav-open .references-filter-wrap {
+        display: none !important; /* Hide filter button when mobile menu is open */
     }
 
     .filter-toggle {

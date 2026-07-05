@@ -5,11 +5,13 @@ $id = $_GET['id'] ?? null;
 
 function fallbackReferences(): array {
     return [
-        ['id' => 10001, 'titre' => 'Groupe scolaire en site occupé', 'commune' => 'Avignon', 'domaine' => '4', 'statut' => '1', 'anneeD' => '2021', 'anneeF' => '2023', 'duree_travaux_mois' => '20', 'moa' => "Ville d'Avignon", 'archi' => 'Atelier Provence Architecture', 'eMoe' => 'Méditerranée Structure', 'montant' => 3200000, 'nbPhase' => 5, 'nbE' => 12, 'nombre_lots' => 10, 'description' => "Réhabilitation d'un groupe scolaire en site occupé avec phasage précis des interventions et maintien de l'activité."],
-        ['id' => 10002, 'titre' => 'Réhabilitation de logements collectifs', 'commune' => 'Apt', 'domaine' => '10', 'statut' => '1', 'anneeD' => '2020', 'anneeF' => '2022', 'duree_travaux_mois' => '18', 'moa' => 'Bailleur social Provence Habitat', 'archi' => 'Studio Ligne Claire', 'eMoe' => 'Méditerranée Structure', 'montant' => 2800000, 'nbPhase' => 4, 'nbE' => 10, 'nombre_lots' => 9, 'description' => 'Réhabilitation thermique et fonctionnelle de logements collectifs avec coordination des interventions en site occupé.'],
-        ['id' => 10003, 'titre' => 'Pôle santé et services publics', 'commune' => 'Manosque', 'domaine' => '9', 'statut' => '1', 'anneeD' => '2021', 'anneeF' => '2023', 'duree_travaux_mois' => '16', 'moa' => "Communauté d'agglomération", 'archi' => 'Atelier Santé', 'eMoe' => 'BET Provence', 'montant' => 3600000, 'nbPhase' => 3, 'nbE' => 13, 'nombre_lots' => 11, 'description' => "Création d'un équipement de santé et de services publics avec coordination renforcée des lots techniques."],
-        ['id' => 10004, 'titre' => 'Gymnase intercommunal du Vallon', 'commune' => 'Pertuis', 'domaine' => '2', 'statut' => '1', 'anneeD' => '2020', 'anneeF' => '2022', 'duree_travaux_mois' => '18', 'moa' => 'Communauté Territoriale Sud Luberon', 'archi' => 'Studio Ligne Claire', 'eMoe' => 'Méditerranée Structure', 'montant' => 4200000, 'nbPhase' => 4, 'nbE' => 14, 'nombre_lots' => 12, 'description' => "Réalisation d'un gymnase multisports comprenant tribunes, vestiaires, dojo annexe et plateau extérieur. Coordination renforcée des lots charpente bois, sols sportifs et traitement acoustique."],
-        ['id' => 10005, 'titre' => 'Équipement culturel et médiathèque', 'commune' => 'Cavaillon', 'domaine' => '3', 'statut' => '1', 'anneeD' => '2022', 'anneeF' => '2024', 'duree_travaux_mois' => '19', 'moa' => 'Ville de Cavaillon', 'archi' => 'Agence Culture & Bois', 'eMoe' => 'BET Lumière', 'montant' => 5100000, 'nbPhase' => 4, 'nbE' => 16, 'nombre_lots' => 13, 'description' => "Construction d'un équipement culturel et d'une médiathèque intégrant des espaces publics modulables."],
+        ['id' => 1, 'titre' => 'Aménagement de la Place Jean Jaurès', 'commune' => 'APT (84)', 'domaine' => '5', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2025', 'duree_travaux_mois' => '12', 'moa' => 'CITADIS (84)', 'archi' => null, 'eMoe' => null, 'montant' => 980000, 'nbPhase' => null, 'nbE' => 4, 'nombre_lots' => 6, 'description' => 'Aménagement de la Place Jean Jaurès à Apt.'],
+        ['id' => 2, 'titre' => 'Centre Culturel Simone Signoret', 'commune' => 'CHATEAU-ARNOUX (04)', 'domaine' => '3', 'statut' => '1', 'anneeD' => '2023', 'anneeF' => '2025', 'duree_travaux_mois' => '15', 'moa' => 'PROVENCE ALPES AGGLOMERATION Digne-les-Bains (04)', 'archi' => null, 'eMoe' => null, 'montant' => 2875000, 'nbPhase' => null, 'nbE' => 13, 'nombre_lots' => 18, 'description' => 'Réhabilitation du Centre Culturel Simone Signoret et de ses abords à Château-Arnoux-Saint-Auban.'],
+        ['id' => 3, 'titre' => 'L’hôtel des Monnaies-Niel', 'commune' => 'AVIGNON (84)', 'domaine' => '12', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '20', 'moa' => 'Groupe E-Hôtel (69)', 'archi' => null, 'eMoe' => null, 'montant' => 8000000, 'nbPhase' => null, 'nbE' => 18, 'nombre_lots' => 25, 'description' => "Reconversion de l'hôtel des Monnaies-Niel pour la création d'un hôtel de 40 chambres, Place du Palais des Papes à Avignon."],
+        ['id' => 4, 'titre' => "Residence l'Aygues", 'commune' => 'ORANGE (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '24', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => null, 'eMoe' => null, 'montant' => 9250000, 'nbPhase' => null, 'nbE' => 9, 'nombre_lots' => 12, 'description' => "Réhabilitation de 146 logements collectifs - Résidence « L'Aygues » à Orange."],
+        ['id' => 5, 'titre' => 'Réfectoire de Coudoux', 'commune' => 'COUDOUX (13)', 'domaine' => '4', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '11', 'moa' => 'Commune de COUDOUX (13)', 'archi' => null, 'eMoe' => null, 'montant' => 1300000, 'nbPhase' => null, 'nbE' => 14, 'nombre_lots' => 16, 'description' => "Création d'un réfectoire et extension du groupe scolaire à Coudoux."],
+        ['id' => 6, 'titre' => 'Réhabilitation du collège Paul Cézanne', 'commune' => 'BRIGNOLES (83)', 'domaine' => '4', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '19', 'moa' => 'Conseil Départemental (83)', 'archi' => null, 'eMoe' => null, 'montant' => 5400000, 'nbPhase' => null, 'nbE' => 14, 'nombre_lots' => 18, 'description' => 'Réhabilitation du collège Paul Cézanne à Brignoles.'],
+        ['id' => 7, 'titre' => 'Résidence Les Angevines', 'commune' => 'LE THOR (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '20', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => null, 'eMoe' => null, 'montant' => 3280000, 'nbPhase' => null, 'nbE' => 17, 'nombre_lots' => 22, 'description' => 'Construction de 30 logements collectifs – Résidence « Les Angevines » au Thor.']
     ];
 }
 
@@ -34,8 +36,70 @@ function getThePic($db, $idR) {
     $stmt->execute();
     $pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if (empty($pics) && $db instanceof NullDb) {
-        $localPics = ['img5.jpg', 'img4.jpg', 'img3.jpg', 'img2.jpg', 'img1.jpg'];
-        return array_map(fn($pic, $index) => ['id' => $index + 1, 'idR' => $idR, 'titre' => $pic, 'orderPic' => $index + 1], $localPics, array_keys($localPics));
+        $allPics = [
+            1 => [
+                'amenagement_de_la_place_jean_jaures_1.jpg',
+                'amenagement_de_la_place_jean_jaures_2.png',
+                'amenagement_de_la_place_jean_jaures_3.png',
+                'amenagement_de_la_place_jean_jaures_4.jpg'
+            ],
+            2 => [
+                'centre_culturel_simone_signoret_1.jpg',
+                'centre_culturel_simone_signoret_2.jpg',
+                'centre_culturel_simone_signoret_3.jpg',
+                'centre_culturel_simone_signoret_4.jpg',
+                'centre_culturel_simone_signoret_5.jpg',
+                'centre_culturel_simone_signoret_6.jpg',
+                'centre_culturel_simone_signoret_7.jpg'
+            ],
+            3 => [
+                'l_hotel_des_monnaies_niel_1.jpg',
+                'l_hotel_des_monnaies_niel_2.png',
+                'l_hotel_des_monnaies_niel_3.jpg',
+                'l_hotel_des_monnaies_niel_4.jpg',
+                'l_hotel_des_monnaies_niel_5.jpg',
+                'l_hotel_des_monnaies_niel_6.jpg',
+                'l_hotel_des_monnaies_niel_7.jpg',
+                'l_hotel_des_monnaies_niel_8.jpg',
+                'l_hotel_des_monnaies_niel_9.jpg'
+            ],
+            4 => [
+                'residence_l_aygues_1.jpg'
+            ],
+            5 => [
+                'refectoire_de_coudoux_1.jpg',
+                'refectoire_de_coudoux_2.jpg',
+                'refectoire_de_coudoux_3.jpg',
+                'refectoire_de_coudoux_4.avif',
+                'refectoire_de_coudoux_5.jpg',
+                'refectoire_de_coudoux_6.jpg',
+                'refectoire_de_coudoux_7.jpg'
+            ],
+            6 => [
+                'rehabilitation_du_college_paul_cezanne_1.jpg',
+                'rehabilitation_du_college_paul_cezanne_2.jpg',
+                'rehabilitation_du_college_paul_cezanne_3.jpg',
+                'rehabilitation_du_college_paul_cezanne_4.jpg',
+                'rehabilitation_du_college_paul_cezanne_5.jpg',
+                'rehabilitation_du_college_paul_cezanne_6.jpg'
+            ],
+            7 => [
+                'residence_les_angevines_1.jpg',
+                'residence_les_angevines_2.jpg',
+                'residence_les_angevines_3.jpeg',
+                'residence_les_angevines_4.jpg',
+                'residence_les_angevines_5.jpg',
+                'residence_les_angevines_6.jpg',
+                'residence_les_angevines_7.jpg',
+                'residence_les_angevines_8.jpg'
+            ]
+        ];
+        $list = $allPics[(int)$idR] ?? [];
+        $out = [];
+        foreach ($list as $idx => $pic) {
+            $out[] = ['id' => $idx + 1, 'idR' => $idR, 'titre' => $pic, 'orderPic' => $idx + 1];
+        }
+        return $out;
     }
     return $pics;
 }
@@ -59,12 +123,71 @@ function getAllPics($db): array {
     $stmt->execute();
     $pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if (empty($pics) && $db instanceof NullDb) {
-        $fallback = [];
-        $localPics = ['img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg'];
-        foreach (fallbackReferences() as $index => $ref) {
-            $fallback[] = ['idR' => $ref['id'], 'titre' => $localPics[$index % count($localPics)], 'orderPic' => 1];
+        $allPics = [
+            1 => [
+                'amenagement_de_la_place_jean_jaures_1.jpg',
+                'amenagement_de_la_place_jean_jaures_2.png',
+                'amenagement_de_la_place_jean_jaures_3.png',
+                'amenagement_de_la_place_jean_jaures_4.jpg'
+            ],
+            2 => [
+                'centre_culturel_simone_signoret_1.jpg',
+                'centre_culturel_simone_signoret_2.jpg',
+                'centre_culturel_simone_signoret_3.jpg',
+                'centre_culturel_simone_signoret_4.jpg',
+                'centre_culturel_simone_signoret_5.jpg',
+                'centre_culturel_simone_signoret_6.jpg',
+                'centre_culturel_simone_signoret_7.jpg'
+            ],
+            3 => [
+                'l_hotel_des_monnaies_niel_1.jpg',
+                'l_hotel_des_monnaies_niel_2.png',
+                'l_hotel_des_monnaies_niel_3.jpg',
+                'l_hotel_des_monnaies_niel_4.jpg',
+                'l_hotel_des_monnaies_niel_5.jpg',
+                'l_hotel_des_monnaies_niel_6.jpg',
+                'l_hotel_des_monnaies_niel_7.jpg',
+                'l_hotel_des_monnaies_niel_8.jpg',
+                'l_hotel_des_monnaies_niel_9.jpg'
+            ],
+            4 => [
+                'residence_l_aygues_1.jpg'
+            ],
+            5 => [
+                'refectoire_de_coudoux_1.jpg',
+                'refectoire_de_coudoux_2.jpg',
+                'refectoire_de_coudoux_3.jpg',
+                'refectoire_de_coudoux_4.avif',
+                'refectoire_de_coudoux_5.jpg',
+                'refectoire_de_coudoux_6.jpg',
+                'refectoire_de_coudoux_7.jpg'
+            ],
+            6 => [
+                'rehabilitation_du_college_paul_cezanne_1.jpg',
+                'rehabilitation_du_college_paul_cezanne_2.jpg',
+                'rehabilitation_du_college_paul_cezanne_3.jpg',
+                'rehabilitation_du_college_paul_cezanne_4.jpg',
+                'rehabilitation_du_college_paul_cezanne_5.jpg',
+                'rehabilitation_du_college_paul_cezanne_6.jpg'
+            ],
+            7 => [
+                'residence_les_angevines_1.jpg',
+                'residence_les_angevines_2.jpg',
+                'residence_les_angevines_3.jpeg',
+                'residence_les_angevines_4.jpg',
+                'residence_les_angevines_5.jpg',
+                'residence_les_angevines_6.jpg',
+                'residence_les_angevines_7.jpg',
+                'residence_les_angevines_8.jpg'
+            ]
+        ];
+        $out = [];
+        foreach ($allPics as $idR => $list) {
+            foreach ($list as $idx => $pic) {
+                $out[] = ['idR' => $idR, 'titre' => $pic, 'orderPic' => $idx + 1];
+            }
         }
-        return $fallback;
+        return $out;
     }
     return $pics;
 }
@@ -237,27 +360,33 @@ $activePage = 'references';
                                 </div>
                                 <span class="row-value"><?= htmlspecialchars($ref['moa'] ?? '—') ?></span>
                             </div>
+                            <?php if (!empty($ref['archi'])): ?>
                             <div class="card-row">
                                 <div class="row-label-container">
                                     <i data-lucide="pencil" aria-hidden="true"></i>
                                     <strong>Architecte</strong>
                                 </div>
-                                <span class="row-value"><?= htmlspecialchars($ref['archi'] ?? '—') ?></span>
+                                <span class="row-value"><?= htmlspecialchars($ref['archi']) ?></span>
                             </div>
+                            <?php endif; ?>
+                            <?php if (!empty($ref['eMoe'])): ?>
                             <div class="card-row">
                                 <div class="row-label-container">
                                     <i data-lucide="users" aria-hidden="true"></i>
                                     <strong>Équipe de Maîtrise d'Œuvre</strong>
                                 </div>
-                                <span class="row-value"><?= htmlspecialchars($ref['eMoe'] ?? '—') ?></span>
+                                <span class="row-value"><?= htmlspecialchars($ref['eMoe']) ?></span>
                             </div>
+                            <?php endif; ?>
+                            <?php if (!empty($ref['nbPhase'])): ?>
                             <div class="card-row">
                                 <div class="row-label-container">
                                     <i data-lucide="git-branch" aria-hidden="true"></i>
                                     <strong>Nombre de phases</strong>
                                 </div>
-                                <span class="row-value"><?= !empty($ref['nbPhase']) ? htmlspecialchars((string)$ref['nbPhase']) : '—' ?></span>
+                                <span class="row-value"><?= htmlspecialchars((string)$ref['nbPhase']) ?></span>
                             </div>
+                            <?php endif; ?>
                             <div class="card-row">
                                 <div class="row-label-container">
                                     <i data-lucide="building" aria-hidden="true"></i>

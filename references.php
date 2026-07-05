@@ -8,14 +8,13 @@ function getAllRef($db) {
     $refs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if (empty($refs) && $db instanceof NullDb) {
         return [
-            ['id' => 10001, 'titre' => 'Groupe scolaire en site occupé', 'commune' => 'Avignon', 'domaine' => '4'],
-            ['id' => 10002, 'titre' => 'Réhabilitation de logements collectifs', 'commune' => 'Apt', 'domaine' => '10'],
-            ['id' => 10003, 'titre' => 'Pôle santé et services publics', 'commune' => 'Manosque', 'domaine' => '9'],
-            ['id' => 10004, 'titre' => 'Gymnase intercommunal', 'commune' => 'Pertuis', 'domaine' => '2'],
-            ['id' => 10005, 'titre' => 'Équipement culturel et médiathèque', 'commune' => 'Cavaillon', 'domaine' => '3'],
-            ['id' => 10006, 'titre' => 'Maison des associations', 'commune' => 'Forcalquier', 'domaine' => '6'],
-            ['id' => 10007, 'titre' => 'Extension administrative', 'commune' => 'Sisteron', 'domaine' => '6'],
-            ['id' => 10008, 'titre' => 'Équipement petite enfance', 'commune' => 'Salon-de-Provence', 'domaine' => '7'],
+            ['id' => 1, 'titre' => 'Aménagement de la Place Jean Jaurès', 'commune' => 'APT (84)', 'domaine' => '5'],
+            ['id' => 2, 'titre' => 'Centre Culturel Simone Signoret', 'commune' => 'CHATEAU-ARNOUX (04)', 'domaine' => '3'],
+            ['id' => 3, 'titre' => 'L’hôtel des Monnaies-Niel', 'commune' => 'AVIGNON (84)', 'domaine' => '12'],
+            ['id' => 4, 'titre' => "Residence l'Aygues", 'commune' => 'ORANGE (84)', 'domaine' => '10'],
+            ['id' => 5, 'titre' => 'Réfectoire de Coudoux', 'commune' => 'COUDOUX (13)', 'domaine' => '4'],
+            ['id' => 6, 'titre' => 'Réhabilitation du collège Paul Cézanne', 'commune' => 'BRIGNOLES (83)', 'domaine' => '4'],
+            ['id' => 7, 'titre' => 'Résidence Les Angevines', 'commune' => 'LE THOR (84)', 'domaine' => '10']
         ];
     }
     return $refs;
@@ -27,12 +26,50 @@ function getAllPic($db) {
     $stmt->execute();
     $pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if (empty($pics) && $db instanceof NullDb) {
-        $localPics = ['img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.jpg', 'img7.jpeg', 'img8.png'];
-        $fallbackPics = [];
-        foreach ($localPics as $index => $pic) {
-            $fallbackPics[] = ['idR' => 10001 + $index, 'titre' => $pic, 'orderPic' => 1];
-        }
-        return $fallbackPics;
+        return [
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_1.jpg', 'orderPic' => 1],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_2.png', 'orderPic' => 2],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_3.png', 'orderPic' => 3],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_4.jpg', 'orderPic' => 4],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_1.jpg', 'orderPic' => 1],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_2.jpg', 'orderPic' => 2],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_3.jpg', 'orderPic' => 3],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_4.jpg', 'orderPic' => 4],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_5.jpg', 'orderPic' => 5],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_6.jpg', 'orderPic' => 6],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_7.jpg', 'orderPic' => 7],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_1.jpg', 'orderPic' => 1],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_2.png', 'orderPic' => 2],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_3.jpg', 'orderPic' => 3],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_4.jpg', 'orderPic' => 4],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_5.jpg', 'orderPic' => 5],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_6.jpg', 'orderPic' => 6],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_7.jpg', 'orderPic' => 7],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_8.jpg', 'orderPic' => 8],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_9.jpg', 'orderPic' => 9],
+            ['idR' => 4, 'titre' => 'residence_l_aygues_1.jpg', 'orderPic' => 1],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_1.jpg', 'orderPic' => 1],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_2.jpg', 'orderPic' => 2],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_3.jpg', 'orderPic' => 3],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_4.avif', 'orderPic' => 4],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_5.jpg', 'orderPic' => 5],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_6.jpg', 'orderPic' => 6],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_7.jpg', 'orderPic' => 7],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_1.jpg', 'orderPic' => 1],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_2.jpg', 'orderPic' => 2],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_3.jpg', 'orderPic' => 3],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_4.jpg', 'orderPic' => 4],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_5.jpg', 'orderPic' => 5],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_6.jpg', 'orderPic' => 6],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_1.jpg', 'orderPic' => 1],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_2.jpg', 'orderPic' => 2],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_3.jpeg', 'orderPic' => 3],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_4.jpg', 'orderPic' => 4],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_5.jpg', 'orderPic' => 5],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_6.jpg', 'orderPic' => 6],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_7.jpg', 'orderPic' => 7],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_8.jpg', 'orderPic' => 8]
+        ];
     }
     return $pics;
 }

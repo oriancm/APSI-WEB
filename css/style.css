@@ -6,8 +6,8 @@ body.home-page {
     --apsi-footer-height: 142px; /* Restored standard footer height */
     height: auto;
     min-height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow-x: clip;
+    overflow-y: visible;
     background: #fff;
 }
 
@@ -17,14 +17,16 @@ html:has(body.home-page) {
     overflow-y: auto;
 }
 
-/* Homepage Header Overlay */
-body.home-page .site-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: transparent;
-    z-index: 100;
+@media (min-width: 981px) {
+    /* Homepage Header Overlay - Desktop Only */
+    body.home-page .site-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: transparent;
+        z-index: 100;
+    }
 }
 
 /* Main Shell Container (Hero Area constrained to around 6/7 of the screen height) */
@@ -72,14 +74,16 @@ body.home-page .site-header {
     position: absolute;
     top: var(--apsi-header-height);
     bottom: calc(var(--home-card-height) / 2 + 24px); /* Bounding box excludes cards' top halves + safety margin */
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    margin-inline: auto;
     width: var(--apsi-page-width);
+    max-width: 100%;
     padding-inline: var(--apsi-page-pad);
     display: flex;
     align-items: center; /* Vertical alignment */
     justify-content: flex-start;
-    margin: 0;
+    margin: 0 auto;
     min-height: 0;
 }
 
@@ -148,14 +152,15 @@ body.home-page .site-header {
 /* Service Cards Container - Half-overlapping the bottom fold of the image */
 .home-service-cards {
     position: absolute;
-    left: 50%;
-    bottom: 0; /* Anchored directly to the bottom of the home shell */
-    transform: translate(-50%, 50%); /* Shifts the container down by exactly half its height to create the unbreakable overlap */
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    bottom: calc(-1 * var(--home-card-height) / 2); /* Shifts the container down by exactly half its height to create the unbreakable overlap */
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(18px, 2.4vw, 36px);
     width: min(1080px, calc(100vw - var(--apsi-page-pad) * 2)); /* Max width matching original desktop grid width */
-    margin: 0;
+    margin: 0 auto;
     z-index: 10;
 }
 
@@ -240,22 +245,15 @@ body.home-page .site-footer__inner {
 @media (max-width: 980px) {
     html:has(body.home-page) {
         height: auto;
-        overflow: auto;
+        overflow: visible;
     }
 
     body.home-page {
         height: auto;
-        overflow: auto;
+        overflow-x: clip;
+        overflow-y: visible;
     }
 
-    body.home-page .site-header {
-        position: relative;
-        top: auto;
-        left: auto;
-        right: auto;
-        transform: none;
-        background: #fff; /* Solid white background for mobile header readability */
-    }
 
     body.home-page .site-footer {
         display: block;
@@ -296,6 +294,7 @@ body.home-page .site-footer__inner {
         top: auto;
         bottom: auto;
         left: auto;
+        right: auto;
         transform: none;
         width: 100%;
         max-width: none;
@@ -313,9 +312,9 @@ body.home-page .site-footer__inner {
             linear-gradient(125deg, #ffffff 0%, #ffffff clamp(170px, 35%, 230px), rgba(255, 255, 255, 0.75) clamp(260px, 58%, 390px), rgba(255, 255, 255, 0) clamp(350px, 80%, 550px)),
             url("/img/home-building-crane-wide.png");
         background-repeat: no-repeat;
-        background-size: 100% 100%, auto 90%;
-        background-position: center top, clamp(100%, calc(100% + (500px - 100vw) * 0.25), 120%) center;
-        padding-top: clamp(30px, 6vw, 44px); /* Decreased top padding */
+        background-size: 100% 100%, auto 100%;
+        background-position: center top, clamp(100%, calc(100% + (500px - 100vw) * 0.25), 120%) top;
+        padding-top: 0; /* Removed top padding to align content directly with the bottom of the nav bar */
         padding-bottom: clamp(34px, 7vw, 48px); /* Decreased bottom padding */
     }
 
@@ -352,6 +351,7 @@ body.home-page .site-footer__inner {
     .home-service-cards {
         position: relative;
         left: auto;
+        right: auto;
         bottom: auto;
         transform: none;
         width: calc(100% - 40px);

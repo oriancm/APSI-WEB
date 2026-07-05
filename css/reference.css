@@ -9,7 +9,7 @@ body.reference-page {
 .reference-shell {
     min-height: 100svh;
     position: relative;
-    overflow-x: hidden;
+    overflow-x: clip;
     background-color: #f8fafc !important;
     background-image: none !important;
 }
