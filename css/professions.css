@@ -510,7 +510,7 @@ body.professions-page .site-shell-bg {
     grid-template-columns: 0.9fr 1.1fr;
     gap: 48px;
     padding: 48px;
-    align-items: start;
+    align-items: center;
 }
 
 .profession-deliverables-left {

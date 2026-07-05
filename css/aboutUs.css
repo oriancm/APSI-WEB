@@ -327,50 +327,7 @@ body.about-page {
     border-right: 1px solid rgba(6, 23, 51, 0.14);
 }
 
-.about-missions-bg-container {
-    position: relative;
-    padding: clamp(18px, 3vw, 24px);
-    border-radius: var(--apsi-radius);
-    overflow: hidden;
-    background: url('/img/opc-chantier.jpg') no-repeat center center / cover;
-    border: 1px solid rgba(6, 23, 51, 0.08);
-    box-shadow: 0 4px 18px rgba(0, 94, 200, 0.04);
-    margin-top: 16px;
-    box-sizing: border-box;
-}
 
-/* Dark overlay filter inspired by references cards, covering the whole image */
-.about-missions-bg-container::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(3, 16, 35, 0.58); /* Increased filter opacity for references cards level text pop */
-    z-index: 1;
-    pointer-events: none;
-}
-
-.about-missions-bg-container .mission-item {
-    position: relative;
-    z-index: 2;
-    margin: 16px 0;
-}
-
-/* Extra bold white text matching references cards headers */
-.about-missions-bg-container .mission-item strong {
-    color: #ffffff !important;
-    font-family: "Montserrat", "Inter", Arial, sans-serif !important;
-    font-weight: 800 !important; /* Matches references cards font-weight */
-    font-size: clamp(16px, 4.2vw, 18px) !important;
-    text-shadow: none !important;
-}
-
-.about-missions-bg-container .mission-item:first-child {
-    margin-top: 0;
-}
-
-.about-missions-bg-container .mission-item:last-child {
-    margin-bottom: 0;
-}
 
 .about-missions-left > p,
 .about-card > p {
@@ -446,6 +403,15 @@ body.about-page {
 .about-zone {
     padding: clamp(26px, 3vw, 34px);
     min-width: 0;
+}
+
+.about-card > p.experience-note {
+    margin-top: 8px;
+    margin-bottom: 18px;
+    color: rgba(6, 23, 51, 0.58);
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: left;
 }
 
 .about-experience ul {

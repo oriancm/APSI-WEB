@@ -111,16 +111,14 @@
                     de deux missions complémentaires.
                 </p>
 
-                <div class="about-missions-bg-container">
-                    <div class="mission-item">
-                        <i data-lucide="calendar-clock" aria-hidden="true"></i>
-                        <strong>Ordonnancement, Pilotage<br>et Coordination (OPC)</strong>
-                    </div>
+                <div class="mission-item">
+                    <i data-lucide="calendar-clock" aria-hidden="true"></i>
+                    <strong>Ordonnancement, Pilotage<br>et Coordination (OPC)</strong>
+                </div>
 
-                    <div class="mission-item">
-                        <i data-lucide="building-2" aria-hidden="true"></i>
-                        <strong>Maîtrise d’Œuvre<br>d’Exécution (MOEX)</strong>
-                    </div>
+                <div class="mission-item">
+                    <i data-lucide="building-2" aria-hidden="true"></i>
+                    <strong>Maîtrise d’Œuvre<br>d’Exécution (MOEX)</strong>
                 </div>
             </div>
 
@@ -159,6 +157,9 @@
             <p>
                 Avec plus d’une centaine d’opérations suivies, APSI BTP a développé une expérience
                 concrète sur des projets variés, en construction neuve comme en réhabilitation.
+            </p>
+            <p class="experience-note">
+                Références équivalentes aux qualifications OPQIBI 03.01, 03.02, 03.03 et 03.04.
             </p>
 
             <ul>
