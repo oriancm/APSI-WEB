@@ -4,26 +4,35 @@ Ce guide décrit la procédure pour déployer et mettre à jour le site **APSI B
 
 ---
 
-## 1. Informations d'Hébergement (OVH)
+## 1. Informations d'Hébergement & Identifiants (OVH)
 
 * **Serveur SSH** : `ssh.cluster126.hosting.ovh.net`
 * **Port SSH** : `22`
 * **Identifiant principal** : `apsibtl`
+* **Mot de passe SSH** : `34KAseb2sjK3Fn9`
 * **Chemin racine du site** : `/home/apsibtl/www`
+* **Dépôt GitHub** : `https://github.com/oriancm/APSI-WEB.git`
+* **Branche de production** : `codex/secure-contabo-deploy`
 
 ---
 
-## 2. Déploiement initial de la structure Git sur le serveur
+## 2. Déploiement Ultra-Rapide via l'Agent AI Antigravity (AGY)
 
-Le serveur a été configuré avec un dépôt Git lié directement à votre dépôt GitHub : `https://github.com/oriancm/APSI-WEB.git`.
+Si vous utilisez un agent AI Antigravity (AGY) dans une session future et souhaitez déployer, dites-lui simplement :
 
-Toutes les configurations sensibles (comme `.env`) ainsi que vos fichiers d'images de production non-suivis (ex. `pic/img*.jpg`) restent intacts, car ils sont protégés par le système de fichiers et les règles d'exclusion de Git.
+> *"Déploie le site en utilisant le script scripts/deploy_ovh.py"*
+
+L'agent exécutera simplement la commande suivante en local pour automatiser la connexion SSH, le fetch Git et l'alignement des fichiers en production :
+
+```powershell
+python scripts/deploy_ovh.py
+```
 
 ---
 
-## 3. Comment déployer de nouvelles modifications (Déploiement Git)
+## 3. Comment déployer de nouvelles modifications (Déploiement Git Manuel)
 
-Chaque fois que vous souhaitez pousser et mettre en ligne de nouvelles modifications, suivez cette procédure simple :
+Si vous souhaitez effectuer la mise en ligne manuellement, suivez cette procédure simple :
 
 ### Étape 1 : Pousser vos modifications locales sur GitHub
 Depuis votre terminal local (sur votre machine de développement), poussez vos modifications vers la branche de production sur GitHub :
@@ -36,7 +45,7 @@ Connectez-vous en SSH à votre serveur OVH :
 ```bash
 ssh apsibtl@ssh.cluster126.hosting.ovh.net
 ```
-Renseignez votre mot de passe de connexion, puis exécutez la commande de synchronisation Git :
+Renseignez le mot de passe `34KAseb2sjK3Fn9`, puis exécutez la commande de synchronisation Git :
 ```bash
 cd /home/apsibtl/www
 git fetch origin
