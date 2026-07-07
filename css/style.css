@@ -225,7 +225,6 @@ body.home-page .site-footer {
     width: 100% !important; /* Use the whole width even if the screen is really large */
     max-width: none !important;
     margin: clamp(140px, 16svh, 180px) auto 0 !important; /* White margin-top creates scrollable white space under image */
-    padding-top: 24px !important; /* Reset normal footer padding */
     background: var(--apsi-footer-blue);
     position: relative;
     z-index: 1;
@@ -235,7 +234,7 @@ body.home-page .site-footer__inner {
     width: var(--apsi-page-width) !important; /* Keep content centered and aligned with the page container */
     max-width: var(--apsi-container) !important;
     margin: 0 auto;
-    padding-inline: var(--apsi-page-pad);
+    padding: 22px var(--apsi-page-pad) !important; /* Match standard page footer padding */
 }
 
 /* ==========================================================================
@@ -262,14 +261,12 @@ body.home-page .site-footer__inner {
         max-width: none !important;
         overflow: visible;
         margin-top: 48px !important;
-        padding-top: 34px; /* Reset luxurious desktop spacing to normal mobile padding */
     }
 
     body.home-page .site-footer__inner {
         width: 100% !important;
         max-width: none !important;
-        padding-top: 34px;
-        padding-bottom: 34px;
+        padding: 34px 0 !important; /* Match standard page mobile padding exactly */
     }
 
     body.home-page .site-footer__drawing {

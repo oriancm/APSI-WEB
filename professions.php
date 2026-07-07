@@ -354,6 +354,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll(buttonSelector);
         const panels = document.querySelectorAll(panelSelector);
 
+        function handlePanelPosition() {
+            const isMobile = window.innerWidth <= 850;
+            buttons.forEach((button) => {
+                if (button.classList.contains('active')) {
+                    const target = button.dataset[dataKey];
+                    const panel = document.getElementById(target);
+                    if (panel) {
+                        if (isMobile) {
+                            // Move panel immediately after the active button on mobile
+                            button.parentNode.insertBefore(panel, button.nextSibling);
+                        } else {
+                            // Move panel back to the end of its parent section on desktop
+                            const section = button.closest('section');
+                            section.appendChild(panel);
+                        }
+                    }
+                }
+            });
+        }
+
         buttons.forEach((button) => {
             button.addEventListener('click', function() {
                 const target = this.dataset[dataKey];
@@ -367,8 +387,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (panel) {
                     panel.classList.add('active');
                 }
+
+                handlePanelPosition();
             });
         });
+
+        // Handle resize events to reposition panels if necessary
+        window.addEventListener('resize', handlePanelPosition);
+        handlePanelPosition();
     }
 
     initToggleGroup('.opc-pillar', '.opc-panel', 'panel');
