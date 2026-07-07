@@ -478,7 +478,7 @@ $activePage = 'references';
                             <article class="same-domain-card">
                                 <a href="/reference/<?= htmlspecialchars($sameRef['id']) ?>" aria-label="<?= htmlspecialchars($sameRef['titre']) ?>"></a>
                                 <?php if ($img): ?>
-                                    <img src="/pic/<?= htmlspecialchars($img) ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
+                                    <img src="/pic/card/<?= htmlspecialchars($img) ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
                                 <?php else: ?>
                                     <div class="same-empty">Aucune image disponible</div>
                                 <?php endif; ?>

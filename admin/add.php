@@ -11,6 +11,7 @@ if (!isset($_SESSION["session"]) || $_SESSION["session"] != "valide") {
 require_once('./php_upload_config.php');
 
 require('./db.php');
+require_once('./image_optimizer.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     // Validations
@@ -130,6 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         $relativePath = 'pic/' . $final_name;
 
                         if (in_array(strtolower($extPic), array_map('strtolower', $extValid)) && move_uploaded_file($pic['tmp_name'], $uploadPath)) {
+                            // Automatically compress image and generate card thumbnail
+                            optimizeUploadedImage($uploadPath);
+                            
                             $sql = "INSERT INTO photo (titre, dir, idR, orderPic) VALUES (?, ?, ?, ?)";
                             $stmt = $db->prepare($sql);
                             if (!$stmt->execute([$final_name, $relativePath, $idRef, $orderPic])) {

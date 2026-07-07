@@ -178,7 +178,7 @@ $activePage = 'references';
                     <article class="reference-tile" data-domain="<?= htmlspecialchars($ref['domaine'] ?? '0') ?>">
                         <a href="/reference/<?= htmlspecialchars($ref['id']) ?>" aria-label="<?= htmlspecialchars($ref['titre']) ?>"></a>
                         <?php if ($img): ?>
-                            <img src="/pic/<?= htmlspecialchars($img) ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" loading="lazy">
+                            <img src="/pic/card/<?= htmlspecialchars($img) ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" loading="lazy">
                         <?php else: ?>
                             <div class="reference-tile-empty">Aucune image disponible</div>
                         <?php endif; ?>

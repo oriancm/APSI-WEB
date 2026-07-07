@@ -11,6 +11,7 @@ if (!isset($_SESSION["session"]) || $_SESSION["session"] != "valide") {
 require_once('./php_upload_config.php');
 
 require('./db.php');
+require_once('./image_optimizer.php');
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: admin");
@@ -139,6 +140,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             }
                             
                             if (move_uploaded_file($files['tmp_name'][$i], $destination)) {
+                                // Automatically compress image and generate card thumbnail
+                                optimizeUploadedImage($destination);
+                                
                                 $uploaded_files[$files['name'][$i]] = [
                                     'dir' => 'pic/' . $final_name,
                                     'titre' => $final_name

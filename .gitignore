@@ -8,4 +8,6 @@ dist/
 dev.log
 php-dev.log
 tmp-*.png
+img_backup/
+pic_backup/
 
