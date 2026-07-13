@@ -58,9 +58,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
+        <?php
+    if (!function_exists('apsi_minify_css')) {
+        function apsi_minify_css($path) {
+            if (!file_exists($path)) return '';
+            $css = file_get_contents($path);
+            // Remove CSS comments
+            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
+            // Remove space around braces, colons, semi-colons
+            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
+            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
+            return $css;
+        }
+    }
+    ?>
     <style>
-        <?php include __DIR__ . '/css/site.css'; ?>
-        <?php include __DIR__ . '/css/style.css'; ?>
+        <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
+        <?= apsi_minify_css(__DIR__ . '/css/style.css'); ?>
     </style>
     <!-- Fonts Preload -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">

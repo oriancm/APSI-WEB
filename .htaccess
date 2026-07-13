@@ -56,3 +56,13 @@ RewriteRule ^admin/.*$ /admin/admin.php [L]
     ExpiresByType application/pdf "access plus 1 month"
     ExpiresByType application/x-shockwave-flash "access plus 1 month"
 </IfModule>
+
+# Enforce explicit caching headers for static assets (for servers where mod_expires is partially bypassed)
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|avif|webp|svg|woff2)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+    <FilesMatch "\.(pdf|txt)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+</IfModule>

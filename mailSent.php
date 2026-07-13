@@ -42,8 +42,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
+        <?php
+    if (!function_exists('apsi_minify_css')) {
+        function apsi_minify_css($path) {
+            if (!file_exists($path)) return '';
+            $css = file_get_contents($path);
+            // Remove CSS comments
+            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
+            // Remove space around braces, colons, semi-colons
+            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
+            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
+            return $css;
+        }
+    }
+    ?>
     <style>
-        <?php include __DIR__ . '/css/styleGlobalNotIndex.css'; ?>
+        <?= apsi_minify_css(__DIR__ . '/css/styleGlobalNotIndex.css'); ?>
     </style>
     <link rel="preload" href="css/mailSent.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
@@ -102,8 +116,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
     <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
+        <?php
+    if (!function_exists('apsi_minify_css')) {
+        function apsi_minify_css($path) {
+            if (!file_exists($path)) return '';
+            $css = file_get_contents($path);
+            // Remove CSS comments
+            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
+            // Remove space around braces, colons, semi-colons
+            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
+            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
+            return $css;
+        }
+    }
+    ?>
     <style>
-        <?php include __DIR__ . '/css/styleGlobalNotIndex.css'; ?>
+        <?= apsi_minify_css(__DIR__ . '/css/styleGlobalNotIndex.css'); ?>
     </style>
 
 </html>
