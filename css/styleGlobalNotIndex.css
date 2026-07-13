@@ -10,7 +10,7 @@ body {
     font-family: 'Montserrat';
     background-image:
         linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.12) 18%, rgba(238,242,243,0) 36%, rgba(238,242,243,0.16) 100%),
-        url("/img/home-cloud-long.png");
+        url("/img/home-cloud-long.avif");
     background-size: cover;
     background-position: center top;
     background-attachment: fixed;

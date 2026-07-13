@@ -17,17 +17,28 @@
     <meta property="og:url" content="https://apsi-btp.fr/legalNotices">
     <meta property="og:title" content="Mentions Légales - APSI BTP">
     <meta property="og:description" content="Consultez les mentions légales de la société APSI BTP, éditeur du site et coordinateur d'ordonnancement de chantier.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.avif">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mentions Légales - APSI BTP">
     <meta name="twitter:description" content="Consultez les mentions légales de la société APSI BTP, éditeur du site.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.avif">
 
-    <link rel="stylesheet" href="/css/site.css">
+    <!-- Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+    <link rel="stylesheet" href="/css/site.css?v=20260713">
     <link rel="stylesheet" href="/css/legalNotices.css?v=20260622-3">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    
+    <!-- Fonts Preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="/js/site.js" defer></script>
 </head>

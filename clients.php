@@ -15,18 +15,29 @@
     <meta property="og:url" content="https://apsi-btp.fr/clients">
     <meta property="og:title" content="Nos Clients - APSI BTP">
     <meta property="og:description" content="Découvrez nos clients et partenaires qui nous font confiance pour leurs projets BTP.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.avif">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nos Clients - APSI BTP">
     <meta name="twitter:description" content="Découvrez nos clients et partenaires qui nous font confiance pour leurs projets BTP.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.avif">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/site.css">
+    <!-- Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+    <link rel="stylesheet" href="/css/site.css?v=20260713">
     <link rel="stylesheet" href="/css/clients.css?v=20260623-1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    
+    <!-- Fonts Preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="/js/site.js" defer></script>
 </head>

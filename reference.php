@@ -38,60 +38,60 @@ function getThePic($db, $idR) {
     if (empty($pics) && $db instanceof NullDb) {
         $allPics = [
             1 => [
-                'amenagement_de_la_place_jean_jaures_1.jpg',
-                'amenagement_de_la_place_jean_jaures_2.png',
-                'amenagement_de_la_place_jean_jaures_3.png',
-                'amenagement_de_la_place_jean_jaures_4.jpg'
+                'amenagement_de_la_place_jean_jaures_1.avif',
+                'amenagement_de_la_place_jean_jaures_2.avif',
+                'amenagement_de_la_place_jean_jaures_3.avif',
+                'amenagement_de_la_place_jean_jaures_4.avif'
             ],
             2 => [
-                'centre_culturel_simone_signoret_1.jpg',
-                'centre_culturel_simone_signoret_2.jpg',
-                'centre_culturel_simone_signoret_3.jpg',
-                'centre_culturel_simone_signoret_4.jpg',
-                'centre_culturel_simone_signoret_5.jpg',
-                'centre_culturel_simone_signoret_6.jpg',
-                'centre_culturel_simone_signoret_7.jpg'
+                'centre_culturel_simone_signoret_1.avif',
+                'centre_culturel_simone_signoret_2.avif',
+                'centre_culturel_simone_signoret_3.avif',
+                'centre_culturel_simone_signoret_4.avif',
+                'centre_culturel_simone_signoret_5.avif',
+                'centre_culturel_simone_signoret_6.avif',
+                'centre_culturel_simone_signoret_7.avif'
             ],
             3 => [
-                'l_hotel_des_monnaies_niel_1.jpg',
-                'l_hotel_des_monnaies_niel_2.png',
-                'l_hotel_des_monnaies_niel_3.jpg',
-                'l_hotel_des_monnaies_niel_4.jpg',
-                'l_hotel_des_monnaies_niel_5.jpg',
-                'l_hotel_des_monnaies_niel_6.jpg',
-                'l_hotel_des_monnaies_niel_7.jpg',
-                'l_hotel_des_monnaies_niel_8.jpg',
-                'l_hotel_des_monnaies_niel_9.jpg'
+                'l_hotel_des_monnaies_niel_1.avif',
+                'l_hotel_des_monnaies_niel_2.avif',
+                'l_hotel_des_monnaies_niel_3.avif',
+                'l_hotel_des_monnaies_niel_4.avif',
+                'l_hotel_des_monnaies_niel_5.avif',
+                'l_hotel_des_monnaies_niel_6.avif',
+                'l_hotel_des_monnaies_niel_7.avif',
+                'l_hotel_des_monnaies_niel_8.avif',
+                'l_hotel_des_monnaies_niel_9.avif'
             ],
             4 => [
-                'residence_l_aygues_1.jpg'
+                'residence_l_aygues_1.avif'
             ],
             5 => [
-                'refectoire_de_coudoux_1.jpg',
-                'refectoire_de_coudoux_2.jpg',
-                'refectoire_de_coudoux_3.jpg',
+                'refectoire_de_coudoux_1.avif',
+                'refectoire_de_coudoux_2.avif',
+                'refectoire_de_coudoux_3.avif',
                 'refectoire_de_coudoux_4.avif',
-                'refectoire_de_coudoux_5.jpg',
-                'refectoire_de_coudoux_6.jpg',
-                'refectoire_de_coudoux_7.jpg'
+                'refectoire_de_coudoux_5.avif',
+                'refectoire_de_coudoux_6.avif',
+                'refectoire_de_coudoux_7.avif'
             ],
             6 => [
-                'rehabilitation_du_college_paul_cezanne_1.jpg',
-                'rehabilitation_du_college_paul_cezanne_2.jpg',
-                'rehabilitation_du_college_paul_cezanne_3.jpg',
-                'rehabilitation_du_college_paul_cezanne_4.jpg',
-                'rehabilitation_du_college_paul_cezanne_5.jpg',
-                'rehabilitation_du_college_paul_cezanne_6.jpg'
+                'rehabilitation_du_college_paul_cezanne_1.avif',
+                'rehabilitation_du_college_paul_cezanne_2.avif',
+                'rehabilitation_du_college_paul_cezanne_3.avif',
+                'rehabilitation_du_college_paul_cezanne_4.avif',
+                'rehabilitation_du_college_paul_cezanne_5.avif',
+                'rehabilitation_du_college_paul_cezanne_6.avif'
             ],
             7 => [
-                'residence_les_angevines_1.jpg',
-                'residence_les_angevines_2.jpg',
-                'residence_les_angevines_3.jpeg',
-                'residence_les_angevines_4.jpg',
-                'residence_les_angevines_5.jpg',
-                'residence_les_angevines_6.jpg',
-                'residence_les_angevines_7.jpg',
-                'residence_les_angevines_8.jpg'
+                'residence_les_angevines_1.avif',
+                'residence_les_angevines_2.avif',
+                'residence_les_angevines_3.avif',
+                'residence_les_angevines_4.avif',
+                'residence_les_angevines_5.avif',
+                'residence_les_angevines_6.avif',
+                'residence_les_angevines_7.avif',
+                'residence_les_angevines_8.avif'
             ]
         ];
         $list = $allPics[(int)$idR] ?? [];
@@ -125,60 +125,60 @@ function getAllPics($db): array {
     if (empty($pics) && $db instanceof NullDb) {
         $allPics = [
             1 => [
-                'amenagement_de_la_place_jean_jaures_1.jpg',
-                'amenagement_de_la_place_jean_jaures_2.png',
-                'amenagement_de_la_place_jean_jaures_3.png',
-                'amenagement_de_la_place_jean_jaures_4.jpg'
+                'amenagement_de_la_place_jean_jaures_1.avif',
+                'amenagement_de_la_place_jean_jaures_2.avif',
+                'amenagement_de_la_place_jean_jaures_3.avif',
+                'amenagement_de_la_place_jean_jaures_4.avif'
             ],
             2 => [
-                'centre_culturel_simone_signoret_1.jpg',
-                'centre_culturel_simone_signoret_2.jpg',
-                'centre_culturel_simone_signoret_3.jpg',
-                'centre_culturel_simone_signoret_4.jpg',
-                'centre_culturel_simone_signoret_5.jpg',
-                'centre_culturel_simone_signoret_6.jpg',
-                'centre_culturel_simone_signoret_7.jpg'
+                'centre_culturel_simone_signoret_1.avif',
+                'centre_culturel_simone_signoret_2.avif',
+                'centre_culturel_simone_signoret_3.avif',
+                'centre_culturel_simone_signoret_4.avif',
+                'centre_culturel_simone_signoret_5.avif',
+                'centre_culturel_simone_signoret_6.avif',
+                'centre_culturel_simone_signoret_7.avif'
             ],
             3 => [
-                'l_hotel_des_monnaies_niel_1.jpg',
-                'l_hotel_des_monnaies_niel_2.png',
-                'l_hotel_des_monnaies_niel_3.jpg',
-                'l_hotel_des_monnaies_niel_4.jpg',
-                'l_hotel_des_monnaies_niel_5.jpg',
-                'l_hotel_des_monnaies_niel_6.jpg',
-                'l_hotel_des_monnaies_niel_7.jpg',
-                'l_hotel_des_monnaies_niel_8.jpg',
-                'l_hotel_des_monnaies_niel_9.jpg'
+                'l_hotel_des_monnaies_niel_1.avif',
+                'l_hotel_des_monnaies_niel_2.avif',
+                'l_hotel_des_monnaies_niel_3.avif',
+                'l_hotel_des_monnaies_niel_4.avif',
+                'l_hotel_des_monnaies_niel_5.avif',
+                'l_hotel_des_monnaies_niel_6.avif',
+                'l_hotel_des_monnaies_niel_7.avif',
+                'l_hotel_des_monnaies_niel_8.avif',
+                'l_hotel_des_monnaies_niel_9.avif'
             ],
             4 => [
-                'residence_l_aygues_1.jpg'
+                'residence_l_aygues_1.avif'
             ],
             5 => [
-                'refectoire_de_coudoux_1.jpg',
-                'refectoire_de_coudoux_2.jpg',
-                'refectoire_de_coudoux_3.jpg',
+                'refectoire_de_coudoux_1.avif',
+                'refectoire_de_coudoux_2.avif',
+                'refectoire_de_coudoux_3.avif',
                 'refectoire_de_coudoux_4.avif',
-                'refectoire_de_coudoux_5.jpg',
-                'refectoire_de_coudoux_6.jpg',
-                'refectoire_de_coudoux_7.jpg'
+                'refectoire_de_coudoux_5.avif',
+                'refectoire_de_coudoux_6.avif',
+                'refectoire_de_coudoux_7.avif'
             ],
             6 => [
-                'rehabilitation_du_college_paul_cezanne_1.jpg',
-                'rehabilitation_du_college_paul_cezanne_2.jpg',
-                'rehabilitation_du_college_paul_cezanne_3.jpg',
-                'rehabilitation_du_college_paul_cezanne_4.jpg',
-                'rehabilitation_du_college_paul_cezanne_5.jpg',
-                'rehabilitation_du_college_paul_cezanne_6.jpg'
+                'rehabilitation_du_college_paul_cezanne_1.avif',
+                'rehabilitation_du_college_paul_cezanne_2.avif',
+                'rehabilitation_du_college_paul_cezanne_3.avif',
+                'rehabilitation_du_college_paul_cezanne_4.avif',
+                'rehabilitation_du_college_paul_cezanne_5.avif',
+                'rehabilitation_du_college_paul_cezanne_6.avif'
             ],
             7 => [
-                'residence_les_angevines_1.jpg',
-                'residence_les_angevines_2.jpg',
-                'residence_les_angevines_3.jpeg',
-                'residence_les_angevines_4.jpg',
-                'residence_les_angevines_5.jpg',
-                'residence_les_angevines_6.jpg',
-                'residence_les_angevines_7.jpg',
-                'residence_les_angevines_8.jpg'
+                'residence_les_angevines_1.avif',
+                'residence_les_angevines_2.avif',
+                'residence_les_angevines_3.avif',
+                'residence_les_angevines_4.avif',
+                'residence_les_angevines_5.avif',
+                'residence_les_angevines_6.avif',
+                'residence_les_angevines_7.avif',
+                'residence_les_angevines_8.avif'
             ]
         ];
         $out = [];
@@ -296,9 +296,20 @@ $activePage = 'references';
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/css/site.css">
-    <link rel="stylesheet" href="/css/reference.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    <!-- Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+    <link rel="stylesheet" href="/css/site.css?v=20260713">
+    <link rel="stylesheet" href="/css/reference.css?v=20260713">
+    
+    <!-- Fonts Preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="/js/site.js" defer></script>
 </head>
@@ -478,7 +489,7 @@ $activePage = 'references';
                             <article class="same-domain-card">
                                 <a href="/reference/<?= htmlspecialchars($sameRef['id']) ?>" aria-label="<?= htmlspecialchars($sameRef['titre']) ?>"></a>
                                 <?php if ($img): ?>
-                                    <img src="/pic/card/<?= htmlspecialchars($img) ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
+                                    <img src="/pic/<?= htmlspecialchars($img) ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
                                 <?php else: ?>
                                     <div class="same-empty">Aucune image disponible</div>
                                 <?php endif; ?>

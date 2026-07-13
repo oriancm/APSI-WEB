@@ -19,17 +19,28 @@
     <meta property="og:url" content="https://apsi-btp.fr/aboutUs">
     <meta property="og:title" content="APSI BTP - Qui sommes-nous | OPC et MOEX depuis 2007">
     <meta property="og:description" content="APSI BTP accompagne les maîtres d’ouvrage publics et privés en OPC et MOEX depuis 2007, avec plus de 100 opérations suivies en construction et réhabilitation.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.avif">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="APSI BTP - Qui sommes-nous">
     <meta name="twitter:description" content="Découvrez notre équipe et notre expertise d'accompagnement de vos projets d'ingénierie et de coordination de travaux depuis 2007.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.avif">
 
-    <link rel="stylesheet" href="/css/site.css">
+    <!-- Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+    <link rel="stylesheet" href="/css/site.css?v=20260713">
     <link rel="stylesheet" href="/css/aboutUs.css?v=20260623-2">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Fonts Preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    </noscript>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="/js/site.js" defer></script>

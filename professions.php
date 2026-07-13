@@ -9,9 +9,20 @@
     <title>Nos Métiers : OPC & MOEX - APSI BTP</title>
     <meta name="description" content="Découvrez les missions OPC et MOEX d'APSI BTP : coordination de chantier, planification, suivi d'exécution, réunions, OPR et levée des réserves.">
 
-    <link rel="stylesheet" href="/css/site.css">
+    <!-- Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+    <link rel="stylesheet" href="/css/site.css?v=20260713">
     <link rel="stylesheet" href="/css/professions.css?v=20260623-5">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Fonts Preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    </noscript>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="/js/site.js" defer></script>
@@ -64,7 +75,7 @@
     </section>
 
     <section class="profession-card profession-card--moex">
-        <img src="/img/moex-desktop.jpg" alt="Professionnel APSI BTP sur chantier avec tablette">
+        <img src="/img/moex-desktop.avif" alt="Professionnel APSI BTP sur chantier avec tablette">
 
         <div class="profession-card-copy">
             <div class="profession-title-row">

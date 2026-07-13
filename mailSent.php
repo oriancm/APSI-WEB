@@ -37,9 +37,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             window.location.href = 'index.php';
         }, 5000);
     </script>
-    <link rel="stylesheet" href="css/mailSent.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <!-- Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+    <link rel="preload" href="css/mailSent.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Fonts Preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:bold" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="css/mailSent.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    </noscript>
     <style>
       .hidden-until-loaded {
         opacity: 0;
@@ -85,7 +98,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 </body>
-<link rel="stylesheet" href="/css/styleGlobalNotIndex.css">
+<!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+<link rel="stylesheet" href="/css/styleGlobalNotIndex.css?v=20260713">
+
 </html>
 <script>
 window.addEventListener('load', function() {

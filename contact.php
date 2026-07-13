@@ -84,13 +84,13 @@ $activePage = 'contact';
     <meta property="og:url" content="https://apsi-btp.fr/contact">
     <meta property="og:title" content="Nous Contacter - APSI BTP">
     <meta property="og:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.avif">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nous Contacter - APSI BTP">
     <meta name="twitter:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.avif">
 
     <!-- Schema.org ContactPage JSON-LD -->
     <script type="application/ld+json">
@@ -115,9 +115,20 @@ $activePage = 'contact';
     </script>
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/site.css">
-    <link rel="stylesheet" href="/css/contact.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    <!-- Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+    <link rel="stylesheet" href="/css/site.css?v=20260713">
+    <link rel="stylesheet" href="/css/contact.css?v=20260713">
+    
+    <!-- Fonts Preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="/js/site.js" defer></script>
 </head>

@@ -27,48 +27,48 @@ function getAllPic($db) {
     $pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if (empty($pics) && $db instanceof NullDb) {
         return [
-            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_1.jpg', 'orderPic' => 1],
-            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_2.png', 'orderPic' => 2],
-            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_3.png', 'orderPic' => 3],
-            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_4.jpg', 'orderPic' => 4],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_1.jpg', 'orderPic' => 1],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_2.jpg', 'orderPic' => 2],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_3.jpg', 'orderPic' => 3],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_4.jpg', 'orderPic' => 4],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_5.jpg', 'orderPic' => 5],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_6.jpg', 'orderPic' => 6],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_7.jpg', 'orderPic' => 7],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_1.jpg', 'orderPic' => 1],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_2.png', 'orderPic' => 2],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_3.jpg', 'orderPic' => 3],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_4.jpg', 'orderPic' => 4],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_5.jpg', 'orderPic' => 5],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_6.jpg', 'orderPic' => 6],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_7.jpg', 'orderPic' => 7],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_8.jpg', 'orderPic' => 8],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_9.jpg', 'orderPic' => 9],
-            ['idR' => 4, 'titre' => 'residence_l_aygues_1.jpg', 'orderPic' => 1],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_1.jpg', 'orderPic' => 1],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_2.jpg', 'orderPic' => 2],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_3.jpg', 'orderPic' => 3],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_1.avif', 'orderPic' => 1],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_2.avif', 'orderPic' => 2],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_3.avif', 'orderPic' => 3],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_4.avif', 'orderPic' => 4],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_1.avif', 'orderPic' => 1],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_2.avif', 'orderPic' => 2],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_3.avif', 'orderPic' => 3],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_4.avif', 'orderPic' => 4],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_5.avif', 'orderPic' => 5],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_6.avif', 'orderPic' => 6],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_7.avif', 'orderPic' => 7],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_1.avif', 'orderPic' => 1],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_2.avif', 'orderPic' => 2],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_3.avif', 'orderPic' => 3],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_4.avif', 'orderPic' => 4],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_5.avif', 'orderPic' => 5],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_6.avif', 'orderPic' => 6],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_7.avif', 'orderPic' => 7],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_8.avif', 'orderPic' => 8],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_9.avif', 'orderPic' => 9],
+            ['idR' => 4, 'titre' => 'residence_l_aygues_1.avif', 'orderPic' => 1],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_1.avif', 'orderPic' => 1],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_2.avif', 'orderPic' => 2],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_3.avif', 'orderPic' => 3],
             ['idR' => 5, 'titre' => 'refectoire_de_coudoux_4.avif', 'orderPic' => 4],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_5.jpg', 'orderPic' => 5],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_6.jpg', 'orderPic' => 6],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_7.jpg', 'orderPic' => 7],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_1.jpg', 'orderPic' => 1],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_2.jpg', 'orderPic' => 2],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_3.jpg', 'orderPic' => 3],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_4.jpg', 'orderPic' => 4],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_5.jpg', 'orderPic' => 5],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_6.jpg', 'orderPic' => 6],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_1.jpg', 'orderPic' => 1],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_2.jpg', 'orderPic' => 2],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_3.jpeg', 'orderPic' => 3],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_4.jpg', 'orderPic' => 4],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_5.jpg', 'orderPic' => 5],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_6.jpg', 'orderPic' => 6],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_7.jpg', 'orderPic' => 7],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_8.jpg', 'orderPic' => 8]
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_5.avif', 'orderPic' => 5],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_6.avif', 'orderPic' => 6],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_7.avif', 'orderPic' => 7],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_1.avif', 'orderPic' => 1],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_2.avif', 'orderPic' => 2],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_3.avif', 'orderPic' => 3],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_4.avif', 'orderPic' => 4],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_5.avif', 'orderPic' => 5],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_6.avif', 'orderPic' => 6],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_1.avif', 'orderPic' => 1],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_2.avif', 'orderPic' => 2],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_3.avif', 'orderPic' => 3],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_4.avif', 'orderPic' => 4],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_5.avif', 'orderPic' => 5],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_6.avif', 'orderPic' => 6],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_7.avif', 'orderPic' => 7],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_8.avif', 'orderPic' => 8]
         ];
     }
     return $pics;
@@ -121,21 +121,32 @@ $activePage = 'references';
     <meta property="og:url" content="https://apsi-btp.fr/references">
     <meta property="og:title" content="Nos Références - APSI BTP | Projets BTP en Provence-Alpes-Côte d'Azur">
     <meta property="og:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.avif">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nos Références - APSI BTP">
     <meta name="twitter:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.avif">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/css/site.css">
+    <!-- Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+    <link rel="stylesheet" href="/css/site.css?v=20260713">
     <link rel="stylesheet" href="/css/references.css?v=20260623-1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Fonts Preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+    </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="/js/site.js" defer></script>
 </head>
@@ -178,7 +189,7 @@ $activePage = 'references';
                     <article class="reference-tile" data-domain="<?= htmlspecialchars($ref['domaine'] ?? '0') ?>">
                         <a href="/reference/<?= htmlspecialchars($ref['id']) ?>" aria-label="<?= htmlspecialchars($ref['titre']) ?>"></a>
                         <?php if ($img): ?>
-                            <img src="/pic/card/<?= htmlspecialchars($img) ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" loading="lazy">
+                            <img src="/pic/<?= htmlspecialchars($img) ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" loading="lazy">
                         <?php else: ?>
                             <div class="reference-tile-empty">Aucune image disponible</div>
                         <?php endif; ?>
