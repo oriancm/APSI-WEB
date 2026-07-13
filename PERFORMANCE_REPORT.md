@@ -1,18 +1,18 @@
 # 🚀 APSI Web Performance & Media Size Audit Report
 
-> **Audit Date:** `2026-07-13 21:16:50`  
+> **Audit Date:** `2026-07-13 21:42:07`  
 > **Target Host (Local test):** `http://127.0.0.1:8088`  
 > **Total Unique Media Files Detected:** `76`  
-> **Total Site Media Weight:** `10.22 MB`
+> **Total Site Media Weight:** `10.76 MB`
 
 ## 📊 Executive Summary
 
 An automated performance and media asset audit was performed across all **16 main pages** of the APSI web application. The audit measured the HTML rendering response times (TTFB) and calculated the complete page transfer sizes by extracting and measuring all referenced assets (CSS, JS, and Media).
 
 ### Key Findings:
-- 🏎️ **Overall Speed:** Server response speed (TTFB) is exceptionally healthy. Across all pages, the average rendering time is **10.2ms**. This indicates that the PHP backend logic and routing are extremely efficient.
+- 🏎️ **Overall Speed:** Server response speed (TTFB) is exceptionally healthy. Across all pages, the average rendering time is **12.6ms**. This indicates that the PHP backend logic and routing are extremely efficient.
 - ⚖️ **Page Weight Concern:** Several pages suffer from extremely heavy initial page weights due to uncompressed PNG and high-resolution JPG images. 
-  - The heaviest page is **Reference: Résidence Les Angevines** with a massive payload of **4.06 MB**!
+  - The heaviest page is **Reference: Résidence Les Angevines** with a massive payload of **4.07 MB**!
   - Under slow mobile connections (3G), this page would take several seconds to load, significantly impacting UX and SEO.
 - 🖼️ **Asset Types:** The project contains multiple background images that are several megabytes in size (e.g. `background1Old.avif` and `background2Old.avif` are over 4MB each). Optimizing these single assets will result in dramatic speedups for users.
 
@@ -20,22 +20,22 @@ An automated performance and media asset audit was performed across all **16 mai
 
 | Page Name | Route | Response Time | HTML Size | CSS (Files/Size) | JS (Files/Size) | Media (Files/Size) | Total Page Weight | Status |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Home Page | `/` | 5.5ms | 35.0 KB | 0 (0 B) | 1 (6.8 KB) | 3 (70.2 KB) | **112.0 KB** | 🟢 Good |
-| About Us | `/aboutUs` | 3.8ms | 53.1 KB | 0 (0 B) | 1 (6.8 KB) | 4 (114.4 KB) | **174.3 KB** | 🟢 Good |
-| Clients | `/clients` | 3.5ms | 29.9 KB | 0 (0 B) | 1 (6.8 KB) | 22 (1.10 MB) | **1.14 MB** | 🟢 Good |
-| Contact | `/contact` | 14.1ms | 33.6 KB | 0 (0 B) | 1 (6.8 KB) | 4 (96.5 KB) | **136.9 KB** | 🟢 Good |
-| Legal Notices | `/legalNotices` | 3ms | 28.8 KB | 0 (0 B) | 1 (6.8 KB) | 3 (70.2 KB) | **105.8 KB** | 🟢 Good |
-| Privacy Policy | `/privacyPolicy` | 3.2ms | 27.9 KB | 0 (0 B) | 1 (6.8 KB) | 3 (70.2 KB) | **104.9 KB** | 🟢 Good |
-| Professions / Services | `/professions` | 3.9ms | 57.0 KB | 0 (0 B) | 1 (6.8 KB) | 8 (244.2 KB) | **308.0 KB** | 🟢 Good |
-| References Portfolio | `/references` | 10.7ms | 42.7 KB | 0 (0 B) | 1 (6.8 KB) | 15 (2.12 MB) | **2.17 MB** | 🟡 Warning |
-| Sitemap | `/sitemap` | 4.5ms | 2.8 KB | 0 (0 B) | 0 (0 B) | 0 (0 B) | **2.8 KB** | 🟢 Good |
-| Reference: Place Jean Jaurès | `/reference/1` | 19.1ms | 53.2 KB | 0 (0 B) | 1 (6.8 KB) | 12 (2.91 MB) | **2.97 MB** | 🟡 Warning |
-| Reference: Centre Culturel Simone Signoret | `/reference/2` | 8.5ms | 54.4 KB | 0 (0 B) | 1 (6.8 KB) | 15 (2.54 MB) | **2.60 MB** | 🟡 Warning |
-| Reference: L’hôtel des Monnaies-Niel | `/reference/3` | 19.7ms | 55.0 KB | 0 (0 B) | 1 (6.8 KB) | 17 (3.27 MB) | **3.33 MB** | 🟡 Warning |
-| Reference: Residence l'Aygues | `/reference/4` | 6.8ms | 51.4 KB | 0 (0 B) | 1 (6.8 KB) | 9 (1.51 MB) | **1.57 MB** | 🟡 Warning |
-| Reference: Réfectoire de Coudoux | `/reference/5` | 10.5ms | 53.8 KB | 0 (0 B) | 1 (6.8 KB) | 14 (1.72 MB) | **1.78 MB** | 🟡 Warning |
-| Reference: Réhabilitation du collège Paul Cézanne | `/reference/6` | 21.6ms | 54.0 KB | 0 (0 B) | 1 (6.8 KB) | 13 (1.69 MB) | **1.75 MB** | 🟡 Warning |
-| Reference: Résidence Les Angevines | `/reference/7` | 24.7ms | 54.5 KB | 0 (0 B) | 1 (6.8 KB) | 16 (4.00 MB) | **4.06 MB** | 🟡 Warning |
+| Home Page | `/` | 6.1ms | 35.0 KB | 0 (0 B) | 1 (6.8 KB) | 3 (70.2 KB) | **112.0 KB** | 🟢 Good |
+| About Us | `/aboutUs` | 6ms | 53.1 KB | 0 (0 B) | 1 (6.8 KB) | 4 (114.4 KB) | **174.3 KB** | 🟢 Good |
+| Clients | `/clients` | 3.9ms | 29.9 KB | 0 (0 B) | 1 (6.8 KB) | 22 (1.10 MB) | **1.14 MB** | 🟢 Good |
+| Contact | `/contact` | 14.8ms | 33.6 KB | 0 (0 B) | 1 (6.8 KB) | 4 (96.5 KB) | **136.9 KB** | 🟢 Good |
+| Legal Notices | `/legalNotices` | 4.9ms | 28.8 KB | 0 (0 B) | 1 (6.8 KB) | 3 (70.2 KB) | **105.8 KB** | 🟢 Good |
+| Privacy Policy | `/privacyPolicy` | 4.1ms | 27.9 KB | 0 (0 B) | 1 (6.8 KB) | 3 (70.2 KB) | **104.9 KB** | 🟢 Good |
+| Professions / Services | `/professions` | 22.8ms | 57.0 KB | 0 (0 B) | 1 (6.8 KB) | 8 (244.2 KB) | **308.0 KB** | 🟢 Good |
+| References Portfolio | `/references` | 10.3ms | 42.7 KB | 0 (0 B) | 1 (6.8 KB) | 15 (2.13 MB) | **2.17 MB** | 🟡 Warning |
+| Sitemap | `/sitemap` | 4.3ms | 2.8 KB | 0 (0 B) | 0 (0 B) | 0 (0 B) | **2.8 KB** | 🟢 Good |
+| Reference: Place Jean Jaurès | `/reference/1` | 31.2ms | 53.2 KB | 0 (0 B) | 1 (6.8 KB) | 12 (3.44 MB) | **3.50 MB** | 🟡 Warning |
+| Reference: Centre Culturel Simone Signoret | `/reference/2` | 28.5ms | 54.4 KB | 0 (0 B) | 1 (6.8 KB) | 15 (2.54 MB) | **2.60 MB** | 🟡 Warning |
+| Reference: L’hôtel des Monnaies-Niel | `/reference/3` | 10.2ms | 55.0 KB | 0 (0 B) | 1 (6.8 KB) | 17 (3.27 MB) | **3.33 MB** | 🟡 Warning |
+| Reference: Residence l'Aygues | `/reference/4` | 30.5ms | 51.4 KB | 0 (0 B) | 1 (6.8 KB) | 9 (1.52 MB) | **1.57 MB** | 🟡 Warning |
+| Reference: Réfectoire de Coudoux | `/reference/5` | 8.3ms | 53.8 KB | 0 (0 B) | 1 (6.8 KB) | 14 (1.72 MB) | **1.78 MB** | 🟡 Warning |
+| Reference: Réhabilitation du collège Paul Cézanne | `/reference/6` | 8.3ms | 54.0 KB | 0 (0 B) | 1 (6.8 KB) | 13 (1.69 MB) | **1.75 MB** | 🟡 Warning |
+| Reference: Résidence Les Angevines | `/reference/7` | 7.9ms | 54.5 KB | 0 (0 B) | 1 (6.8 KB) | 16 (4.01 MB) | **4.07 MB** | 🟡 Warning |
 
 ---
 
@@ -45,7 +45,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 | Asset URL | Size | File Format | Used On Pages | Recommendation |
 | :--- | :---: | :---: | :--- | :--- |
-| `/pic/amenagement_de_la_place_jean_jaures_4.avif` | 1.08 MB | AVIF | Reference: Place Jean Jaurès | 💥 **CRITICAL:** Convert to WebP & compress. Reduce dimensions if necessary. |
+| `/pic/amenagement_de_la_place_jean_jaures_4.avif` | 1.62 MB | AVIF | Reference: Place Jean Jaurès | 💥 **CRITICAL:** Convert to WebP & compress. Reduce dimensions if necessary. |
 | `/pic/amenagement_de_la_place_jean_jaures_1.avif` | 911.2 KB | AVIF | References Portfolio, Reference: Place Jean Jaurès, Reference: Centre Culturel Simone Signoret, Reference: L’hôtel des Monnaies-Niel, Reference: Residence l'Aygues, Reference: Réfectoire de Coudoux, Reference: Réhabilitation du collège Paul Cézanne, Reference: Résidence Les Angevines | ⚠️ **HIGH:** Compress & convert to WebP. |
 | `/pic/l_hotel_des_monnaies_niel_8.avif` | 810.1 KB | AVIF | Reference: L’hôtel des Monnaies-Niel | ⚠️ **HIGH:** Compress & convert to WebP. |
 | `/pic/residence_les_angevines_4.avif` | 580.0 KB | AVIF | Reference: Résidence Les Angevines | ⚠️ **HIGH:** Compress & convert to WebP. |
@@ -67,7 +67,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Home Page (`/`)
 - **Total Payload Size:** `112.0 KB`
-- **Response Speed:** `5.5 ms`
+- **Response Speed:** `6.1 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -77,7 +77,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 About Us (`/aboutUs`)
 - **Total Payload Size:** `174.3 KB`
-- **Response Speed:** `3.8 ms`
+- **Response Speed:** `6 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -88,7 +88,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Clients (`/clients`)
 - **Total Payload Size:** `1.14 MB`
-- **Response Speed:** `3.5 ms`
+- **Response Speed:** `3.9 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -117,7 +117,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Contact (`/contact`)
 - **Total Payload Size:** `136.9 KB`
-- **Response Speed:** `14.1 ms`
+- **Response Speed:** `14.8 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -128,7 +128,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Legal Notices (`/legalNotices`)
 - **Total Payload Size:** `105.8 KB`
-- **Response Speed:** `3 ms`
+- **Response Speed:** `4.9 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -138,7 +138,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Privacy Policy (`/privacyPolicy`)
 - **Total Payload Size:** `104.9 KB`
-- **Response Speed:** `3.2 ms`
+- **Response Speed:** `4.1 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -148,7 +148,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Professions / Services (`/professions`)
 - **Total Payload Size:** `308.0 KB`
-- **Response Speed:** `3.9 ms`
+- **Response Speed:** `22.8 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -163,7 +163,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 References Portfolio (`/references`)
 - **Total Payload Size:** `2.17 MB`
-- **Response Speed:** `10.7 ms`
+- **Response Speed:** `10.3 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -176,22 +176,22 @@ These unique media files are responsible for over 90% of the site's transfer pay
 | `/pic/rehabilitation_du_college_paul_cezanne_1.avif` | `pic\rehabilitation_du_college_paul_cezanne_1.avif` | 41.0 KB | 🟢 OK |
 | `/pic/residence_les_angevines_1.avif` | `pic\residence_les_angevines_1.avif` | 185.1 KB | 🟢 OK |
 | `/img/footer-construction.png` | `img\footer-construction.png` | 20.7 KB | 🟢 OK |
-| `/pic/mobile/amenagement_de_la_place_jean_jaures_1.avif` | `pic\mobile\amenagement_de_la_place_jean_jaures_1.avif` | 139.4 KB | 🟢 OK |
-| `/pic/mobile/centre_culturel_simone_signoret_1.avif` | `pic\mobile\centre_culturel_simone_signoret_1.avif` | 38.5 KB | 🟢 OK |
-| `/pic/mobile/l_hotel_des_monnaies_niel_1.avif` | `pic\mobile\l_hotel_des_monnaies_niel_1.avif` | 136.5 KB | 🟢 OK |
-| `/pic/mobile/residence_l_aygues_1.avif` | `pic\mobile\residence_l_aygues_1.avif` | 55.6 KB | 🟢 OK |
-| `/pic/mobile/residence_les_angevines_1.avif` | `pic\mobile\residence_les_angevines_1.avif` | 79.6 KB | 🟢 OK |
+| `/pic/mobile/amenagement_de_la_place_jean_jaures_1.avif` | `pic\mobile\amenagement_de_la_place_jean_jaures_1.avif` | 140.6 KB | 🟢 OK |
+| `/pic/mobile/centre_culturel_simone_signoret_1.avif` | `pic\mobile\centre_culturel_simone_signoret_1.avif` | 39.3 KB | 🟢 OK |
+| `/pic/mobile/l_hotel_des_monnaies_niel_1.avif` | `pic\mobile\l_hotel_des_monnaies_niel_1.avif` | 136.7 KB | 🟢 OK |
+| `/pic/mobile/residence_l_aygues_1.avif` | `pic\mobile\residence_l_aygues_1.avif` | 56.8 KB | 🟢 OK |
+| `/pic/mobile/residence_les_angevines_1.avif` | `pic\mobile\residence_les_angevines_1.avif` | 83.7 KB | 🟢 OK |
 | `/img/home-building-crane-wide.png` | `img\home-building-crane-wide.png` | 39.2 KB | 🟢 OK |
 
 ### 📄 Sitemap (`/sitemap`)
 - **Total Payload Size:** `2.8 KB`
-- **Response Speed:** `4.5 ms`
+- **Response Speed:** `4.3 ms`
 
 *No media assets found on this page.*
 
 ### 📄 Reference: Place Jean Jaurès (`/reference/1`)
-- **Total Payload Size:** `2.97 MB`
-- **Response Speed:** `19.1 ms`
+- **Total Payload Size:** `3.50 MB`
+- **Response Speed:** `31.2 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -199,18 +199,18 @@ These unique media files are responsible for over 90% of the site's transfer pay
 | `/pic/amenagement_de_la_place_jean_jaures_1.avif` | `pic\amenagement_de_la_place_jean_jaures_1.avif` | 911.2 KB | 🟡 Large (>300KB) |
 | `/pic/amenagement_de_la_place_jean_jaures_2.avif` | `pic\amenagement_de_la_place_jean_jaures_2.avif` | 144.4 KB | 🟢 OK |
 | `/pic/amenagement_de_la_place_jean_jaures_3.avif` | `pic\amenagement_de_la_place_jean_jaures_3.avif` | 91.2 KB | 🟢 OK |
-| `/pic/amenagement_de_la_place_jean_jaures_4.avif` | `pic\amenagement_de_la_place_jean_jaures_4.avif` | 1.08 MB | 🔴 Too Heavy (>1MB) |
+| `/pic/amenagement_de_la_place_jean_jaures_4.avif` | `pic\amenagement_de_la_place_jean_jaures_4.avif` | 1.62 MB | 🔴 Too Heavy (>1MB) |
 | `/pic/centre_culturel_simone_signoret_1.avif` | `pic\centre_culturel_simone_signoret_1.avif` | 172.7 KB | 🟢 OK |
 | `/pic/l_hotel_des_monnaies_niel_1.avif` | `pic\l_hotel_des_monnaies_niel_1.avif` | 226.2 KB | 🟢 OK |
 | `/pic/residence_l_aygues_1.avif` | `pic\residence_l_aygues_1.avif` | 82.6 KB | 🟢 OK |
 | `/pic/refectoire_de_coudoux_1.avif` | `pic\refectoire_de_coudoux_1.avif` | 31.9 KB | 🟢 OK |
 | `/img/footer-construction.png` | `img\footer-construction.png` | 20.7 KB | 🟢 OK |
-| `/pic/mobile/amenagement_de_la_place_jean_jaures_1.avif` | `pic\mobile\amenagement_de_la_place_jean_jaures_1.avif` | 139.4 KB | 🟢 OK |
+| `/pic/mobile/amenagement_de_la_place_jean_jaures_1.avif` | `pic\mobile\amenagement_de_la_place_jean_jaures_1.avif` | 140.6 KB | 🟢 OK |
 | `/img/home-building-crane-wide.png` | `img\home-building-crane-wide.png` | 39.2 KB | 🟢 OK |
 
 ### 📄 Reference: Centre Culturel Simone Signoret (`/reference/2`)
 - **Total Payload Size:** `2.60 MB`
-- **Response Speed:** `8.5 ms`
+- **Response Speed:** `28.5 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -227,12 +227,12 @@ These unique media files are responsible for over 90% of the site's transfer pay
 | `/pic/residence_l_aygues_1.avif` | `pic\residence_l_aygues_1.avif` | 82.6 KB | 🟢 OK |
 | `/pic/refectoire_de_coudoux_1.avif` | `pic\refectoire_de_coudoux_1.avif` | 31.9 KB | 🟢 OK |
 | `/img/footer-construction.png` | `img\footer-construction.png` | 20.7 KB | 🟢 OK |
-| `/pic/mobile/centre_culturel_simone_signoret_1.avif` | `pic\mobile\centre_culturel_simone_signoret_1.avif` | 38.5 KB | 🟢 OK |
+| `/pic/mobile/centre_culturel_simone_signoret_1.avif` | `pic\mobile\centre_culturel_simone_signoret_1.avif` | 39.3 KB | 🟢 OK |
 | `/img/home-building-crane-wide.png` | `img\home-building-crane-wide.png` | 39.2 KB | 🟢 OK |
 
 ### 📄 Reference: L’hôtel des Monnaies-Niel (`/reference/3`)
 - **Total Payload Size:** `3.33 MB`
-- **Response Speed:** `19.7 ms`
+- **Response Speed:** `10.2 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -251,12 +251,12 @@ These unique media files are responsible for over 90% of the site's transfer pay
 | `/pic/residence_l_aygues_1.avif` | `pic\residence_l_aygues_1.avif` | 82.6 KB | 🟢 OK |
 | `/pic/refectoire_de_coudoux_1.avif` | `pic\refectoire_de_coudoux_1.avif` | 31.9 KB | 🟢 OK |
 | `/img/footer-construction.png` | `img\footer-construction.png` | 20.7 KB | 🟢 OK |
-| `/pic/mobile/l_hotel_des_monnaies_niel_1.avif` | `pic\mobile\l_hotel_des_monnaies_niel_1.avif` | 136.5 KB | 🟢 OK |
+| `/pic/mobile/l_hotel_des_monnaies_niel_1.avif` | `pic\mobile\l_hotel_des_monnaies_niel_1.avif` | 136.7 KB | 🟢 OK |
 | `/img/home-building-crane-wide.png` | `img\home-building-crane-wide.png` | 39.2 KB | 🟢 OK |
 
 ### 📄 Reference: Residence l'Aygues (`/reference/4`)
 - **Total Payload Size:** `1.57 MB`
-- **Response Speed:** `6.8 ms`
+- **Response Speed:** `30.5 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -267,12 +267,12 @@ These unique media files are responsible for over 90% of the site's transfer pay
 | `/pic/l_hotel_des_monnaies_niel_1.avif` | `pic\l_hotel_des_monnaies_niel_1.avif` | 226.2 KB | 🟢 OK |
 | `/pic/refectoire_de_coudoux_1.avif` | `pic\refectoire_de_coudoux_1.avif` | 31.9 KB | 🟢 OK |
 | `/img/footer-construction.png` | `img\footer-construction.png` | 20.7 KB | 🟢 OK |
-| `/pic/mobile/residence_l_aygues_1.avif` | `pic\mobile\residence_l_aygues_1.avif` | 55.6 KB | 🟢 OK |
+| `/pic/mobile/residence_l_aygues_1.avif` | `pic\mobile\residence_l_aygues_1.avif` | 56.8 KB | 🟢 OK |
 | `/img/home-building-crane-wide.png` | `img\home-building-crane-wide.png` | 39.2 KB | 🟢 OK |
 
 ### 📄 Reference: Réfectoire de Coudoux (`/reference/5`)
 - **Total Payload Size:** `1.78 MB`
-- **Response Speed:** `10.5 ms`
+- **Response Speed:** `8.3 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -293,7 +293,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Reference: Réhabilitation du collège Paul Cézanne (`/reference/6`)
 - **Total Payload Size:** `1.75 MB`
-- **Response Speed:** `21.6 ms`
+- **Response Speed:** `8.3 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -312,8 +312,8 @@ These unique media files are responsible for over 90% of the site's transfer pay
 | `/img/home-building-crane-wide.png` | `img\home-building-crane-wide.png` | 39.2 KB | 🟢 OK |
 
 ### 📄 Reference: Résidence Les Angevines (`/reference/7`)
-- **Total Payload Size:** `4.06 MB`
-- **Response Speed:** `24.7 ms`
+- **Total Payload Size:** `4.07 MB`
+- **Response Speed:** `7.9 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -331,7 +331,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 | `/pic/l_hotel_des_monnaies_niel_1.avif` | `pic\l_hotel_des_monnaies_niel_1.avif` | 226.2 KB | 🟢 OK |
 | `/pic/residence_l_aygues_1.avif` | `pic\residence_l_aygues_1.avif` | 82.6 KB | 🟢 OK |
 | `/img/footer-construction.png` | `img\footer-construction.png` | 20.7 KB | 🟢 OK |
-| `/pic/mobile/residence_les_angevines_1.avif` | `pic\mobile\residence_les_angevines_1.avif` | 79.6 KB | 🟢 OK |
+| `/pic/mobile/residence_les_angevines_1.avif` | `pic\mobile\residence_les_angevines_1.avif` | 83.7 KB | 🟢 OK |
 | `/img/home-building-crane-wide.png` | `img\home-building-crane-wide.png` | 39.2 KB | 🟢 OK |
 
 ---
