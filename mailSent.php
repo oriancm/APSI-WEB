@@ -41,7 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
+        <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
+    <style>
+        <?php include __DIR__ . '/css/styleGlobalNotIndex.css'; ?>
+    </style>
     <link rel="preload" href="css/mailSent.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Fonts Preload -->
@@ -98,8 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 </body>
-<!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
-<link rel="stylesheet" href="/css/styleGlobalNotIndex.css?v=20260713">
+    <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
+    <style>
+        <?php include __DIR__ . '/css/styleGlobalNotIndex.css'; ?>
+    </style>
 
 </html>
 <script>

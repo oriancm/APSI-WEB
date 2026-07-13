@@ -28,9 +28,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
-    <link rel="stylesheet" href="/css/site.css?v=20260713">
-    <link rel="stylesheet" href="/css/clients.css?v=20260623-1">
+        <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
+    <style>
+        <?php include __DIR__ . '/css/site.css'; ?>
+        <?php include __DIR__ . '/css/clients.css'; ?>
+    </style>
     
     <!-- Fonts Preload -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
