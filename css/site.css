@@ -366,6 +366,14 @@ img {
 }
 
 @media (max-width: 980px) {
+    .site-shell-bg,
+    .apsi-crane-scene {
+        background-image:
+            linear-gradient(90deg, #fff 0, #fff var(--apsi-bg-fade-start), rgba(255,255,255,0.72) var(--apsi-bg-fade-mid), rgba(255,255,255,0) var(--apsi-bg-fade-end), rgba(255,255,255,0) 100%),
+            linear-gradient(180deg, rgba(255,255,255,0) 58%, rgba(255,255,255,0.96) 96%),
+            url("/img/mobile/home-building-crane-wide.avif") !important;
+    }
+
     :root {
         --apsi-page-edge: 16px;
         --apsi-page-width: calc(100vw - var(--apsi-page-edge) - var(--apsi-page-edge));

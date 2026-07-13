@@ -242,6 +242,12 @@ body.home-page .site-footer__inner {
    ========================================================================== */
 
 @media (max-width: 980px) {
+    .home-shell {
+        background-image:
+            linear-gradient(125deg, #ffffff 0%, #ffffff 35%, rgba(255,255,255,0.9) 42%, rgba(255,255,255,0) 52%),
+            url("/img/mobile/home-building-crane-wide.avif") !important;
+    }
+
     html:has(body.home-page) {
         height: auto;
         overflow: visible;
