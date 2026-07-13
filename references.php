@@ -186,12 +186,28 @@ $activePage = 'references';
             </div>
 
             <div class="references-grid" id="references-grid">
-                <?php foreach ($refTab as $ref): ?>
-                    <?php $img = $picByRef[$ref['id']] ?? null; ?>
+                <?php 
+                $is_first = true;
+                foreach ($refTab as $ref): 
+                    $img = $picByRef[$ref['id']] ?? null; 
+                ?>
                     <article class="reference-tile" data-domain="<?= htmlspecialchars($ref['domaine'] ?? '0') ?>">
                         <a href="/reference/<?= htmlspecialchars($ref['id']) ?>" aria-label="<?= htmlspecialchars($ref['titre']) ?>"></a>
                         <?php if ($img): ?>
-                            <img src="/pic/<?= htmlspecialchars($img) ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" loading="lazy">
+                            <?php
+                            $img_clean = htmlspecialchars($img);
+                            $mobile_img_path = "pic/mobile/" . $img;
+                            $has_mobile = file_exists(__DIR__ . '/' . $mobile_img_path);
+                            $lazy_attr = $is_first ? 'fetchpriority="high"' : 'loading="lazy"';
+                            ?>
+                            <?php if ($has_mobile): ?>
+                                <picture>
+                                    <source media="(max-width: 980px)" srcset="/<?= $mobile_img_path ?>">
+                                    <img src="/pic/<?= $img_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" <?= $lazy_attr ?>>
+                                </picture>
+                            <?php else: ?>
+                                <img src="/pic/<?= $img_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" <?= $lazy_attr ?>>
+                            <?php endif; ?>
                         <?php else: ?>
                             <div class="reference-tile-empty">Aucune image disponible</div>
                         <?php endif; ?>
@@ -200,6 +216,7 @@ $activePage = 'references';
                             <p><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($ref['commune']) ?></p>
                         </div>
                     </article>
+                    <?php $is_first = false; ?>
                 <?php endforeach; ?>
             </div>
         </section>

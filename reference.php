@@ -344,8 +344,19 @@ $activePage = 'references';
                             <button type="button" class="gallery-arrow gallery-arrow--left" aria-label="Image précédente">
                                 <i data-lucide="chevron-left" aria-hidden="true"></i>
                             </button>
-                            
-                            <img id="main-reference-image" src="/pic/<?= htmlspecialchars($mainPic) ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune'] ?? '') ?> - APSI BTP">
+                            <?php
+                            $main_pic_clean = htmlspecialchars($mainPic);
+                            $mobile_main_path = "pic/mobile/" . $mainPic;
+                            $has_mobile_main = file_exists(__DIR__ . '/' . $mobile_main_path);
+                            ?>
+                            <?php if ($has_mobile_main): ?>
+                                <picture>
+                                    <source id="main-reference-source" media="(max-width: 980px)" srcset="/<?= $mobile_main_path ?>">
+                                    <img id="main-reference-image" src="/pic/<?= $main_pic_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune'] ?? '') ?> - APSI BTP" fetchpriority="high">
+                                </picture>
+                            <?php else: ?>
+                                <img id="main-reference-image" src="/pic/<?= $main_pic_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune'] ?? '') ?> - APSI BTP" fetchpriority="high">
+                            <?php endif; ?>
 
                             <button type="button" class="gallery-arrow gallery-arrow--right" aria-label="Image suivante">
                                 <i data-lucide="chevron-right" aria-hidden="true"></i>
@@ -372,8 +383,14 @@ $activePage = 'references';
                         <!-- Keep hidden thumbnail container so that JS list of sources works unmodified! -->
                         <div class="reference-thumbs" style="display: none;">
                             <?php foreach ($picTab as $index => $pic): ?>
-                                <button type="button" class="<?= $index === 0 ? 'active' : '' ?>" data-src="/pic/<?= htmlspecialchars($pic['titre']) ?>">
-                                    <img src="/pic/<?= htmlspecialchars($pic['titre']) ?>" alt="Photo <?= $index + 1 ?> - <?= htmlspecialchars($ref['titre']) ?>">
+                                <?php
+                                $pic_name = htmlspecialchars($pic['titre']);
+                                $mobile_pic_path = "pic/mobile/" . $pic['titre'];
+                                $has_mobile_pic = file_exists(__DIR__ . '/' . $mobile_pic_path);
+                                $mobile_src = $has_mobile_pic ? '/' . $mobile_pic_path : '/pic/' . $pic_name;
+                                ?>
+                                <button type="button" class="<?= $index === 0 ? 'active' : '' ?>" data-src="/pic/<?= $pic_name ?>" data-mobile-src="<?= $mobile_src ?>">
+                                    <img src="/pic/<?= $pic_name ?>" alt="Photo <?= $index + 1 ?> - <?= htmlspecialchars($ref['titre']) ?>">
                                 </button>
                             <?php endforeach; ?>
                         </div>
@@ -524,6 +541,10 @@ $activePage = 'references';
             current = (index + thumbs.length) % thumbs.length;
             thumbs.forEach((thumb, thumbIndex) => thumb.classList.toggle('active', thumbIndex === current));
             image.src = thumbs[current].dataset.src;
+            const source = document.getElementById('main-reference-source');
+            if (source) {
+                source.srcset = thumbs[current].dataset.mobileSrc || thumbs[current].dataset.src;
+            }
 
             // Update 2-digit slide progress text (e.g. 01, 02)
             const indicator = document.getElementById('current-slide-index');
