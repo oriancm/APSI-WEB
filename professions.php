@@ -38,7 +38,7 @@
             <h1>Nos Métiers</h1>
 
             <div class="professions-hero-mobile-image">
-                <img src="/img/professions-title-mobile.jpg" alt="APSI BTP - Nos Métiers">
+                <img src="/img/professions-title-mobile.jpg" width="1024" height="616" alt="APSI BTP - Nos Métiers">
             </div>
 
             <p>
@@ -71,11 +71,11 @@
             </div>
         </div>
 
-        <img src="/img/opc-desktop.jpg" alt="Deux professionnels analysant des plans sur un chantier">
+        <img src="/img/opc-desktop.jpg" width="612" height="408" alt="Deux professionnels analysant des plans sur un chantier">
     </section>
 
     <section class="profession-card profession-card--moex">
-        <img src="/img/moex-desktop.avif" alt="Professionnel APSI BTP sur chantier avec tablette">
+        <img src="/img/moex-desktop.avif" width="1024" height="623" alt="Professionnel APSI BTP sur chantier avec tablette">
 
         <div class="profession-card-copy">
             <div class="profession-title-row">
@@ -282,7 +282,7 @@
         <div class="profession-deliverables-left">
             <h2>Documents et suivi de mission</h2>
             <div class="deliverables-image-wrap">
-                <img src="/img/illustrations-articles-de-blog.png" alt="Outils de documents et suivi de mission - APSI BTP">
+                <img src="/img/illustrations-articles-de-blog.png" width="550" height="400" alt="Outils de documents et suivi de mission - APSI BTP">
             </div>
         </div>
 

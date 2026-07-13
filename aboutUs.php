@@ -72,7 +72,7 @@
             <div class="about-founders-row">
                 <div class="about-founder-profile">
                     <div class="about-founder-photo-frame">
-                        <img src="/img/ludovic.jpg" alt="Ludovic MESSY - Fondateur de APSI BTP">
+                        <img src="/img/ludovic.jpg" width="670" height="656" alt="Ludovic MESSY - Fondateur de APSI BTP">
                     </div>
                     <div class="about-founder-info">
                         <strong>Ludovic MESSY</strong>

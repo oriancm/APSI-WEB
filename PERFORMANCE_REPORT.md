@@ -1,6 +1,6 @@
 # 🚀 APSI Web Performance & Media Size Audit Report
 
-> **Audit Date:** `2026-07-13 19:21:24`  
+> **Audit Date:** `2026-07-13 19:46:07`  
 > **Target Host (Local test):** `http://127.0.0.1:8088`  
 > **Total Unique Media Files Detected:** `68`  
 > **Total Site Media Weight:** `10.18 MB`
@@ -10,7 +10,7 @@
 An automated performance and media asset audit was performed across all **16 main pages** of the APSI web application. The audit measured the HTML rendering response times (TTFB) and calculated the complete page transfer sizes by extracting and measuring all referenced assets (CSS, JS, and Media).
 
 ### Key Findings:
-- 🏎️ **Overall Speed:** Server response speed (TTFB) is exceptionally healthy. Across all pages, the average rendering time is **29.6ms**. This indicates that the PHP backend logic and routing are extremely efficient.
+- 🏎️ **Overall Speed:** Server response speed (TTFB) is exceptionally healthy. Across all pages, the average rendering time is **14.1ms**. This indicates that the PHP backend logic and routing are extremely efficient.
 - ⚖️ **Page Weight Concern:** Several pages suffer from extremely heavy initial page weights due to uncompressed PNG and high-resolution JPG images. 
   - The heaviest page is **Reference: Résidence Les Angevines** with a massive payload of **3.95 MB**!
   - Under slow mobile connections (3G), this page would take several seconds to load, significantly impacting UX and SEO.
@@ -20,22 +20,22 @@ An automated performance and media asset audit was performed across all **16 mai
 
 | Page Name | Route | Response Time | HTML Size | CSS (Files/Size) | JS (Files/Size) | Media (Files/Size) | Total Page Weight | Status |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Home Page | `/` | 27ms | 7.0 KB | 2 (28.0 KB) | 1 (6.8 KB) | 2 (31.0 KB) | **72.8 KB** | 🟢 Good |
-| About Us | `/aboutUs` | 3.7ms | 16.0 KB | 2 (37.0 KB) | 1 (6.8 KB) | 3 (75.2 KB) | **135.0 KB** | 🟢 Good |
-| Clients | `/clients` | 65.3ms | 7.8 KB | 2 (22.1 KB) | 1 (6.8 KB) | 21 (1.06 MB) | **1.10 MB** | 🟢 Good |
-| Contact | `/contact` | 37ms | 8.6 KB | 2 (25.0 KB) | 1 (6.8 KB) | 2 (31.0 KB) | **71.4 KB** | 🟢 Good |
-| Legal Notices | `/legalNotices` | 51ms | 6.5 KB | 2 (22.3 KB) | 1 (6.8 KB) | 2 (31.0 KB) | **66.6 KB** | 🟢 Good |
-| Privacy Policy | `/privacyPolicy` | 51.4ms | 6.2 KB | 2 (21.8 KB) | 1 (6.8 KB) | 2 (31.0 KB) | **65.7 KB** | 🟢 Good |
-| Professions / Services | `/professions` | 2.4ms | 20.2 KB | 2 (36.7 KB) | 1 (6.8 KB) | 6 (130.3 KB) | **194.0 KB** | 🟢 Good |
-| References Portfolio | `/references` | 57.1ms | 14.3 KB | 2 (26.7 KB) | 1 (6.8 KB) | 9 (1.64 MB) | **1.69 MB** | 🟡 Warning |
-| Sitemap | `/sitemap` | 23.5ms | 2.8 KB | 0 (0 B) | 0 (0 B) | 0 (0 B) | **2.8 KB** | 🟢 Good |
-| Reference: Place Jean Jaurès | `/reference/1` | 59.3ms | 17.5 KB | 2 (34.8 KB) | 1 (6.8 KB) | 10 (3.27 MB) | **3.33 MB** | 🟡 Warning |
-| Reference: Centre Culturel Simone Signoret | `/reference/2` | 22.7ms | 18.4 KB | 2 (34.8 KB) | 1 (6.8 KB) | 13 (2.46 MB) | **2.52 MB** | 🟡 Warning |
-| Reference: L’hôtel des Monnaies-Niel | `/reference/3` | 23.9ms | 18.9 KB | 2 (34.8 KB) | 1 (6.8 KB) | 15 (3.09 MB) | **3.15 MB** | 🟡 Warning |
-| Reference: Residence l'Aygues | `/reference/4` | 3.6ms | 16.0 KB | 2 (34.8 KB) | 1 (6.8 KB) | 7 (1.42 MB) | **1.48 MB** | 🟢 Good |
-| Reference: Réfectoire de Coudoux | `/reference/5` | 25.7ms | 18.1 KB | 2 (34.8 KB) | 1 (6.8 KB) | 13 (1.69 MB) | **1.74 MB** | 🟡 Warning |
-| Reference: Réhabilitation du collège Paul Cézanne | `/reference/6` | 15ms | 18.4 KB | 2 (34.8 KB) | 1 (6.8 KB) | 12 (1.65 MB) | **1.71 MB** | 🟡 Warning |
-| Reference: Résidence Les Angevines | `/reference/7` | 4.2ms | 18.5 KB | 2 (34.8 KB) | 1 (6.8 KB) | 14 (3.89 MB) | **3.95 MB** | 🟡 Warning |
+| Home Page | `/` | 7.1ms | 7.2 KB | 2 (28.0 KB) | 1 (6.8 KB) | 2 (31.0 KB) | **73.0 KB** | 🟢 Good |
+| About Us | `/aboutUs` | 4.9ms | 16.1 KB | 2 (37.0 KB) | 1 (6.8 KB) | 3 (75.2 KB) | **135.1 KB** | 🟢 Good |
+| Clients | `/clients` | 4.6ms | 7.9 KB | 2 (22.1 KB) | 1 (6.8 KB) | 21 (1.06 MB) | **1.10 MB** | 🟢 Good |
+| Contact | `/contact` | 33.7ms | 8.7 KB | 2 (25.0 KB) | 1 (6.8 KB) | 2 (31.0 KB) | **71.4 KB** | 🟢 Good |
+| Legal Notices | `/legalNotices` | 2.8ms | 6.6 KB | 2 (22.3 KB) | 1 (6.8 KB) | 2 (31.0 KB) | **66.6 KB** | 🟢 Good |
+| Privacy Policy | `/privacyPolicy` | 2.5ms | 6.2 KB | 2 (21.8 KB) | 1 (6.8 KB) | 2 (31.0 KB) | **65.7 KB** | 🟢 Good |
+| Professions / Services | `/professions` | 2.2ms | 20.3 KB | 2 (36.7 KB) | 1 (6.8 KB) | 6 (130.3 KB) | **194.1 KB** | 🟢 Good |
+| References Portfolio | `/references` | 28ms | 14.4 KB | 2 (26.7 KB) | 1 (6.8 KB) | 9 (1.64 MB) | **1.69 MB** | 🟡 Warning |
+| Sitemap | `/sitemap` | 3.6ms | 2.8 KB | 0 (0 B) | 0 (0 B) | 0 (0 B) | **2.8 KB** | 🟢 Good |
+| Reference: Place Jean Jaurès | `/reference/1` | 26.8ms | 17.5 KB | 2 (34.8 KB) | 1 (6.8 KB) | 10 (3.27 MB) | **3.33 MB** | 🟡 Warning |
+| Reference: Centre Culturel Simone Signoret | `/reference/2` | 6.7ms | 18.5 KB | 2 (34.8 KB) | 1 (6.8 KB) | 13 (2.46 MB) | **2.52 MB** | 🟡 Warning |
+| Reference: L’hôtel des Monnaies-Niel | `/reference/3` | 6.7ms | 18.9 KB | 2 (34.8 KB) | 1 (6.8 KB) | 15 (3.09 MB) | **3.15 MB** | 🟡 Warning |
+| Reference: Residence l'Aygues | `/reference/4` | 6.6ms | 16.0 KB | 2 (34.8 KB) | 1 (6.8 KB) | 7 (1.42 MB) | **1.48 MB** | 🟢 Good |
+| Reference: Réfectoire de Coudoux | `/reference/5` | 31.3ms | 18.2 KB | 2 (34.8 KB) | 1 (6.8 KB) | 13 (1.69 MB) | **1.74 MB** | 🟡 Warning |
+| Reference: Réhabilitation du collège Paul Cézanne | `/reference/6` | 28.9ms | 18.4 KB | 2 (34.8 KB) | 1 (6.8 KB) | 12 (1.65 MB) | **1.71 MB** | 🟡 Warning |
+| Reference: Résidence Les Angevines | `/reference/7` | 29.2ms | 18.5 KB | 2 (34.8 KB) | 1 (6.8 KB) | 14 (3.89 MB) | **3.95 MB** | 🟡 Warning |
 
 ---
 
@@ -66,8 +66,8 @@ These unique media files are responsible for over 90% of the site's transfer pay
 ## 📂 Detailed Page Breakdown
 
 ### 📄 Home Page (`/`)
-- **Total Payload Size:** `72.8 KB`
-- **Response Speed:** `27 ms`
+- **Total Payload Size:** `73.0 KB`
+- **Response Speed:** `7.1 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -75,8 +75,8 @@ These unique media files are responsible for over 90% of the site's transfer pay
 | `/img/footer-construction.png` | `img\footer-construction.png` | 20.7 KB | 🟢 OK |
 
 ### 📄 About Us (`/aboutUs`)
-- **Total Payload Size:** `135.0 KB`
-- **Response Speed:** `3.7 ms`
+- **Total Payload Size:** `135.1 KB`
+- **Response Speed:** `4.9 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -86,7 +86,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Clients (`/clients`)
 - **Total Payload Size:** `1.10 MB`
-- **Response Speed:** `65.3 ms`
+- **Response Speed:** `4.6 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -114,7 +114,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Contact (`/contact`)
 - **Total Payload Size:** `71.4 KB`
-- **Response Speed:** `37 ms`
+- **Response Speed:** `33.7 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -123,7 +123,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Legal Notices (`/legalNotices`)
 - **Total Payload Size:** `66.6 KB`
-- **Response Speed:** `51 ms`
+- **Response Speed:** `2.8 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -132,7 +132,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Privacy Policy (`/privacyPolicy`)
 - **Total Payload Size:** `65.7 KB`
-- **Response Speed:** `51.4 ms`
+- **Response Speed:** `2.5 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -140,8 +140,8 @@ These unique media files are responsible for over 90% of the site's transfer pay
 | `/img/footer-construction.png` | `img\footer-construction.png` | 20.7 KB | 🟢 OK |
 
 ### 📄 Professions / Services (`/professions`)
-- **Total Payload Size:** `194.0 KB`
-- **Response Speed:** `2.4 ms`
+- **Total Payload Size:** `194.1 KB`
+- **Response Speed:** `2.2 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -154,7 +154,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 References Portfolio (`/references`)
 - **Total Payload Size:** `1.69 MB`
-- **Response Speed:** `57.1 ms`
+- **Response Speed:** `28 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -170,13 +170,13 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Sitemap (`/sitemap`)
 - **Total Payload Size:** `2.8 KB`
-- **Response Speed:** `23.5 ms`
+- **Response Speed:** `3.6 ms`
 
 *No media assets found on this page.*
 
 ### 📄 Reference: Place Jean Jaurès (`/reference/1`)
 - **Total Payload Size:** `3.33 MB`
-- **Response Speed:** `59.3 ms`
+- **Response Speed:** `26.8 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -193,7 +193,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Reference: Centre Culturel Simone Signoret (`/reference/2`)
 - **Total Payload Size:** `2.52 MB`
-- **Response Speed:** `22.7 ms`
+- **Response Speed:** `6.7 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -213,7 +213,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Reference: L’hôtel des Monnaies-Niel (`/reference/3`)
 - **Total Payload Size:** `3.15 MB`
-- **Response Speed:** `23.9 ms`
+- **Response Speed:** `6.7 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -235,7 +235,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Reference: Residence l'Aygues (`/reference/4`)
 - **Total Payload Size:** `1.48 MB`
-- **Response Speed:** `3.6 ms`
+- **Response Speed:** `6.6 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -249,7 +249,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Reference: Réfectoire de Coudoux (`/reference/5`)
 - **Total Payload Size:** `1.74 MB`
-- **Response Speed:** `25.7 ms`
+- **Response Speed:** `31.3 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -269,7 +269,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Reference: Réhabilitation du collège Paul Cézanne (`/reference/6`)
 - **Total Payload Size:** `1.71 MB`
-- **Response Speed:** `15 ms`
+- **Response Speed:** `28.9 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
@@ -288,7 +288,7 @@ These unique media files are responsible for over 90% of the site's transfer pay
 
 ### 📄 Reference: Résidence Les Angevines (`/reference/7`)
 - **Total Payload Size:** `3.95 MB`
-- **Response Speed:** `4.2 ms`
+- **Response Speed:** `29.2 ms`
 
 | Media Asset | Physical Path | File Size | Status |
 | :--- | :--- | :---: | :--- |
