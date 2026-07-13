@@ -360,17 +360,15 @@ $activePage = 'references';
                             </button>
                             <?php
                             $main_pic_clean = htmlspecialchars($mainPic);
-                            $mobile_main_path = "pic/mobile/" . $mainPic;
+                            $img_basename = pathinfo($mainPic, PATHINFO_FILENAME);
+                            $mobile_main_path = "pic/mobile/" . $img_basename . ".avif";
                             $has_mobile_main = file_exists(__DIR__ . '/' . $mobile_main_path);
+                            $initial_mobile_srcset = $has_mobile_main ? '/' . $mobile_main_path : '/pic/' . $main_pic_clean;
                             ?>
-                            <?php if ($has_mobile_main): ?>
-                                <picture>
-                                    <source id="main-reference-source" media="(max-width: 980px)" srcset="/<?= $mobile_main_path ?>">
-                                    <img id="main-reference-image" src="/pic/<?= $main_pic_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune'] ?? '') ?> - APSI BTP" fetchpriority="high">
-                                </picture>
-                            <?php else: ?>
+                            <picture>
+                                <source id="main-reference-source" media="(max-width: 980px)" srcset="<?= $initial_mobile_srcset ?>">
                                 <img id="main-reference-image" src="/pic/<?= $main_pic_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune'] ?? '') ?> - APSI BTP" fetchpriority="high">
-                            <?php endif; ?>
+                            </picture>
 
                             <button type="button" class="gallery-arrow gallery-arrow--right" aria-label="Image suivante">
                                 <i data-lucide="chevron-right" aria-hidden="true"></i>
@@ -399,13 +397,12 @@ $activePage = 'references';
                             <?php foreach ($picTab as $index => $pic): ?>
                                 <?php
                                 $pic_name = htmlspecialchars($pic['titre']);
-                                $mobile_pic_path = "pic/mobile/" . $pic['titre'];
+                                $thumb_basename = pathinfo($pic['titre'], PATHINFO_FILENAME);
+                                $mobile_pic_path = "pic/mobile/" . $thumb_basename . ".avif";
                                 $has_mobile_pic = file_exists(__DIR__ . '/' . $mobile_pic_path);
                                 $mobile_src = $has_mobile_pic ? '/' . $mobile_pic_path : '/pic/' . $pic_name;
                                 ?>
-                                <button type="button" class="<?= $index === 0 ? 'active' : '' ?>" data-src="/pic/<?= $pic_name ?>" data-mobile-src="<?= $mobile_src ?>">
-                                    <img src="/pic/<?= $pic_name ?>" alt="Photo <?= $index + 1 ?> - <?= htmlspecialchars($ref['titre']) ?>">
-                                </button>
+                                <button type="button" class="<?= $index === 0 ? 'active' : '' ?>" data-src="/pic/<?= $pic_name ?>" data-mobile-src="<?= $mobile_src ?>"></button>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -522,7 +519,20 @@ $activePage = 'references';
                             <article class="same-domain-card">
                                 <a href="/reference/<?= htmlspecialchars($sameRef['id']) ?>" aria-label="<?= htmlspecialchars($sameRef['titre']) ?>"></a>
                                 <?php if ($img): ?>
-                                    <img src="/pic/<?= htmlspecialchars($img) ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
+                                    <?php
+                                    $same_img_clean = htmlspecialchars($img);
+                                    $same_basename = pathinfo($img, PATHINFO_FILENAME);
+                                    $same_mobile_path = "pic/mobile/" . $same_basename . ".avif";
+                                    $same_has_mobile = file_exists(__DIR__ . '/' . $same_mobile_path);
+                                    ?>
+                                    <?php if ($same_has_mobile): ?>
+                                        <picture>
+                                            <source media="(max-width: 980px)" srcset="/<?= $same_mobile_path ?>">
+                                            <img src="/pic/<?= $same_img_clean ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
+                                        </picture>
+                                    <?php else: ?>
+                                        <img src="/pic/<?= $same_img_clean ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <div class="same-empty">Aucune image disponible</div>
                                 <?php endif; ?>

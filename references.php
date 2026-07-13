@@ -210,7 +210,8 @@ $activePage = 'references';
                         <?php if ($img): ?>
                             <?php
                             $img_clean = htmlspecialchars($img);
-                            $mobile_img_path = "pic/mobile/" . $img;
+                            $img_basename = pathinfo($img, PATHINFO_FILENAME);
+                            $mobile_img_path = "pic/mobile/" . $img_basename . ".avif";
                             $has_mobile = file_exists(__DIR__ . '/' . $mobile_img_path);
                             $lazy_attr = $is_first ? 'fetchpriority="high"' : 'loading="lazy"';
                             ?>
