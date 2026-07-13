@@ -60,10 +60,6 @@
     <!-- Stylesheets (Loaded synchronously to prevent Flash of Unstyled Content) -->
     <link rel="stylesheet" href="/css/site.css?v=20260713">
     <link rel="stylesheet" href="/css/style.css?v=20260713">
-    
-    <!-- LCP Image Preload -->
-    <link rel="preload" href="/img/home-building-crane-wide.png" as="image" fetchpriority="high">
-    
     <!-- Fonts Preload -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
