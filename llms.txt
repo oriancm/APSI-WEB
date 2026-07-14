@@ -1,0 +1,23 @@
+# APSI BTP
+
+> APSI BTP est un cabinet d'ingénierie spécialisé dans l'Ordonnancement, le Pilotage et la Coordination (OPC) ainsi que la Maîtrise d'Œuvre d'Exécution (MOEX) de projets de bâtiment et de travaux publics.
+
+## Coordonnées & Informations légales
+- **Site officiel** : https://apsi-btp.fr/
+- **Siège social** : Quartier Pierrefeu, chemin de Saint Jean, 84750 Caseneuve, France
+- **Email** : test@apsi-btp.fr
+- **Capital social** : 6 800,00 € (SARL)
+- **TVA** : FR 40 495 392 557
+
+## Liens Principaux
+- [Accueil](https://apsi-btp.fr/) : Présentation générale de l'entreprise et de ses compétences clés.
+- [Qui sommes-nous](https://apsi-btp.fr/aboutUs) : Histoire d'APSI BTP (créée en 2007 par Ludovic Messy, rejoint par Laurent Métayer en 2021) et valeurs.
+- [Nos métiers](https://apsi-btp.fr/professions) : Détails sur l'Ordonnancement, Pilotage, Coordination (OPC) et la Maîtrise d'Œuvre d'Exécution (MOEX).
+- [Nos références](https://apsi-btp.fr/references) : Liste de nos réalisations d'envergure (construction neuve, réhabilitation en site occupé, etc.).
+- [Nos clients](https://apsi-btp.fr/clients) : Les collectivités publiques et partenaires privés qui nous font confiance.
+- [Nous contacter](https://apsi-btp.fr/contact) : Formulaire et coordonnées de contact.
+
+## Services & Expertises
+- **Ordonnancement, Pilotage, Coordination (OPC)** : Analyse des tâches, planification des travaux (graphes, chemin critique, calendriers d’exécution), coordination des entreprises, animation des réunions de chantier et gestion des délais jusqu’à la réception.
+- **Maîtrise d'Œuvre d'Exécution (MOEX)** : Direction de l'exécution des travaux (DET), visa des plans d'exécution, ordonnancement des paiements, assistance aux opérations de réception (AOR).
+- **Domaines d'intervention** : Équipements publics, hôtellerie haut de gamme, logements collectifs, réhabilitations complexes, patrimoine provençal et aménagement urbain.
