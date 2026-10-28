@@ -1,0 +1,50 @@
+[
+  {
+    "name": "accueil",
+    "route": "/",
+    "status": 200,
+    "title": "APSI BTP - Vos projets en toute sérénité | Ordonnancement Pilotage Coordination"
+  },
+  {
+    "name": "qui-sommes-nous",
+    "route": "/aboutUs",
+    "status": 200,
+    "title": "APSI BTP - Qui sommes-nous | OPC et MOEX depuis 2007"
+  },
+  {
+    "name": "nos-metiers",
+    "route": "/professions",
+    "status": 200,
+    "title": "Nos Métiers : OPC & MOEX - APSI BTP"
+  },
+  {
+    "name": "nos-references",
+    "route": "/references",
+    "status": 200,
+    "title": "Nos Références - APSI BTP | Projets BTP en Provence-Alpes-Côte d'Azur"
+  },
+  {
+    "name": "nos-clients",
+    "route": "/clients",
+    "status": 200,
+    "title": "Nos Clients - APSI BTP | Partenaires et Maîtres d'Ouvrage"
+  },
+  {
+    "name": "nous-contacter",
+    "route": "/contact",
+    "status": 200,
+    "title": "Nous Contacter - APSI BTP | Contactez-nous pour vos projets BTP"
+  },
+  {
+    "name": "mentions-legales",
+    "route": "/legalNotices",
+    "status": 200,
+    "title": "Mentions Légales - APSI BTP"
+  },
+  {
+    "name": "politique-confidentialite",
+    "route": "/privacyPolicy",
+    "status": 200,
+    "title": "Politique de Confidentialité - APSI BTP"
+  }
+]

@@ -54,6 +54,7 @@
     ?>
     <style>
         <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
+        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); ?>
         <?= apsi_minify_css(__DIR__ . '/css/clients.css'); ?>
     </style>
     
@@ -64,16 +65,21 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
     </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/site.js" defer></script>
 </head>
 <body class="clients-page">
     <main class="clients-shell site-shell-bg">
         <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-        <section class="clients-hero site-container">
-            <h1 class="page-title">Nos Clients</h1>
-            <span class="page-line"></span>
-            <p>APSI BTP accompagne depuis plus de 15 ans des maîtres d'ouvrage publics et privés dans la réussite de leurs projets de <strong>construction</strong> et de <strong>réhabilitation.</strong></p>
+        <section class="feature-hero clients-hero" aria-labelledby="clients-title">
+            <div class="feature-hero__inner">
+                <div class="feature-hero__copy">
+                    <p class="feature-hero__eyebrow">Nos clients</p>
+                    <h1 id="clients-title">Ils nous font<br><span>confiance</span></h1>
+                    <p class="feature-hero__description">Collectivités, établissements publics, bailleurs et acteurs privés nous accordent leur confiance. À leurs côtés, nous privilégions <b>l’écoute</b>, <b>la rigueur</b> et <b>la qualité des échanges.</b></p>
+                </div>
+            </div>
         </section>
 
         <section class="clients-grid site-container" aria-label="Logos clients">
@@ -102,7 +108,7 @@
     <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
     <script>
-        window.addEventListener('load', function () {
+        window.apsiPageReady(function () {
             if (window.lucide) window.lucide.createIcons();
         });
     </script>

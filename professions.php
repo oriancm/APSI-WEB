@@ -42,6 +42,7 @@
     <style>
         <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
         <?= apsi_minify_css(__DIR__ . '/css/professions.css'); ?>
+        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); /* Temporary reversible hero test. */ ?>
     </style>
     
     <!-- Fonts Preload -->
@@ -52,6 +53,7 @@
     </noscript>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/site.js" defer></script>
 </head>
 
@@ -60,27 +62,26 @@
 
     <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-    <section class="professions-hero">
-        <div class="professions-hero-copy">
-            <h1>Nos Métiers</h1>
-
-            <div class="professions-hero-mobile-image">
-                <img src="/img/professions-title-mobile.jpg" width="1024" height="616" alt="APSI BTP - Nos Métiers">
+    <section class="feature-hero" aria-labelledby="professions-title">
+        <div class="feature-hero__inner">
+            <div class="feature-hero__copy">
+                <p class="feature-hero__eyebrow">Nos métiers</p>
+                <h1 id="professions-title">Des expertises<br><span>au service</span> de vos projets</h1>
+                <p class="feature-hero__description">Nos missions d’<b>OPC et de MOEX</b> couvrent des opérations de <b>construction neuve et de réhabilitation</b>.</p>
+                <p class="feature-hero__description">Logements, établissements de santé, équipements scolaires et sportifs, hôtellerie ou patrimoine privé : nous intervenons sur des projets aux usages et aux contraintes variés.</p>
+                <div class="feature-hero__actions">
+                    <a href="#mission-opc" class="feature-hero__button">Découvrir nos métiers <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+                    <a href="/contact" class="feature-hero__button feature-hero__button--secondary">Nous contacter</a>
+                </div>
             </div>
-
-            <p>
-                APSI BTP accompagne les maîtres d’ouvrage publics et privés dans l’organisation,
-                le pilotage et le suivi de leurs opérations de <b>construction</b> et de <b>réhabilitation</b>.
-            </p>
-
-            <p>
-                Nos missions s’articulent autour de deux expertises complémentaires :
-                <b>OPC</b> et <b>MOEX</b>.
-            </p>
+        </div>
+        <div class="feature-hero__cards">
+            <article class="feature-expertise-card"><i data-lucide="layers" aria-hidden="true"></i><div><h2>Ordonnancement, Pilotage et Coordination <span>(OPC)</span></h2><p>Planifier les étapes, coordonner les intervenants et suivre les délais du chantier.</p></div></article>
+            <article class="feature-expertise-card"><i data-lucide="hard-hat" aria-hidden="true"></i><div><h2>Maîtrise d’Œuvre d’Exécution <span>(MOEX)</span></h2><p>Piloter l’exécution et suivre les travaux sur le terrain jusqu’à leur réception.</p></div></article>
         </div>
     </section>
 
-    <section class="profession-card profession-card--opc">
+    <section class="profession-card profession-card--opc" id="mission-opc">
         <div class="profession-card-copy">
             <div class="profession-title-row">
                 <h2>Ordonnancement,<br>Pilotage et Coordination<br><span>(OPC)</span></h2>
@@ -368,7 +369,7 @@
 <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
 <script>
-window.addEventListener('load', function() {
+window.apsiPageReady(function() {
     var navElement = document.getElementById('nav');
     var mainElement = document.getElementById('main');
 
@@ -387,7 +388,7 @@ window.addEventListener('load', function() {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+window.apsiPageReady(function() {
     function initToggleGroup(buttonSelector, panelSelector, dataKey) {
         const buttons = document.querySelectorAll(buttonSelector);
         const panels = document.querySelectorAll(panelSelector);
@@ -431,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Handle resize events to reposition panels if necessary
-        window.addEventListener('resize', handlePanelPosition);
+        window.addEventListener('resize', handlePanelPosition, { signal: window.apsiPageSignal });
         handlePanelPosition();
     }
 

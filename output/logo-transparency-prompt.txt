@@ -1,0 +1,4 @@
+Tool: ImageGen built-in, transparent_background=true.
+Input: output/logo-original-reference.png, captured at native dimensions from the original AVIF logo.
+Prompt: Remove ONLY the flat white background from this exact APSI BTP logo, including enclosed white areas inside and between letters and the arch. Return the existing blue arch, navy A.P.S.I letters, blue BTP, and dark COORDINATION DE TRAVAUX slogan unchanged on a genuinely transparent alpha background. Strict identity preservation: no redraw, no typographic change, no new letters, no color change, no shadows, no extra outline, no checkerboard baked into image. Preserve original proportions and framing at landscape 1146:652 aspect ratio, tight natural canvas like source. Crisp original antialiased edges.
+Saved asset: img/logo-nav-transparent.png (RGBA PNG, 1663x946, alpha range 0–255).

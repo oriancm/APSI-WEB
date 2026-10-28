@@ -18,14 +18,101 @@ html:has(body.home-page) {
 }
 
 @media (min-width: 981px) {
+    body.home-page .site-header-slot {
+        height: 0;
+    }
+
     /* Homepage Header Overlay - Desktop Only */
     body.home-page .site-header {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
         background: transparent;
-        z-index: 100;
+        width: min(1300px, 100%);
+        z-index: 1000;
+    }
+
+    body.home-page .site-header {
+        box-shadow: none;
+        transition: background-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    body.home-page .site-header::before {
+        inset: 0 auto 0 50%;
+        width: 100vw;
+        transform: translateX(-50%);
+        opacity: 0;
+        background: rgba(255, 255, 255, 0.96);
+        border-bottom: 1px solid rgba(6, 23, 51, 0.08);
+        box-shadow: 0 8px 24px rgba(6, 23, 51, 0.09);
+    }
+
+    body.home-page .site-header::after {
+        display: none;
+    }
+
+    body.home-page .site-header.is-scrolled {
+        background: transparent;
+    }
+
+    body.home-page .site-header.is-scrolled::before {
+        opacity: 1;
+    }
+
+    body.home-page .site-header .site-header__logo picture {
+        opacity: 1;
+    }
+
+    body.home-page .site-header .site-header__logo .site-header__logo-white {
+        opacity: 0;
+    }
+
+    /* Match the company hero's photo registration, including its header offset. */
+    body.home-page .home-scene {
+        /* Keep the blue sky backing away from the fractional bottom clipping edge. */
+        background: linear-gradient(to bottom, #88bce7 calc(100% - 4px), #fff calc(100% - 4px));
+    }
+
+    body.home-page .home-scene::before {
+        left: max(calc(50vw - 387px), calc(100vw - 1586.12px));
+        top: calc(var(--apsi-header-height) - 44.65px);
+        height: 597.8px;
+        background-size: 100% 100%;
+        background-position: center top;
+        mask-image: linear-gradient(to bottom, transparent, #000 24px);
+    }
+
+    body.home-page .home-scene::after {
+        display: none;
+    }
+
+    body.home-page .home-scene .shared-hero-frame svg {
+        height: 100%;
+    }
+
+    /* Cover only the white panel's fractional clipping seam, never the photo. */
+    body.home-page .home-shell::after {
+        content: "";
+        position: absolute;
+        top: calc(100% - 1px);
+        left: 0;
+        width: calc(50% - 180px);
+        height: 2px;
+        z-index: 0;
+        background: #fff;
+        pointer-events: none;
+    }
+
+    body.home-page .home-hero {
+        width: min(1300px, 100%);
+    }
+
+}
+
+@media (min-width: 981px) and (max-width: 1100px) {
+    body.home-page .home-scene::before {
+        top: calc(var(--apsi-header-height) - 16.16px);
     }
 }
 
@@ -48,13 +135,71 @@ html:has(body.home-page) {
     padding-bottom: 0;
     overflow: visible; /* Allows the bottom half of the overlapping cards to protrude below the fold */
     background-color: #fff;
-    background-image:
-        /* Correct Diagonal Sense Gradient (125deg): From Top-Left to Bottom-Right, with sharp and highly visible transition */
-        linear-gradient(125deg, #ffffff 0%, #ffffff 35%, rgba(255,255,255,0.9) 42%, rgba(255,255,255,0) 52%),
-        url("/img/home-building-crane-wide.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%, cover; /* Highly zoomed cover background */
-    background-position: center top, right center;
+}
+
+/* Fixed-height photo: wider desktops reveal only the rightward outpainting. */
+.home-scene {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: #fff;
+}
+
+.home-scene::before {
+    content: "";
+    position: absolute;
+    width: 1586.12px;
+    height: calc(100% + 2px);
+    left: max(calc(50% - 387px), calc(100% - 1586.12px));
+    top: -1px;
+    background: url("/img/home-crane-muted-continuous.webp") center / cover no-repeat;
+    /* Show the full existing photograph with only a 1px edge bleed. */
+    mask-image: linear-gradient(to right, transparent, #000 80px);
+}
+
+.home-scene::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -2000px;
+    width: calc(50% + 1820px);
+    /* The edge is anchored to the bottom composition, independent of viewport ratio. */
+    background: #fff;
+    transform: skewX(-25deg);
+    transform-origin: right bottom;
+    box-shadow: 16px 0 0 #e4f1ff;
+}
+
+@media (min-width: 981px) and (hover: hover), (min-width: 1401px) {
+    .home-shell {
+        height: 598px;
+    }
+
+    body.home-page .home-hero {
+        /* Same composition and vertical position at every desktop resolution. */
+        top: auto;
+        height: 363px;
+        z-index: 1;
+    }
+
+    body.home-page .home-hero__copy p {
+        margin: 14px 0 16px;
+    }
+
+    body.home-page .home-reference-button {
+        min-width: 286px;
+        min-height: 48px;
+    }
+
+    body.home-page .home-service-cards {
+        gap: 34px;
+    }
+
+    body.home-page .home-service-cards article {
+        padding: 24px 28px;
+    }
 }
 
 /* Adjust hero height on shorter or highly zoomed displays to guarantee cards are 100% visible on load */
@@ -89,7 +234,7 @@ html:has(body.home-page) {
 
 .home-hero__copy {
     width: min(800px, 100%); /* Generous width to prevent any premature line wrapping of the 3-line slogan */
-    margin-left: clamp(28px, 2vw, 40px);
+    margin-left: 0;
     padding-top: 0;
 }
 
@@ -110,6 +255,15 @@ html:has(body.home-page) {
     font-family: Georgia, "Times New Roman", serif;
     font-size: var(--apsi-title-related-text);
     line-height: 1.22;
+}
+
+.home-hero__copy p::after {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 3px;
+    margin-top: 16px;
+    background: var(--apsi-blue);
 }
 
 /* Premium large call-to-action button with slide hover effect */
@@ -159,7 +313,7 @@ html:has(body.home-page) {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(18px, 2.4vw, 36px);
-    width: min(1080px, calc(100vw - var(--apsi-page-pad) * 2)); /* Max width matching original desktop grid width */
+    width: var(--apsi-content-width);
     margin: 0 auto;
     z-index: 10;
 }
@@ -237,15 +391,15 @@ body.home-page .site-footer__inner {
     padding: 22px var(--apsi-page-pad) !important; /* Match standard page footer padding */
 }
 
-/* ==========================================================================
-   RESPONSIVE DESIGN (MOBILE & TABLET STACKING)
-   ========================================================================== */
+/* Keep the desktop slogan on three lines. */
+.home-slogan-mobile-break {
+    display: none;
+}
 
-@media (max-width: 980px) {
-    .home-shell {
-        background-image:
-            linear-gradient(125deg, #ffffff 0%, #ffffff 35%, rgba(255,255,255,0.9) 42%, rgba(255,255,255,0) 52%),
-            url("/img/mobile/home-building-crane-wide.avif") !important;
+/* Mobile and tablet homepage. */
+@media (max-width: 980px), (max-width: 1400px) and (pointer: coarse) and (hover: none) {
+    .home-scene {
+        display: none;
     }
 
     html:has(body.home-page) {
@@ -259,66 +413,34 @@ body.home-page .site-footer__inner {
         overflow-y: visible;
     }
 
-
-    body.home-page .site-footer {
-        display: block;
-        height: auto;
-        width: 100% !important;
-        max-width: none !important;
-        overflow: visible;
-        margin-top: 48px !important;
-    }
-
-    body.home-page .site-footer__inner {
-        width: 100% !important;
-        max-width: none !important;
-        padding: 34px 0 !important; /* Match standard page mobile padding exactly */
-    }
-
-    body.home-page .site-footer__drawing {
-        max-height: 122px;
-    }
-
     .home-shell {
-        --home-copy-scale: min(4.2vw, 2.9svh);
-        --apsi-title-size: clamp(16px, 4.5vw, 22px); /* Moderately increased slogan size */
-        --apsi-title-related-text: clamp(13px, 3.5vw, 15px); /* Preserved author font size exactly */
-        --apsi-title-related-button: clamp(8px, 2.1vw, 9.5px); /* Decreased button text size further */
-        --apsi-title-related-gap: 14px;
-        
+        --home-mobile-pad: clamp(20px, 6.8vw, 48px);
+        --apsi-title-size: clamp(24px, 5.5vw, 42px);
         height: auto;
-        min-height: 100vh;
-        padding-bottom: 48px;
-        background: #fff; /* Solid white background on mobile */
+        min-height: 0;
+        padding-bottom: 0;
+        background: #fff;
     }
 
-    .home-hero {
+    body.home-page .home-hero {
         position: relative;
-        top: auto;
-        bottom: auto;
-        left: auto;
-        right: auto;
-        transform: none;
+        inset: auto;
         width: 100%;
         max-width: none;
-        padding-inline: 16px; /* Align margin with logo and burger menu spacing */
+        min-height: clamp(390px, 66vw, 580px);
+        margin: 0;
+        padding: clamp(36px, 6vw, 60px) var(--home-mobile-pad) clamp(48px, 10vw, 80px);
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: flex-start;
-        margin-top: 0;
-        margin-bottom: 36px;
-        min-height: clamp(260px, 35vh, 320px); /* Decreased min-height */
-        box-sizing: border-box;
-        /* Beautiful diagonal crane background like desktop with responsive clamp stops for a perfectly fluid transition on all mobile screen widths */
-        background-image: 
-            linear-gradient(125deg, #ffffff 0%, #ffffff clamp(170px, 35%, 230px), rgba(255, 255, 255, 0.75) clamp(260px, 58%, 390px), rgba(255, 255, 255, 0) clamp(350px, 80%, 550px)),
-            url("/img/home-building-crane-wide.png");
+        justify-content: center;
+        flex-direction: column;
+        background-color: #eef7ff;
+        background-image:
+            linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.86) 28%, rgba(255,255,255,0.35) 60%, rgba(255,255,255,0) 82%),
+            url("/img/mobile/home-crane-portrait.avif");
         background-repeat: no-repeat;
-        background-size: 100% 100%, auto 100%;
-        background-position: center top, clamp(100%, calc(100% + (500px - 100vw) * 0.25), 120%) top;
-        padding-top: 0; /* Removed top padding to align content directly with the bottom of the nav bar */
-        padding-bottom: clamp(34px, 7vw, 48px); /* Decreased bottom padding */
+        background-size: 100% 100%, cover;
+        background-position: center, right 70%;
     }
 
     .home-hero__copy {
@@ -330,49 +452,185 @@ body.home-page .site-footer__inner {
     .home-hero__copy h1 {
         max-width: 100%;
         font-size: var(--apsi-title-size);
-        line-height: 1.15;
+        line-height: 1.2;
+        letter-spacing: 0;
+    }
+
+    .home-slogan-mobile-break {
+        display: initial;
     }
 
     .home-hero__copy p {
-        margin-top: 8px;
-        margin-bottom: 24px;
+        margin: 18px 0 20px;
+        font-size: clamp(21px, 3.6vw, 28px);
     }
 
     .home-reference-button {
-        display: inline-flex;
-        min-width: 125px; /* Decreased button width further */
-        min-height: 28px; /* Decreased button height further */
+        min-width: 0;
+        min-height: 48px;
+        max-width: 100%;
+        gap: 18px;
         margin-top: 0;
-        padding-inline: 10px; /* Decreased padding further */
+        padding: 12px 18px;
+        border-radius: 7px;
+        font-size: clamp(13px, 2.5vw, 17px);
     }
 
     .home-reference-button svg {
-        width: 12px;
-        height: 12px;
+        width: 22px;
+        height: 22px;
     }
 
     .home-service-cards {
         position: relative;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        transform: none;
-        width: calc(100% - 40px);
+        inset: auto;
+        width: calc(100% - var(--home-mobile-pad) * 2);
         margin: 0 auto;
+        padding-top: 8px;
         grid-template-columns: 1fr;
         gap: 16px;
     }
 
     .home-service-cards article {
-        min-height: auto;
-        padding: 24px 20px;
+        display: grid;
+        grid-template-columns: clamp(56px, 15.5vw, 88px) minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-content: center;
+        align-items: center;
+        column-gap: clamp(16px, 4vw, 28px);
+        min-height: 140px;
+        padding: 22px 18px;
+        border-radius: 12px;
+        text-align: left;
+    }
+
+    /* Soft circular motifs echo the construction cards in the mobile reference. */
+    .home-service-cards article:nth-child(1) {
+        background-image: radial-gradient(circle at 0 0,
+            rgba(0, 103, 214, 0.10) 0 48px, transparent 49px);
+    }
+
+    .home-service-cards article:nth-child(2) {
+        background-image:
+            radial-gradient(circle at calc(100% + 42px) 48%,
+                rgba(0, 103, 214, 0.07) 0 102px, transparent 103px),
+            radial-gradient(circle at calc(100% + 16px) 100%,
+                rgba(0, 103, 214, 0.035) 0 126px, transparent 127px);
+    }
+
+    .home-service-cards article:nth-child(3) {
+        background-image: radial-gradient(circle at 0 100%,
+            rgba(0, 103, 214, 0.11) 0 36px,
+            rgba(0, 103, 214, 0.065) 37px 62px, transparent 63px);
+    }
+
+    .home-service-cards svg {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+        padding: clamp(12px, 3vw, 20px);
+        border-radius: 50%;
+        background: #eef6ff;
+    }
+
+    .home-service-cards h2 {
+        grid-column: 2;
+        margin: 0;
+        font-size: clamp(12px, 2.8vw, 18px);
+        line-height: 1.35;
+    }
+
+    .home-service-cards h2::after {
+        width: 26px;
+        margin: 10px 0;
+    }
+
+    .home-service-cards p {
+        grid-column: 2;
+        max-width: none;
+        margin: 0;
+        font-size: clamp(13px, 2.8vw, 17px);
+        line-height: 1.5;
+    }
+
+    body.home-page .site-footer {
+        display: block;
+        height: auto;
+        width: 100% !important;
+        max-width: none !important;
+        overflow: visible;
+        margin-top: 48px !important;
+    }
+
+    body.home-page .site-footer__inner {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 18px;
+        text-align: center;
+        width: 100% !important;
+        max-width: none !important;
+        padding: 34px 0 !important;
+    }
+
+    body.home-page .site-footer__drawing {
+        width: min(260px, 100%);
+        object-position: center;
+        max-height: 122px;
+    }
+
+    body.home-page .site-footer__contact {
+        justify-items: center;
+    }
+
+    body.home-page .site-footer__links {
+        align-items: center;
+    }
+
+    body.home-page .site-footer__contact::before,
+    body.home-page .site-footer__links::before {
+        content: "";
+        display: block;
+        width: 32px;
+        height: 2px;
+        margin: 0 auto 14px;
+        background: rgba(255,255,255,0.65);
     }
 }
 
-/* Dezoom crane image on small mobile screens */
-@media (max-width: 600px) {
-    .home-hero {
-        background-size: 100% 100%, auto 78% !important;
-        background-position: center top, right top !important;
+/* Use the common interior header once the homepage has scrolled. */
+@media (min-width: 981px) and (hover: hover), (min-width: 1401px) {
+    body.home-page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100svh;
+    }
+
+    body.home-page .home-shell {
+        flex: none;
+        margin-bottom: clamp(140px, 16svh, 180px);
+    }
+
+    body.home-page .site-footer {
+        flex: none;
+        margin: auto auto 0 !important;
     }
 }
+
+@media (min-width: 981px) {
+    body.home-page .site-header:not(.is-scrolled) .site-header__scene { display: none; }
+    body.home-page .site-header.is-scrolled::before {
+        inset: 0 min(0px, calc((1300px - 100vw) / 2)) 0 auto;
+        width: calc(65% + max(0px, calc((100vw - 1300px) / 2)));
+        transform: none;
+        background: #fff;
+        border: 0;
+        box-shadow: none;
+    }
+    body.home-page .site-header.is-scrolled::after { display: block; }
+    body.home-page .site-header.is-scrolled .site-header__logo picture { opacity: 0; }
+    body.home-page .site-header.is-scrolled .site-header__logo .site-header__logo-white { opacity: 1; }
+}
+

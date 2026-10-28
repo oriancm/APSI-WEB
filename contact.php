@@ -103,7 +103,7 @@ $activePage = 'contact';
       "mainEntity": {
         "@type": "LocalBusiness",
         "name": "APSI BTP",
-        "email": "test@apsi-btp.fr",
+        "email": "info@apsi-btp.fr",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Caseneuve",
@@ -155,6 +155,7 @@ $activePage = 'contact';
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
     </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/site.js" defer></script>
 </head>
 <body class="contact-body">
@@ -168,15 +169,19 @@ $activePage = 'contact';
     <main id="main" class="contact-page hidden-until-loaded">
         <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-        <section class="contact-hero site-narrow-container">
+        <section class="contact-hero" aria-labelledby="contact-title">
+            <div class="contact-scene">
+                <img class="contact-scene__image" src="/img/home-crane-original.webp" alt="Grue et bâtiment en construction">
+                <div class="contact-details">
+                    <a href="mailto:info@apsi-btp.fr"><i data-lucide="mail" aria-hidden="true"></i><strong>info@apsi-btp.fr</strong></a>
+                    <p><i data-lucide="map-pin" aria-hidden="true"></i><span>84750 Caseneuve</span></p>
+                </div>
+            </div>
+            <div class="contact-content">
             <div class="contact-copy">
-                <h1>Nous Contacter</h1>
-                <p>
-                    Une question, un projet ?<br>
-                    Notre équipe est à <strong>votre écoute</strong> pour<br>
-                    vous accompagner dans la <strong>réussite<br>
-                    de vos opérations.</strong>
-                </p>
+                <p class="contact-eyebrow">Nous contacter</p>
+                <h1 id="contact-title">Un projet ?<br><span>Échangeons ensemble.</span></h1>
+                <p class="contact-description">Une question, un projet ? Notre équipe est à <strong>votre écoute</strong> pour vous accompagner dans la <strong>réussite de vos opérations.</strong></p>
             </div>
 
             <form action="/contact" method="POST" id="contactForm" class="contact-form">
@@ -184,39 +189,40 @@ $activePage = 'contact';
                     <p class="form-error"><?php echo htmlspecialchars($form_error); ?></p>
                 <?php endif; ?>
 
+                <div class="contact-form-group">
                 <label for="fname">Nom Prénom</label>
                 <div class="field">
                     <i data-lucide="user-round" aria-hidden="true"></i>
                     <input type="text" id="fname" name="name" placeholder="Ex : MARTY Paul" value="<?php echo isset($name) ? htmlspecialchars($name) : '' ?>">
                 </div>
-
+                </div>
+                <div class="contact-form-group">
                 <label for="sujet">Objet</label>
                 <div class="field">
                     <i data-lucide="clipboard-list" aria-hidden="true"></i>
                     <input type="text" id="sujet" name="objet" placeholder="Ex : Demande d'information" value="<?php echo isset($objet) ? htmlspecialchars($objet) : '' ?>">
                 </div>
-
+                </div>
+                <div class="contact-form-group contact-form-group--message">
                 <label for="subject">Message</label>
                 <textarea id="subject" name="message" placeholder="Votre message..."><?php echo isset($message) ? htmlspecialchars($message) : '' ?></textarea>
-
+                </div>
                 <div class="contact-form-footer">
-                    <a href="mailto:test@apsi-btp.fr" class="mail-link">
-                        <i data-lucide="mail" aria-hidden="true"></i>
-                        test@apsi-btp.fr
-                    </a>
                     <button type="submit" id="submitBtn">
                         Envoyer
                         <i data-lucide="send" aria-hidden="true"></i>
                     </button>
+                    <a href="/privacyPolicy" class="contact-privacy-link">Politique de confidentialité <i data-lucide="arrow-right" aria-hidden="true"></i></a>
                 </div>
             </form>
+            </div>
         </section>
     </main>
 
     <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
     <script>
-        window.addEventListener('load', function () {
+        window.apsiPageReady(function () {
             var navElement = document.getElementById('nav');
             var mainElement = document.getElementById('main');
             if (mainElement) {
@@ -247,7 +253,7 @@ $activePage = 'contact';
                 submitBtn.innerHTML = 'Envoyer <i data-lucide="send" aria-hidden="true"></i>';
                 if (window.lucide) window.lucide.createIcons();
             }
-        });
+        }, { signal: window.apsiPageSignal });
     </script>
 </body>
 </html>

@@ -1,0 +1,32 @@
+{
+  "tool": "ImageGen intégré",
+  "references": [
+    "C:/Users/orian/AppData/Local/Temp/codex-clipboard-5fe9a06f-52ca-4b86-a417-0dbb8e70dd50.png",
+    "C:/Users/orian/AppData/Local/Temp/codex-clipboard-58a69482-0153-4875-b2fb-7e98b45147ec.png",
+    "C:/Users/orian/AppData/Local/Temp/codex-clipboard-e90a6a47-b787-4bb3-937a-7caab0947d1f.png",
+    "C:/Users/orian/AppData/Local/Temp/codex-clipboard-3d99c386-4c6a-4d84-9569-512554172dc8.png"
+  ],
+  "shared": "Use case: ui-mockup. Generate a refined, professional French APSI BTP homepage redesign mockup optimized for LARGE desktop monitors. The attached four screenshots are reference images showing the existing site at different viewport sizes. Preserve the real APSI arch logo, Montserrat/Inter typography, navy #061733, blue #0067d6, white backgrounds, natural crane and modern construction photo at RIGHT, pale-blue angular diagonal photo border, original content and blue footer. These are visual reference screenshots, NOT exact compositions to copy. Correct the current cramped fixed-width center column and huge empty white space at high resolutions: use a wide responsive composition occupying about 88–92% of the viewport width, a taller hero proportional to the viewport, prominent readable typography, deliberate spacing, and footer at the BOTTOM of the viewport with no blank white area underneath. Main three service cards must be fully visible, not clipped; all text is legible and aligned. Never stretch a tiny existing webpage screenshot. Rebuild the graphic composition at native high fidelity, confident architectural editorial art direction, not a SaaS template. Retain generous intentional breathing room without wasted lower half. Output one single 16:9 flat webpage screenshot, no browser/devtools chrome, rulers, monitor or device mockup, resolution labels or outside presentation framing. Keep factual content exactly; no invented statistics or extra service offerings.\nHeader: logo left, QUI SOMMES-NOUS, NOS MÉTIERS, NOS RÉFÉRENCES, NOS CLIENTS, and Nous contacter arrow button at rightmost edge of the header.\nHero quote verbatim in navy: De tous les actes, / le plus complet / est celui de construire. Author Paul Valéry in smaller serif. Blue button Découvrir nos références with arrow.\nThree services in equal columns with blue outline icons: COORDINATION DE CHANTIER — Organisation des interventions et coordination des entreprises.; PLANIFICATION DES TRAVAUX — Suivi des délais, phasage et anticipation des contraintes d’exécution.; SUIVI OPÉRATIONNEL — Présence terrain, dialogue constant et suivi du chantier jusqu’à la livraison.\nFull-width blue footer includes white architectural crane line drawing at left, APSI BTP / Coordination de travaux, 84750 Caseneuve / info@apsi-btp.fr, Mentions légales / Politique de confidentialité. Keep it compact and aligned with main content. No thin horizontal decorative line extending from the photo across the left white background.",
+  "variants": [
+    {
+      "key": "a-fhd",
+      "title": "A · FHD",
+      "prompt": "DIRECTION A / FHD 1920×1080 design. Faithful fluid expansion of the existing approved identity. 120px side gutters (main width1680px), header height110px with useful distributed nav. Large hero from y120 to810, quote at x120/y240 in 62px type with a 670px measure, photo about60% of viewport with its pale-blue angular left edge. Three elegant white cards overlap the bottom of hero at y740 through950, each about535px wide, icons48px, labels18px and body17px, subtle restrained shadows. Footer about140px at y940 to1080, no blank below. Keep a comfortable gap between quote CTA and service cards. The page should feel designed for full HD, not a tiny 1300px-wide website in a large blank canvas."
+    },
+    {
+      "key": "a-2k",
+      "title": "A · 2K",
+      "prompt": "DIRECTION A / 2K QHD 2560×1440 design. Same faithful fluid design family as A FHD, deliberately using the additional width and height. 150px side gutters (content2260px), header130px with larger logo and 19px navigation and CTA. Hero occupies y140 to1090 with impressive natural construction photograph taking right60%; large quote72px at x150/y340 with spacious vertical rhythm and 800px line measure. Three generously scaled white cards overlap hero lower edge at y1010–1260 across entire main content, each about720px wide, icons60px and body21px. Footer at y1260–1440. No giant unused lower half, no tiny type, no enormous empty side margins, no invented content. Artistic pale-blue diagonal frame remains restrained."
+    },
+    {
+      "key": "b-fhd",
+      "title": "B · FHD",
+      "prompt": "DIRECTION B / FHD 1920×1080 design. More structured editorial architecture layout, visibly different from floating-card A. Header uses 96px side gutters and110px height. Below it a tall split hero ending at y760: quote left on white at x96/y245, navy58px 3-line text and blue CTA; construction photo right inside a large sharply diagonal pale-blue bordered polygon that begins around x860 and fills to1824 right edge. At y760–940 put ONE white horizontal service panel across1728px width with three evenly sized columns, each with a blue outline icon on LEFT of its dark title and brief copy, fine light-grey vertical column dividers, small corner radius; no three giant detached stacked cards. Compact blue footer flush to bottom at y940–1080. Broad layout aligned to header, bold readable hierarchy, intentional whitespace, immaculate French."
+    },
+    {
+      "key": "b-2k",
+      "title": "B · 2K",
+      "prompt": "DIRECTION B / 2K QHD 2560×1440 design. Wider and taller editorial split composition, same family as B FHD. 128px side gutters, 2304px content width, header132px. Hero spans y132–1080: quote left at x128/y380 in72px font with900px measure, elegant Paul Valéry and CTA; photo right in an architectural angular diagonal frame, large enough to clearly feature the whole crane and glass building. ONE horizontal white service panel at y1080–1260, three columns with icons next to text and fine vertical dividers, body21px, comfortable padding, visually integrated not floating a long way above footer. Footer180px flush to canvas bottom1440. Huge-screen legibility and full-width visual balance; no empty lower area, no shrink-to-center layout; no new content or claims."
+    }
+  ]
+}

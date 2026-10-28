@@ -7,7 +7,7 @@
         </div>
         <address class="site-footer__contact">
             <span>84750 Caseneuve</span>
-            <a href="mailto:test@apsi-btp.fr">test@apsi-btp.fr</a>
+            <a href="mailto:info@apsi-btp.fr">info@apsi-btp.fr</a>
         </address>
         <nav class="site-footer__links" aria-label="Liens légaux">
             <a href="/legalNotices">Mentions légales</a>

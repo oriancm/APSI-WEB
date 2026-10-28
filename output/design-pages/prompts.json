@@ -1,0 +1,52 @@
+{
+  "tool": "image_gen built-in",
+  "reference_images": [
+    "C:/Users/orian/code/APSI-WEB/output/design-pages/captures/accueil-1400x720.png",
+    "C:/Users/orian/code/APSI-WEB/output/design-pages/captures/qui-sommes-nous-1400x720.png",
+    "C:/Users/orian/code/APSI-WEB/output/design-pages/captures/nos-metiers-1400x720.png",
+    "C:/Users/orian/code/APSI-WEB/output/design-pages/captures/nos-references-1400x720.png"
+  ],
+  "shared_prompt": "Use case: ui-mockup. Create ONE polished desktop website design proposal for APSI BTP, French construction project coordination firm. Output a flat screenshot, landscape 1400x720 composition, no device frame, no surrounding board, no labels outside the website. The attached images 1-4 are APPROVED page screenshots: copy their exact established branding, APSI logo, header proportions (108px high), blue trapezoid behind white logo at left, white navigation with QUI SOMMES-NOUS, NOS MÉTIERS, NOS RÉFÉRENCES, NOS CLIENTS and blue Nous contacter CTA at right, Montserrat bold headings, Inter body, blue #0067d6, navy #061733, white backgrounds and restrained pale blue, angular diagonal construction photo with pale blue border, white cards rounded 10px and subtle shadows. Attached image 5 is the CURRENT page to redesign: retain its factual content and branding, improve layout to match approved references. Do not invent statistics, client names, addresses or legal claims. Crisp readable French, elegant spacious functional UI. Page can continue below fold. Keep key information comfortably legible at this viewport.",
+  "variants": [
+    {
+      "key": "clients-a",
+      "page": "nos-clients",
+      "prompt": "PAGE Nos clients. Direction A: closest continuation of approved about and professions. Upper half: left eyebrow NOS CLIENTS, large two-line heading Une confiance partagée, des projets réussis with second line blue, short intro about public/private construction and rehabilitation; right diagonal crane/building photo from approved pages. Below, a large floating white logo panel over the bottom edge of hero, refined 6-column logo wall with generous spacing, genuine client logos from current screenshot. Include small blue text Voir nos références arrow. No invented category tags."
+    },
+    {
+      "key": "clients-b",
+      "page": "nos-clients",
+      "prompt": "PAGE Nos clients. Direction B: editorial directory inspired by approved references page. Compact white intro left headed Ils nous font confiance with blue accent words, right shorter diagonal construction photograph. Lower half use a narrow pale-blue left sidebar labelled Nos partenaires with entries Tous les clients, Maîtres d’ouvrage publics, Maîtres d’ouvrage privés (visual proposed navigation) and a spacious white 4-column logo gallery on right with fine dividers, using actual logos from current screenshot (Alpes de Haute Provence, Citadis, Grand Delta Habitat, Les Crous, ONF, Vaucluse). Make visibly distinct from direction A, still identical brand."
+    },
+    {
+      "key": "contact-a",
+      "page": "nous-contacter",
+      "prompt": "PAGE Nous contacter. Direction A: approved diagonal hero as backdrop right, spacious left text eyebrow NOUS CONTACTER and heading Parlons de votre prochain projet, blue second line. Short intro about listening and accompanying projects. Small contact lines test@apsi-btp.fr and 84750 Caseneuve at lower left. Right white floating form card above crane photo, label Écrivez-nous and exact fields Nom Prénom, Objet, Message, pale grey inputs, blue Envoyer arrow button. Keep existing fields, no extra inputs, no blue heavy form panel. Original header retained."
+    },
+    {
+      "key": "contact-b",
+      "page": "nous-contacter",
+      "prompt": "PAGE Nous contacter. Direction B: wide two-column split below original header. Left 40% diagonal photo panel showing same crane and construction, with small white lower contact card email test@apsi-btp.fr and 84750 Caseneuve. Right 60% clean white editorial form with small blue eyebrow NOUS CONTACTER, dark navy/blue heading Un projet ? Échangeons ensemble., short introductory text, Nom Prénom and Objet in two aligned columns, Message full width, blue Envoyer arrow button below and discreet Politique de confidentialité link. Photo cut uses pale-blue diagonal from approved pages. Distinct from A, very restrained and airy."
+    },
+    {
+      "key": "legal-a",
+      "page": "mentions-legales",
+      "prompt": "PAGE Mentions légales. Direction A: reuse approved short diagonal photo hero, eyebrow INFORMATIONS LÉGALES, large Mentions légales heading navy and blue, smaller photo on right. Two white floating cards below, side by side, Éditeur du site and Hébergement with blue line icons. Exact facts: APSI BTP; SARL; capital 6 800,00 €; Quartier Pierrefeu, chemin de Saint Jean, 84750 CASENEUVE; RCS Avignon 2007 B 498; TVA FR 40 495 392 557; Directeur de la publication Ludovic MESSY; test@apsi-btp.fr. Hébergement OVH, 2 rue Kellermann, 59100 Roubaix, France; www.ovh.com; 1007. Use neat label/value typography and excellent contrast. No invented legal content. Layout prioritize reading all facts in 720px. No huge navy card."
+    },
+    {
+      "key": "legal-b",
+      "page": "mentions-legales",
+      "prompt": "PAGE Mentions légales. Direction B: editorial legal reading page, original header, small diagonal construction photo only in top-right corner. Heading Mentions légales and slim blue rule. Below use left sidebar with small outline icon, label Informations du site, links 01 Éditeur du site and 02 Hébergement, and a discreet Politique de confidentialité link. Wide white main reading sheet at right with two sections separated by thin grey rule, dark headings, blue numbered markers and elegant two-column definition list. Exact facts APSI BTP, SARL, capital 6 800,00 €, Quartier Pierrefeu, chemin de Saint Jean, 84750 CASENEUVE, RCS Avignon 2007 B 498, TVA FR 40 495 392 557, Ludovic MESSY, test@apsi-btp.fr; OVH, 2 rue Kellermann, 59100 Roubaix, France, www.ovh.com, 1007. Readable, minimal, distinct from cards variant, follows brand."
+    },
+    {
+      "key": "privacy-a",
+      "page": "politique-confidentialite",
+      "prompt": "PAGE Politique de confidentialité. Direction A: short approved-style diagonal crane hero on right, left eyebrow VOS DONNÉES and large navy/blue Politique de confidentialité heading, short nonlegal introductory line about contact form. Four elegant white cards in 2x2 grid, blue outline icons and dark headings: Collecte limitée (only information provided through contact form); Une finalité précise (nom, objet, message used to respond to requests); Utilisation des données (neither stored in a database nor used for commercial/advertising purposes nor passed to third parties); Une question ? (test@apsi-btp.fr). Keep exactly existing assertions, no added security/cookie/legal promises. Compact cards fully readable at viewport, subtle shadows, similar white cards to approved homepage."
+    },
+    {
+      "key": "privacy-b",
+      "page": "politique-confidentialite",
+      "prompt": "PAGE Politique de confidentialité. Direction B: calm editorial legal page, large left heading Vos données, en toute clarté navy/blue, small subtitle Politique de confidentialité, small diagonal crane photo on far upper right; content below split narrow pale blue navigation sidebar and wide white reading sheet with three numbered horizontal rows 01 Données collectées (only nom, objet, message from contact form), 02 Finalité et utilisation (responding to requests only; not stored in database, not commercial or advertising use, no transfer to third parties), 03 Nous contacter (test@apsi-btp.fr). Use original French assertions, no extra legal or cookie claims. Small link Mentions légales in sidebar. Strong whitespace, thin dividers, restrained blue outline icons. Distinct from A card grid while matching approved references site."
+    }
+  ]
+}

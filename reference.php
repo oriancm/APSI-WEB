@@ -5,13 +5,13 @@ $id = $_GET['id'] ?? null;
 
 function fallbackReferences(): array {
     return [
-        ['id' => 1, 'titre' => 'Aménagement de la Place Jean Jaurès', 'commune' => 'APT (84)', 'domaine' => '5', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2025', 'duree_travaux_mois' => '12', 'moa' => 'CITADIS (84)', 'archi' => null, 'eMoe' => null, 'montant' => 980000, 'nbPhase' => null, 'nbE' => 4, 'nombre_lots' => 6, 'description' => 'Aménagement de la Place Jean Jaurès à Apt.'],
-        ['id' => 2, 'titre' => 'Centre Culturel Simone Signoret', 'commune' => 'CHATEAU-ARNOUX (04)', 'domaine' => '3', 'statut' => '1', 'anneeD' => '2023', 'anneeF' => '2025', 'duree_travaux_mois' => '15', 'moa' => 'PROVENCE ALPES AGGLOMERATION Digne-les-Bains (04)', 'archi' => null, 'eMoe' => null, 'montant' => 2875000, 'nbPhase' => null, 'nbE' => 13, 'nombre_lots' => 18, 'description' => 'Réhabilitation du Centre Culturel Simone Signoret et de ses abords à Château-Arnoux-Saint-Auban.'],
-        ['id' => 3, 'titre' => 'L’hôtel des Monnaies-Niel', 'commune' => 'AVIGNON (84)', 'domaine' => '12', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '20', 'moa' => 'Groupe E-Hôtel (69)', 'archi' => null, 'eMoe' => null, 'montant' => 8000000, 'nbPhase' => null, 'nbE' => 18, 'nombre_lots' => 25, 'description' => "Reconversion de l'hôtel des Monnaies-Niel pour la création d'un hôtel de 40 chambres, Place du Palais des Papes à Avignon."],
-        ['id' => 4, 'titre' => "Residence l'Aygues", 'commune' => 'ORANGE (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '24', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => null, 'eMoe' => null, 'montant' => 9250000, 'nbPhase' => null, 'nbE' => 9, 'nombre_lots' => 12, 'description' => "Réhabilitation de 146 logements collectifs - Résidence « L'Aygues » à Orange."],
-        ['id' => 5, 'titre' => 'Réfectoire de Coudoux', 'commune' => 'COUDOUX (13)', 'domaine' => '4', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '11', 'moa' => 'Commune de COUDOUX (13)', 'archi' => null, 'eMoe' => null, 'montant' => 1300000, 'nbPhase' => null, 'nbE' => 14, 'nombre_lots' => 16, 'description' => "Création d'un réfectoire et extension du groupe scolaire à Coudoux."],
-        ['id' => 6, 'titre' => 'Réhabilitation du collège Paul Cézanne', 'commune' => 'BRIGNOLES (83)', 'domaine' => '4', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '19', 'moa' => 'Conseil Départemental (83)', 'archi' => null, 'eMoe' => null, 'montant' => 5400000, 'nbPhase' => null, 'nbE' => 14, 'nombre_lots' => 18, 'description' => 'Réhabilitation du collège Paul Cézanne à Brignoles.'],
-        ['id' => 7, 'titre' => 'Résidence Les Angevines', 'commune' => 'LE THOR (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '20', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => null, 'eMoe' => null, 'montant' => 3280000, 'nbPhase' => null, 'nbE' => 17, 'nombre_lots' => 22, 'description' => 'Construction de 30 logements collectifs – Résidence « Les Angevines » au Thor.']
+        ['id' => 1, 'titre' => 'Aménagement de la Place Jean Jaurès', 'commune' => 'APT (84)', 'domaine' => '5', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2025', 'duree_travaux_mois' => '12', 'moa' => 'CITADIS (84)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 980000, 'nbPhase' => 'XXX', 'nbE' => 4, 'nombre_lots' => 6, 'description' => 'Aménagement de la Place Jean Jaurès à Apt.'],
+        ['id' => 2, 'titre' => 'Centre Culturel Simone Signoret', 'commune' => 'CHATEAU-ARNOUX (04)', 'domaine' => '3', 'statut' => '1', 'anneeD' => '2023', 'anneeF' => '2025', 'duree_travaux_mois' => '15', 'moa' => 'PROVENCE ALPES AGGLOMERATION Digne-les-Bains (04)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 2875000, 'nbPhase' => 'XXX', 'nbE' => 13, 'nombre_lots' => 18, 'description' => 'Réhabilitation du Centre Culturel Simone Signoret et de ses abords à Château-Arnoux-Saint-Auban.'],
+        ['id' => 3, 'titre' => 'L’hôtel des Monnaies-Niel', 'commune' => 'AVIGNON (84)', 'domaine' => '12', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '20', 'moa' => 'Groupe E-Hôtel (69)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 8000000, 'nbPhase' => 'XXX', 'nbE' => 18, 'nombre_lots' => 25, 'description' => "Reconversion de l'hôtel des Monnaies-Niel pour la création d'un hôtel de 40 chambres, Place du Palais des Papes à Avignon."],
+        ['id' => 4, 'titre' => "Residence l'Aygues", 'commune' => 'ORANGE (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '24', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 9250000, 'nbPhase' => 'XXX', 'nbE' => 9, 'nombre_lots' => 12, 'description' => "Réhabilitation de 146 logements collectifs - Résidence « L'Aygues » à Orange."],
+        ['id' => 5, 'titre' => 'Réfectoire de Coudoux', 'commune' => 'COUDOUX (13)', 'domaine' => '4', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '11', 'moa' => 'Commune de COUDOUX (13)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 1300000, 'nbPhase' => 'XXX', 'nbE' => 14, 'nombre_lots' => 16, 'description' => "Création d'un réfectoire et extension du groupe scolaire à Coudoux."],
+        ['id' => 6, 'titre' => 'Réhabilitation du collège Paul Cézanne', 'commune' => 'BRIGNOLES (83)', 'domaine' => '4', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '19', 'moa' => 'Conseil Départemental (83)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 5400000, 'nbPhase' => 'XXX', 'nbE' => 14, 'nombre_lots' => 18, 'description' => 'Réhabilitation du collège Paul Cézanne à Brignoles.'],
+        ['id' => 7, 'titre' => 'Résidence Les Angevines', 'commune' => 'LE THOR (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '20', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 3280000, 'nbPhase' => 'XXX', 'nbE' => 17, 'nombre_lots' => 22, 'description' => 'Construction de 30 logements collectifs – Résidence « Les Angevines » au Thor.']
     ];
 }
 
@@ -333,6 +333,7 @@ $activePage = 'references';
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
     </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/site.js" defer></script>
 </head>
 <body class="reference-page">
@@ -557,11 +558,11 @@ $activePage = 'references';
     <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
     <script>
-    window.addEventListener('load', function() {
+    window.apsiPageReady(function() {
         if (window.lucide) window.lucide.createIcons();
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
+    window.apsiPageReady(function() {
         const image = document.getElementById('main-reference-image');
         const thumbs = Array.from(document.querySelectorAll('.reference-thumbs button'));
         let current = 0;

@@ -1,0 +1,10 @@
+const {chromium}=require('C:/Users/orian/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+(async()=>{const b=await chromium.launch({headless:true,channel:'chrome'});const p=await b.newPage({viewport:{width:1400,height:720},deviceScaleFactor:1});const base=__dirname+'/captures/';
+await p.goto('http://127.0.0.1:8088/reference/3',{waitUntil:'networkidle'});await p.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));});await p.waitForTimeout(1000);
+await p.screenshot({path:base+'reference-3-1400x720.png'});
+console.log('rows',await p.locator('.card-row').allInnerTexts());console.log('footer',await p.locator('.card-footer').innerText());
+await p.evaluate(()=>scrollTo(0,430));await p.waitForTimeout(800);await p.screenshot({path:base+'reference-3-suite-1400x720.png'});
+await p.evaluate(()=>scrollTo(0,0));await p.screenshot({path:base+'reference-3-complete.png',fullPage:true});
+await p.goto('http://127.0.0.1:8088/aboutUs',{waitUntil:'networkidle'});await p.evaluate(()=>document.fonts.ready);await p.screenshot({path:base+'charte-qui-sommes-nous-1400x720.png'});
+await p.goto('http://127.0.0.1:8088/references',{waitUntil:'networkidle'});console.log('carousel transform',await p.locator('.references-carousel__slide img').first().evaluate(i=>getComputedStyle(i).transform));
+await b.close()})().catch(e=>{console.error(e);process.exit(1)});

@@ -1,4 +1,6 @@
 body.about-page {
+    --apsi-page-width: min(var(--apsi-container), 100%);
+    --apsi-content-width: calc(var(--apsi-page-width) - var(--apsi-page-pad) * 2);
     min-height: 100svh;
     overflow-x: hidden;
     background: #fff;
@@ -11,68 +13,47 @@ body.about-page {
     --about-block-gap: clamp(24px, 3vw, 36px);
     padding-bottom: clamp(30px, 4vw, 56px);
     overflow-x: clip;
-    --apsi-subtitle-measure: min(480px, 100%);
-    --apsi-title-width: min(500px, min(1120px, var(--apsi-content-width)));
-    --apsi-bg-fade-start: calc(var(--apsi-page-edge) + ((var(--apsi-page-width) - min(1120px, var(--apsi-content-width))) / 2) + var(--apsi-title-width) - clamp(54px, 4vw, 78px));
+    --apsi-subtitle-measure: 100%;
+    --apsi-title-width: min(500px, min(var(--apsi-container), var(--apsi-content-width)));
+    --apsi-bg-fade-start: calc(var(--apsi-page-edge) + ((var(--apsi-page-width) - min(var(--apsi-container), var(--apsi-content-width))) / 2) + var(--apsi-title-width) - clamp(54px, 4vw, 78px));
 }
 
 .about-page-shell.site-shell-bg {
     background-image: none !important;
 }
 
-.about-hero {
-    position: relative;
-    width: min(1120px, var(--apsi-content-width));
-    margin: var(--apsi-page-top) auto 0;
-    min-height: max(260px, calc(var(--apsi-crane-height) - var(--apsi-header-height) - var(--apsi-page-top) - 80px));
-    padding-inline: 0;
-    padding-bottom: 24px;
-    z-index: 1;
+/* Every section shares the navigation content edges. */
+.about-page .site-header {
+    background: #fff;
 }
 
-.about-hero::after {
-    content: "";
-    position: absolute;
-    top: calc(-1 * var(--apsi-header-height) - var(--apsi-page-top));
-    bottom: 0;
-    left: 0;
-    right: calc(50% - 50vw);
-    background-image:
-        linear-gradient(to right, #ffffff 0%, #ffffff 440px, rgba(255,255,255,0.92) 520px, rgba(255,255,255,0) 740px),
-        url("/img/home-building-crane-wide.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: right center;
-    z-index: -1;
-    pointer-events: none;
+.about-hero {
+    width: var(--apsi-content-width);
+    margin: var(--apsi-page-top) auto 0;
+    padding: clamp(24px, 3vw, 40px);
+    border: 1px solid var(--apsi-line);
+    border-radius: var(--apsi-radius);
+    background: #fff;
+    box-shadow: var(--apsi-shadow);
 }
 
 .about-hero-content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
-    gap: 48px;
-    width: 100%;
+    gap: clamp(24px, 3vw, 48px);
 }
 
 .about-hero-copy {
-    flex: 1;
     min-width: 0;
-    max-width: 68ch;
 }
 
 .about-founders-row {
-    display: flex !important;
-    flex-direction: row;
+    display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 20px;
-    width: 440px;
-    flex-shrink: 0;
-    margin: 0 0 0 auto; /* Push it to the right of the flex container! */
-    box-sizing: border-box;
-    z-index: 2;
-    position: relative;
+    justify-content: center;
+    gap: 12px;
+    min-width: 0;
 }
 
 .about-founder-profile {
@@ -85,13 +66,14 @@ body.about-page {
     flex: 1;
     min-width: 0;
     margin-top: 0;
-    aspect-ratio: 1 / 1; /* Forces a perfect square card ratio */
+    width: 100%;
+    max-width: none;
     background: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(8px); /* Elegant glass blur */
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 16px;
-    padding: 12px 10px; /* Tighter padding to maximize avatar space */
+    padding: 10px 6px;
     box-sizing: border-box;
     box-shadow:
         0 10px 24px -10px rgba(0, 94, 200, 0.06),
@@ -109,8 +91,9 @@ body.about-page {
 }
 
 .about-founder-photo-frame {
-    width: 135px; /* Scaled up from 110px to take up more space in the card */
-    height: 135px; /* Scaled up from 110px to take up more space in the card */
+    width: 100%;
+    aspect-ratio: 1;
+    flex-shrink: 0;
     border-radius: 12px; /* Beautiful rounded square avatar frame */
     overflow: hidden;
     border: 2px solid #ffffff;
@@ -191,14 +174,15 @@ body.about-page {
 
 .about-hero p {
     max-width: var(--apsi-subtitle-measure);
-    margin: 26px 0 0;
+    margin: 20px 0 0;
     color: var(--apsi-ink);
     font-size: 15.5px;
     line-height: 1.62;
-    text-align: justify;
+    text-align: left;
 }
 
-.about-page-shell b {
+.about-page-shell b,
+.about-hero-copy strong {
     color: var(--apsi-blue);
 }
 
@@ -206,7 +190,7 @@ body.about-page {
 .about-card,
 .about-lower-grid,
 .about-intro-quote {
-    width: min(1120px, calc(100vw - 32px), var(--apsi-content-width));
+    width: var(--apsi-content-width);
     margin-inline: auto;
 }
 
@@ -227,23 +211,22 @@ body.about-page {
 }
 
 .about-badges {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-wrap: wrap;
     gap: 24px;
-    width: min(500px, calc(100vw - 32px), calc(var(--apsi-page-width) - var(--apsi-page-pad) - var(--apsi-page-pad)));
-    margin-top: var(--about-block-gap);
-    margin-bottom: var(--about-block-gap);
-    margin-left: calc((100% - min(1120px, var(--apsi-content-width))) / 2);
-    margin-right: auto;
-    transform: none;
+    margin: var(--about-block-gap) auto;
 }
 
 .about-badges article {
     display: flex;
     align-items: center;
-    gap: 18px;
-    min-height: 88px;
-    padding: 18px 24px;
+    gap: 14px;
+    flex: 1 1 0;
+    min-width: max-content;
+    min-height: 104px;
+    padding: 18px 20px;
     border: 1px solid rgba(6, 23, 51, 0.08);
     border-radius: var(--apsi-radius);
     background: rgba(255, 255, 255, 0.96);
@@ -260,8 +243,9 @@ body.about-page {
 }
 
 .about-badges svg {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
     color: var(--apsi-blue);
     stroke-width: 2.2;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
@@ -276,8 +260,8 @@ body.about-page {
     display: block;
     color: var(--apsi-navy);
     font-family: "Montserrat", "Inter", Arial, sans-serif;
-    font-size: 25px;
-    line-height: 1;
+    font-size: clamp(20px, 1.8vw, 25px);
+    line-height: 1.2;
 }
 
 .about-badges span {
@@ -285,8 +269,10 @@ body.about-page {
     margin-top: 7px;
     color: #435a7d;
     font-family: "Montserrat", "Inter", Arial, sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.12em;
+    font-size: 12px;
+    white-space: nowrap;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
 }
 
@@ -317,7 +303,7 @@ body.about-page {
 
 .about-missions-grid {
     display: grid;
-    grid-template-columns: minmax(320px, 40%) minmax(0, 60%);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
     gap: 42px;
     margin-top: 0;
 }
@@ -335,7 +321,7 @@ body.about-page {
     color: var(--apsi-ink);
     font-size: 15.5px;
     line-height: 1.62;
-    text-align: justify;
+    text-align: left;
 }
 
 .mission-item {
@@ -379,7 +365,7 @@ body.about-page {
     color: var(--apsi-ink);
     font-size: 15.4px;
     line-height: 1.58;
-    text-align: justify;
+    text-align: left;
 }
 
 .about-missions-text p:last-child {
@@ -447,7 +433,7 @@ body.about-page {
 
 .zone-layout {
     display: grid;
-    grid-template-columns: minmax(170px, 38%) minmax(0, 62%);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
     gap: 16px;
     align-items: end;
     min-width: 0;
@@ -548,16 +534,74 @@ body.about-page {
 }
 
 @media (max-width: 1180px) {
-    .about-badges {
-        width: min(500px, calc(100vw - 32px));
-        margin-left: calc((100% - min(1120px, var(--apsi-content-width))) / 2);
-        margin-right: auto;
-    }
-
-    .about-missions-grid,
     .about-lower-grid,
     .zone-layout {
         grid-template-columns: 1fr;
+    }
+
+    .about-badges article {
+        padding: 18px;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 980px) {
+    body.about-page {
+        --apsi-page-width: calc(100% - 32px);
+        --apsi-content-width: var(--apsi-page-width);
+    }
+
+    .about-page-shell {
+        --about-block-gap: 24px;
+        padding-bottom: 28px;
+    }
+
+    .about-page .site-header__toggle {
+        background: var(--apsi-blue);
+    }
+
+    .about-hero {
+        margin-top: 24px;
+        padding: 24px;
+    }
+
+    .about-hero-content,
+    .about-missions-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .about-founders-row {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .about-hero h1 {
+        font-size: clamp(26px, 4vw, 34px);
+    }
+
+    .about-hero p {
+        font-size: 16px;
+    }
+
+    .about-badges {
+        gap: 16px;
+    }
+
+    .about-badges article {
+        flex-direction: column;
+        justify-content: center;
+        flex: 1 1 260px;
+        text-align: center;
+        padding: 20px 12px;
+    }
+
+    .about-badges strong {
+        font-size: 19px;
+    }
+
+    .about-badges span {
+        font-size: 11px;
     }
 
     .about-missions-left {
@@ -569,274 +613,70 @@ body.about-page {
         max-width: none;
     }
 
+    .about-missions,
+    .about-experience,
+    .about-zone {
+        padding: 24px;
+    }
 }
 
-@media (max-width: 980px) {
-    .about-page-shell {
-        --about-block-gap: 20px;
-        padding-bottom: 28px;
-        background-image:
-            linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.97) 50%, rgba(255,255,255,0.94) 75%, rgba(255,255,255,0.76) 100%),
-            linear-gradient(180deg, #fff 0, #fff 52px, rgba(255,255,255,0) 53px, rgba(255,255,255,0.05) 68%, rgba(255,255,255,0.84) 100%),
-            url("/img/home-building-crane-wide.png");
-        background-size: 100% 100%, 100% 100%, auto 480px;
-        background-position: center top, center top, right 0 top 52px;
-    }
-
+@media (max-width: 560px) {
     .about-hero,
-    .about-badges,
-    .about-card,
-    .about-lower-grid,
-    .about-intro-quote {
-        width: var(--apsi-page-width);
-    }
-
-    .about-hero {
-        min-height: auto;
-        padding: 24px 20px;
-        margin-top: 24px;
-        margin-bottom: var(--about-block-gap);
-        border: 1px solid rgba(6, 23, 51, 0.07);
-        border-radius: var(--apsi-radius);
-        background: rgba(255, 255, 255, 0.96);
-        box-shadow: var(--apsi-shadow);
-        box-sizing: border-box;
-    }
-
-    .about-hero-content {
-        flex-direction: column;
-        gap: 32px;
-        text-align: left; /* Left align! */
-    }
-
-    .about-hero::after {
-        display: none !important;
-    }
-
-    .about-hero-copy {
-        width: 100%;
-        max-width: none;
-    }
-
-    .about-founders-row {
-        display: flex !important;
-        flex-direction: row !important; /* Side-by-side! */
-        gap: 16px !important; /* Beautiful space between cards */
-        width: 100% !important;
-        margin: 24px 0 0 0 !important; /* Spacing below subtitle paragraph */
-        box-sizing: border-box !important;
-        background: none !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        border-radius: 0 !important;
-        transform: none !important;
-    }
-
-    .about-founder-profile {
-        margin: 0 !important;
-        flex: 1 !important; /* Distribute 50/50 width */
-        max-width: none !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        text-align: left !important;
-        box-sizing: border-box !important;
-        background: none !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        border: none !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        transform: none !important;
-        aspect-ratio: auto !important; /* Reset desktop square card ratio */
-    }
-
-    .about-founder-photo-frame {
-        width: 100% !important; /* Full width of the card half */
-        height: auto !important;
-        aspect-ratio: 1 / 1 !important; /* Perfect square portraits */
-        border-radius: 12px !important; /* Premium rounded card corners */
-        border: 1px solid rgba(6, 23, 51, 0.05) !important; /* Elegant subtle border */
-        box-shadow: 0 10px 24px rgba(0, 94, 200, 0.08) !important; /* Soft card shadow */
-        margin-bottom: 12px !important;
-        overflow: hidden;
-    }
-
-    .placeholder-frame .founder-placeholder-logo {
-        font-size: clamp(32px, 10vw, 54px) !important; /* Clean monogram logo */
-    }
-
-    .about-founder-info {
-        padding: 4px 0 0 0 !important; /* Align flush with the left of the image */
-        box-sizing: border-box !important;
-    }
-
-    .about-founder-info strong {
-        font-size: clamp(14px, 4vw, 16px) !important; /* Highly readable heading size */
-        color: var(--apsi-navy) !important;
-        font-weight: 700 !important;
-    }
-
-    .about-founder-info span {
-        font-size: clamp(12px, 3.5vw, 13px) !important;
-        color: var(--apsi-blue) !important;
-        margin-top: 4px !important;
-    }
-
-    .about-hero h1 {
-        font-size: clamp(22px, 5.5vw, 26px);
-    }
-
-    .about-hero h1::after {
-        margin-left: 0; /* Left align underline! */
-        margin-right: auto;
-    }
-
-    .about-hero p {
-        width: 100%;
-        max-width: none;
-        font-size: 16px;
-        line-height: 1.68;
-        text-align: justify; /* Justified on mobile too */
-    }
-
-    .about-intro-quote {
-        margin-top: 0;
-    }
-
-    .about-intro-quote p {
-        font-size: clamp(20px, 4vw, 28px);
-    }
-
-    .about-badges {
-        grid-template-columns: 1fr 1fr;
-        max-width: none;
-        gap: 14px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 16px !important;
-        margin-bottom: var(--about-block-gap);
-    }
-
-    .about-badges article {
-        min-height: 74px;
-        padding: 14px;
-    }
-
-    .about-badges svg {
-        width: 34px;
-        height: 34px;
-    }
-
-    .about-badges strong {
-        font-size: 20px;
-    }
-
-    .about-badges span {
-        font-size: 10px;
-    }
-
     .about-missions,
     .about-experience,
     .about-zone {
         padding: 24px 20px;
     }
 
-    .mission-item {
-        grid-template-columns: 62px 1fr;
+    .about-founders-row {
+        gap: 12px;
     }
 
-    .zone-layout,
-    .about-lower-grid,
-    .about-missions-grid {
-        gap: 20px;
+    .about-founder-profile {
+        padding: 12px 6px;
     }
 
-    .interactive-map {
-        min-height: 330px;
-    }
-
-    .interactive-map svg {
-        height: 320px;
-    }
-}
-
-@media (max-width: 560px) {
-    .about-page-shell {
-        background-size: 100% 100%, 100% 100%, auto 440px;
-    }
-
-    .about-hero {
-        min-height: auto;
-        padding-bottom: 16px;
-    }
-
-
-
-    .about-section-title h2 {
-        font-size: 24px !important;
-    }
-
-    .about-section-title::after {
-        margin-top: 10px !important;
-        margin-bottom: 20px !important;
+    .about-founder-info strong {
+        font-size: 12px;
     }
 
     .about-badges {
-        grid-template-columns: 1fr 1fr !important;
-        gap: 16px !important;
-        margin-top: 12px !important;
-        margin-bottom: 16px !important;
+        flex-direction: column;
     }
 
     .about-badges article {
-        background: rgba(255, 255, 255, 0.96) !important;
-        border: 1px solid rgba(6, 23, 51, 0.08) !important;
-        box-shadow: var(--apsi-shadow) !important;
-        border-radius: var(--apsi-radius) !important;
-        padding: 12px 10px !important;
-        min-height: 72px !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        gap: 10px !important;
-        text-align: left !important;
-    }
-
-    .about-badges svg {
-        width: 30px !important;
-        height: 30px !important;
-    }
-
-    .about-badges strong {
-        font-size: 18px !important;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-basis: auto;
+        gap: 20px;
+        padding: 20px;
+        text-align: left;
     }
 
     .about-badges span {
-        font-size: 9.5px !important;
-        margin-top: 2px !important;
+        white-space: normal;
+    }
+
+    .about-badges article {
+        min-width: 0;
+    }
+
+    .about-section-title h2 {
+        font-size: 24px;
     }
 
     .mission-item {
-        grid-template-columns: 54px 1fr;
+        grid-template-columns: 48px 1fr;
         gap: 14px;
-        margin: 24px 0;
     }
 
-    .mission-item svg,
-    .about-experience li svg {
+    .mission-item svg {
         width: 46px;
         height: 46px;
         padding: 12px;
     }
 
-    .about-experience li {
-        grid-template-columns: 54px 1fr;
+    .mission-item strong {
+        font-size: 16px;
     }
-
-    .about-founders-row {
-        gap: 12px !important; /* Slightly more compact gap on narrow mobile screens */
-    }
-
 }

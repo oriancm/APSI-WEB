@@ -1,0 +1,18 @@
+{
+  "outil": "ImageGen intégré",
+  "base": "Use case: ui-mockup / precise-object-edit. Create a high-fidelity desktop screenshot variation of the supplied APSI BTP contact webpage, landscape ratio 1400:720. Image 1 is the clean approved composition; image 2 is an annotated shape-idea reference ONLY. Keep original header, APSI branding, crane photograph at left, white contact information card, French text and form on right, same positions, typography, white/navy/blue palette and same content. Change ONLY the boundary / artistic geometric frame of the photograph. Remove all red and fluorescent-green pen marks; those strokes are sketch guides, never output colors. Make the boundary architecturally precise, with ruler-straight segments, deliberate sharp corners, pale blue #e4f1ff border with tasteful small saturated blue #0067d6 accents, clean white negative space, elegant construction/architecture art direction, no organic shapes. Photo retains its natural colors, crane mast remains visible and not cut through. Protect the entire right-hand text and form area from overlays. Preserve French copy: NOUS CONTACTER; Un projet ?; Échangeons ensemble.; Nom Prénom; Objet; Message; Envoyer; Politique de confidentialité; test@apsi-btp.fr; 84750 Caseneuve. Output one single complete website screenshot, no presentation board, labels, annotations, fake browser chrome or devices.",
+  "variantes": [
+    {
+      "key": "cadre-01-chevron",
+      "prompt": "VARIANT 1 — A bold single arrowhead/chevron frame echoing the RED guide. The photo's right edge is a giant clean > shape with only two long straight diagonals: from upper left-of-center below the navigation to a tip near 47% of viewport width and 51% of viewport height, then back diagonally to lower left-of-center at the page bottom. This is a unified large pentagonal photograph silhouette, not a standalone arrow icon. Thin continuous pale-blue 12–16px inset border follows both edges. Add one short vivid-blue parallel offset accent near the central point. Minimal and assertive, no vertical middle segment."
+    },
+    {
+      "key": "cadre-02-prisme",
+      "prompt": "VARIANT 2 — An asymmetric faceted prism / half-hexagonal architectural frame, echoing the GREEN guide: upper diagonal shoulder goes from about 31% viewport x at top below nav down to 45% x at 35% page height, then a controlled straight vertical edge down to 67% page height, then a lower diagonal returns to about 32% x at bottom. Crisp angled joins, three geometric segments, a consistent narrow pale-blue 14px border and a tiny blue facet at the top shoulder only. This must look visibly different from a single > chevron, deliberate geometric polygon, beautiful restrained architectural cut."
+    },
+    {
+      "key": "cadre-03-facettes",
+      "prompt": "VARIANT 3 — An artistic layered architectural frame: one long overall diagonal at the photo's right edge, interrupted by ONE precise rectangular/triangular inset notch at its middle. Frame with two offset translucent-pale-blue polygon planes and a single narrow saturated-blue angular ribbon following the upper diagonal, making a tasteful folded-paper architectural sculpture. Main photograph remains a large continuous left surface; no small photo collage. Straight segments and controlled sharp corners only. Strong graphic treatment yet restrained, lots of white space, no added marks on the form. Clearly distinct from chevron and half-hexagon variants."
+    }
+  ]
+}

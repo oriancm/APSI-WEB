@@ -1,6 +1,71 @@
-document.addEventListener('DOMContentLoaded', function () {
+window.apsiInitSite = function () {
+    const signal = window.apsiPageSignal;
     const header = document.getElementById('site-header');
     const toggle = header?.querySelector('.site-header__toggle');
+
+    // Keep the lower diagonal fixed; turn upward before the contact button.
+    const homeFrame = document.querySelector('.home-scene .shared-hero-frame svg');
+    function syncHomeFrame() {
+        if (!homeFrame || window.innerWidth <= 980) return;
+        const scene = homeFrame.closest('.home-scene').getBoundingClientRect();
+        const lastLink = header?.querySelector('.site-header__links a:last-child');
+        const contactLink = header?.querySelector('.site-header__nav-cta');
+        if (!lastLink || !contactLink) return;
+        const link = lastLink.getBoundingClientRect();
+        const width = scene.width;
+        const height = scene.height;
+        const lowerSlope = Math.tan(25 * Math.PI / 180);
+        const preferredUpperSlope = Math.tan(32 * Math.PI / 180);
+        let upperSlope = preferredUpperSlope;
+        const bottomX = width / 2 - 180;
+        const textRange = document.createRange();
+        textRange.selectNodeContents(lastLink);
+        const clearY = textRange.getBoundingClientRect().bottom + 6;
+        const clearX = link.right - scene.left + 8;
+        const upperEdgeEnd = contactLink.getBoundingClientRect().left - scene.left - 12;
+        // Match the interior pages' 16px horizontal blue offset on the main edge.
+        const lowerOffset = 16;
+        const borderWidth = lowerOffset / Math.sqrt(1 + lowerSlope * lowerSlope);
+        let topX;
+        for (let step = 0; step < 6; step++) {
+            const offset = borderWidth * Math.sqrt(1 + 1 / (upperSlope * upperSlope));
+            topX = upperEdgeEnd - offset;
+            upperSlope = Math.max(preferredUpperSlope, clearY / Math.max(1, topX - clearX));
+        }
+        const upperOffset = borderWidth * Math.sqrt(1 + 1 / (upperSlope * upperSlope));
+        topX = upperEdgeEnd - upperOffset;
+        const bendY = Math.max(header.offsetHeight + 32,
+            (topX - bottomX - height * lowerSlope) / (1 / upperSlope - lowerSlope) - 110);
+        const bendX = bottomX + (height - bendY) * lowerSlope;
+        upperSlope = Math.min(upperSlope, (bendY - clearY) / Math.max(1, clearX - bendX));
+        topX = bendX + bendY / upperSlope;
+        const adjustedUpperOffset = borderWidth * Math.sqrt(1 + 1 / (upperSlope * upperSlope));
+        const borderY = bendY + (lowerOffset - adjustedUpperOffset) / (lowerSlope - 1 / upperSlope);
+        const borderX = bottomX + lowerOffset + (height - borderY) * lowerSlope;
+        homeFrame.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        const [border, panel] = homeFrame.querySelectorAll('path');
+        // Draw past the clipped scene to avoid a horizontal antialiasing seam.
+        const frameBleed = 4;
+        const frameBottom = height + frameBleed;
+        const frameBottomX = bottomX - frameBleed * lowerSlope;
+        panel.setAttribute('d',
+            `M0 0H${topX}L${bendX} ${bendY}L${frameBottomX} ${frameBottom}H0Z`);
+        border.setAttribute('d',
+            `M${topX} 0H${topX + adjustedUpperOffset}L${borderX} ${borderY}L${frameBottomX + lowerOffset} ${frameBottom}H${frameBottomX}L${bendX} ${bendY}Z`);
+    }
+    syncHomeFrame();
+    window.addEventListener('resize', syncHomeFrame, { signal });
+    window.addEventListener('load', syncHomeFrame, { signal });
+    document.fonts?.ready?.then(syncHomeFrame);
+
+    if (header) {
+        const syncHeaderScroll = () => {
+            header.classList.toggle('is-scrolled', window.scrollY > 12);
+        };
+        syncHeaderScroll();
+        window.addEventListener('scroll', syncHeaderScroll, { passive: true, signal });
+        window.addEventListener('pageshow', syncHeaderScroll, { signal });
+    }
 
     function clamp(value, min, max) {
         return Math.min(Math.max(value, min), max);
@@ -94,14 +159,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     syncCraneFade();
-    window.addEventListener('resize', requestFadeSync);
-    window.addEventListener('load', syncCraneFade);
+    window.addEventListener('resize', requestFadeSync, { signal });
+    window.addEventListener('load', syncCraneFade, { signal });
     document.fonts?.ready?.then(syncCraneFade);
-    window.visualViewport?.addEventListener('resize', requestFadeSync);
+    window.visualViewport?.addEventListener('resize', requestFadeSync, { signal });
 
     const fadeAnchor = document.querySelector('.home-shell .home-hero__copy, .about-page-shell .about-hero-copy, .site-shell-bg .page-title, .site-shell-bg .page-subtitle');
     if (fadeAnchor && 'ResizeObserver' in window) {
         const fadeObserver = new ResizeObserver(requestFadeSync);
+        signal?.addEventListener('abort', () => fadeObserver.disconnect(), { once: true });
         fadeObserver.observe(fadeAnchor);
         fadeAnchor.querySelectorAll?.('h1, p').forEach((element) => fadeObserver.observe(element));
     }
@@ -111,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const isOpen = header.classList.toggle('is-open');
             toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             document.body.classList.toggle('nav-open', isOpen);
-        });
+        }, { signal });
     }
 
     // Progressive Scroll Reveal Logic (IntersectionObserver)
@@ -121,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add class to non-hero elements to prepare them for reveal
     revealElements.forEach((element) => {
         // Skip elements that are above the fold or in a hero so they load instantly
-        if (element.closest('.home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero') || element.matches('.home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero')) {
+        if (element.closest('.feature-hero, .home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero') || element.matches('.feature-hero, .home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero')) {
             element.classList.add('scroll-reveal', 'is-visible');
             return;
         }
@@ -149,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
             rootMargin: '0px 0px -20px 0px'
         });
 
+        signal?.addEventListener('abort', () => revealObserver.disconnect(), { once: true });
         revealElements.forEach((el) => {
             if (!el.classList.contains('is-visible')) {
                 revealObserver.observe(el);
@@ -158,4 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Fallback for browsers that don't support IntersectionObserver
         revealElements.forEach(el => el.classList.add('is-visible'));
     }
-});
+};
+
+document.addEventListener('DOMContentLoaded', () => window.apsiInitSite());

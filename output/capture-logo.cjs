@@ -1,0 +1,2 @@
+const {chromium}=require('C:/Users/orian/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+(async()=>{const b=await chromium.launch({headless:true,channel:'chrome'});const p=await b.newPage({viewport:{width:1146,height:652}});await p.setContent('<html><body style="margin:0;background:white"><img style="display:block;width:1146px;height:652px" src="http://127.0.0.1:8088/img/logo-nav.png"></body></html>');await p.locator('img').evaluate(i=>i.decode());await p.screenshot({path:'output/logo-original-reference.png'});await b.close()})();

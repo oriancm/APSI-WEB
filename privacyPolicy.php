@@ -1,4 +1,4 @@
-<?php $activePage = 'contact'; ?>
+<?php $activePage = ''; ?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -57,6 +57,7 @@
     ?>
     <style>
         <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
+        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); ?>
         <?= apsi_minify_css(__DIR__ . '/css/policyPrivacy.css'); ?>
     </style>
     
@@ -67,41 +68,59 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
     </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/site.js" defer></script>
 </head>
 <body class="privacy-page-body">
     <main class="privacy-page site-shell-bg">
         <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-        <section class="privacy-hero site-container">
-            <h1 class="page-title">Politique de confidentialité</h1>
-            <span class="page-line"></span>
+        <section class="feature-hero privacy-intro" aria-labelledby="privacy-title">
+            <div class="feature-hero__inner">
+                <div class="feature-hero__copy">
+                    <p class="feature-hero__eyebrow">Vos données</p>
+                    <h1 id="privacy-title">Politique de<br><span>confidentialité</span></h1>
+                    <p class="feature-hero__description">Ce site ne collecte pas de données personnelles en dehors de celles fournies via le formulaire de contact.</p>
+                </div>
+            </div>
+        </section>
 
-            <div class="privacy-panel">
+        <section class="privacy-panel" aria-label="Traitement de vos données">
                 <article>
                     <div class="privacy-icon"><i data-lucide="shield-check" aria-hidden="true"></i></div>
+                    <div class="privacy-content">
+                    <h2>Collecte limitée</h2>
                     <p>Ce site ne collecte <strong>pas de données personnelles</strong> en dehors de celles fournies via le formulaire de contact.</p>
+                    </div>
                 </article>
                 <article>
                     <div class="privacy-icon"><i data-lucide="file-pen-line" aria-hidden="true"></i></div>
+                    <div class="privacy-content">
+                    <h2>Une finalité précise</h2>
                     <p>Le formulaire de contact présent sur ce site recueille certaines informations (nom, objet, message) <strong>uniquement dans le but de permettre à l'entreprise de répondre aux demandes envoyées.</strong></p>
+                    </div>
                 </article>
                 <article>
                     <div class="privacy-icon"><i data-lucide="database-x" aria-hidden="true"></i></div>
+                    <div class="privacy-content">
+                    <h2>Utilisation des données</h2>
                     <p>Ces données ne sont <strong>ni stockées</strong> en base de données, <strong>ni utilisées</strong> à des fins commerciales ou publicitaires, <strong>ni transmises</strong> à des tiers.</p>
+                    </div>
                 </article>
                 <article>
                     <div class="privacy-icon"><i data-lucide="mail" aria-hidden="true"></i></div>
-                    <p>Si vous avez des questions concernant le traitement de vos données, vous pouvez contacter :<br><strong>test@apsi-btp.fr</strong></p>
+                    <div class="privacy-content">
+                    <h2>Une question ?</h2>
+                    <p>Si vous avez des questions concernant le traitement de vos données, vous pouvez contacter :<br><a href="mailto:info@apsi-btp.fr"><strong>info@apsi-btp.fr</strong></a></p>
+                    </div>
                 </article>
-            </div>
         </section>
     </main>
 
     <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
     <script>
-        window.addEventListener('load', function () {
+        window.apsiPageReady(function () {
             if (window.lucide) window.lucide.createIcons();
         });
     </script>

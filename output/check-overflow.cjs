@@ -1,0 +1,2 @@
+const {chromium}=require('C:/Users/orian/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+(async()=>{const b=await chromium.launch({headless:true,channel:'chrome'}); const p=await b.newPage({viewport:{width:390,height:844}}); await p.goto('http://127.0.0.1:8088/professions');console.log(await p.evaluate(()=>[...document.querySelectorAll('body *')].map(e=>({tag:e.tagName,cl:e.className,r:e.getBoundingClientRect().right,l:e.getBoundingClientRect().left})).filter(e=>e.r>innerWidth+1&&e.l>=0).slice(0,12)));await b.close()})();

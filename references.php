@@ -101,6 +101,13 @@ $domains = [
     '12' => 'Restructuration et réhabilitation',
 ];
 
+$featuredRefs = array_values(array_filter($refTab, fn($ref) => isset($picByRef[$ref['id']])));
+usort($featuredRefs, function ($left, $right) {
+    $leftRank = stripos($left['titre'], 'monnaies') !== false ? 0 : 1;
+    $rightRank = stripos($right['titre'], 'monnaies') !== false ? 0 : 1;
+    return ($leftRank <=> $rightRank) ?: ((int)$left['id'] <=> (int)$right['id']);
+});
+$featuredRefs = array_slice($featuredRefs, 0, 3);
 $activePage = 'references';
 ?>
 <!doctype html>
@@ -161,6 +168,7 @@ $activePage = 'references';
     <style>
         <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
         <?= apsi_minify_css(__DIR__ . '/css/references.css'); ?>
+        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); /* Temporary reversible hero test. */ ?>
     </style>
     
     <!-- Fonts Preload -->
@@ -170,20 +178,38 @@ $activePage = 'references';
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
     </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/site.js" defer></script>
 </head>
 <body class="references-page">
     <main class="references-shell site-shell-bg">
         <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-        <section class="references-hero site-container">
-            <h1 class="page-title">Nos Références</h1>
-            <span class="page-line"></span>
-            <p>Découvrez une sélection de projets accompagnés par APSI BTP dans les secteurs <b>publics</b> et <b>privés</b>.</p>
+        <section class="references-hero site-container" aria-labelledby="references-title">
+            <div class="references-hero__copy">
+                <p class="references-eyebrow">Nos références</p>
+                <h1 id="references-title">Des projets variés,<br><span>un même engagement</span></h1>
+                <p class="references-hero__description">Parcourez les opérations accompagnées par APSI BTP et filtrez nos références par domaine.</p>
+                <a class="references-hero__browse" href="#references-layout">Parcourir les projets <i data-lucide="arrow-down" aria-hidden="true"></i></a>
+            </div>
+            <?php if ($featuredRefs): ?>
+                <div class="references-carousel" role="region" aria-roledescription="carrousel" aria-label="Quelques références APSI BTP">
+                    <?php foreach ($featuredRefs as $index => $featured): ?>
+                        <div class="references-carousel__slide" role="group" aria-roledescription="diapositive" aria-label="<?= $index + 1 ?> sur <?= count($featuredRefs) ?>" <?= $index ? 'hidden' : '' ?>>
+                            <img src="/pic/<?= htmlspecialchars($picByRef[$featured['id']]) ?>" alt="<?= htmlspecialchars($featured['titre']) ?> à <?= htmlspecialchars($featured['commune']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>>
+                            <a class="references-carousel__caption" href="/reference/<?= htmlspecialchars($featured['id']) ?>">
+                                <strong><?= htmlspecialchars($featured['titre']) ?></strong>
+                                <span><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($featured['commune']) ?></span>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </section>
 
-        <section class="references-layout site-container">
+        <section class="references-layout site-container" id="references-layout" aria-label="Nos réalisations par domaine">
             <div class="references-filter-wrap">
+                <p class="references-results" role="status" aria-live="polite" aria-atomic="true"><span class="references-results__domain">Tous les domaines</span> · <span class="references-results__count"><?= count($refTab) ?> résultats</span></p>
                 <button class="filter-toggle" type="button" aria-expanded="false" aria-controls="references-filter">
                     <span class="btn-content">
                         <i data-lucide="filter" aria-hidden="true"></i>
@@ -199,7 +225,7 @@ $activePage = 'references';
                     </div>
                     <ul>
                         <?php foreach ($domains as $value => $label): ?>
-                            <li><button class="<?= $value === 'all' ? 'active' : '' ?>" type="button" data-filter="<?= htmlspecialchars($value) ?>"><?= htmlspecialchars($label) ?></button></li>
+                            <li><button class="<?= $value === 'all' ? 'active' : '' ?>" type="button" aria-pressed="<?= $value === 'all' ? 'true' : 'false' ?>" data-filter="<?= htmlspecialchars($value) ?>"><?= htmlspecialchars($label) ?></button></li>
                         <?php endforeach; ?>
                     </ul>
                 </aside>
@@ -213,6 +239,9 @@ $activePage = 'references';
                 ?>
                     <article class="reference-tile" data-domain="<?= htmlspecialchars($ref['domaine'] ?? '0') ?>">
                         <a href="/reference/<?= htmlspecialchars($ref['id']) ?>" aria-label="<?= htmlspecialchars($ref['titre']) ?>"></a>
+                        <?php if (isset($domains[$ref['domaine'] ?? '0'])): ?>
+                            <span class="reference-tile__domain"><?= htmlspecialchars($domains[$ref['domaine']]) ?></span>
+                        <?php endif; ?>
                         <?php if ($img): ?>
                             <?php
                             $img_clean = htmlspecialchars($img);
@@ -232,6 +261,7 @@ $activePage = 'references';
                         <?php else: ?>
                             <div class="reference-tile-empty">Aucune image disponible</div>
                         <?php endif; ?>
+                        <span class="reference-tile__arrow" aria-hidden="true"><i data-lucide="arrow-right"></i></span>
                         <div>
                             <h2><?= htmlspecialchars($ref['titre']) ?></h2>
                             <p><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($ref['commune']) ?></p>
@@ -239,52 +269,13 @@ $activePage = 'references';
                     </article>
                     <?php $is_first = false; ?>
                 <?php endforeach; ?>
+                <p class="references-empty" hidden role="status">Aucune référence dans ce domaine pour le moment.</p>
             </div>
         </section>
     </main>
 
     <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
-    <script>
-    window.addEventListener('load', function() {
-        if (window.lucide) window.lucide.createIcons();
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.references-filter button[data-filter]');
-        const cards = document.querySelectorAll('.reference-tile');
-        const filterPanel = document.getElementById('references-filter');
-        const filterToggle = document.querySelector('.filter-toggle');
-
-        buttons.forEach((button) => {
-            button.addEventListener('click', () => {
-                buttons.forEach((item) => item.classList.remove('active'));
-                button.classList.add('active');
-                const filter = button.dataset.filter;
-                cards.forEach((card) => {
-                    card.hidden = filter !== 'all' && card.dataset.domain !== filter;
-                });
-                filterPanel?.classList.remove('is-open');
-                filterToggle?.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        filterToggle?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = filterPanel.classList.toggle('is-open');
-            filterToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (filterPanel?.classList.contains('is-open')) {
-                if (!filterPanel.contains(e.target) && !filterToggle?.contains(e.target)) {
-                    filterPanel.classList.remove('is-open');
-                    filterToggle?.setAttribute('aria-expanded', 'false');
-                }
-            }
-        });
-    });
-    </script>
+    <script src="/js/references.js" defer></script>
 </body>
 </html>

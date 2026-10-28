@@ -48,7 +48,7 @@
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "email": "test@apsi-btp.fr",
+        "email": "info@apsi-btp.fr",
         "contactType": "customer service"
       },
       "geo": {
@@ -91,6 +91,7 @@
     <style>
         <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
         <?= apsi_minify_css(__DIR__ . '/css/style.css'); ?>
+        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); /* Temporary reversible hero test. */ ?>
     </style>
     <!-- Fonts Preload -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -99,15 +100,19 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap">
     </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/site.js" defer></script>
 </head>
 <body class="home-page">
     <main class="home-shell">
+        <div class="home-scene" aria-hidden="true">
+            <?php include __DIR__ . '/partials/heroFrame.php'; ?>
+        </div>
         <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
         <section class="home-hero">
             <div class="home-hero__copy">
-                <h1>De tous les actes,<br>le plus complet<br>est celui de construire.</h1>
+                <h1>De tous les actes,<br>le plus complet<br>est celui de<br class="home-slogan-mobile-break"> construire.</h1>
                 <p>Paul Valéry</p>
                 <a href="/references" class="home-reference-button">
                     <span>Découvrir nos références</span>
@@ -138,7 +143,7 @@
     <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
     <script>
-        window.addEventListener('load', function () {
+        window.apsiPageReady(function () {
             if (window.lucide) {
                 window.lucide.createIcons();
             }

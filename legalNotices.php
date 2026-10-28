@@ -1,4 +1,4 @@
-<?php $activePage = 'contact'; ?>
+<?php $activePage = ''; ?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -57,6 +57,7 @@
     ?>
     <style>
         <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
+        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); ?>
         <?= apsi_minify_css(__DIR__ . '/css/legalNotices.css'); ?>
     </style>
     
@@ -67,54 +68,58 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
     </noscript>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/site.js" defer></script>
 </head>
 <body class="legal-page-body">
     <main class="legal-page site-shell-bg">
         <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-        <section class="legal-hero site-container">
-            <h1 class="page-title">Mentions légales</h1>
-            <span class="page-line"></span>
-
-            <div class="legal-panel">
-                <article class="legal-row">
-                    <div class="legal-icon"><i data-lucide="file-text" aria-hidden="true"></i></div>
-                    <div class="legal-content">
-                        <h2>Éditeur du site</h2>
-                        <span class="small-line"></span>
-                        <p>Le présent site est édité par <strong>APSI BTP</strong>, société de type <strong>SARL</strong>, au capital de <strong>6 800,00 €</strong></p>
-                        <ul>
-                            <li>Siège social : Quartier Pierrefeu, chemin de Saint Jean, 84750 CASENEUVE</li>
-                            <li>RCS Avignon : <strong>2007 B 498</strong></li>
-                            <li>Numéro de TVA : <strong>FR 40 495 392 557</strong></li>
-                            <li>Directeur de la publication : <strong>Ludovic MESSY</strong></li>
-                            <li>Contact : <strong>test@apsi-btp.fr</strong></li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="legal-row">
-                    <div class="legal-icon"><i data-lucide="server" aria-hidden="true"></i></div>
-                    <div class="legal-content">
-                        <h2>Hébergement</h2>
-                        <span class="small-line"></span>
-                        <p>Le site est hébergé par : <strong>OVH</strong></p>
-                        <ul>
-                            <li>Adresse : 2 rue Kellermann, 59100 Roubaix, France</li>
-                            <li>Site web : <a href="https://www.ovh.com" target="_blank" rel="noopener"><strong>https://www.ovh.com</strong></a></li>
-                            <li>Téléphone : <strong>1007</strong> (gratuit depuis un poste fixe en France)</li>
-                        </ul>
-                    </div>
-                </article>
+        <section class="feature-hero legal-intro" aria-labelledby="legal-title">
+            <div class="feature-hero__inner">
+                <div class="feature-hero__copy">
+                    <p class="feature-hero__eyebrow">Informations légales</p>
+                    <h1 id="legal-title">Mentions <span>légales</span></h1>
+                    <p class="feature-hero__description">Retrouvez ci-dessous les informations légales relatives au site d’APSI BTP.</p>
+                </div>
             </div>
+        </section>
+
+        <section class="legal-panel" aria-label="Éditeur et hébergement du site">
+                <article class="legal-card">
+                    <div class="legal-card__heading">
+                    <div class="legal-icon"><i data-lucide="file-text" aria-hidden="true"></i></div>
+                    <h2>Éditeur du site</h2>
+                    </div>
+                    <dl>
+                        <div><dt>Société</dt><dd><strong>APSI BTP</strong>, société de type <strong>SARL</strong>, au capital de <strong>6 800,00 €</strong></dd></div>
+                        <div><dt>Siège social</dt><dd>Quartier Pierrefeu, chemin de Saint Jean, 84750 CASENEUVE</dd></div>
+                        <div><dt>RCS</dt><dd>Avignon : <strong>2007 B 498</strong></dd></div>
+                        <div><dt>Numéro de TVA</dt><dd><strong>FR 40 495 392 557</strong></dd></div>
+                        <div><dt>Directeur de la publication</dt><dd><strong>Ludovic MESSY</strong></dd></div>
+                        <div><dt>Contact</dt><dd><a href="mailto:info@apsi-btp.fr"><strong>info@apsi-btp.fr</strong></a></dd></div>
+                    </dl>
+                </article>
+
+                <article class="legal-card">
+                    <div class="legal-card__heading">
+                    <div class="legal-icon"><i data-lucide="server" aria-hidden="true"></i></div>
+                    <h2>Hébergement</h2>
+                    </div>
+                    <dl>
+                        <div><dt>Hébergeur</dt><dd><strong>OVH</strong></dd></div>
+                        <div><dt>Adresse</dt><dd>2 rue Kellermann,<br>59100 Roubaix, France</dd></div>
+                        <div><dt>Site web</dt><dd><a href="https://www.ovh.com" target="_blank" rel="noopener">www.ovh.com</a></dd></div>
+                        <div><dt>Téléphone</dt><dd>1007 <small>(gratuit depuis un poste fixe en France)</small></dd></div>
+                    </dl>
+                </article>
         </section>
     </main>
 
     <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
     <script>
-        window.addEventListener('load', function () {
+        window.apsiPageReady(function () {
             if (window.lucide) window.lucide.createIcons();
         });
     </script>

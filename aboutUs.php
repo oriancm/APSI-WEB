@@ -60,6 +60,7 @@
     <style>
         <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
         <?= apsi_minify_css(__DIR__ . '/css/aboutUs.css'); ?>
+        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); /* Temporary reversible hero test. */ ?>
     </style>
     
     <!-- Fonts Preload -->
@@ -70,6 +71,7 @@
     </noscript>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/site.js" defer></script>
 </head>
 
@@ -78,63 +80,30 @@
 
     <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
-    <section class="about-hero">
-        <div class="about-hero-content">
-            <div class="about-hero-copy">
-                <h1>Qui sommes-nous</h1>
-
-                <p>
-                    La société <b>APSI BTP</b> a été créée en 2007 par <b>Ludovic MESSY</b>.
-                </p>
-
-                <p>
-                    Après une période de développement, elle a reçu du renfort avec l'arrivée en avril 2021 de <b>Laurent MÉTAYER</b>.
-                </p>
-
-                <p>
-                    Depuis cette date, notre équipe continue à soutenir activement nos clients et nos partenaires maîtres d'œuvre dans leurs projets.
-                </p>
-            </div>
-
-            <div class="about-founders-row">
-                <div class="about-founder-profile">
-                    <div class="about-founder-photo-frame">
-                        <img src="/img/ludovic.jpg" width="670" height="656" alt="Ludovic MESSY - Fondateur de APSI BTP">
-                    </div>
-                    <div class="about-founder-info">
-                        <strong>Ludovic MESSY</strong>
-                        <span>Fondateur</span>
-                    </div>
-                </div>
-                <div class="about-founder-profile about-founder-placeholder">
-                    <div class="about-founder-photo-frame placeholder-frame">
-                        <div class="founder-placeholder-logo">LM</div>
-                    </div>
-                    <div class="about-founder-info">
-                        <strong>Laurent MÉTAYER</strong>
-                        <span>OPC Associé</span>
-                    </div>
+    <section class="feature-hero" aria-labelledby="about-title">
+        <div class="feature-hero__inner">
+            <div class="feature-hero__copy">
+                <p class="feature-hero__eyebrow">Qui sommes-nous</p>
+                <h1 id="about-title">Une équipe engagée<br><span>aux côtés de vos projets</span></h1>
+                <p class="feature-hero__description">Depuis 2007, APSI BTP accompagne les maîtres d’ouvrage publics et privés dans leurs projets de construction.</p>
+                <p class="feature-hero__description">De la <b>préparation à la réception</b>, nous assurons la planification, la coordination et le suivi des travaux.</p>
+                <div class="feature-hero__stats" aria-label="Chiffres clés">
+                    <div><i data-lucide="calendar-days" aria-hidden="true"></i><p><strong>20 ans</strong><span>d’expérience</span></p></div>
+                    <div><i data-lucide="users" aria-hidden="true"></i><p><strong>100+</strong><span>références</span></p></div>
+                    <div><i data-lucide="layers" aria-hidden="true"></i><p><strong>OPC &amp; MOEX</strong><span>Deux expertises complémentaires</span></p></div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="about-badges" aria-label="Chiffres clés">
-        <article>
-            <i data-lucide="calendar-days" aria-hidden="true"></i>
-            <div>
-                <strong>20+ ans</strong>
-                <span>D'expérience</span>
-            </div>
-        </article>
-
-        <article>
-            <i data-lucide="award" aria-hidden="true"></i>
-            <div>
-                <strong>100+</strong>
-                <span>Références</span>
-            </div>
-        </article>
+        <div class="feature-hero__cards">
+            <article class="feature-team-card">
+                <img src="/img/ludovic.jpg" width="670" height="656" alt="Ludovic MESSY, fondateur d’APSI BTP">
+                <div><h2>Ludovic MESSY</h2><span>Fondateur</span><p>Création d’APSI BTP en 2007 pour apporter une expertise terrain et une organisation rigoureuse aux projets de construction.</p></div>
+            </article>
+            <article class="feature-team-card">
+                <div class="feature-team-card__monogram" aria-hidden="true">LM</div>
+                <div><h2>Laurent MÉTAYER</h2><span>OPC Associé</span><p>Renforce l’équipe en avril 2021 pour développer l’activité et accompagner de nouveaux projets aux côtés des maîtres d’ouvrage.</p></div>
+            </article>
+        </div>
     </section>
 
     <section class="about-card about-missions">
@@ -295,7 +264,7 @@
 <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
 <script>
-window.addEventListener('load', function() {
+window.apsiPageReady(function() {
     var navElement = document.getElementById('nav');
     var mainElement = document.getElementById('main');
 
@@ -314,7 +283,7 @@ window.addEventListener('load', function() {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+window.apsiPageReady(function() {
     const labels = {
         '84': 'Vaucluse (84)',
         '04': 'Alpes-de-Haute-Provence (04)',

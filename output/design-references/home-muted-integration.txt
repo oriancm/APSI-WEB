@@ -1,0 +1,3 @@
+Image intégrée : img/home-crane-muted-continuous.webp
+Source générée : exec-2c068a64-fb54-4d00-895a-e5e96d48bc9c.png (2043×770).
+Reprise du cadrage dézoomé : photo 1586.12×598 px, sommet de grue à environ x=centre+180 et y=140 en 1400×720. Texte/cartes inchangés. La hauteur de l'image reste fixe, mobile conserve son image existante. Sur les écrans dépassant la largeur disponible, la photo s'aligne à droite sans agrandissement et la zone blanche s'étend.
