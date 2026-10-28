@@ -68,7 +68,7 @@
                 <p class="feature-hero__eyebrow">Nos métiers</p>
                 <h1 id="professions-title">Des expertises<br><span>au service</span> de vos projets</h1>
                 <p class="feature-hero__description">Nos missions d’<b>OPC et de MOEX</b> couvrent des opérations de <b>construction neuve et de réhabilitation</b>.</p>
-                <p class="feature-hero__description">Logements, établissements de santé, équipements scolaires et sportifs, hôtellerie ou patrimoine privé : nous intervenons sur des projets aux usages et aux contraintes variés.</p>
+                <p class="feature-hero__description">Logements, établissements de santé, équipements scolaires et sportifs, hôtellerie ou patrimoine privé : nous intervenons sur des projets aux contraintes variées.</p>
                 <div class="feature-hero__actions">
                     <a href="#mission-opc" class="feature-hero__button">Découvrir nos métiers <i data-lucide="arrow-right" aria-hidden="true"></i></a>
                     <a href="/contact" class="feature-hero__button feature-hero__button--secondary">Nous contacter</a>

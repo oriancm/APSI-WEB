@@ -77,7 +77,7 @@ body.contact-body { background: #fff; }
     letter-spacing: -.035em;
 }
 .contact-copy h1 span, .contact-copy strong { color: var(--apsi-blue); }
-.contact-description { margin: 26px 0 32px; font-size: 16px; line-height: 1.65; }
+.contact-description { max-width: var(--apsi-intro-measure); margin: 26px 0 32px; font-size: 16px; line-height: 1.65; }
 .contact-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .contact-form-group { min-width: 0; }
 .contact-form-group--message, .contact-form-footer, .form-error { grid-column: 1 / -1; }

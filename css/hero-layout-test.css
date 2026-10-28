@@ -25,7 +25,7 @@
     }
 
     body:is(.about-page, .professions-page, .clients-page, .legal-page-body, .privacy-page-body) .feature-hero__copy {
-        width: 470px;
+        width: var(--apsi-intro-measure);
         max-width: 100%;
     }
 
@@ -37,12 +37,12 @@
     }
 
     body:is(.about-page, .professions-page, .clients-page, .legal-page-body, .privacy-page-body) .feature-hero__description {
-        max-width: 470px;
+        max-width: var(--apsi-intro-measure);
         text-align: justify;
     }
 
     body:is(.about-page, .professions-page, .clients-page, .legal-page-body, .privacy-page-body) .feature-hero::after {
-        width: calc(50% + 1820px + (598px - var(--apsi-header-height)) * 0.466307658);
+        width: calc(50% + 1820px + (598px - var(--apsi-header-height)) * 0.466307658 - var(--apsi-diagonal-offset));
         transform-origin: right top;
     }
 
@@ -111,23 +111,24 @@ body.about-page .feature-hero__stats {
     display: grid;
     grid-template-columns: 1fr 1fr 1.55fr;
     align-items: center;
-    gap: 14px;
-    min-height: 76px;
-    margin-top: 28px;
+    gap: 10px;
+    width: min(400px, 100%);
+    min-height: 64px;
+    margin-top: 22px;
 }
 
 body.about-page .feature-hero__stats > div {
-    gap: 9px;
+    gap: 7px;
 }
 
 body.about-page .feature-hero__stats > div + div {
     border-left: 1px solid rgba(0, 103, 214, 0.18);
-    padding-left: 14px;
+    padding-left: 10px;
 }
 
 body.about-page .feature-hero__stats svg {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
 }
 
 body.about-page .feature-hero__stats strong {

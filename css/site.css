@@ -11,6 +11,8 @@
     --apsi-footer-blue: #0067d6;
     --apsi-radius: 10px;
     --apsi-container: 1300px;
+    --apsi-intro-measure: 430px;
+    --apsi-diagonal-offset: 24px;
     --apsi-page-edge: max(0px, calc((100vw - var(--apsi-container)) / 2));
     --apsi-page-width: min(var(--apsi-container), 100%);
     --apsi-page-pad: clamp(36px, 4.2vw, 76px);
@@ -722,7 +724,7 @@ img {
 }
 
 .feature-hero .feature-hero__description {
-    max-width: 570px;
+    max-width: var(--apsi-intro-measure);
     margin: 0 0 12px;
     font-size: 16px;
     line-height: 1.6;

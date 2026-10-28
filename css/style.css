@@ -68,9 +68,8 @@ html:has(body.home-page) {
         opacity: 0;
     }
 
-    /* Match the company hero's photo registration, including its header offset. */
+    /* Keep the original photo registration and the shared geometric frame. */
     body.home-page .home-scene {
-        /* Keep the blue sky backing away from the fractional bottom clipping edge. */
         background: linear-gradient(to bottom, #88bce7 calc(100% - 4px), #fff calc(100% - 4px));
     }
 
@@ -91,13 +90,13 @@ html:has(body.home-page) {
         height: 100%;
     }
 
-    /* Cover only the white panel's fractional clipping seam, never the photo. */
+    /* Cover only the white panel's fractional clipping seam. */
     body.home-page .home-shell::after {
         content: "";
         position: absolute;
         top: calc(100% - 1px);
         left: 0;
-        width: calc(50% - 180px);
+        width: calc(50% - 180px - var(--apsi-diagonal-offset));
         height: 2px;
         z-index: 0;
         background: #fff;

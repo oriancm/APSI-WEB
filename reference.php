@@ -352,15 +352,19 @@ $activePage = 'references';
                 <section class="reference-showcase">
                     <!-- Left Column: Immersive Image Gallery Container -->
                     <div class="reference-gallery">
+                        <header class="reference-project-heading">
+                            <h1 class="page-title"><?= htmlspecialchars($ref['titre']) ?></h1>
+                            <div class="reference-project-meta">
+                                <?php if (!empty($ref['domaine'])): ?>
+                                    <span class="reference-badge"><i data-lucide="file-text" aria-hidden="true"></i><?= htmlspecialchars(safe_strtoupper(domaineLabel($ref['domaine']))) ?></span>
+                                <?php endif; ?>
+                                <?php if (!empty($ref['commune'])): ?>
+                                    <span class="reference-location"><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($ref['commune']) ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </header>
                         <div class="reference-main-image-container">
-                            <!-- Category Badge -->
-                            <?php if (!empty($ref['domaine'])): ?>
-                                <div class="reference-badge">
-                                    <i data-lucide="file-text" aria-hidden="true"></i>
-                                    <span><?= htmlspecialchars(safe_strtoupper(domaineLabel($ref['domaine']))) ?></span>
-                                </div>
-                            <?php endif; ?>
-
+                            <button type="button" class="reference-fullscreen" aria-label="Agrandir la photo"><i data-lucide="expand" aria-hidden="true"></i></button>
                             <!-- Navigation Arrows -->
                             <button type="button" class="gallery-arrow gallery-arrow--left" aria-label="Image précédente">
                                 <i data-lucide="chevron-left" aria-hidden="true"></i>
@@ -381,18 +385,12 @@ $activePage = 'references';
                                 <i data-lucide="chevron-right" aria-hidden="true"></i>
                             </button>
 
-                            <!-- Bottom Title and Location Overlay -->
                             <div class="reference-image-overlay">
-                                <h1 class="page-title"><?= htmlspecialchars($ref['titre']) ?></h1>
-                                <?php if (!empty($ref['commune'])): ?>
-                                    <p class="reference-location"><?= htmlspecialchars($ref['commune']) ?></p>
-                                <?php endif; ?>
-
                                 <!-- Slide Indicator: e.g., 01 -------- 06 -->
                                 <?php if (count($picTab) > 1): ?>
                                     <div class="reference-slide-progress">
                                         <span id="current-slide-index">01</span>
-                                        <span class="progress-line"></span>
+                                        <span aria-hidden="true">/</span>
                                         <span><?= sprintf('%02d', count($picTab)) ?></span>
                                     </div>
                                 <?php endif; ?>
@@ -417,13 +415,13 @@ $activePage = 'references';
                     <!-- Right Column: Premium white info card -->
                     <aside class="reference-info-card">
                         <div class="card-header">
-                            <h2>INFORMATIONS CLÉS</h2>
+                            <h2>INTERVENANTS</h2>
                         </div>
 
                         <div class="card-body">
                             <div class="card-row">
                                 <div class="row-label-container">
-                                    <i data-lucide="user" aria-hidden="true"></i>
+                                    <i data-lucide="hard-hat" aria-hidden="true"></i>
                                     <strong>Maître d'ouvrage</strong>
                                 </div>
                                 <span class="row-value"><?= htmlspecialchars($ref['moa'] ?? '—') ?></span>
@@ -431,7 +429,7 @@ $activePage = 'references';
                             <?php if (!empty($ref['archi'])): ?>
                             <div class="card-row">
                                 <div class="row-label-container">
-                                    <i data-lucide="pencil" aria-hidden="true"></i>
+                                    <i data-lucide="building-2" aria-hidden="true"></i>
                                     <strong>Architecte</strong>
                                 </div>
                                 <span class="row-value"><?= htmlspecialchars($ref['archi']) ?></span>
@@ -440,76 +438,40 @@ $activePage = 'references';
                             <?php if (!empty($ref['eMoe'])): ?>
                             <div class="card-row">
                                 <div class="row-label-container">
-                                    <i data-lucide="users" aria-hidden="true"></i>
-                                    <strong>Équipe de Maîtrise d'Œuvre</strong>
+                                    <i data-lucide="boxes" aria-hidden="true"></i>
+                                    <strong>Maîtrise d'œuvre</strong>
                                 </div>
                                 <span class="row-value"><?= htmlspecialchars($ref['eMoe']) ?></span>
                             </div>
                             <?php endif; ?>
-                            <?php if (!empty($ref['nbPhase'])): ?>
-                            <div class="card-row">
-                                <div class="row-label-container">
-                                    <i data-lucide="git-branch" aria-hidden="true"></i>
-                                    <strong>Nombre de phases</strong>
-                                </div>
-                                <span class="row-value"><?= htmlspecialchars((string)$ref['nbPhase']) ?></span>
+                        </div>
+                        <h2 class="reference-characteristics-title">CARACTÉRISTIQUES DU PROJET</h2>
+                        <div class="reference-schedule">
+                            <div class="schedule-item">
+                                <i data-lucide="calendar-days" aria-hidden="true"></i>
+                                <div><span>Période</span><strong><?= !empty($ref['anneeD']) ? htmlspecialchars($ref['anneeD']) . (!empty($ref['anneeF']) ? ' – ' . htmlspecialchars($ref['anneeF']) : '') : '—' ?></strong></div>
                             </div>
-                            <?php endif; ?>
-                            <div class="card-row">
-                                <div class="row-label-container">
-                                    <i data-lucide="building" aria-hidden="true"></i>
-                                    <strong>Nombre d'entreprises</strong>
-                                </div>
-                                <span class="row-value"><?= !empty($ref['nbE']) ? htmlspecialchars((string)$ref['nbE']) : '—' ?></span>
+                            <div class="schedule-item">
+                                <i data-lucide="clock" aria-hidden="true"></i>
+                                <div><span>Durée</span><strong><?= !empty($ref['duree_travaux_mois']) ? htmlspecialchars($ref['duree_travaux_mois']) . ' mois' : '—' ?></strong></div>
                             </div>
-                            <div class="card-row">
-                                <div class="row-label-container">
-                                    <i data-lucide="boxes" aria-hidden="true"></i>
-                                    <strong>Nombre de lots</strong>
-                                </div>
-                                <span class="row-value"><?= !empty($ref['nombre_lots']) ? htmlspecialchars((string)$ref['nombre_lots']) : '—' ?></span>
+                            <div class="schedule-item">
+                                <i data-lucide="circle-check" aria-hidden="true"></i>
+                                <div><span>Statut</span><strong><?= !empty($ref['statut']) ? htmlspecialchars(statutLabel($ref['statut'])) : '—' ?></strong></div>
                             </div>
                         </div>
-
-                        <!-- Card Footer Section with 3 columns (Period, Status, Montant) -->
-                        <div class="card-footer">
-                            <!-- Period Column -->
-                            <div class="footer-col footer-col--periode">
-                                <i data-lucide="calendar" class="footer-icon" aria-hidden="true"></i>
-                                <div class="footer-text-group">
-                                    <span class="footer-sub-label">Période</span>
-                                    <?php if (!empty($ref['anneeD'])): ?>
-                                        <span class="footer-val"><?= htmlspecialchars($ref['anneeD']) ?><?= !empty($ref['anneeF']) ? ' - ' . htmlspecialchars($ref['anneeF']) : '' ?></span>
-                                        <?php if (!empty($ref['duree_travaux_mois'])): ?>
-                                            <span class="footer-sub">(<?= htmlspecialchars($ref['duree_travaux_mois']) ?> mois)</span>
-                                        <?php endif; ?>
-                                    <?php else: ?>
-                                        <span class="footer-val">—</span>
-                                    <?php endif; ?>
+                        <div class="reference-stats">
+                            <?php foreach ([['layers-3', 'Phases', $ref['nbPhase'] ?? null], ['building', 'Entreprises', $ref['nbE'] ?? null], ['boxes', 'Lots', $ref['nombre_lots'] ?? null]] as [$icon, $label, $value]): ?>
+                                <div class="reference-stat">
+                                    <i data-lucide="<?= $icon ?>" aria-hidden="true"></i>
+                                    <div><span><?= $label ?></span><strong><?= htmlspecialchars((string)($value ?: '—')) ?></strong></div>
                                 </div>
-                            </div>
+                            <?php endforeach; ?>
+                        </div>
 
-                            <!-- Status Column -->
-                            <div class="footer-col footer-col--statut">
-                                <i data-lucide="check-circle" class="footer-icon" aria-hidden="true"></i>
-                                <div class="footer-text-group">
-                                    <span class="footer-sub-label">Statut</span>
-                                    <span class="footer-val"><?= !empty($ref['statut']) ? htmlspecialchars(statutLabel($ref['statut'])) : '—' ?></span>
-                                </div>
-                            </div>
-
-                            <!-- Montant Column -->
-                            <div class="footer-col footer-col--montant">
-                                <i data-lucide="euro" class="footer-icon" aria-hidden="true"></i>
-                                <div class="footer-text-group">
-                                    <span class="footer-sub-label">Montant des travaux</span>
-                                    <?php if (!empty($ref['montant'])): ?>
-                                        <span class="footer-val"><?= htmlspecialchars(formatNumber($ref['montant'])) ?> € HT</span>
-                                    <?php else: ?>
-                                        <span class="footer-val">—</span>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
+                        <div class="reference-budget">
+                            <i data-lucide="database" aria-hidden="true"></i>
+                            <div><span>Montant des travaux</span><strong><?= !empty($ref['montant']) ? htmlspecialchars(formatNumber($ref['montant'])) . ' € HT' : '—' ?></strong></div>
                         </div>
                     </aside>
                 </section>
@@ -519,7 +481,7 @@ $activePage = 'references';
         <?php if (!empty($sameDomainRefs)): ?>
             <section class="same-domain-section">
                 <div class="site-container">
-                    <h2>Références du même domaine</h2>
+                    <h2>Suggestions de références</h2>
                     <div class="same-domain-grid">
                         <?php foreach($sameDomainRefs as $sameRef): ?>
                             <?php $img = $samePicByRef[$sameRef['id']] ?? null; ?>
@@ -560,9 +522,45 @@ $activePage = 'references';
     <script>
     window.apsiPageReady(function() {
         if (window.lucide) window.lucide.createIcons();
+
+        const titles = Array.from(document.querySelectorAll('.reference-project-heading .page-title, .card-header h2, .reference-characteristics-title, .same-domain-section h2, .same-domain-card h3'));
+        function fitTitles() {
+            titles.forEach(title => {
+                title.style.removeProperty('font-size');
+                const maximum = parseFloat(getComputedStyle(title).fontSize);
+                if (title.scrollWidth <= title.clientWidth) return;
+                let low = 1;
+                let high = maximum;
+                // Keep the full title on one line at the largest size that fits.
+                for (let step = 0; step < 12; step++) {
+                    const size = (low + high) / 2;
+                    title.style.fontSize = size + 'px';
+                    if (title.scrollWidth > title.clientWidth) high = size;
+                    else low = size;
+                }
+                title.style.fontSize = low + 'px';
+            });
+        }
+        fitTitles();
+        document.fonts.ready.then(fitTitles);
+        const titleObserver = new ResizeObserver(fitTitles);
+        new Set(titles.map(title => title.parentElement)).forEach(parent => titleObserver.observe(parent));
     });
 
     window.apsiPageReady(function() {
+        const gallery = document.querySelector('.reference-main-image-container');
+        const fullscreenButton = document.querySelector('.reference-fullscreen');
+        if (gallery?.requestFullscreen) {
+            fullscreenButton?.addEventListener('click', async () => {
+                try {
+                    if (document.fullscreenElement === gallery) await document.exitFullscreen();
+                    else await gallery.requestFullscreen();
+                } catch (error) { console.warn('Agrandissement indisponible', error); }
+            });
+            document.addEventListener('fullscreenchange', () => {
+                fullscreenButton?.setAttribute('aria-label', document.fullscreenElement === gallery ? 'Quitter le plein écran' : 'Agrandir la photo');
+            });
+        } else if (fullscreenButton) fullscreenButton.hidden = true;
         const image = document.getElementById('main-reference-image');
         const thumbs = Array.from(document.querySelectorAll('.reference-thumbs button'));
         let current = 0;
