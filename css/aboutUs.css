@@ -431,111 +431,139 @@ body.about-page {
     border-color: transparent;
 }
 
+.about-zone {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-zone > p {
+    margin-bottom: 0;
+}
+
 .zone-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
-    gap: 16px;
-    align-items: end;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: clamp(16px, 2vw, 27px);
+    align-items: center;
+    align-content: center;
+    flex: 1;
+    width: 100%;
+    max-width: 960px;
+    margin-inline: auto;
+    padding-block: clamp(36px, 4vw, 60px);
     min-width: 0;
 }
 
 .dept-list {
     display: grid;
-    gap: 15px;
+    gap: 9px;
     margin: 0;
-    padding: 0 0 12px;
+    padding: 0;
+    list-style: none;
 }
 
 .dept-list button {
-    display: grid;
-    grid-template-columns: 25px 1fr;
+    display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 13px 16px;
+    border: 1px solid #dae5f2;
+    border-radius: 9px;
+    background: #fff;
     color: var(--apsi-navy);
-    cursor: pointer;
+    font-family: inherit;
     font-size: 14px;
     font-weight: 600;
-    list-style: none;
-    transition: color 0.2s ease, transform 0.2s ease;
+    line-height: 1.4;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
-.dept-list button svg {
-    width: 23px;
-    height: 23px;
-    color: var(--apsi-navy);
-}
-
-.dept-list button b,
-.dept-list button.active {
+.dept-list button b {
+    flex-shrink: 0;
     color: var(--apsi-blue);
 }
 
 .dept-list button:hover,
 .dept-list button.active {
-    transform: translateX(4px);
+    border-color: var(--apsi-blue);
+    background: #eef7ff;
+    color: var(--apsi-blue);
 }
 
 .interactive-map {
-    position: relative;
-    min-height: 360px;
-    overflow: hidden;
-    border-radius: 0 0 var(--apsi-radius) var(--apsi-radius);
-    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(221,241,255,0.82) 100%);
+    min-width: 0;
+    padding: 20px 10px;
+    border: 1px solid #d4e7f8;
+    border-radius: 12px;
+    background: #eff7ff;
 }
 
 .interactive-map svg {
     display: block;
     width: 100%;
-    max-width: 100%;
-    height: 350px;
-    overflow: hidden;
-    filter: drop-shadow(0 10px 18px rgba(25, 90, 160, 0.18));
-}
-
-.interactive-map .sea {
-    fill: rgba(214, 238, 252, 0.75);
+    height: auto;
+    max-height: 430px;
 }
 
 .interactive-map .dept path {
-    fill: #68a8dc;
+    fill: #8fbce5;
     stroke: #fff;
-    stroke-width: 2.2;
+    stroke-width: 1.8;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
     cursor: pointer;
-    transition: fill 0.2s ease, transform 0.2s ease;
-    transform-box: fill-box;
-    transform-origin: center;
+    transition: fill 0.2s ease;
 }
 
 .interactive-map .dept:hover path,
 .interactive-map .dept.active path {
     fill: var(--apsi-blue);
-    transform: scale(1.025);
 }
 
 .interactive-map text {
-    fill: #fff;
-    font-family: "Montserrat", "Inter", Arial, sans-serif;
-    font-size: 22px;
-    font-weight: 700;
+    font: 700 9px Arial, sans-serif;
+    fill: #183f6a;
+    text-anchor: middle;
+    dominant-baseline: central;
+    paint-order: stroke;
+    stroke: #e1f0ff;
+    stroke-width: 1.7px;
     pointer-events: none;
 }
 
+.interactive-map .dept.active text,
+.interactive-map .dept:hover text {
+    fill: #fff;
+    stroke: none;
+}
+
+.dept:focus-visible,
+.dept-list button:focus-visible {
+    outline: 3px solid #efad47;
+    outline-offset: 3px;
+}
+
 .map-info {
-    position: absolute;
-    right: 16px;
-    bottom: 12px;
+    width: fit-content;
+    margin: 16px auto 0;
     padding: 8px 11px;
     border-radius: 8px;
-    background: rgba(0, 94, 200, 0.86);
+    background: var(--apsi-blue);
     color: #fff;
     font-family: "Montserrat", "Inter", Arial, sans-serif;
     font-size: 12px;
     font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
 }
 
 @media (max-width: 1180px) {
-    .about-lower-grid,
-    .zone-layout {
+    .about-lower-grid {
         grid-template-columns: 1fr;
     }
 
@@ -681,15 +709,26 @@ body.about-page {
     }
 }
 
-/* Geographical map supplied for the six departments. */
-.zone-layout { align-items: center; }
-.interactive-map { min-height: 0; padding: 20px 10px 58px; border: 1px solid #d4e7f8; border-radius: 12px; background: #eff7ff; }
-.interactive-map svg { height: auto; max-height: 430px; filter: none; }
-.interactive-map .dept path { fill: #8fbce5; stroke-width: 1.8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-.interactive-map .dept:hover path, .interactive-map .dept.active path { transform: none; fill: var(--apsi-blue); }
-.interactive-map text { font: 700 9px Arial, sans-serif; fill: #183f6a; text-anchor: middle; dominant-baseline: central; paint-order: stroke; stroke: #e1f0ff; stroke-width: 1.7px; }
-.interactive-map .dept.active text, .interactive-map .dept:hover text { fill: white; stroke: none; }
-.dept:focus-visible, .dept-list button:focus-visible { outline: 3px solid #efad47; outline-offset: 3px; }
+@media (max-width: 640px) {
+    .zone-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding-block: 32px;
+    }
 
-.dept-list li { list-style: none; }
-.dept-list button { border: 0; background: transparent; padding: 0; text-align: left; font-family: inherit; min-height: 32px; }
+    .dept-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dept-list button {
+        height: 100%;
+        padding: 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 390px) {
+    .dept-list {
+        grid-template-columns: 1fr;
+    }
+}

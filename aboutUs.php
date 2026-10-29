@@ -189,18 +189,17 @@
             </div>
 
             <p>
-                APSI BTP privilégie un rayon d’action maîtrisé afin de garantir une présence régulière
-                sur chantier, une bonne réactivité et un suivi de proximité.
+                APSI BTP intervient dans six départements du Sud-Est. Notre proximité avec les chantiers permet d’assurer une présence régulière, une coordination efficace et un suivi réactif.
             </p>
 
             <div class="zone-layout">
-                <ul class="dept-list">
-                    <li><button type="button" data-dept="84"><i data-lucide="map-pin" aria-hidden="true"></i><span>Vaucluse <b>(84)</b></span></button></li>
-                    <li><button type="button" data-dept="04"><i data-lucide="map-pin" aria-hidden="true"></i><span>Alpes-de-Haute-Provence <b>(04)</b></span></button></li>
-                    <li><button type="button" data-dept="05"><i data-lucide="map-pin" aria-hidden="true"></i><span>Hautes-Alpes <b>(05)</b></span></button></li>
-                    <li><button type="button" data-dept="13"><i data-lucide="map-pin" aria-hidden="true"></i><span>Bouches du Rhône <b>(13)</b></span></button></li>
-                    <li><button type="button" data-dept="30"><i data-lucide="map-pin" aria-hidden="true"></i><span>Gard <b>(30)</b></span></button></li>
-                    <li><button type="button" data-dept="83"><i data-lucide="map-pin" aria-hidden="true"></i><span>Var <b>(83)</b></span></button></li>
+                <ul class="dept-list" aria-label="Choisir un département">
+                    <li><button type="button" data-dept="84"><span>Vaucluse</span><b>84</b></button></li>
+                    <li><button type="button" data-dept="04"><span>Alpes-de-Haute-Provence</span><b>04</b></button></li>
+                    <li><button type="button" data-dept="05"><span>Hautes-Alpes</span><b>05</b></button></li>
+                    <li><button type="button" data-dept="13"><span>Bouches-du-Rhône</span><b>13</b></button></li>
+                    <li><button type="button" data-dept="30"><span>Gard</span><b>30</b></button></li>
+                    <li><button type="button" data-dept="83"><span>Var</span><b>83</b></button></li>
                 </ul>
 
                 <div class="interactive-map" aria-label="Carte interactive des départements d'intervention">
@@ -246,7 +245,7 @@ window.apsiPageReady(function() {
         '84': 'Vaucluse (84)',
         '04': 'Alpes-de-Haute-Provence (04)',
         '05': 'Hautes-Alpes (05)',
-        '13': 'Bouches du Rhône (13)',
+        '13': 'Bouches-du-Rhône (13)',
         '30': 'Gard (30)',
         '83': 'Var (83)'
     };
