@@ -1,6 +1,6 @@
 <footer class="site-footer">
     <div class="site-footer__inner">
-        <img class="site-footer__drawing" src="/img/footer-construction.webp" width="707" height="353" alt="" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="site-footer__drawing" src="/img/footer-construction-small.webp" width="707" height="353" alt="" loading="lazy" decoding="async" aria-hidden="true">
         <div class="site-footer__brand">
             <strong>APSI BTP</strong>
             <span>Coordination de travaux</span>

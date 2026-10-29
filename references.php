@@ -184,7 +184,7 @@ $activePage = 'references';
                     <button class="references-carousel__pause" type="button" aria-pressed="false" aria-label="Mettre le carrousel en pause">Pause</button>
                     <?php foreach ($featuredRefs as $index => $featured): ?>
                         <div class="references-carousel__slide" role="group" aria-roledescription="diapositive" aria-label="<?= $index + 1 ?> sur <?= count($featuredRefs) ?>" <?= $index ? 'hidden' : '' ?>>
-                            <img <?= apsiImageSize($picByRef[$featured['id']]) ?> src="/pic/<?= htmlspecialchars($picByRef[$featured['id']]) ?>" alt="<?= htmlspecialchars($featured['titre']) ?> à <?= htmlspecialchars($featured['commune']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>>
+                            <img <?= apsiImageSize($picByRef[$featured['id']]) ?> src="/pic/<?= htmlspecialchars($picByRef[$featured['id']]) ?>" alt="<?= htmlspecialchars($featured['titre']) ?> à <?= htmlspecialchars($featured['commune']) ?>" loading="lazy" decoding="async" <?= $index === 0 ? 'fetchpriority="high"' : '' ?>>
                             <a class="references-carousel__caption" href="/reference/<?= htmlspecialchars($featured['id']) ?>">
                                 <strong><?= htmlspecialchars($featured['titre']) ?></strong>
                                 <span><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($featured['commune']) ?></span>
@@ -236,7 +236,7 @@ $activePage = 'references';
                             <?php
                             $img_clean = htmlspecialchars(apsiCardImage($img));
                             $img_basename = pathinfo($img, PATHINFO_FILENAME);
-                            $mobile_img_path = "pic/cards/" . $img_basename . ".webp";
+                            $mobile_img_path = "pic/previews/" . $img_basename . ".webp";
                             $has_mobile = file_exists(__DIR__ . '/' . $mobile_img_path);
                             $lazy_attr = $is_first ? 'fetchpriority="high"' : 'loading="lazy"';
                             ?>
