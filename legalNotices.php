@@ -1,4 +1,4 @@
-<?php $activePage = ''; ?>
+<?php $activePage = 'legal'; ?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -17,8 +17,8 @@
     <meta property="og:url" content="https://apsi-btp.fr/legalNotices">
     <meta property="og:title" content="Mentions Légales - APSI BTP">
     <meta property="og:description" content="Consultez les mentions légales de la société APSI BTP, éditeur du site et coordinateur d'ordonnancement de chantier.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.webp">
+    <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="1146">
     <meta property="og:image:height" content="652">
     <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mentions Légales - APSI BTP">
     <meta name="twitter:description" content="Consultez les mentions légales de la société APSI BTP, éditeur du site.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.webp">
     <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Favicons & Manifest -->
@@ -42,42 +42,23 @@
     <link rel="manifest" href="/site.webmanifest">
 
     <!-- Fonts Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
-        <?php
-    if (!function_exists('apsi_minify_css')) {
-        function apsi_minify_css($path) {
-            if (!file_exists($path)) return '';
-            $css = file_get_contents($path);
-            // Remove CSS comments
-            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
-            // Remove space around braces, colons, semi-colons
-            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
-            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
-            return $css;
-        }
-    }
-    ?>
-    <style>
-        <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/legalNotices.css'); ?>
-    </style>
+        <?php require_once __DIR__ . '/functions/assets.php'; ?>
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/hero-layout-test.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/legalNotices.css') ?>">
     
     <!-- Fonts Preload -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
-    </noscript>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="/js/navigation.js"></script>
-    <script src="/js/site.js" defer></script>
+    <link rel="stylesheet" href="<?= apsiAsset('/css/fonts.css') ?>">
+    <script src="<?= apsiAsset('/js/icons.min.js') ?>" defer></script>
+    <script src="<?= apsiAsset('/js/navigation.js') ?>"></script>
+    <script src="<?= apsiAsset('/js/site.js') ?>" defer></script>
+    <?php include __DIR__ . '/partials/seo.php'; ?>
 </head>
 <body class="legal-page-body">
-    <main class="legal-page site-shell-bg">
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <main id="main" tabindex="-1" class="legal-page site-shell-bg">
         <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
         <section class="feature-hero legal-intro" aria-labelledby="legal-title">

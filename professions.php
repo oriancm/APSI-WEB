@@ -3,7 +3,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Nos Métiers : OPC & MOEX - APSI BTP</title>
@@ -18,8 +18,8 @@
     <meta property="og:url" content="https://apsi-btp.fr/professions">
     <meta property="og:title" content="Nos Métiers : OPC & MOEX - APSI BTP">
     <meta property="og:description" content="Découvrez les missions OPC et MOEX d'APSI BTP : coordination de chantier, planification, suivi d'exécution, réunions, OPR et levée des réserves.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.webp">
+    <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="1146">
     <meta property="og:image:height" content="652">
     <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
@@ -28,7 +28,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nos Métiers : OPC & MOEX - APSI BTP">
     <meta name="twitter:description" content="Découvrez les missions OPC et MOEX d'APSI BTP : coordination de chantier, planification, suivi d'exécution, réunions, OPR et levée des réserves.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.webp">
     <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Favicons & Manifest -->
@@ -43,44 +43,25 @@
     <link rel="manifest" href="/site.webmanifest">
 
     <!-- Fonts Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
-        <?php
-    if (!function_exists('apsi_minify_css')) {
-        function apsi_minify_css($path) {
-            if (!file_exists($path)) return '';
-            $css = file_get_contents($path);
-            // Remove CSS comments
-            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
-            // Remove space around braces, colons, semi-colons
-            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
-            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
-            return $css;
-        }
-    }
-    ?>
-    <style>
-        <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/professions.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); /* Temporary reversible hero test. */ ?>
-    </style>
+        <?php require_once __DIR__ . '/functions/assets.php'; ?>
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/professions.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/hero-layout-test.css') ?>">
     
     <!-- Fonts Preload -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
-    </noscript>
+    <link rel="stylesheet" href="<?= apsiAsset('/css/fonts.css') ?>">
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="/js/navigation.js"></script>
-    <script src="/js/site.js" defer></script>
+    <script src="<?= apsiAsset('/js/icons.min.js') ?>" defer></script>
+    <script src="<?= apsiAsset('/js/navigation.js') ?>"></script>
+    <script src="<?= apsiAsset('/js/site.js') ?>" defer></script>
+    <?php include __DIR__ . '/partials/seo.php'; ?>
 </head>
 
 <body class="professions-page">
-<main id="main" class="professions-shell site-shell-bg hidden-until-loaded">
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+<main id="main" tabindex="-1" class="professions-shell site-shell-bg hidden-until-loaded">
 
     <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
@@ -121,11 +102,11 @@
             </div>
         </div>
 
-        <img src="/img/opc-desktop.jpg" width="612" height="408" alt="Deux professionnels analysant des plans sur un chantier">
+        <img width="612" height="408" src="/img/opc-desktop.webp" alt="Deux professionnels analysant des plans sur un chantier">
     </section>
 
     <section class="profession-card profession-card--moex">
-        <img src="/img/moex-desktop.avif" width="1024" height="623" alt="Professionnel APSI BTP sur chantier avec tablette">
+        <img width="1024" height="623" src="/img/moex-desktop.webp" alt="Professionnel APSI BTP sur chantier avec tablette">
 
         <div class="profession-card-copy">
             <div class="profession-title-row">
@@ -332,7 +313,7 @@
         <div class="profession-deliverables-left">
             <h2>Documents et suivi de mission</h2>
             <div class="deliverables-image-wrap">
-                <img src="/img/illustrations-articles-de-blog.png" width="550" height="400" alt="Outils de documents et suivi de mission - APSI BTP">
+                <img width="550" height="400" src="/img/illustrations-articles-de-blog.webp" alt="Outils de documents et suivi de mission - APSI BTP">
             </div>
         </div>
 

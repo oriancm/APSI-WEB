@@ -152,7 +152,7 @@ html:has(body.home-page) {
     height: calc(100% + 2px);
     left: max(calc(50% - 387px), calc(100% - 1586.12px));
     top: -1px;
-    background: url("/img/home-crane-muted-continuous.webp") center / cover no-repeat;
+    background: url("/img/home-crane-optimized.webp") center / cover no-repeat;
     /* Show the full existing photograph with only a 1px edge bleed. */
     mask-image: linear-gradient(to right, transparent, #000 80px);
 }
@@ -436,7 +436,7 @@ body.home-page .site-footer__inner {
         background-color: #eef7ff;
         background-image:
             linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.86) 28%, rgba(255,255,255,0.35) 60%, rgba(255,255,255,0) 82%),
-            url("/img/mobile/home-crane-portrait.avif");
+            url("/img/mobile/home-crane-portrait.webp");
         background-repeat: no-repeat;
         background-size: 100% 100%, cover;
         background-position: center, right 70%;

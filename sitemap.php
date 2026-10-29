@@ -48,7 +48,7 @@ function getReferencesForSitemap($db) {
 }
 
 $dynamicRefs = getReferencesForSitemap($db);
-$currentDate = date('Y-m-d');
+// Dynamic records have no reliable modification timestamp: omit lastmod for them.
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
 ?>
@@ -56,7 +56,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
 <?php foreach ($staticPages as $page => $info): ?>
     <url>
         <loc>https://apsi-btp.fr/<?= htmlspecialchars($page) ?></loc>
-        <lastmod><?= $currentDate ?></lastmod>
+        <lastmod><?= date('Y-m-d', filemtime(__DIR__ . '/' . ($page === '' ? 'index' : $page) . '.php')) ?></lastmod>
         <changefreq><?= htmlspecialchars($info['changefreq']) ?></changefreq>
         <priority><?= htmlspecialchars($info['priority']) ?></priority>
     </url>
@@ -64,7 +64,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
 <?php foreach ($dynamicRefs as $ref): ?>
     <url>
         <loc>https://apsi-btp.fr/reference/<?= htmlspecialchars($ref['id']) ?></loc>
-        <lastmod><?= $currentDate ?></lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>

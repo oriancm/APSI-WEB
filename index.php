@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>APSI BTP - Vos projets en toute sérénité | Ordonnancement Pilotage Coordination</title>
+    <title>APSI BTP | OPC et MOEX en Provence depuis 2007</title>
     <meta name="description" content="APSI BTP, spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007.">
     <meta name="keywords" content="APSI BTP, OPC, ordonnancement pilotage coordination, maîtrise d'oeuvre, construction, réhabilitation, chantier, Provence, PACA">
     <meta name="author" content="APSI BTP">
@@ -15,10 +15,10 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://apsi-btp.fr/">
-    <meta property="og:title" content="APSI BTP - Vos projets en toute sérénité | Ordonnancement Pilotage Coordination">
+    <meta property="og:title" content="APSI BTP | OPC et MOEX en Provence depuis 2007">
     <meta property="og:description" content="APSI BTP, spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.webp">
+    <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="1146">
     <meta property="og:image:height" content="652">
     <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="APSI BTP - Vos projets en toute sérénité">
     <meta name="twitter:description" content="Spécialiste en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.webp">
     <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Schema.org JSON-LD Structured Data -->
@@ -38,11 +38,10 @@
       "name": "APSI BTP",
       "alternateName": "Ordonnancement Pilotage Coordination BTP",
       "url": "https://apsi-btp.fr/",
-      "logo": "https://apsi-btp.fr/img/logo-nav.png",
-      "image": "https://apsi-btp.fr/img/logo-nav.png",
+      "logo": "https://apsi-btp.fr/img/logo-nav.webp",
+      "image": "https://apsi-btp.fr/img/logo-nav.webp",
       "description": "APSI BTP, spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007 en région Provence-Alpes-Côte d'Azur.",
       "foundingDate": "2007",
-      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Quartier Pierrefeu, chemin de Saint Jean",
@@ -55,11 +54,6 @@
         "@type": "ContactPoint",
         "email": "info@apsi-btp.fr",
         "contactType": "customer service"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "43.8876",
-        "longitude": "5.4344"
       }
     }
     </script>
@@ -74,42 +68,25 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="preload" as="image" href="/img/mobile/home-crane-portrait.webp" media="(max-width: 980px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/img/home-crane-optimized.webp" media="(min-width: 981px)">
     <!-- Fonts Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
-        <?php
-    if (!function_exists('apsi_minify_css')) {
-        function apsi_minify_css($path) {
-            if (!file_exists($path)) return '';
-            $css = file_get_contents($path);
-            // Remove CSS comments
-            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
-            // Remove space around braces, colons, semi-colons
-            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
-            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
-            return $css;
-        }
-    }
-    ?>
-    <style>
-        <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/style.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); /* Temporary reversible hero test. */ ?>
-    </style>
+        <?php require_once __DIR__ . '/functions/assets.php'; ?>
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/style.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/hero-layout-test.css') ?>">
     <!-- Fonts Preload -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap">
-    </noscript>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="/js/navigation.js"></script>
-    <script src="/js/site.js" defer></script>
+    <link rel="stylesheet" href="<?= apsiAsset('/css/fonts.css') ?>">
+    <script src="<?= apsiAsset('/js/icons.min.js') ?>" defer></script>
+    <script src="<?= apsiAsset('/js/navigation.js') ?>"></script>
+    <script src="<?= apsiAsset('/js/site.js') ?>" defer></script>
+    <?php include __DIR__ . '/partials/seo.php'; ?>
 </head>
 <body class="home-page">
-    <main class="home-shell">
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <main id="main" tabindex="-1" class="home-shell">
         <div class="home-scene" aria-hidden="true">
             <?php include __DIR__ . '/partials/heroFrame.php'; ?>
         </div>
@@ -117,7 +94,7 @@
 
         <section class="home-hero">
             <div class="home-hero__copy">
-                <h1>De tous les actes,<br>le plus complet<br>est celui de<br class="home-slogan-mobile-break"> construire.</h1>
+                <h1><span class="sr-only">APSI BTP — Coordination de chantier OPC et MOEX en Provence. </span>De tous les actes,<br>le plus complet<br>est celui de<br class="home-slogan-mobile-break"> construire.</h1>
                 <p>Paul Valéry</p>
                 <a href="/references" class="home-reference-button">
                     <span>Découvrir nos références</span>

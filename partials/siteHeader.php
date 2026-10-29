@@ -12,9 +12,9 @@ $navItems = [
         <div class="site-header__scene" aria-hidden="true"></div>
     <a class="site-header__logo" href="/" aria-label="APSI BTP - Accueil">
         <picture>
-            <img src="/img/logo-nav-transparent.png" width="1663" height="946" alt="APSI BTP">
+            <img width="400" height="228" src="/img/logo-header.webp" alt="APSI BTP">
         </picture>
-            <img class="site-header__logo-white" src="/img/logo-nav-white.png" width="1146" height="652" alt="" aria-hidden="true">
+            <img width="400" height="226" class="site-header__logo-white" src="/img/logo-header-white.webp" alt="" aria-hidden="true">
     </a>
 
     <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav">

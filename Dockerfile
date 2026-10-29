@@ -1,7 +1,10 @@
 FROM php:8.2-fpm
 
 # Installer les extensions nécessaires
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN apt-get update && apt-get install -y libjpeg62-turbo-dev libpng-dev libwebp-dev \
+    && docker-php-ext-configure gd --with-jpeg --with-webp \
+    && docker-php-ext-install mysqli pdo pdo_mysql gd exif \
+    && rm -rf /var/lib/apt/lists/*
 
 # Installer nginx et outils d'optimisation
 RUN apt-get update && apt-get install -y nginx \

@@ -12,6 +12,7 @@ require_once('./php_upload_config.php');
 
 require('./db.php');
 require_once('./image_optimizer.php');
+require_once __DIR__ . '/../functions/images.php';
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: admin");
@@ -35,7 +36,7 @@ if (!$reference) {
 $sql = "SELECT * FROM photo WHERE idR = ? ORDER BY orderPic";
 $stmt = $db->prepare($sql);
 $stmt->execute([$id]);
-$photos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$photos = apsiWebpPhotos($stmt->fetchAll(PDO::FETCH_ASSOC));
 
 // Debugging: Output warning if no photos are found
 if (empty($photos)) {
@@ -90,9 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 $stmt->execute([$photo, $id]);
                 $photo_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($photo_data) {
-                    $file_path = $_SERVER['DOCUMENT_ROOT'] . $photo_data['dir'];
-                    if (file_exists($file_path)) {
-                        unlink($file_path);
+                    $original = basename(str_replace('\\', '/', $photo_data['dir']));
+                    $stem = pathinfo($original, PATHINFO_FILENAME);
+                    foreach ([$original, $stem . '.webp', 'mobile/' . $stem . '.webp', 'cards/' . $stem . '.webp'] as $imagePath) {
+                        $file_path = __DIR__ . '/../pic/' . $imagePath;
+                        if (is_file($file_path)) unlink($file_path);
                     }
                     $stmt = $db->prepare("DELETE FROM photo WHERE id = ? AND idR = ?");
                     $stmt->execute([$photo, $id]);
@@ -103,13 +106,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             $order = $_POST['order'] ?? [];
             $files = $_FILES['images'] ?? [];
             $uploaded_files = [];
+            $uploadErrors = [];
 
             // Process new images if any
             if (!empty($files['name'][0])) {
                 for ($i = 0; $i < count($files['name']); $i++) {
                     if ($files['error'][$i] === 0) {
                         $ext = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
-                        $extValid = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
+                        $extValid = ['jpg', 'jpeg', 'png', 'webp'];
                         
                         if (in_array(strtolower($ext), array_map('strtolower', $extValid))) {
                             // Nettoyer et sécuriser le nom de fichier pour nginx
@@ -133,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             
                             // Vérifier si le fichier existe déjà et ajouter un suffixe si nécessaire
                             $counter = 1;
-                            while (file_exists($destination)) {
+                            while (file_exists($destination) || file_exists(dirname($destination) . '/' . pathinfo($final_name, PATHINFO_FILENAME) . '.webp')) {
                                 $final_name = $name_without_ext . '_' . $counter . '.' . $ext_normalized;
                                 $destination = $_SERVER['DOCUMENT_ROOT'] . '/pic/' . $final_name;
                                 $counter++;
@@ -141,7 +145,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             
                             if (move_uploaded_file($files['tmp_name'][$i], $destination)) {
                                 // Automatically compress image and generate card thumbnail
-                                optimizeUploadedImage($destination);
+                                $optimized = optimizeUploadedImage($destination);
+                                if (!$optimized) {
+                                    @unlink($destination);
+                                    $uploadErrors[] = "Conversion WebP impossible pour " . htmlspecialchars($files['name'][$i]);
+                                    continue;
+                                }
+                                $final_name = basename($optimized);
                                 
                                 $uploaded_files[$files['name'][$i]] = [
                                     'dir' => 'pic/' . $final_name,
@@ -168,6 +178,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 }
             }
 
+            if ($uploadErrors) {
+                $message = "<div role='alert'>" . implode('<br>', $uploadErrors) . "</div>";
+            }
             // Refresh data for display
             $sql = "SELECT * FROM reference WHERE id = ?";
             $stmt = $db->prepare($sql);
@@ -177,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             $sql = "SELECT * FROM photo WHERE idR = ? ORDER BY orderPic";
             $stmt = $db->prepare($sql);
             $stmt->execute([$id]);
-            $photos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $photos = apsiWebpPhotos($stmt->fetchAll(PDO::FETCH_ASSOC));
         } else {
             $message = "<div style='background-color: #fee2e2; border-left: 4px solid #ef4444; color: #b91c1c; padding: 1rem; margin-bottom: 1rem;'>ERREUR: Impossible de modifier les informations du chantier</div>";
         }
@@ -330,11 +343,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             <!-- Images Section -->
             <div class="mb-4">
                 <label for="image-upload" class="text-sm font-medium text-gray-700 mb-1">Images</label>
-                <input type="file" id="image-upload" name="images[]" multiple accept="image/jpeg,image/png" class="mt-1 block w-full">
-                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG (JPG, jpg, PNG, png). Limite : 100MB par fichier, 400MB au total. Faites glisser les images pour changer l'ordre</p>
+                <input type="file" id="image-upload" name="images[]" multiple accept="image/jpeg,image/png,image/webp" class="mt-1 block w-full">
+                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG et WebP. Conversion automatique en WebP optimisé. Limite : 100MB par fichier, 400MB au total. Faites glisser les images pour changer l'ordre</p>
                 <div id="image-container" class="image-container mb-4 flex flex-wrap mt-2 border border-gray-300 p-4 rounded">
                     <?php foreach ($photos as $index => $photo): ?>
-                        <div class="image-item existing-image" data-id="<?= $photo['id'] ?>" data-index="<?= $index ?>" data-type="existing" style="background-image: url('/pic/<?= htmlspecialchars($photo['titre']) ?>');" draggable="true">
+                        <div class="image-item existing-image" data-id="<?= $photo['id'] ?>" data-index="<?= $index ?>" data-type="existing" style="background-image: url('/pic/<?= htmlspecialchars(apsiCardImage($photo['titre'])) ?>');" draggable="true">
                             <div class="order-number"><?= $index + 1 ?></div>
                             <div class="delete-btn" onclick="deleteExistingImage(<?= $photo['id'] ?>)">×</div>
                             <input type="hidden" name="order[]" value="existing_<?= $photo['id'] ?>">
@@ -419,8 +432,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Vérifier le type MIME ET l'extension du fichier
                 const fileName = file.name.toLowerCase();
-                const isValidType = file.type.match('image/jpeg') || file.type.match('image/png');
-                const isValidExtension = fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png');
+                const isValidType = file.type.match('image/jpeg') || file.type.match('image/png') || file.type.match('image/webp');
+                const isValidExtension = fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png') || fileName.endsWith('.webp');
                 
                 if (isValidType || isValidExtension) {
                     const reader = new FileReader();
@@ -439,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     };
                     reader.readAsDataURL(file);
                 } else {
-                    alert(`Erreur : Le fichier "${file.name}" n'est pas un format d'image valide (JPG, JPEG ou PNG uniquement)`);
+                    alert(`Erreur : Le fichier "${file.name}" n'est pas un format d'image valide (JPG, JPEG, PNG ou WebP uniquement)`);
                     processedCount++;
                     if (processedCount === totalFiles) {
                         displayImages();

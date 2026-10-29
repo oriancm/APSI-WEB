@@ -52,7 +52,7 @@
         left: var(--feature-image-left);
         width: 1586.12px;
         height: 597.8px;
-        background: url("/img/home-crane-muted-continuous.webp") center top / 100% 100% no-repeat;
+        background: url("/img/home-crane-optimized.webp") center top / 100% 100% no-repeat;
         mask-image: linear-gradient(to bottom, transparent, #000 24px);
         clip-path: inset(0 0 63.35px 0);
     }
@@ -166,3 +166,5 @@ body.about-page .feature-hero__stats span {
         font-size: 10px;
     }
 }
+
+@media (min-width: 981px) { body.about-page .feature-hero__copy { width: 443px; max-width: 100%; } body.about-page .feature-hero__description { max-width: 443px; } }

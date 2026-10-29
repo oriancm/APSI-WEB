@@ -159,6 +159,14 @@ window.apsiInitSite = function () {
     }
 
     if (header && toggle) {
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && header.classList.contains('is-open')) {
+                header.classList.remove('is-open');
+                document.body.classList.remove('nav-open');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.focus();
+            }
+        }, { signal });
         toggle.addEventListener('click', function () {
             const isOpen = header.classList.toggle('is-open');
             toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
@@ -173,7 +181,7 @@ window.apsiInitSite = function () {
     // Add class to non-hero elements to prepare them for reveal
     revealElements.forEach((element) => {
         // Skip elements that are above the fold or in a hero so they load instantly
-        if (element.closest('.feature-hero, .home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero') || element.matches('.feature-hero, .home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero')) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || element.getBoundingClientRect().top < window.innerHeight || element.closest('.feature-hero, .home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero') || element.matches('.feature-hero, .home-hero, .about-hero, .professions-hero, .references-hero, .clients-hero, .contact-hero')) {
             element.classList.add('scroll-reveal', 'is-visible');
             return;
         }

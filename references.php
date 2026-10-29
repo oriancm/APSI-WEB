@@ -1,5 +1,6 @@
 <?php
 require('admin/db.php');
+require_once __DIR__ . '/functions/images.php';
 
 function getAllRef($db) {
     $sql = "SELECT * FROM reference ORDER BY id ASC";
@@ -27,51 +28,51 @@ function getAllPic($db) {
     $pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if (empty($pics) && $db instanceof NullDb) {
         return [
-            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_1.avif', 'orderPic' => 1],
-            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_2.avif', 'orderPic' => 2],
-            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_3.avif', 'orderPic' => 3],
-            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_4.avif', 'orderPic' => 4],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_1.avif', 'orderPic' => 1],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_2.avif', 'orderPic' => 2],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_3.avif', 'orderPic' => 3],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_4.avif', 'orderPic' => 4],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_5.avif', 'orderPic' => 5],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_6.avif', 'orderPic' => 6],
-            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_7.avif', 'orderPic' => 7],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_1.avif', 'orderPic' => 1],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_2.avif', 'orderPic' => 2],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_3.avif', 'orderPic' => 3],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_4.avif', 'orderPic' => 4],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_5.avif', 'orderPic' => 5],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_6.avif', 'orderPic' => 6],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_7.avif', 'orderPic' => 7],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_8.avif', 'orderPic' => 8],
-            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_9.avif', 'orderPic' => 9],
-            ['idR' => 4, 'titre' => 'residence_l_aygues_1.avif', 'orderPic' => 1],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_1.avif', 'orderPic' => 1],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_2.avif', 'orderPic' => 2],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_3.avif', 'orderPic' => 3],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_4.avif', 'orderPic' => 4],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_5.avif', 'orderPic' => 5],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_6.avif', 'orderPic' => 6],
-            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_7.avif', 'orderPic' => 7],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_1.avif', 'orderPic' => 1],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_2.avif', 'orderPic' => 2],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_3.avif', 'orderPic' => 3],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_4.avif', 'orderPic' => 4],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_5.avif', 'orderPic' => 5],
-            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_6.avif', 'orderPic' => 6],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_1.avif', 'orderPic' => 1],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_2.avif', 'orderPic' => 2],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_3.avif', 'orderPic' => 3],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_4.avif', 'orderPic' => 4],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_5.avif', 'orderPic' => 5],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_6.avif', 'orderPic' => 6],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_7.avif', 'orderPic' => 7],
-            ['idR' => 7, 'titre' => 'residence_les_angevines_8.avif', 'orderPic' => 8]
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_1.webp', 'orderPic' => 1],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_2.webp', 'orderPic' => 2],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_3.webp', 'orderPic' => 3],
+            ['idR' => 1, 'titre' => 'amenagement_de_la_place_jean_jaures_4.webp', 'orderPic' => 4],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_1.webp', 'orderPic' => 1],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_2.webp', 'orderPic' => 2],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_3.webp', 'orderPic' => 3],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_4.webp', 'orderPic' => 4],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_5.webp', 'orderPic' => 5],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_6.webp', 'orderPic' => 6],
+            ['idR' => 2, 'titre' => 'centre_culturel_simone_signoret_7.webp', 'orderPic' => 7],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_1.webp', 'orderPic' => 1],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_2.webp', 'orderPic' => 2],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_3.webp', 'orderPic' => 3],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_4.webp', 'orderPic' => 4],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_5.webp', 'orderPic' => 5],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_6.webp', 'orderPic' => 6],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_7.webp', 'orderPic' => 7],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_8.webp', 'orderPic' => 8],
+            ['idR' => 3, 'titre' => 'l_hotel_des_monnaies_niel_9.webp', 'orderPic' => 9],
+            ['idR' => 4, 'titre' => 'residence_l_aygues_1.webp', 'orderPic' => 1],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_1.webp', 'orderPic' => 1],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_2.webp', 'orderPic' => 2],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_3.webp', 'orderPic' => 3],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_4.webp', 'orderPic' => 4],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_5.webp', 'orderPic' => 5],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_6.webp', 'orderPic' => 6],
+            ['idR' => 5, 'titre' => 'refectoire_de_coudoux_7.webp', 'orderPic' => 7],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_1.webp', 'orderPic' => 1],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_2.webp', 'orderPic' => 2],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_3.webp', 'orderPic' => 3],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_4.webp', 'orderPic' => 4],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_5.webp', 'orderPic' => 5],
+            ['idR' => 6, 'titre' => 'rehabilitation_du_college_paul_cezanne_6.webp', 'orderPic' => 6],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_1.webp', 'orderPic' => 1],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_2.webp', 'orderPic' => 2],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_3.webp', 'orderPic' => 3],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_4.webp', 'orderPic' => 4],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_5.webp', 'orderPic' => 5],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_6.webp', 'orderPic' => 6],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_7.webp', 'orderPic' => 7],
+            ['idR' => 7, 'titre' => 'residence_les_angevines_8.webp', 'orderPic' => 8]
         ];
     }
-    return $pics;
+    return apsiWebpPhotos($pics);
 }
 
 $refTab = getAllRef($db);
@@ -128,8 +129,8 @@ $activePage = 'references';
     <meta property="og:url" content="https://apsi-btp.fr/references">
     <meta property="og:title" content="Nos Références - APSI BTP | Projets BTP en Provence-Alpes-Côte d'Azur">
     <meta property="og:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.webp">
+    <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="1146">
     <meta property="og:image:height" content="652">
     <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
@@ -138,7 +139,7 @@ $activePage = 'references';
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nos Références - APSI BTP">
     <meta name="twitter:description" content="Découvrez nos références en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.webp">
     <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Favicons & Manifest -->
@@ -152,42 +153,23 @@ $activePage = 'references';
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     <!-- Fonts Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
-        <?php
-    if (!function_exists('apsi_minify_css')) {
-        function apsi_minify_css($path) {
-            if (!file_exists($path)) return '';
-            $css = file_get_contents($path);
-            // Remove CSS comments
-            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
-            // Remove space around braces, colons, semi-colons
-            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
-            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
-            return $css;
-        }
-    }
-    ?>
-    <style>
-        <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/references.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); /* Temporary reversible hero test. */ ?>
-    </style>
+        <?php require_once __DIR__ . '/functions/assets.php'; ?>
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/references.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/hero-layout-test.css') ?>">
     
     <!-- Fonts Preload -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
-    </noscript>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="/js/navigation.js"></script>
-    <script src="/js/site.js" defer></script>
+    <link rel="stylesheet" href="<?= apsiAsset('/css/fonts.css') ?>">
+    <script src="<?= apsiAsset('/js/icons.min.js') ?>" defer></script>
+    <script src="<?= apsiAsset('/js/navigation.js') ?>"></script>
+    <script src="<?= apsiAsset('/js/site.js') ?>" defer></script>
+    <?php include __DIR__ . '/partials/seo.php'; ?>
 </head>
 <body class="references-page">
-    <main class="references-shell site-shell-bg">
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <main id="main" tabindex="-1" class="references-shell site-shell-bg">
         <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
         <section class="references-hero site-container" aria-labelledby="references-title">
@@ -199,9 +181,10 @@ $activePage = 'references';
             </div>
             <?php if ($featuredRefs): ?>
                 <div class="references-carousel" role="region" aria-roledescription="carrousel" aria-label="Quelques références APSI BTP">
+                    <button class="references-carousel__pause" type="button" aria-pressed="false" aria-label="Mettre le carrousel en pause">Pause</button>
                     <?php foreach ($featuredRefs as $index => $featured): ?>
                         <div class="references-carousel__slide" role="group" aria-roledescription="diapositive" aria-label="<?= $index + 1 ?> sur <?= count($featuredRefs) ?>" <?= $index ? 'hidden' : '' ?>>
-                            <img src="/pic/<?= htmlspecialchars($picByRef[$featured['id']]) ?>" alt="<?= htmlspecialchars($featured['titre']) ?> à <?= htmlspecialchars($featured['commune']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>>
+                            <img <?= apsiImageSize($picByRef[$featured['id']]) ?> src="/pic/<?= htmlspecialchars($picByRef[$featured['id']]) ?>" alt="<?= htmlspecialchars($featured['titre']) ?> à <?= htmlspecialchars($featured['commune']) ?>" <?= $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' ?>>
                             <a class="references-carousel__caption" href="/reference/<?= htmlspecialchars($featured['id']) ?>">
                                 <strong><?= htmlspecialchars($featured['titre']) ?></strong>
                                 <span><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($featured['commune']) ?></span>
@@ -213,8 +196,9 @@ $activePage = 'references';
         </section>
 
         <section class="references-layout site-container" id="references-layout" aria-label="Nos réalisations par domaine">
-            <div class="references-filter-wrap">
+            <div class="references-filter-column">
                 <p class="references-results" role="status" aria-live="polite" aria-atomic="true"><span class="references-results__domain">Tous les domaines</span> · <span class="references-results__count"><?= count($refTab) ?> résultats</span></p>
+                <div class="references-filter-wrap">
                 <button class="filter-toggle" type="button" aria-expanded="false" aria-controls="references-filter">
                     <span class="btn-content">
                         <i data-lucide="filter" aria-hidden="true"></i>
@@ -234,6 +218,7 @@ $activePage = 'references';
                         <?php endforeach; ?>
                     </ul>
                 </aside>
+                </div>
             </div>
 
             <div class="references-grid" id="references-grid">
@@ -249,19 +234,19 @@ $activePage = 'references';
                         <?php endif; ?>
                         <?php if ($img): ?>
                             <?php
-                            $img_clean = htmlspecialchars($img);
+                            $img_clean = htmlspecialchars(apsiCardImage($img));
                             $img_basename = pathinfo($img, PATHINFO_FILENAME);
-                            $mobile_img_path = "pic/mobile/" . $img_basename . ".avif";
+                            $mobile_img_path = "pic/cards/" . $img_basename . ".webp";
                             $has_mobile = file_exists(__DIR__ . '/' . $mobile_img_path);
                             $lazy_attr = $is_first ? 'fetchpriority="high"' : 'loading="lazy"';
                             ?>
                             <?php if ($has_mobile): ?>
                                 <picture>
                                     <source media="(max-width: 980px)" srcset="/<?= $mobile_img_path ?>">
-                                    <img src="/pic/<?= $img_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" <?= $lazy_attr ?>>
+                                    <img <?= apsiImageSize(apsiCardImage($img)) ?> src="/pic/<?= $img_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" <?= $lazy_attr ?>>
                                 </picture>
                             <?php else: ?>
-                                <img src="/pic/<?= $img_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" <?= $lazy_attr ?>>
+                                <img <?= apsiImageSize(apsiCardImage($img)) ?> src="/pic/<?= $img_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" <?= $lazy_attr ?>>
                             <?php endif; ?>
                         <?php else: ?>
                             <div class="reference-tile-empty">Aucune image disponible</div>
@@ -281,6 +266,6 @@ $activePage = 'references';
 
     <?php include __DIR__ . '/partials/siteFooter.php'; ?>
 
-    <script src="/js/references.js" defer></script>
+    <script src="<?= apsiAsset('/js/references.js') ?>" defer></script>
 </body>
 </html>

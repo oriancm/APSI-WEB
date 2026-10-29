@@ -38,7 +38,7 @@ body.professions-page .site-shell-bg {
     right: calc(50% - 50vw);
     background-image:
         linear-gradient(to right, #ffffff 0%, #ffffff 440px, rgba(255,255,255,0.92) 520px, rgba(255,255,255,0) 740px),
-        url("/img/home-building-crane-wide.png");
+        url("/img/home-building-crane-wide.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right center;
@@ -619,7 +619,7 @@ body.professions-page .site-shell-bg {
     padding: 48px;
     background:
         linear-gradient(90deg, var(--apsi-footer-blue) 0%, var(--apsi-footer-blue) 30%, rgba(0, 103, 214, 0.85) 42%, rgba(0, 103, 214, 0.4) 55%, rgba(0, 103, 214, 0) 70%),
-        url('/img/profession-cta.jpg') no-repeat right center / cover;
+        url('/img/profession-cta.webp') no-repeat right center / cover;
     border: none;
     color: #ffffff;
     position: relative;
@@ -771,7 +771,7 @@ body.professions-page .site-shell-bg {
         gap: 28px;
         background:
             linear-gradient(180deg, rgba(0, 103, 214, 0.95) 0%, rgba(0, 103, 214, 0.85) 100%),
-            url('/img/profession-cta.jpg') no-repeat center center / cover;
+            url('/img/profession-cta.webp') no-repeat center center / cover;
         text-align: center;
     }
 
@@ -933,3 +933,6 @@ body.professions-page .site-footer {
         padding-bottom: clamp(20px, 3vw, 40px) !important;
     }
 }
+
+/* Clip the decorative diagonal without creating a horizontal scroll area. */
+.professions-shell { overflow-x: clip; }

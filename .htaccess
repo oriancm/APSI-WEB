@@ -1,19 +1,40 @@
 RewriteEngine On
 
-# Rediriger sitemap.xml vers sitemap.php
+# Never serve deployment instructions, credentials, source archives or audit outputs.
+RewriteRule ^(?:\.(?!well-known/)|output(?:/|$)|scripts?(?:/|$)|bdd(?:/|$)) - [F,L]
+<FilesMatch "(?i)(\.(md|sql|py|ya?ml|ini|sh|log|bak)$|^(package(?:-lock)?\.json|composer\.(json|lock))$)">
+    Require all denied
+</FilesMatch>
+
+# One public origin and one URL per page. POST requests keep their form body.
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\.apsi-btp\.fr$ [NC]
+RewriteRule ^ https://apsi-btp.fr%{REQUEST_URI} [R=301,L,NE]
+
+RewriteCond %{REQUEST_METHOD} ^(?:GET|HEAD)$
+RewriteCond %{THE_REQUEST} \s/+index(?:\.php)?[?\s] [NC]
+RewriteRule ^index(?:\.php)?$ / [R=301,L]
+
+RewriteCond %{REQUEST_METHOD} ^(?:GET|HEAD)$
+RewriteCond %{THE_REQUEST} \s/+reference(?:\.php)?\? [NC]
+RewriteCond %{QUERY_STRING} ^id=([0-9]+)$
+RewriteRule ^reference(?:\.php)?$ /reference/%1 [R=301,L,QSD]
+
+RewriteCond %{REQUEST_METHOD} ^(?:GET|HEAD)$
+RewriteCond %{THE_REQUEST} \s/+(?:aboutUs|professions|references|clients|contact|legalNotices|privacyPolicy)\.php[?\s] [NC]
+RewriteRule ^(aboutUs|professions|references|clients|contact|legalNotices|privacyPolicy)\.php$ /$1 [R=301,L]
+
+RewriteRule ^(aboutUs|professions|references|clients|contact|legalNotices|privacyPolicy)/index\.php$ /$1 [R=301,L]
+RewriteRule ^((?:aboutUs|professions|references|clients|contact|legalNotices|privacyPolicy)|reference/[0-9]+)/$ /$1 [R=301,L]
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteRule ^(aboutUs|professions|references|clients|contact|legalNotices|privacyPolicy)$ $1.php [L]
+RewriteRule ^reference/([0-9]+)$ reference.php?id=$1 [L]
 
-# Rediriger HTTP vers HTTPS
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# Enlever le .php dans l'URL
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([^/]+)$ $1.php [L]
 
-# Exemple pour référence propre : /reference/8
-RewriteRule ^reference/([0-9]+)$ reference.php?id=$1 [L]
+ErrorDocument 404 /404.php
 
 # Rediriger toute URL non trouvée sous /admin/ vers /admin/admin.php
 RewriteCond %{REQUEST_URI} ^/admin/.*
@@ -30,6 +51,8 @@ RewriteRule ^admin/.*$ /admin/admin.php [L]
     AddOutputFilterByType DEFLATE text/html
     AddOutputFilterByType DEFLATE text/xml
     AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
     AddOutputFilterByType DEFLATE application/xml
     AddOutputFilterByType DEFLATE application/xhtml+xml
     AddOutputFilterByType DEFLATE application/rss+xml
@@ -40,8 +63,8 @@ RewriteRule ^admin/.*$ /admin/admin.php [L]
 # Cache pour les fichiers statiques
 <IfModule mod_expires.c>
     ExpiresActive on
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
@@ -58,9 +81,19 @@ RewriteRule ^admin/.*$ /admin/admin.php [L]
 </IfModule>
 
 # Enforce explicit caching headers for static assets (for servers where mod_expires is partially bypassed)
+<IfModule mod_setenvif.c>
+    SetEnvIf Request_URI "^/(admin(?:/|$)|mailSent)" apsi_noindex
+</IfModule>
+
 <IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Robots-Tag "noindex, nofollow" env=apsi_noindex
     <FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|avif|webp|svg|woff2)$">
         Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "max-age=2592000, public"
     </FilesMatch>
     <FilesMatch "\.(pdf|txt)$">
         Header set Cache-Control "max-age=2592000, public"

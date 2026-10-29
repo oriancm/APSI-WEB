@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>APSI BTP - Qui sommes-nous | OPC et MOEX depuis 2007</title>
@@ -19,8 +19,8 @@
     <meta property="og:url" content="https://apsi-btp.fr/aboutUs">
     <meta property="og:title" content="APSI BTP - Qui sommes-nous | OPC et MOEX depuis 2007">
     <meta property="og:description" content="APSI BTP accompagne les maîtres d’ouvrage publics et privés en OPC et MOEX depuis 2007, avec plus de 100 opérations suivies en construction et réhabilitation.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.webp">
+    <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="1146">
     <meta property="og:image:height" content="652">
     <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
@@ -29,7 +29,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="APSI BTP - Qui sommes-nous">
     <meta name="twitter:description" content="Découvrez notre équipe et notre expertise d'accompagnement de vos projets d'ingénierie et de coordination de travaux depuis 2007.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.webp">
     <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Favicons & Manifest -->
@@ -44,44 +44,25 @@
     <link rel="manifest" href="/site.webmanifest">
 
     <!-- Fonts Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
-        <?php
-    if (!function_exists('apsi_minify_css')) {
-        function apsi_minify_css($path) {
-            if (!file_exists($path)) return '';
-            $css = file_get_contents($path);
-            // Remove CSS comments
-            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
-            // Remove space around braces, colons, semi-colons
-            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
-            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
-            return $css;
-        }
-    }
-    ?>
-    <style>
-        <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/aboutUs.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/hero-layout-test.css'); /* Temporary reversible hero test. */ ?>
-    </style>
+        <?php require_once __DIR__ . '/functions/assets.php'; ?>
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/aboutUs.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/hero-layout-test.css') ?>">
     
     <!-- Fonts Preload -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
-    </noscript>
+    <link rel="stylesheet" href="<?= apsiAsset('/css/fonts.css') ?>">
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="/js/navigation.js"></script>
-    <script src="/js/site.js" defer></script>
+    <script src="<?= apsiAsset('/js/icons.min.js') ?>" defer></script>
+    <script src="<?= apsiAsset('/js/navigation.js') ?>"></script>
+    <script src="<?= apsiAsset('/js/site.js') ?>" defer></script>
+    <?php include __DIR__ . '/partials/seo.php'; ?>
 </head>
 
 <body class="about-page">
-<main id="main" class="about-page-shell site-shell-bg hidden-until-loaded">
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+<main id="main" tabindex="-1" class="about-page-shell site-shell-bg hidden-until-loaded">
 
     <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
@@ -101,7 +82,7 @@
         </div>
         <div class="feature-hero__cards">
             <article class="feature-team-card">
-                <img src="/img/ludovic.jpg" width="670" height="656" alt="Ludovic MESSY, fondateur d’APSI BTP">
+                <img width="670" height="656" src="/img/ludovic.webp" alt="Ludovic MESSY, fondateur d’APSI BTP">
                 <div><h2>Ludovic MESSY</h2><span>Fondateur</span><p>Création d’APSI BTP en 2007 pour apporter une expertise terrain et une organisation rigoureuse aux projets de construction.</p></div>
             </article>
             <article class="feature-team-card">
@@ -214,51 +195,23 @@
 
             <div class="zone-layout">
                 <ul class="dept-list">
-                    <li data-dept="84"><i data-lucide="map-pin" aria-hidden="true"></i><span>Vaucluse <b>(84)</b></span></li>
-                    <li data-dept="04"><i data-lucide="map-pin" aria-hidden="true"></i><span>Alpes-de-Haute-Provence <b>(04)</b></span></li>
-                    <li data-dept="05"><i data-lucide="map-pin" aria-hidden="true"></i><span>Hautes-Alpes <b>(05)</b></span></li>
-                    <li data-dept="13"><i data-lucide="map-pin" aria-hidden="true"></i><span>Bouches du Rhône <b>(13)</b></span></li>
-                    <li data-dept="30"><i data-lucide="map-pin" aria-hidden="true"></i><span>Gard <b>(30)</b></span></li>
-                    <li data-dept="83"><i data-lucide="map-pin" aria-hidden="true"></i><span>Var <b>(83)</b></span></li>
+                    <li><button type="button" data-dept="84"><i data-lucide="map-pin" aria-hidden="true"></i><span>Vaucluse <b>(84)</b></span></button></li>
+                    <li><button type="button" data-dept="04"><i data-lucide="map-pin" aria-hidden="true"></i><span>Alpes-de-Haute-Provence <b>(04)</b></span></button></li>
+                    <li><button type="button" data-dept="05"><i data-lucide="map-pin" aria-hidden="true"></i><span>Hautes-Alpes <b>(05)</b></span></button></li>
+                    <li><button type="button" data-dept="13"><i data-lucide="map-pin" aria-hidden="true"></i><span>Bouches du Rhône <b>(13)</b></span></button></li>
+                    <li><button type="button" data-dept="30"><i data-lucide="map-pin" aria-hidden="true"></i><span>Gard <b>(30)</b></span></button></li>
+                    <li><button type="button" data-dept="83"><i data-lucide="map-pin" aria-hidden="true"></i><span>Var <b>(83)</b></span></button></li>
                 </ul>
 
                 <div class="interactive-map" aria-label="Carte interactive des départements d'intervention">
-                    <svg viewBox="0 0 400 360" role="img" aria-labelledby="map-title">
-                        <title id="map-title">Carte interactive PACA et Gard</title>
-                        <path class="sea" d="M0 285 Q70 260 135 300 T280 318 T400 290 L400 360 L0 360 Z"></path>
+                    <svg viewBox="405 464 246 181" role="group" aria-label="Carte géographique interactive des six départements d’intervention"><title>Gard, Vaucluse, Bouches-du-Rhône, Hautes-Alpes, Alpes-de-Haute-Provence et Var</title><g class="dept" data-dept="30" tabindex="0" role="button" aria-label="Gard (30)"><path d="M 433.2739 549.7851 437.6578 553.2755 448.0736 553.6346 448.727 548.9589 461.8341 552.8195 465.9323 543.6947 463.3744 533.249 468.6093 526.592 472.6449 530.8686 474.1267 536.446 478.7568 537.6843 483.5464 541.836 487.3986 535.9212 497.4586 535.6326 505.8798 540.9766 510.1815 547.4676 509.486 554.1421 517.426 561.4742 511.5999 568.3076 506.2027 575.8651 506.8093 579.6438 504.1443 587.3679 497.3987 586.4829 493.0158 597.5924 483.5063 602.5406 483.004 605.6193 478.206 604.329 475.4515 598.2587 480.7038 590.2811 477.6143 583.7375 469.4445 577.9323 464.6699 572.4939 456.0171 565.6383 447.6727 569.8392 444.079 574.69 440.9369 571.4537 432.4652 570.1841 432.0493 568.2337 437.6122 561.4489 428.7377 558.0058 431.0303 550.758 433.2739 549.7851 Z"/><text x="485.2" y="566.9">30</text></g>
+<g class="dept active" data-dept="84" tabindex="0" role="button" aria-label="Vaucluse (84)"><path d="M 519.7542 535.2865 520.9202 529.7435 524.902 528.4142 527.2173 533.1364 524.6455 538.3913 519.7542 535.2865 Z M 554.6342 551.9309 557.4145 558.9906 555.525 564.4861 559.8656 567.7295 559.7043 574.4392 564.2914 574.6915 570.4578 582.078 570.2491 582.4646 562.0086 587.9738 552.2872 586.5061 545.1132 582.3588 537.7091 582.654 529.6692 578.6138 525.2435 572.5347 518.1418 569.1757 511.5999 568.3076 517.426 561.4742 509.486 554.1421 510.1815 547.4676 505.8798 540.9766 505.8472 536.2621 512.2444 536.4633 515.329 543.7942 529.2107 537.4257 534.2647 539.5276 536.2848 544.3135 540.5294 543.3012 547.9106 545.3926 547.8808 548.6217 554.6342 551.9309 Z"/><text x="536.1" y="563.0">84</text></g>
+<g class="dept" data-dept="13" tabindex="0" role="button" aria-label="Bouches-du-Rhône (13)"><path d="M 483.004 605.6193 483.5063 602.5406 493.0158 597.5924 497.3987 586.4829 504.1443 587.3679 506.8093 579.6438 506.2027 575.8651 511.5999 568.3076 518.1418 569.1757 525.2435 572.5347 529.6692 578.6138 537.7091 582.654 545.1132 582.3588 552.2872 586.5061 562.0086 587.9738 570.2491 582.4646 572.9769 587.4384 566.3919 591.6309 569.0454 596.4308 567.791 601.4853 570.8953 605.4679 567.0594 608.405 567.1439 614.6379 571.6409 617.3901 567.6114 621.3137 567.025 625.8355 563.3292 627.4726 554.5738 623.7063 549.368 624.1813 548.88 615.8939 545.5135 612.0662 540.6687 614.8499 529.0717 614.3115 526.8016 610.1133 536.9691 608.2608 533.6369 599.3982 529.1673 597.9128 527.5949 603.8377 519.4798 609.5735 515.2352 614.0081 503.4445 613.0716 504.042 609.598 500.561 605.9881 483.004 605.6193 Z"/><text x="530.7" y="597.8">13</text></g>
+<g class="dept" data-dept="05" tabindex="0" role="button" aria-label="Hautes-Alpes (05)"><path d="M 594.8016 470.2951 599.1561 470.6042 602.6362 475.1832 612.5169 469.8248 615.566 470.7748 618.3289 477.7665 622.2392 477.8223 622.9164 485.3159 629.6617 490.6396 637.7641 491.0891 639.4937 499.717 635.22 505.8988 625.223 511.73 620.6958 516.4102 618.1141 523.2178 610.4975 523.4138 602.2449 517.9109 600.5689 522.6627 595.2682 529.3087 588.6794 522.169 579.7068 529.0069 571.255 543.6284 564.5316 545.6219 564.2928 538.9364 560.8533 534.5765 553.7185 534.3925 549.2874 527.6018 552.6139 522.2307 559.7008 524.0511 559.124 517.8922 561.9137 508.9317 566.8791 509.9061 570.2456 504.5543 576.7538 500.7772 578.3189 496.5207 588.4698 491.3597 600.9557 491.7211 600.9353 484.7568 597.7753 479.8556 592.0497 479.4798 594.8016 470.2951 Z"/><text x="600.5" y="507.4">05</text></g>
+<g class="dept" data-dept="04" tabindex="0" role="button" aria-label="Alpes-de-Haute-Provence (04)"><path d="M 564.5316 545.6219 571.255 543.6284 579.7068 529.0069 588.6794 522.169 595.2682 529.3087 600.5689 522.6627 602.2449 517.9109 610.4975 523.4138 618.1141 523.2178 620.6958 516.4102 625.223 511.73 635.22 505.8988 634.6643 512.4126 630.4429 515.8817 632.9773 524.6566 632.9187 529.3073 628.5505 532.0023 624.0514 538.5737 622.256 545.2305 626.4827 551.9744 626.1138 555.0187 632.2435 561.6514 628.7217 567.4308 624.2649 569.8319 620.7422 575.3176 614.2846 574.2259 608.5244 575.7853 606.4106 580.2764 596.4888 575.5578 592.5038 580.5826 586.5172 584.3069 580.9992 581.8683 570.4578 582.078 564.2914 574.6915 559.7043 574.4392 559.8656 567.7295 555.525 564.4861 557.4145 558.9906 554.6342 551.9309 558.8633 546.0827 564.5316 545.6219 Z"/><text x="595.5" y="544.4">04</text></g>
+<g class="dept" data-dept="83" tabindex="0" role="button" aria-label="Var (83)"><path d="M 570.2491 582.4646 570.4578 582.078 580.9992 581.8683 586.5172 584.3069 592.5038 580.5826 596.4888 575.5578 606.4106 580.2764 608.5244 575.7853 614.2846 574.2259 620.7422 575.3176 622.2982 578.501 627.6538 578.898 628.3665 584.7032 630.9556 587.7038 637.0715 589.6079 635.6384 594.9491 639.0115 598.9438 635.0115 604.2852 627.8671 605.1881 626.7306 610.2948 619.9173 615.5506 624.3658 618.6349 622.2009 624.8201 618.6433 623.0337 614.797 626.203 597.9332 629.7232 593.6834 632.9138 589.3034 632.9886 582.4352 630.1168 578.1387 635.9042 575.1877 630.7438 567.025 625.8355 567.6114 621.3137 571.6409 617.3901 567.1439 614.6379 567.0594 608.405 570.8953 605.4679 567.791 601.4853 569.0454 596.4308 566.3919 591.6309 572.9769 587.4384 570.2491 582.4646 Z"/><text x="600.9" y="604.7">83</text></g></svg>
 
-                        <g class="dept" data-dept="30">
-                            <path d="M38 108 L112 120 L145 190 L110 226 L82 292 L48 275 Q18 235 24 172 Z"></path>
-                            <text x="76" y="198">30</text>
-                        </g>
-
-                        <g class="dept active" data-dept="84">
-                            <path d="M112 120 L190 110 L232 143 L232 214 L206 246 L138 248 L145 190 Z"></path>
-                            <text x="165" y="187">84</text>
-                        </g>
-
-                        <g class="dept" data-dept="13">
-                            <path d="M138 248 L206 246 L218 264 L244 264 L236 310 L186 304 L145 330 L84 292 L110 226 Z"></path>
-                            <text x="160" y="291">13</text>
-                        </g>
-
-                        <g class="dept" data-dept="05">
-                            <path d="M226 30 L312 52 L348 92 L316 158 L254 148 L214 108 Z"></path>
-                            <text x="275" y="97">05</text>
-                        </g>
-
-                        <g class="dept" data-dept="04">
-                            <path d="M190 110 L254 148 L316 158 L350 230 L308 260 L250 268 L232 214 L232 143 Z"></path>
-                            <text x="278" y="212">04</text>
-                        </g>
-
-                        <g class="dept" data-dept="83">
-                            <path d="M236 310 L244 264 L250 268 L308 260 L335 288 C350 312 326 344 296 348 L218 330 Z"></path>
-                            <text x="272" y="315">83</text>
-                        </g>
-                    </svg>
-
-                    <div class="map-info" id="map-info">Vaucluse (84)</div>
+                    <div class="map-info" id="map-info" aria-live="polite">Vaucluse (84)</div>
                 </div>
             </div>
         </article>
@@ -299,11 +252,12 @@ window.apsiPageReady(function() {
     };
 
     const mapInfo = document.getElementById('map-info');
-    const targets = document.querySelectorAll('.dept, .dept-list li');
+    const targets = document.querySelectorAll('.dept, .dept-list button');
 
     function setActive(code) {
-        document.querySelectorAll('.dept, .dept-list li').forEach((el) => {
+        document.querySelectorAll('.dept, .dept-list button').forEach((el) => {
             el.classList.toggle('active', el.dataset.dept === code);
+            el.setAttribute('aria-pressed', String(el.dataset.dept === code));
         });
 
         if (mapInfo) {
@@ -311,11 +265,16 @@ window.apsiPageReady(function() {
         }
     }
 
+    setActive('84');
     targets.forEach((el) => {
         el.addEventListener('mouseenter', () => setActive(el.dataset.dept));
         el.addEventListener('focus', () => setActive(el.dataset.dept));
         el.addEventListener('click', () => setActive(el.dataset.dept));
         el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        el.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActive(el.dataset.dept); }
+        });
     });
 });
 </script>

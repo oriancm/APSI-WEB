@@ -1,5 +1,6 @@
 <?php
 require('admin/db.php');
+require_once __DIR__ . '/functions/images.php';
 
 $id = $_GET['id'] ?? null;
 
@@ -38,60 +39,60 @@ function getThePic($db, $idR) {
     if (empty($pics) && $db instanceof NullDb) {
         $allPics = [
             1 => [
-                'amenagement_de_la_place_jean_jaures_1.avif',
-                'amenagement_de_la_place_jean_jaures_2.avif',
-                'amenagement_de_la_place_jean_jaures_3.avif',
-                'amenagement_de_la_place_jean_jaures_4.avif'
+                'amenagement_de_la_place_jean_jaures_1.webp',
+                'amenagement_de_la_place_jean_jaures_2.webp',
+                'amenagement_de_la_place_jean_jaures_3.webp',
+                'amenagement_de_la_place_jean_jaures_4.webp'
             ],
             2 => [
-                'centre_culturel_simone_signoret_1.avif',
-                'centre_culturel_simone_signoret_2.avif',
-                'centre_culturel_simone_signoret_3.avif',
-                'centre_culturel_simone_signoret_4.avif',
-                'centre_culturel_simone_signoret_5.avif',
-                'centre_culturel_simone_signoret_6.avif',
-                'centre_culturel_simone_signoret_7.avif'
+                'centre_culturel_simone_signoret_1.webp',
+                'centre_culturel_simone_signoret_2.webp',
+                'centre_culturel_simone_signoret_3.webp',
+                'centre_culturel_simone_signoret_4.webp',
+                'centre_culturel_simone_signoret_5.webp',
+                'centre_culturel_simone_signoret_6.webp',
+                'centre_culturel_simone_signoret_7.webp'
             ],
             3 => [
-                'l_hotel_des_monnaies_niel_1.avif',
-                'l_hotel_des_monnaies_niel_2.avif',
-                'l_hotel_des_monnaies_niel_3.avif',
-                'l_hotel_des_monnaies_niel_4.avif',
-                'l_hotel_des_monnaies_niel_5.avif',
-                'l_hotel_des_monnaies_niel_6.avif',
-                'l_hotel_des_monnaies_niel_7.avif',
-                'l_hotel_des_monnaies_niel_8.avif',
-                'l_hotel_des_monnaies_niel_9.avif'
+                'l_hotel_des_monnaies_niel_1.webp',
+                'l_hotel_des_monnaies_niel_2.webp',
+                'l_hotel_des_monnaies_niel_3.webp',
+                'l_hotel_des_monnaies_niel_4.webp',
+                'l_hotel_des_monnaies_niel_5.webp',
+                'l_hotel_des_monnaies_niel_6.webp',
+                'l_hotel_des_monnaies_niel_7.webp',
+                'l_hotel_des_monnaies_niel_8.webp',
+                'l_hotel_des_monnaies_niel_9.webp'
             ],
             4 => [
-                'residence_l_aygues_1.avif'
+                'residence_l_aygues_1.webp'
             ],
             5 => [
-                'refectoire_de_coudoux_1.avif',
-                'refectoire_de_coudoux_2.avif',
-                'refectoire_de_coudoux_3.avif',
-                'refectoire_de_coudoux_4.avif',
-                'refectoire_de_coudoux_5.avif',
-                'refectoire_de_coudoux_6.avif',
-                'refectoire_de_coudoux_7.avif'
+                'refectoire_de_coudoux_1.webp',
+                'refectoire_de_coudoux_2.webp',
+                'refectoire_de_coudoux_3.webp',
+                'refectoire_de_coudoux_4.webp',
+                'refectoire_de_coudoux_5.webp',
+                'refectoire_de_coudoux_6.webp',
+                'refectoire_de_coudoux_7.webp'
             ],
             6 => [
-                'rehabilitation_du_college_paul_cezanne_1.avif',
-                'rehabilitation_du_college_paul_cezanne_2.avif',
-                'rehabilitation_du_college_paul_cezanne_3.avif',
-                'rehabilitation_du_college_paul_cezanne_4.avif',
-                'rehabilitation_du_college_paul_cezanne_5.avif',
-                'rehabilitation_du_college_paul_cezanne_6.avif'
+                'rehabilitation_du_college_paul_cezanne_1.webp',
+                'rehabilitation_du_college_paul_cezanne_2.webp',
+                'rehabilitation_du_college_paul_cezanne_3.webp',
+                'rehabilitation_du_college_paul_cezanne_4.webp',
+                'rehabilitation_du_college_paul_cezanne_5.webp',
+                'rehabilitation_du_college_paul_cezanne_6.webp'
             ],
             7 => [
-                'residence_les_angevines_1.avif',
-                'residence_les_angevines_2.avif',
-                'residence_les_angevines_3.avif',
-                'residence_les_angevines_4.avif',
-                'residence_les_angevines_5.avif',
-                'residence_les_angevines_6.avif',
-                'residence_les_angevines_7.avif',
-                'residence_les_angevines_8.avif'
+                'residence_les_angevines_1.webp',
+                'residence_les_angevines_2.webp',
+                'residence_les_angevines_3.webp',
+                'residence_les_angevines_4.webp',
+                'residence_les_angevines_5.webp',
+                'residence_les_angevines_6.webp',
+                'residence_les_angevines_7.webp',
+                'residence_les_angevines_8.webp'
             ]
         ];
         $list = $allPics[(int)$idR] ?? [];
@@ -99,9 +100,9 @@ function getThePic($db, $idR) {
         foreach ($list as $idx => $pic) {
             $out[] = ['id' => $idx + 1, 'idR' => $idR, 'titre' => $pic, 'orderPic' => $idx + 1];
         }
-        return $out;
+        return apsiWebpPhotos($out);
     }
-    return $pics;
+    return apsiWebpPhotos($pics);
 }
 
 function getSameDomainReferences($db, $domaine, $currentId) {
@@ -125,60 +126,60 @@ function getAllPics($db): array {
     if (empty($pics) && $db instanceof NullDb) {
         $allPics = [
             1 => [
-                'amenagement_de_la_place_jean_jaures_1.avif',
-                'amenagement_de_la_place_jean_jaures_2.avif',
-                'amenagement_de_la_place_jean_jaures_3.avif',
-                'amenagement_de_la_place_jean_jaures_4.avif'
+                'amenagement_de_la_place_jean_jaures_1.webp',
+                'amenagement_de_la_place_jean_jaures_2.webp',
+                'amenagement_de_la_place_jean_jaures_3.webp',
+                'amenagement_de_la_place_jean_jaures_4.webp'
             ],
             2 => [
-                'centre_culturel_simone_signoret_1.avif',
-                'centre_culturel_simone_signoret_2.avif',
-                'centre_culturel_simone_signoret_3.avif',
-                'centre_culturel_simone_signoret_4.avif',
-                'centre_culturel_simone_signoret_5.avif',
-                'centre_culturel_simone_signoret_6.avif',
-                'centre_culturel_simone_signoret_7.avif'
+                'centre_culturel_simone_signoret_1.webp',
+                'centre_culturel_simone_signoret_2.webp',
+                'centre_culturel_simone_signoret_3.webp',
+                'centre_culturel_simone_signoret_4.webp',
+                'centre_culturel_simone_signoret_5.webp',
+                'centre_culturel_simone_signoret_6.webp',
+                'centre_culturel_simone_signoret_7.webp'
             ],
             3 => [
-                'l_hotel_des_monnaies_niel_1.avif',
-                'l_hotel_des_monnaies_niel_2.avif',
-                'l_hotel_des_monnaies_niel_3.avif',
-                'l_hotel_des_monnaies_niel_4.avif',
-                'l_hotel_des_monnaies_niel_5.avif',
-                'l_hotel_des_monnaies_niel_6.avif',
-                'l_hotel_des_monnaies_niel_7.avif',
-                'l_hotel_des_monnaies_niel_8.avif',
-                'l_hotel_des_monnaies_niel_9.avif'
+                'l_hotel_des_monnaies_niel_1.webp',
+                'l_hotel_des_monnaies_niel_2.webp',
+                'l_hotel_des_monnaies_niel_3.webp',
+                'l_hotel_des_monnaies_niel_4.webp',
+                'l_hotel_des_monnaies_niel_5.webp',
+                'l_hotel_des_monnaies_niel_6.webp',
+                'l_hotel_des_monnaies_niel_7.webp',
+                'l_hotel_des_monnaies_niel_8.webp',
+                'l_hotel_des_monnaies_niel_9.webp'
             ],
             4 => [
-                'residence_l_aygues_1.avif'
+                'residence_l_aygues_1.webp'
             ],
             5 => [
-                'refectoire_de_coudoux_1.avif',
-                'refectoire_de_coudoux_2.avif',
-                'refectoire_de_coudoux_3.avif',
-                'refectoire_de_coudoux_4.avif',
-                'refectoire_de_coudoux_5.avif',
-                'refectoire_de_coudoux_6.avif',
-                'refectoire_de_coudoux_7.avif'
+                'refectoire_de_coudoux_1.webp',
+                'refectoire_de_coudoux_2.webp',
+                'refectoire_de_coudoux_3.webp',
+                'refectoire_de_coudoux_4.webp',
+                'refectoire_de_coudoux_5.webp',
+                'refectoire_de_coudoux_6.webp',
+                'refectoire_de_coudoux_7.webp'
             ],
             6 => [
-                'rehabilitation_du_college_paul_cezanne_1.avif',
-                'rehabilitation_du_college_paul_cezanne_2.avif',
-                'rehabilitation_du_college_paul_cezanne_3.avif',
-                'rehabilitation_du_college_paul_cezanne_4.avif',
-                'rehabilitation_du_college_paul_cezanne_5.avif',
-                'rehabilitation_du_college_paul_cezanne_6.avif'
+                'rehabilitation_du_college_paul_cezanne_1.webp',
+                'rehabilitation_du_college_paul_cezanne_2.webp',
+                'rehabilitation_du_college_paul_cezanne_3.webp',
+                'rehabilitation_du_college_paul_cezanne_4.webp',
+                'rehabilitation_du_college_paul_cezanne_5.webp',
+                'rehabilitation_du_college_paul_cezanne_6.webp'
             ],
             7 => [
-                'residence_les_angevines_1.avif',
-                'residence_les_angevines_2.avif',
-                'residence_les_angevines_3.avif',
-                'residence_les_angevines_4.avif',
-                'residence_les_angevines_5.avif',
-                'residence_les_angevines_6.avif',
-                'residence_les_angevines_7.avif',
-                'residence_les_angevines_8.avif'
+                'residence_les_angevines_1.webp',
+                'residence_les_angevines_2.webp',
+                'residence_les_angevines_3.webp',
+                'residence_les_angevines_4.webp',
+                'residence_les_angevines_5.webp',
+                'residence_les_angevines_6.webp',
+                'residence_les_angevines_7.webp',
+                'residence_les_angevines_8.webp'
             ]
         ];
         $out = [];
@@ -187,9 +188,9 @@ function getAllPics($db): array {
                 $out[] = ['idR' => $idR, 'titre' => $pic, 'orderPic' => $idx + 1];
             }
         }
-        return $out;
+        return apsiWebpPhotos($out);
     }
-    return $pics;
+    return apsiWebpPhotos($pics);
 }
 
 function formatNumber($number) {
@@ -233,7 +234,8 @@ function statutLabel($statut): string {
 
 $ref = getTheRef($db, $id);
 if (!$ref) {
-    header('Location: /references');
+    http_response_code(404);
+    require __DIR__ . '/404.php';
     exit;
 }
 
@@ -284,8 +286,8 @@ $activePage = 'references';
     <meta property="og:url" content="https://apsi-btp.fr/reference/<?= (int)$id ?>">
     <meta property="og:title" content="<?= htmlspecialchars($ref['titre']) ?> - APSI BTP">
     <meta property="og:description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune'] ?? '') ?>.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.webp">
+    <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="1146">
     <meta property="og:image:height" content="652">
     <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
@@ -294,7 +296,7 @@ $activePage = 'references';
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?= htmlspecialchars($ref['titre']) ?> - APSI BTP">
     <meta name="twitter:description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune'] ?? '') ?>.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.webp">
     <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Favicons & Manifest -->
@@ -308,41 +310,22 @@ $activePage = 'references';
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     <!-- Fonts Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
-        <?php
-    if (!function_exists('apsi_minify_css')) {
-        function apsi_minify_css($path) {
-            if (!file_exists($path)) return '';
-            $css = file_get_contents($path);
-            // Remove CSS comments
-            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
-            // Remove space around braces, colons, semi-colons
-            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
-            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
-            return $css;
-        }
-    }
-    ?>
-    <style>
-        <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/reference.css'); ?>
-    </style>
+        <?php require_once __DIR__ . '/functions/assets.php'; ?>
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/reference.css') ?>">
     
     <!-- Fonts Preload -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
-    </noscript>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="/js/navigation.js"></script>
-    <script src="/js/site.js" defer></script>
+    <link rel="stylesheet" href="<?= apsiAsset('/css/fonts.css') ?>">
+    <script src="<?= apsiAsset('/js/icons.min.js') ?>" defer></script>
+    <script src="<?= apsiAsset('/js/navigation.js') ?>"></script>
+    <script src="<?= apsiAsset('/js/site.js') ?>" defer></script>
+    <?php include __DIR__ . '/partials/seo.php'; ?>
 </head>
 <body class="reference-page">
-    <main class="reference-shell site-shell-bg">
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <main id="main" tabindex="-1" class="reference-shell site-shell-bg">
         <div class="reference-top-gradient-wrapper">
             <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
@@ -377,13 +360,13 @@ $activePage = 'references';
                             <?php
                             $main_pic_clean = htmlspecialchars($mainPic);
                             $img_basename = pathinfo($mainPic, PATHINFO_FILENAME);
-                            $mobile_main_path = "pic/mobile/" . $img_basename . ".avif";
+                            $mobile_main_path = "pic/mobile/" . $img_basename . ".webp";
                             $has_mobile_main = file_exists(__DIR__ . '/' . $mobile_main_path);
                             $initial_mobile_srcset = $has_mobile_main ? '/' . $mobile_main_path : '/pic/' . $main_pic_clean;
                             ?>
                             <picture>
                                 <source id="main-reference-source" media="(max-width: 980px)" srcset="<?= $initial_mobile_srcset ?>">
-                                <img id="main-reference-image" src="/pic/<?= $main_pic_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune'] ?? '') ?> - APSI BTP" fetchpriority="high">
+                                <img <?= apsiImageSize($mainPic) ?> id="main-reference-image" src="/pic/<?= $main_pic_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune'] ?? '') ?> - APSI BTP" fetchpriority="high">
                             </picture>
 
                             <button type="button" class="gallery-arrow gallery-arrow--right" aria-label="Image suivante">
@@ -408,7 +391,7 @@ $activePage = 'references';
                                 <?php
                                 $pic_name = htmlspecialchars($pic['titre']);
                                 $thumb_basename = pathinfo($pic['titre'], PATHINFO_FILENAME);
-                                $mobile_pic_path = "pic/mobile/" . $thumb_basename . ".avif";
+                                $mobile_pic_path = "pic/mobile/" . $thumb_basename . ".webp";
                                 $has_mobile_pic = file_exists(__DIR__ . '/' . $mobile_pic_path);
                                 $mobile_src = $has_mobile_pic ? '/' . $mobile_pic_path : '/pic/' . $pic_name;
                                 ?>
@@ -494,9 +477,9 @@ $activePage = 'references';
                                 <a href="/reference/<?= htmlspecialchars($sameRef['id']) ?>" aria-label="<?= htmlspecialchars($sameRef['titre']) ?>"></a>
                                 <?php if ($img): ?>
                                     <?php
-                                    $same_img_clean = htmlspecialchars($img);
+                                    $same_img_clean = htmlspecialchars(apsiCardImage($img));
                                     $same_basename = pathinfo($img, PATHINFO_FILENAME);
-                                    $same_mobile_path = "pic/mobile/" . $same_basename . ".avif";
+                                    $same_mobile_path = "pic/cards/" . $same_basename . ".webp";
                                     $same_has_mobile = file_exists(__DIR__ . '/' . $same_mobile_path);
                                     ?>
                                     <?php if ($same_has_mobile): ?>

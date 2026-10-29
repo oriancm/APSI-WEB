@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     if (isset($fileMap[$fileName]) && $fileMap[$fileName]['error'] === 0) {
                         $pic = $fileMap[$fileName];
                         $extPic = pathinfo($pic['name'], PATHINFO_EXTENSION);
-                        $extValid = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
+                        $extValid = ['jpg', 'jpeg', 'png', 'webp'];
                         $localPath = __DIR__ . '/../pic/';
                         // Vérifier si le dossier existe, sinon le créer
                         if (!is_dir($localPath)) {
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         
                         // Vérifier si le fichier existe déjà et ajouter un suffixe si nécessaire
                         $counter = 1;
-                        while (file_exists($uploadPath)) {
+                        while (file_exists($uploadPath) || file_exists($localPath . pathinfo($final_name, PATHINFO_FILENAME) . '.webp')) {
                             $final_name = $name_without_ext . '_' . $counter . '.' . $ext_normalized;
                             $uploadPath = $localPath . $final_name;
                             $counter++;
@@ -132,7 +132,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
                         if (in_array(strtolower($extPic), array_map('strtolower', $extValid)) && move_uploaded_file($pic['tmp_name'], $uploadPath)) {
                             // Automatically compress image and generate card thumbnail
-                            optimizeUploadedImage($uploadPath);
+                            $optimized = optimizeUploadedImage($uploadPath);
+                            if (!$optimized) {
+                                @unlink($uploadPath);
+                                $imageErrors[] = "Conversion WebP impossible pour " . htmlspecialchars($pic['name']);
+                                continue;
+                            }
+                            $final_name = basename($optimized);
+                            $relativePath = 'pic/' . $final_name;
                             
                             $sql = "INSERT INTO photo (titre, dir, idR, orderPic) VALUES (?, ?, ?, ?)";
                             $stmt = $db->prepare($sql);
@@ -257,7 +264,7 @@ function dernierChantier($db) {
             <ul class="text-sm text-red-600 mt-2 list-disc list-inside">
                 <li><strong>Titre</strong> : Nom du chantier/projet</li>
                 <li><strong>Commune</strong> : Lieu du projet (sélectionner dans la liste)</li>
-                <li><strong>Images</strong> : Au moins une image est requise (formats JPEG, PNG)</li>
+                <li><strong>Images</strong> : Au moins une image est requise (formats JPEG, PNG, WebP)</li>
             </ul>
         </div>
 
@@ -357,8 +364,8 @@ function dernierChantier($db) {
             </div>
             <div class="mb-4">
                 <label for="image-upload" class="text-sm font-medium text-gray-700 mb-1">Images  <span class="text-red-500">*</span></label>
-                <input type="file" id="image-upload" name="images[]" multiple accept="image/jpeg,image/png" required class="mt-1 block w-full <?php echo isset($errorsValidation['images']) ? 'border-red-500' : ''; ?>">
-                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG (JPG, jpg, PNG, png). Limite : 100MB par fichier, 400MB au total. Faites glisser les images pour changer l'ordre</p>
+                <input type="file" id="image-upload" name="images[]" multiple accept="image/jpeg,image/png,image/webp" required class="mt-1 block w-full <?php echo isset($errorsValidation['images']) ? 'border-red-500' : ''; ?>">
+                <p class="text-sm text-gray-500">Formats acceptés : JPEG, PNG et WebP. Conversion automatique en WebP optimisé. Limite : 100MB par fichier, 400MB au total. Faites glisser les images pour changer l'ordre</p>
                 <div id="image-container" class="image-container mb-4 flex flex-wrap mt-2 border border-gray-300 p-4 rounded">
                     <p id="no-images" class="text-gray-400 w-full text-center">Aucune image sélectionnée</p>
                 </div>
@@ -442,8 +449,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Vérifier le type MIME ET l'extension du fichier
                 const fileName = file.name.toLowerCase();
-                const isValidType = file.type.match('image/jpeg') || file.type.match('image/png');
-                const isValidExtension = fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png');
+                const isValidType = file.type.match('image/jpeg') || file.type.match('image/png') || file.type.match('image/webp');
+                const isValidExtension = fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png') || fileName.endsWith('.webp');
                 
                 if (isValidType || isValidExtension) {
                     const reader = new FileReader();
@@ -463,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     };
                     reader.readAsDataURL(file);
                 } else {
-                    alert(`Erreur : Le fichier "${file.name}" n'est pas un format d'image valide (JPG, JPEG ou PNG uniquement)`);
+                    alert(`Erreur : Le fichier "${file.name}" n'est pas un format d'image valide (JPG, JPEG, PNG ou WebP uniquement)`);
                     processedCount++;
                     if (processedCount === totalFiles) {
                         displayImages();

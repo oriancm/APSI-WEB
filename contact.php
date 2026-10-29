@@ -84,8 +84,8 @@ $activePage = 'contact';
     <meta property="og:url" content="https://apsi-btp.fr/contact">
     <meta property="og:title" content="Nous Contacter - APSI BTP">
     <meta property="og:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.webp">
+    <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="1146">
     <meta property="og:image:height" content="652">
     <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
@@ -94,7 +94,7 @@ $activePage = 'contact';
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nous Contacter - APSI BTP">
     <meta name="twitter:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.webp">
     <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Schema.org ContactPage JSON-LD -->
@@ -108,8 +108,8 @@ $activePage = 'contact';
       "mainEntity": {
         "@type": "LocalBusiness",
         "name": "APSI BTP",
-        "logo": "https://apsi-btp.fr/img/logo-nav.png",
-        "image": "https://apsi-btp.fr/img/logo-nav.png",
+        "logo": "https://apsi-btp.fr/img/logo-nav.webp",
+        "image": "https://apsi-btp.fr/img/logo-nav.webp",
         "email": "info@apsi-btp.fr",
         "address": {
           "@type": "PostalAddress",
@@ -132,40 +132,21 @@ $activePage = 'contact';
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     <!-- Fonts Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <!-- Stylesheets (Inlined dynamically via PHP to prevent FOUC & maximize mobile performance) -->
-        <?php
-    if (!function_exists('apsi_minify_css')) {
-        function apsi_minify_css($path) {
-            if (!file_exists($path)) return '';
-            $css = file_get_contents($path);
-            // Remove CSS comments
-            $css = preg_replace('!/\*[^*]*\*+([^/*][^*]*\*+)*/!', '', $css);
-            // Remove space around braces, colons, semi-colons
-            $css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    '), '', $css);
-            $css = preg_replace('/(\s*([:;{}])\s*)/', '$2', $css);
-            return $css;
-        }
-    }
-    ?>
-    <style>
-        <?= apsi_minify_css(__DIR__ . '/css/site.css'); ?>
-        <?= apsi_minify_css(__DIR__ . '/css/contact.css'); ?>
-    </style>
+        <?php require_once __DIR__ . '/functions/assets.php'; ?>
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/contact.css') ?>">
     
     <!-- Fonts Preload -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
-    </noscript>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="/js/navigation.js"></script>
-    <script src="/js/site.js" defer></script>
+    <link rel="stylesheet" href="<?= apsiAsset('/css/fonts.css') ?>">
+    <script src="<?= apsiAsset('/js/icons.min.js') ?>" defer></script>
+    <script src="<?= apsiAsset('/js/navigation.js') ?>"></script>
+    <script src="<?= apsiAsset('/js/site.js') ?>" defer></script>
+    <?php include __DIR__ . '/partials/seo.php'; ?>
 </head>
 <body class="contact-body">
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-container">
             <div class="loading-spinner"></div>
@@ -173,12 +154,12 @@ $activePage = 'contact';
         </div>
     </div>
 
-    <main id="main" class="contact-page hidden-until-loaded">
+    <main id="main" tabindex="-1" class="contact-page hidden-until-loaded">
         <?php include __DIR__ . '/partials/siteHeader.php'; ?>
 
         <section class="contact-hero" aria-labelledby="contact-title">
             <div class="contact-scene">
-                <img class="contact-scene__image" src="/img/home-crane-original.webp" alt="Grue et bâtiment en construction">
+                <img width="1200" height="400" class="contact-scene__image" src="/img/contact-crane.webp" alt="Grue et bâtiment en construction">
                 <div class="contact-details">
                     <a href="mailto:info@apsi-btp.fr"><i data-lucide="mail" aria-hidden="true"></i><strong>info@apsi-btp.fr</strong></a>
                     <p><i data-lucide="map-pin" aria-hidden="true"></i><span>84750 Caseneuve</span></p>
@@ -193,26 +174,26 @@ $activePage = 'contact';
 
             <form action="/contact" method="POST" id="contactForm" class="contact-form">
                 <?php if (isset($form_error)) : ?>
-                    <p class="form-error"><?php echo htmlspecialchars($form_error); ?></p>
+                    <p class="form-error" role="alert"><?php echo htmlspecialchars($form_error); ?></p>
                 <?php endif; ?>
 
                 <div class="contact-form-group">
                 <label for="fname">Nom Prénom</label>
                 <div class="field">
                     <i data-lucide="user-round" aria-hidden="true"></i>
-                    <input type="text" id="fname" name="name" placeholder="Ex : MARTY Paul" value="<?php echo isset($name) ? htmlspecialchars($name) : '' ?>">
+                    <input type="text" id="fname" name="name" autocomplete="name" required placeholder="Ex : MARTY Paul" value="<?php echo isset($name) ? htmlspecialchars($name) : '' ?>">
                 </div>
                 </div>
                 <div class="contact-form-group">
                 <label for="sujet">Objet</label>
                 <div class="field">
                     <i data-lucide="clipboard-list" aria-hidden="true"></i>
-                    <input type="text" id="sujet" name="objet" placeholder="Ex : Demande d'information" value="<?php echo isset($objet) ? htmlspecialchars($objet) : '' ?>">
+                    <input type="text" id="sujet" name="objet" required placeholder="Ex : Demande d'information" value="<?php echo isset($objet) ? htmlspecialchars($objet) : '' ?>">
                 </div>
                 </div>
                 <div class="contact-form-group contact-form-group--message">
                 <label for="subject">Message</label>
-                <textarea id="subject" name="message" placeholder="Votre message..."><?php echo isset($message) ? htmlspecialchars($message) : '' ?></textarea>
+                <textarea id="subject" name="message" required placeholder="Votre message..."><?php echo isset($message) ? htmlspecialchars($message) : '' ?></textarea>
                 </div>
                 <div class="contact-form-footer">
                     <button type="submit" id="submitBtn">

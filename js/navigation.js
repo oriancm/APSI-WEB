@@ -33,12 +33,27 @@
                 .map(async script => {
                     if (!script.src) return script.textContent;
                     const source = new URL(script.getAttribute('src'), response.url);
-                    if (source.origin !== location.origin || source.pathname !== '/js/references.js') throw new Error('Unsupported page script');
+                    if (source.origin !== location.origin || !['/js/references.js', '/js/references.min.js'].includes(source.pathname)) throw new Error('Unsupported page script');
                     const result = await fetch(source, { signal: pendingRequest.signal });
                     if (!result.ok) throw new Error('Missing page script');
                     return result.text();
                 }));
             if (id !== navigationId) return;
+
+            // Keep shared fonts and libraries; update page styles and search metadata.
+            const pageHead = 'link[data-apsi-style], style, meta[name="description"], meta[name="keywords"], meta[property], meta[name^="twitter:"], link[rel="canonical"], script[type="application/ld+json"]';
+            const previousHead = [...document.head.querySelectorAll(pageHead)];
+            const nextHead = [...next.head.querySelectorAll(pageHead)];
+            await Promise.all(nextHead.map(node => new Promise(resolve => {
+                if (node.matches('link[rel="stylesheet"]')) { node.onload = resolve; node.onerror = resolve; }
+                document.head.append(node);
+                if (!node.matches('link[rel="stylesheet"]')) resolve();
+            })));
+            if (id !== navigationId) {
+                nextHead.forEach(node => node.remove());
+                return;
+            }
+            previousHead.forEach(node => node.remove());
 
             pageController.abort();
             pageController = new AbortController();
@@ -55,10 +70,6 @@
             const footer = document.querySelector('.site-footer');
             if (footer && next.querySelector('.site-footer')) next.querySelector('.site-footer').replaceWith(footer);
 
-            // Keep shared fonts and libraries; update page styles and search metadata.
-            const pageHead = 'style, meta[name="description"], meta[name="keywords"], meta[property], meta[name^="twitter:"], link[rel="canonical"], script[type="application/ld+json"]';
-            document.head.querySelectorAll(pageHead).forEach(node => node.remove());
-            next.head.querySelectorAll(pageHead).forEach(node => document.head.append(node));
             document.title = next.title;
             next.body.querySelectorAll('script').forEach(script => script.remove());
             document.body.className = next.body.className;

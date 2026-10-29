@@ -38,3 +38,6 @@ vendor/
 # Fichiers de cache
 .cache/
 *.cache 
+
+# Local audit reports and design previews
+output/

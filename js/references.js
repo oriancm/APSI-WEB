@@ -6,17 +6,28 @@ window.apsiPageReady(() => {
         const slides = [...carousel.querySelectorAll('.references-carousel__slide')];
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const compactScreen = window.matchMedia('(max-width: 980px)');
+        let paused = false;
+        const pause = carousel.querySelector('.references-carousel__pause');
         let current = 0;
         let timer;
         const start = () => {
             window.clearInterval(timer);
-            if (slides.length < 2 || document.hidden || reducedMotion.matches || compactScreen.matches ||
+            if (paused || slides.length < 2 || document.hidden || reducedMotion.matches || compactScreen.matches ||
                 carousel.contains(document.activeElement)) return;
             timer = window.setInterval(() => {
                 current = (current + 1) % slides.length;
                 slides.forEach((slide, index) => { slide.hidden = index !== current; });
             }, 4000);
         };
+        pause?.addEventListener('click', () => {
+            paused = !paused;
+            pause.setAttribute('aria-pressed', String(paused));
+            pause.textContent = paused ? 'Reprendre' : 'Pause';
+            pause.setAttribute('aria-label', paused ? 'Reprendre le carrousel' : 'Mettre le carrousel en pause');
+            start();
+        }, { signal });
+        carousel.addEventListener('mouseenter', () => window.clearInterval(timer), { signal });
+        carousel.addEventListener('mouseleave', start, { signal });
         // Keep a focused project link stable and suspend unused background work.
         carousel.addEventListener('focusin', () => window.clearInterval(timer));
         carousel.addEventListener('focusout', () => window.setTimeout(() => { if (!signal.aborted) start(); }, 0));

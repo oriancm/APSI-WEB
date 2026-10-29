@@ -6,6 +6,19 @@ $path = $path === '/' ? '/' : rtrim($path, '/');
 
 $localFile = __DIR__ . str_replace('/', DIRECTORY_SEPARATOR, $path);
 
+if ($path === '/sitemap.xml') { require __DIR__ . '/sitemap.php'; return true; }
+if (preg_match('#^/(?:index(?:\.php)?|(?:aboutUs|professions|references|clients|contact|legalNotices|privacyPolicy)\.php)$#', $path) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    $target = preg_match('#^/index#', $path) ? '/' : substr($path, 0, -4);
+    header('Location: ' . $target . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']), true, 301);
+    return true;
+}
+if ($hasTrailingSlash && preg_match('#^/(?:aboutUs|professions|references|clients|contact|legalNotices|privacyPolicy|reference/[0-9]+)$#', $path)) {
+    header('Location: ' . $path . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']), true, 301);
+    return true;
+}
+if (in_array($path, ['/reference.php', '/reference'], true) && preg_match('/^[0-9]+$/', $_GET['id'] ?? '') && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: /reference/' . (int)$_GET['id'], true, 301); return true;
+}
 if ($path !== '/' && is_file($localFile)) {
     return false;
 }
@@ -48,5 +61,5 @@ if (preg_match('#^[a-zA-Z0-9_-]+$#', $cleanPath)) {
 }
 
 http_response_code(404);
-require __DIR__ . '/index.php';
+require __DIR__ . '/404.php';
 return true;

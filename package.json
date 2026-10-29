@@ -1,0 +1,6 @@
+{
+  "name": "apsi-web-assets",
+  "private": true,
+  "scripts": { "build": "node scripts/build-assets.cjs" },
+  "devDependencies": { "esbuild": "0.28.2", "lucide": "1.64.0" }
+}

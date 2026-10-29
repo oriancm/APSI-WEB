@@ -394,7 +394,7 @@ body.about-page {
 .about-card > p.experience-note {
     margin-top: 8px;
     margin-bottom: 18px;
-    color: rgba(6, 23, 51, 0.58);
+    color: #4a5a70;
     font-size: 13px;
     line-height: 1.5;
     text-align: left;
@@ -446,7 +446,7 @@ body.about-page {
     padding: 0 0 12px;
 }
 
-.dept-list li {
+.dept-list button {
     display: grid;
     grid-template-columns: 25px 1fr;
     align-items: center;
@@ -459,19 +459,19 @@ body.about-page {
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.dept-list li svg {
+.dept-list button svg {
     width: 23px;
     height: 23px;
     color: var(--apsi-navy);
 }
 
-.dept-list li b,
-.dept-list li.active {
+.dept-list button b,
+.dept-list button.active {
     color: var(--apsi-blue);
 }
 
-.dept-list li:hover,
-.dept-list li.active {
+.dept-list button:hover,
+.dept-list button.active {
     transform: translateX(4px);
 }
 
@@ -680,3 +680,16 @@ body.about-page {
         font-size: 16px;
     }
 }
+
+/* Geographical map supplied for the six departments. */
+.zone-layout { align-items: center; }
+.interactive-map { min-height: 0; padding: 20px 10px 58px; border: 1px solid #d4e7f8; border-radius: 12px; background: #eff7ff; }
+.interactive-map svg { height: auto; max-height: 430px; filter: none; }
+.interactive-map .dept path { fill: #8fbce5; stroke-width: 1.8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.interactive-map .dept:hover path, .interactive-map .dept.active path { transform: none; fill: var(--apsi-blue); }
+.interactive-map text { font: 700 9px Arial, sans-serif; fill: #183f6a; text-anchor: middle; dominant-baseline: central; paint-order: stroke; stroke: #e1f0ff; stroke-width: 1.7px; }
+.interactive-map .dept.active text, .interactive-map .dept:hover text { fill: white; stroke: none; }
+.dept:focus-visible, .dept-list button:focus-visible { outline: 3px solid #efad47; outline-offset: 3px; }
+
+.dept-list li { list-style: none; }
+.dept-list button { border: 0; background: transparent; padding: 0; text-align: left; font-family: inherit; min-height: 32px; }
