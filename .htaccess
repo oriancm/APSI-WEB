@@ -1,5 +1,10 @@
 RewriteEngine On
 
+# Compatibility folders share names with PHP routes; suppress mod_dir slash redirects.
+<IfModule mod_dir.c>
+    DirectorySlash Off
+</IfModule>
+
 # Never serve deployment instructions, credentials, source archives or audit outputs.
 RewriteRule ^(?:\.(?!well-known/)|output(?:/|$)|scripts?(?:/|$)|bdd(?:/|$)) - [F,L]
 <FilesMatch "(?i)(\.(md|sql|py|ya?ml|ini|sh|log|bak)$|^(package(?:-lock)?\.json|composer\.(json|lock))$)">
