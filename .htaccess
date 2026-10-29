@@ -11,6 +11,8 @@ RewriteRule ^(?:\.(?!well-known/)|output(?:/|$)|scripts?(?:/|$)|bdd(?:/|$)) - [F
     Require all denied
 </FilesMatch>
 
+RewriteRule ^admin$ /admin/ [R=301,L]
+
 # One public origin and one URL per page. POST requests keep their form body.
 RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\.apsi-btp\.fr$ [NC]
