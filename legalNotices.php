@@ -17,13 +17,18 @@
     <meta property="og:url" content="https://apsi-btp.fr/legalNotices">
     <meta property="og:title" content="Mentions Légales - APSI BTP">
     <meta property="og:description" content="Consultez les mentions légales de la société APSI BTP, éditeur du site et coordinateur d'ordonnancement de chantier.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.avif">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1146">
+    <meta property="og:image:height" content="652">
+    <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mentions Légales - APSI BTP">
     <meta name="twitter:description" content="Consultez les mentions légales de la société APSI BTP, éditeur du site.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.avif">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Favicons & Manifest -->
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">

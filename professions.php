@@ -8,6 +8,28 @@
 
     <title>Nos Métiers : OPC & MOEX - APSI BTP</title>
     <meta name="description" content="Découvrez les missions OPC et MOEX d'APSI BTP : coordination de chantier, planification, suivi d'exécution, réunions, OPR et levée des réserves.">
+    <meta name="keywords" content="APSI BTP, OPC, MOEX, ordonnancement pilotage coordination, maîtrise d'oeuvre d'exécution, coordination de chantier, OPR, levée des réserves, Provence, PACA">
+    <meta name="author" content="APSI BTP">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apsi-btp.fr/professions">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apsi-btp.fr/professions">
+    <meta property="og:title" content="Nos Métiers : OPC & MOEX - APSI BTP">
+    <meta property="og:description" content="Découvrez les missions OPC et MOEX d'APSI BTP : coordination de chantier, planification, suivi d'exécution, réunions, OPR et levée des réserves.">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1146">
+    <meta property="og:image:height" content="652">
+    <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nos Métiers : OPC & MOEX - APSI BTP">
+    <meta name="twitter:description" content="Découvrez les missions OPC et MOEX d'APSI BTP : coordination de chantier, planification, suivi d'exécution, réunions, OPR et levée des réserves.">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Favicons & Manifest -->
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">

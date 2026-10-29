@@ -284,13 +284,18 @@ $activePage = 'references';
     <meta property="og:url" content="https://apsi-btp.fr/reference/<?= (int)$id ?>">
     <meta property="og:title" content="<?= htmlspecialchars($ref['titre']) ?> - APSI BTP">
     <meta property="og:description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune'] ?? '') ?>.">
-    <meta property="og:image" content="https://apsi-btp.fr/pic/<?= htmlspecialchars($mainPic) ?>">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1146">
+    <meta property="og:image:height" content="652">
+    <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?= htmlspecialchars($ref['titre']) ?> - APSI BTP">
     <meta name="twitter:description" content="Découvrez le projet <?= htmlspecialchars($ref['titre']) ?> réalisé par APSI BTP à <?= htmlspecialchars($ref['commune'] ?? '') ?>.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/pic/<?= htmlspecialchars($mainPic) ?>">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Favicons & Manifest -->
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">

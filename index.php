@@ -17,13 +17,18 @@
     <meta property="og:url" content="https://apsi-btp.fr/">
     <meta property="og:title" content="APSI BTP - Vos projets en toute sérénité | Ordonnancement Pilotage Coordination">
     <meta property="og:description" content="APSI BTP, spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007.">
-    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.avif">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1146">
+    <meta property="og:image:height" content="652">
+    <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="APSI BTP - Vos projets en toute sérénité">
     <meta name="twitter:description" content="Spécialiste en Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007.">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.avif">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Schema.org JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -33,8 +38,8 @@
       "name": "APSI BTP",
       "alternateName": "Ordonnancement Pilotage Coordination BTP",
       "url": "https://apsi-btp.fr/",
-      "logo": "https://apsi-btp.fr/img/APSI.avif",
-      "image": "https://apsi-btp.fr/img/APSI.avif",
+      "logo": "https://apsi-btp.fr/img/logo-nav.png",
+      "image": "https://apsi-btp.fr/img/logo-nav.png",
       "description": "APSI BTP, spécialiste en Ordonnancement Pilotage et Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX) depuis 2007 en région Provence-Alpes-Côte d'Azur.",
       "foundingDate": "2007",
       "priceRange": "$$",

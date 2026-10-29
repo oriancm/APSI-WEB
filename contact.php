@@ -84,13 +84,18 @@ $activePage = 'contact';
     <meta property="og:url" content="https://apsi-btp.fr/contact">
     <meta property="og:title" content="Nous Contacter - APSI BTP">
     <meta property="og:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta property="og:image" content="https://apsi-btp.fr/img/APSI.avif">
+    <meta property="og:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1146">
+    <meta property="og:image:height" content="652">
+    <meta property="og:image:alt" content="APSI BTP - Coordination de travaux">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nous Contacter - APSI BTP">
     <meta name="twitter:description" content="Contactez-nous pour vos projets d'Ordonnancement Pilotage Coordination (OPC) et Maîtrise d'Oeuvre d'Exécution (MOEX).">
-    <meta name="twitter:image" content="https://apsi-btp.fr/img/APSI.avif">
+    <meta name="twitter:image" content="https://apsi-btp.fr/img/logo-nav.png">
+    <meta name="twitter:image:alt" content="APSI BTP - Coordination de travaux">
 
     <!-- Schema.org ContactPage JSON-LD -->
     <script type="application/ld+json">
@@ -103,6 +108,8 @@ $activePage = 'contact';
       "mainEntity": {
         "@type": "LocalBusiness",
         "name": "APSI BTP",
+        "logo": "https://apsi-btp.fr/img/logo-nav.png",
+        "image": "https://apsi-btp.fr/img/logo-nav.png",
         "email": "info@apsi-btp.fr",
         "address": {
           "@type": "PostalAddress",
