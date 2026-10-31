@@ -98,5 +98,18 @@ try {
         $options
     );
 } catch (Throwable $e) {
-    $db = new NullDb();
+    // Demo data must be explicitly enabled for local development.
+    // Production must never silently replace CRM data with hard-coded references.
+    if (envValue('APSI_ALLOW_DEMO_DATA', '0') === '1') {
+        $db = new NullDb();
+    } else {
+        error_log('APSI: production database unavailable (no demo fallback).');
+        if (PHP_SAPI === 'cli') {
+            throw new RuntimeException('Production database unavailable.');
+        }
+        http_response_code(503);
+        header('Content-Type: text/plain; charset=utf-8');
+        header('Retry-After: 60');
+        exit('Service temporairement indisponible. Merci de réessayer plus tard.');
+    }
 }
