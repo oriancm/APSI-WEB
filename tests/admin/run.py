@@ -50,7 +50,7 @@ class Fixture:
             shutil.copy2(path, self.root / path.name)
         (self.root / 'pic').mkdir()
         (self.root / 'img').mkdir()
-        for name in ['logo-nav.webp', 'logo-nav-white.webp']:
+        for name in ['logo-nav.webp', 'logo-nav-white.webp', 'logo-header.webp', 'logo-header-white.webp']:
             shutil.copy2(REPO / 'img' / name, self.root / 'img' / name)
         self.path = self.root / 'test.sqlite'
         self.password = 'Fixture-only-password-2026!'
