@@ -6,9 +6,10 @@ RewriteEngine On
 </IfModule>
 
 # Never serve deployment instructions, credentials, source archives or audit outputs.
-RewriteRule ^(?:\.(?!well-known/)|output(?:/|$)|scripts?(?:/|$)|bdd(?:/|$)|tests?(?:/|$)) - [F,L]
+RewriteRule ^(?:\.(?!well-known/)|output(?:/|$)|scripts?(?:/|$)|bdd(?:/|$)|tests?(?:/|$)|secrets(?:/|$)|backups(?:/|$)) - [F,L]
+RewriteRule (?:^|/)\.(?!well-known(?:/|$)) - [F,L]
 # Internal back-office modules are included by authenticated entry points only.
-RewriteRule ^admin/(?:bootstrap|layout|editor|reference_service|image_optimizer|php_upload_config|db)\.php$ - [F,L]
+RewriteRule ^admin/(?:bootstrap|layout|editor|reference_service|image_optimizer|php_upload_config|db)\.php(?:/|$) - [F,L]
 # Uploaded project photos must never execute scripts, even if a legacy upload exists.
 RewriteRule ^pic/.*\.(?:php[0-9]?|phtml|phar|cgi|pl|sh)(?:/|$) - [F,L,NC]
 <FilesMatch "(?i)(\.(md|sql|py|ya?ml|ini|sh|log|bak)$|^(package(?:-lock)?\.json|composer\.(json|lock))$)">

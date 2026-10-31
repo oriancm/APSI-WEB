@@ -130,7 +130,7 @@ class AdminHTTPTests(unittest.TestCase):
             response = requests.get(self.fixture.base + path, allow_redirects=False)
             self.assertEqual(response.status_code, 303, path)
             self.assertEqual(response.headers['Location'], '/admin/login.php')
-        for path in ['/admin/db.php', '/admin/editor.php', '/admin/bootstrap.php', '/admin/reference_service.php', '/.env', '/tests/test.php', '/pic/payload.php']:
+        for path in ['/admin/db.php', '/admin/db.php/extra', '/admin/editor.php/extra', '/admin/editor.php', '/admin/bootstrap.php', '/admin/reference_service.php', '/.env', '/admin/.env/extra', '/secrets/private-key', '/backups/db.serialized', '/tests/test.php', '/pic/payload.php']:
             self.assertEqual(self.get(path).status_code, 403, path)
         response = self.get('/admin/admin.php')
         self.assertEqual(response.headers['X-Frame-Options'], 'DENY')

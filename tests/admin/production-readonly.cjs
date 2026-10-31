@@ -16,7 +16,7 @@ const output = path.resolve('output/backoffice');
   page.on('console', message => {if (/Content Security Policy|Refused to/.test(message.text())) errors.push(message.text());});
   page.on('dialog', dialog => dialog.accept());
   try {
-    for (const url of ['/admin/db.php', '/admin/editor.php', '/admin/reference_service.php', '/.env', '/admin/.env', '/tests/admin/run.py']) {
+    for (const url of ['/secrets/private-key', '/backups/db.serialized', '/admin/.env/extra', '/admin/db.php/extra', '/admin/editor.php/extra', '/admin/db.php', '/admin/editor.php', '/admin/reference_service.php', '/.env', '/admin/.env', '/tests/admin/run.py']) {
       const response = await context.request.get(base + url, {maxRedirects: 0}); assert.equal(response.status(), 403, url);
     }
     await page.goto(base + '/admin/login.php');

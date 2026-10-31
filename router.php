@@ -7,8 +7,8 @@ $path = $path === '/' ? '/' : rtrim($path, '/');
 $localFile = __DIR__ . str_replace('/', DIRECTORY_SEPARATOR, $path);
 
 // Match Apache's production protections when running the local PHP server.
-if (preg_match('#(?:^|/)\.(?!well-known(?:/|$))|^/(?:output|scripts?|bdd|tests?|secrets)(?:/|$)#i', $path)
-    || preg_match('#^/admin/(?:bootstrap|layout|editor|reference_service|image_optimizer|php_upload_config|db)\.php$#', $path)
+if (preg_match('#(?:^|/)\.(?!well-known(?:/|$))|^/(?:output|scripts?|bdd|tests?|secrets|backups)(?:/|$)#i', $path)
+    || preg_match('#^/admin/(?:bootstrap|layout|editor|reference_service|image_optimizer|php_upload_config|db)\.php(?:/|$)#', $path)
     || preg_match('#^/pic/.*\.(?:php[0-9]?|phtml|phar|cgi|pl|sh)(?:/|$)#i', $path)
     || str_contains($path, '..')) {
     http_response_code(403);
