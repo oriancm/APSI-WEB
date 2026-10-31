@@ -2,10 +2,10 @@
 /** Encode validated uploads as WebP, including lightweight mobile and card copies.
  * Returns the saved WebP path, or false without publishing an unconverted image.
  */
-function optimizeUploadedImage($filePath) {
+function optimizeUploadedImage($filePath, ?string $destination = null) {
     if (!function_exists('imagewebp')) return false;
     $info = @getimagesize($filePath);
-    if (!$info || $info[0] * $info[1] > 40000000) return false;
+    if (!$info || $info[0] * $info[1] > 20000000) return false;
     $decoders = ['image/jpeg' => 'imagecreatefromjpeg', 'image/png' => 'imagecreatefrompng', 'image/webp' => 'imagecreatefromwebp'];
     $decoder = $decoders[$info['mime']] ?? null;
     if (!$decoder || !function_exists($decoder)) return false;
@@ -19,8 +19,8 @@ function optimizeUploadedImage($filePath) {
         $angle = [3 => 180, 4 => 180, 5 => 270, 6 => 270, 7 => 90, 8 => 90][$orientation] ?? 0;
         if ($angle) { $rotated = imagerotate($image, $angle, 0); imagedestroy($image); $image = $rotated; }
     }
-    $base = pathinfo($filePath, PATHINFO_FILENAME);
-    $directory = dirname($filePath);
+    $base = pathinfo($destination ?? $filePath, PATHINFO_FILENAME);
+    $directory = dirname($destination ?? $filePath);
     $created = [];
     foreach ([['', 1920, 80], ['mobile', 960, 77], ['cards', 800, 75]] as [$folder, $limit, $quality]) {
         $targetDir = $directory . ($folder ? '/' . $folder : '');

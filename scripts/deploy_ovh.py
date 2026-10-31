@@ -22,7 +22,7 @@ def protected(path):
     return (
         not parts or path.startswith("/") or ".." in parts
         or any(p == ".git" or p == "secrets" or p.startswith(".env") for p in parts)
-        or parts[0] in {"pic", "bdd", "output", "backups", "node_modules"}
+        or parts[0] in {"pic", "bdd", "output", "backups", "node_modules", "tests", "test"}
         or path.endswith((".sql", ".sql.gz"))
     )
 

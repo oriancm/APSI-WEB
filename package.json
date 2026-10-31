@@ -1,6 +1,15 @@
 {
   "name": "apsi-web-assets",
   "private": true,
-  "scripts": { "build": "node scripts/build-assets.cjs" },
-  "devDependencies": { "esbuild": "0.28.2", "lucide": "1.64.0" }
+  "scripts": {
+    "build": "node scripts/build-assets.cjs",
+    "test:admin": "python tests/admin/run.py --browser",
+    "test:deploy": "python -m unittest discover -s scripts -p test_deploy_ovh.py"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "esbuild": "0.28.2",
+    "lucide": "1.64.0",
+    "playwright": "1.62.1"
+  }
 }
