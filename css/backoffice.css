@@ -1992,3 +1992,183 @@ textarea:focus {
     border-top-color: #234163;
   }
 }
+
+/* All option panels share the APSI style while the native selects retain validation. */
+.select-control {
+  position: relative;
+  min-width: 0;
+}
+.native-select {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+.select-trigger {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 13px;
+  border: 1px solid #d4dfea;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  text-align: left;
+  font-size: 12px;
+}
+.select-trigger:hover {
+  border-color: #91b7df;
+}
+.select-trigger:focus-visible,
+.select-control.is-open .select-trigger {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px #0067d61a;
+}
+.select-value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.select-chevron {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-right: 1.7px solid currentColor;
+  border-bottom: 1.7px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+.is-open .select-chevron {
+  transform: translateY(2px) rotate(225deg);
+}
+.select-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 60;
+  max-height: 280px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #ccdceb;
+  background: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 12px 35px #0617331f;
+  scrollbar-width: thin;
+}
+.opens-up .select-options {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+.select-option {
+  position: relative;
+  padding: 11px 34px 11px 12px;
+  min-height: 44px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+  border-radius: 6px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.select-option.is-highlighted {
+  background: #edf6fd;
+  color: var(--ink);
+}
+.select-option[aria-selected="true"] {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.select-option[aria-selected="true"]::after {
+  content: "✓";
+  position: absolute;
+  right: 12px;
+  top: 11px;
+}
+.select-option[aria-disabled="true"] {
+  background: #f6f8fb;
+  color: #647286;
+  cursor: default;
+  font-weight: 400;
+}
+.select-option[aria-disabled="true"]::after {
+  content: none;
+}
+.select-error {
+  color: var(--danger);
+  font-size: 10px;
+  margin: 7px 0 0;
+}
+.has-error .select-trigger {
+  border-color: var(--danger);
+}
+.filters .filter-select {
+  flex: 0 1 220px;
+  min-width: 0;
+  max-width: 260px;
+}
+.filters .select-trigger {
+  font-size: 11px;
+  min-height: 45px;
+}
+.save-actions .cancel-button {
+  display: inline-flex;
+  max-width: none;
+  white-space: nowrap;
+}
+.cancel-label-short {
+  display: none;
+}
+@media (max-width: 1000px) {
+  .filters .filter-select {
+    flex: 1;
+    max-width: none;
+  }
+}
+@media (max-width: 760px) {
+  .cancel-label-long {
+    display: none;
+  }
+  .cancel-label-short {
+    display: inline;
+  }
+  .select-trigger,
+  .select-option {
+    font-size: 13px;
+  }
+}
+@media (max-width: 440px) {
+  .save-bar {
+    flex-wrap: wrap;
+  }
+  .save-bar > div:first-child {
+    display: flex;
+    align-items: center;
+    max-width: none;
+    width: 100%;
+  }
+  .save-bar small {
+    display: none;
+  }
+  .save-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .save-actions .primary {
+    flex: 1;
+  }
+  .editor-layout {
+    padding-bottom: 150px;
+  }
+}

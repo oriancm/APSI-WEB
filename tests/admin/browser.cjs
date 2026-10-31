@@ -111,6 +111,41 @@ fs.mkdirSync(output, { recursive: true });
       path: path.join(output, "dashboard-desktop.png"),
       fullPage: true,
     });
+    await page.locator("#domain-filter-control").click();
+    await accessibility("Expanded dropdown accessibility");
+    await page.screenshot({
+      path: path.join(output, "select-options-desktop.png"),
+    });
+    await page
+      .locator("#domain-filter-options")
+      .getByRole("option", {
+        name: "Groupes scolaires et collèges",
+        exact: true,
+      })
+      .click();
+    assert.equal(await page.locator("#domain-filter").inputValue(), "4");
+    assert.equal(await page.locator(".project-card:visible").count(), 2);
+    await page.locator("#domain-filter-control").press("Home");
+    await page.locator("#domain-filter-control").press("Enter");
+    assert.equal(await page.locator(".project-card:visible").count(), 7);
+    await page.locator("#status-filter-control").press("Enter");
+    await page.locator("#status-filter-control").press("ArrowDown");
+    await page.locator("#status-filter-control").press("ArrowDown");
+    await page.locator("#status-filter-control").press("Enter");
+    assert.equal(await page.locator("#status-filter").inputValue(), "2");
+    assert.equal(await page.locator(".project-card:visible").count(), 4);
+    await page.locator("#status-filter").selectOption("");
+    const favicon = page.locator('link[rel="icon"][sizes="32x32"]');
+    assert.match(
+      await favicon.getAttribute("href"),
+      /^\/favicon-32x32\.png\?v=[a-f0-9]+$/,
+    );
+    assert.equal(
+      (
+        await context.request.get(base + (await favicon.getAttribute("href")))
+      ).status(),
+      200,
+    );
     await page.locator("#reference-search").fill("cezanne");
     assert.equal(await page.locator(".project-card:visible").count(), 1);
     await page.locator("#reference-search").fill("zzzzzz");
@@ -173,6 +208,87 @@ fs.mkdirSync(output, { recursive: true });
       path: path.join(output, "editor-desktop.png"),
       fullPage: true,
     });
+    assert.equal(
+      await page
+        .getByRole("button", { name: "Enregistrer et en créer une autre" })
+        .count(),
+      0,
+    );
+    const originalTitle = await page.locator("#titre").inputValue();
+    await page.locator("#titre").fill("Changements à abandonner");
+    const writes = [];
+    page.on("request", (request) => {
+      if (
+        request.method() === "POST" &&
+        /\/admin\/(?:add|mod)\.php/.test(request.url())
+      )
+        writes.push(request.url());
+    });
+    let releasePreflight;
+    const preflightGate = new Promise((resolve) => {
+      releasePreflight = resolve;
+    });
+    await page.route("**/admin/session.php?**", async (route) => {
+      await preflightGate;
+      await route.continue();
+    });
+    await page
+      .getByRole("button", {
+        name: "Enregistrer les modifications",
+        exact: true,
+      })
+      .click();
+    await page.locator("[data-cancel-edit]").click();
+    await page.locator("#discard-dialog").waitFor({ state: "visible" });
+    await page.keyboard.press("Control+Enter");
+    const preflightResponse = page.waitForResponse((response) =>
+      response.url().includes("/admin/session.php?"),
+    );
+    releasePreflight();
+    await preflightResponse;
+    await page.evaluate(
+      () =>
+        new Promise((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(resolve)),
+        ),
+    );
+    assert.equal(
+      writes.length,
+      0,
+      "Cancelling a pending preflight must not publish",
+    );
+    await accessibility("Discard dialog accessibility");
+    await page.screenshot({ path: path.join(output, "discard-dialog.png") });
+    await page
+      .getByRole("button", { name: "Continuer la saisie", exact: true })
+      .click();
+    assert.equal(
+      await page.locator("#titre").inputValue(),
+      "Changements à abandonner",
+    );
+    assert.equal(await page.locator(".photo-tile").count(), 9);
+    await page.unroute("**/admin/session.php?**");
+    await page.locator(".back-link").click();
+    await page.locator("#discard-dialog").waitFor({ state: "visible" });
+    await page.keyboard.press("Escape");
+    assert.equal(
+      await page.locator("#titre").inputValue(),
+      "Changements à abandonner",
+    );
+    await page.locator("[data-cancel-edit]").click();
+    await page
+      .getByRole("button", { name: "Quitter sans enregistrer", exact: true })
+      .click();
+    await page.waitForURL("**/admin/admin.php");
+    assert.equal(writes.length, 0, "Discard performs no project write");
+    await page.goBack();
+    await page.waitForURL("**/admin/admin.php");
+    await page.goto(base + "/admin/mod.php?id=3");
+    assert.equal(await page.locator("#titre").inputValue(), originalTitle);
+    assert.equal(
+      await page.locator(".photo-tile").first().getAttribute("data-photo-key"),
+      originalFirst,
+    );
     page.on("dialog", (dialog) => dialog.accept()); // Accept only the browser's leave-with-unsaved-changes warning.
     await page.goto(base + "/admin/add.php");
     await page.route("https://geo.api.gouv.fr/communes?**", async (route) => {
@@ -293,6 +409,26 @@ fs.mkdirSync(output, { recursive: true });
       path: path.join(output, "create-desktop.png"),
       fullPage: true,
     });
+    await page.locator("#domaine").selectOption("");
+    await page
+      .getByRole("button", { name: "Enregistrer et publier", exact: true })
+      .click();
+    assert.equal(
+      await page.locator("#domaine-control").getAttribute("aria-invalid"),
+      "true",
+    );
+    await page
+      .locator("#domaine-options")
+      .getByRole("option", {
+        name: "Groupes scolaires et collèges",
+        exact: true,
+      })
+      .click();
+    assert.equal(await page.locator("#domaine").inputValue(), "4");
+    assert.equal(
+      await page.locator("#domaine-control").getAttribute("aria-invalid"),
+      null,
+    );
     const logout = await context.request.post(base + "/admin/logout.php", {
       form: {
         csrf: await page.locator('#reference-form [name="csrf"]').inputValue(),
@@ -353,6 +489,10 @@ fs.mkdirSync(output, { recursive: true });
     await page.goto(base + "/admin/admin.php");
     await noOverflow();
     await accessibility("Mobile dashboard accessibility");
+    await page.locator("#domain-filter-control").click();
+    await noOverflow();
+    await accessibility("Mobile expanded dropdown accessibility");
+    await page.locator("#domain-filter-control").press("Escape");
     await checkSidebarBrand();
     await page.screenshot({
       path: path.join(output, "dashboard-mobile.png"),
@@ -361,6 +501,7 @@ fs.mkdirSync(output, { recursive: true });
     await page.goto(base + "/admin/mod.php?id=3");
     await noOverflow();
     await accessibility("Mobile editor accessibility");
+    assert.equal(await page.locator("[data-cancel-edit]").isVisible(), true);
     await page.evaluate(() => {
       document.activeElement?.blur();
       window.scrollTo(0, 0);
@@ -382,7 +523,7 @@ fs.mkdirSync(output, { recursive: true });
     });
     assert.deepEqual(errors, []);
     console.log(
-      "PASS: desktop/mobile, city↔postal code, ambiguous codes, keyboard choices, API outage and race, filters, gallery order/removal/undo, duplicate filenames, real WebP upload, session expiry and reauthentication without losing files, create/edit, keyboard save, logout, accessibility and CSP.",
+      "PASS: desktop/mobile, city↔postal code, ambiguous codes, keyboard choices, API outage and race, filters, gallery order/removal/undo, duplicate filenames, real WebP upload, session expiry and reauthentication without losing files, create/edit, keyboard save, styled dropdowns, discard/continue and cancelled-save race, favicon, logout, accessibility and CSP.",
     );
   } finally {
     await browser.close();

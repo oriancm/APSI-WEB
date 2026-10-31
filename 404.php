@@ -11,6 +11,7 @@ $activePage = '';
     <meta name="robots" content="noindex, follow">
     <meta name="description" content="La page demandée est introuvable. Retrouvez les métiers, les références et les coordonnées d’APSI BTP.">
     <title>Page introuvable | APSI BTP</title>
+    <?php require __DIR__ . '/partials/favicons.php'; ?>
     <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
     <link rel="stylesheet" href="<?= apsiAsset('/css/fonts.css') ?>">
     <script src="<?= apsiAsset('/js/icons.min.js') ?>" defer></script>

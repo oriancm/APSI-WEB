@@ -23,7 +23,7 @@ Les captures desktop/mobile sont produites dans `output/backoffice/`. Les tests 
 2. Choisir **Créer une référence**, ou rechercher un projet dans la liste.
 3. Donner un nom, choisir le domaine, saisir la ville ou le code postal. La recherche officielle propose la correspondance ; si plusieurs communes ou codes postaux correspondent, choisir explicitement le bon résultat. Si la recherche est indisponible, la saisie manuelle reste possible.
 4. Ajouter les photos, les réordonner en les glissant ou avec les flèches. La première est la couverture. Un retrait peut être annulé avant enregistrement.
-5. Compléter les détails utiles et cliquer sur **Enregistrer et publier**. Les modifications ne deviennent publiques qu'après cet enregistrement. Le bouton secondaire permet de commencer immédiatement une autre référence. `Ctrl`/`⌘` + `Entrée` enregistre aussi le formulaire.
+5. Compléter les détails utiles et cliquer sur **Enregistrer et publier**. Les modifications ne deviennent publiques qu'après cet enregistrement. **Annuler les modifications** permet de revenir à la liste sans enregistrer, après confirmation ; choisir **Continuer la saisie** dans la fenêtre conserve le formulaire et ses photos. `Ctrl`/`⌘` + `Entrée` enregistre aussi le formulaire.
 
 Les formats JPG, PNG et WebP sont décodés et réencodés en WebP avec des versions principale (1920 px), mobile (960 px) et carte (800 px), sans agrandissement. Limites : 15 Mo par photo, 60 Mo de nouveaux fichiers par enregistrement, 20 photos par référence et 20 millions de pixels par source. Les anciens fichiers et leur ordre sont conservés sans reconversion obligatoire.
 
@@ -50,3 +50,5 @@ Les tests automatisés couvrent les protections applicatives ci-dessus, les tran
 Utiliser exclusivement `scripts/deploy_ovh.py` et le guide `AGENT_DEPLOY_GUIDE_OVH.md`. La base en ligne fait autorité. La mise en ligne ne requiert aucun SQL d'initialisation ou de migration et doit conserver les empreintes des données, comptes, réglages et photos.
 
 Références : [API officielle des communes](https://geo.api.gouv.fr/decoupage-administratif/communes), [sécurité des sessions PHP](https://www.php.net/manual/en/features.session.security.management.php).
+
+Les listes déroulantes du back-office proposent des options stylisées, une sélection visible et la navigation au clavier (flèches, Entrée, Échap, début/fin et recherche par lettres). Les champs natifs restent transmis et validés par le serveur. Le favicon coloré du site et du back-office est régénéré avec `python scripts/build-favicons.py` à partir du logo original.

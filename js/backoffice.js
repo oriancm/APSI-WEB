@@ -66,7 +66,8 @@
   const form = $("[data-reference-editor]");
   if (!form) return;
   let dirty = false,
-    submitting = false;
+    submitting = false,
+    saveAttempt = 0;
   const markDirty = () => {
     dirty = true;
     $("#save-status").textContent = "Modifications non enregistrées";
@@ -79,6 +80,51 @@
       event.preventDefault();
       event.returnValue = "";
     }
+  });
+  const discardDialog = $("#discard-dialog");
+  let pendingNavigation = "/admin/admin.php";
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (
+      !link ||
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.altKey ||
+      event.shiftKey ||
+      link.target === "_blank"
+    )
+      return;
+    const url = new URL(link.href, location.href);
+    if (
+      url.origin !== location.origin ||
+      (url.pathname === location.pathname &&
+        url.search === location.search &&
+        url.hash)
+    )
+      return;
+    if (submitting) {
+      event.preventDefault();
+      return;
+    }
+    if (!dirty) return;
+    event.preventDefault();
+    // A pending authentication preflight must not publish after the user decides to leave.
+    saveAttempt++;
+    $("#save-status").textContent = "Modifications non enregistrées";
+    pendingNavigation = url.href;
+    if (!discardDialog.open) discardDialog.showModal();
+  });
+  $("[data-keep-editing]", discardDialog).addEventListener("click", () =>
+    discardDialog.close(),
+  );
+  $("[data-discard-edit]", discardDialog).addEventListener("click", () => {
+    dirty = false;
+    saveAttempt++;
+    discardDialog.close();
+    // Replace the abandoned editor so browser Back cannot restore its discarded draft.
+    location.replace(pendingNavigation);
   });
   const title = $("#titre"),
     city = $("#city"),
@@ -340,6 +386,10 @@
   let checkingSession = false,
     submissionApproved = false;
   form.addEventListener("submit", async (event) => {
+    if (discardDialog.open) {
+      event.preventDefault();
+      return;
+    }
     if (submitting) {
       event.preventDefault();
       return;
@@ -369,6 +419,7 @@
     }
     sync();
     checkingSession = true;
+    const attempt = ++saveAttempt;
     const submitter =
       event.submitter || $("button[name=intent][value=save]", form);
     let warning = $("#session-warning");
@@ -392,12 +443,14 @@
         typeof state.submission !== "string"
       )
         throw new Error("Session unavailable");
+      if (attempt !== saveAttempt) return;
       $("[name=csrf]", form).value = state.csrf;
       $("[name=submission]", form).value = state.submission;
       submissionApproved = true;
       form.requestSubmit(submitter);
       submissionApproved = false;
     } catch (error) {
+      if (attempt !== saveAttempt) return;
       if (!warning) {
         warning = document.createElement("div");
         warning.id = "session-warning";
@@ -428,6 +481,7 @@
   document.addEventListener("keydown", (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
       event.preventDefault();
+      if (discardDialog.open) return;
       form.requestSubmit($("button[name=intent][value=save]", form));
     }
   });

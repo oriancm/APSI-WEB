@@ -8,6 +8,7 @@ import base64
 from html.parser import HTMLParser
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import socket
@@ -48,6 +49,9 @@ class Fixture:
             shutil.copytree(REPO / directory, self.root / directory, ignore=shutil.ignore_patterns('.env', '__pycache__'))
         for path in REPO.glob('*.php'):
             shutil.copy2(path, self.root / path.name)
+        for pattern in ['favicon*', 'apple-touch-icon.png', 'android-chrome-*.png', 'site.webmanifest']:
+            for path in REPO.glob(pattern):
+                if path.is_file(): shutil.copy2(path, self.root / path.name)
         (self.root / 'pic').mkdir()
         (self.root / 'img').mkdir()
         for name in ['logo-nav.webp', 'logo-nav-white.webp', 'logo-header.webp', 'logo-header-white.webp']:
@@ -139,6 +143,25 @@ class AdminHTTPTests(unittest.TestCase):
         guest = requests.get(self.fixture.base + '/admin/login.php')
         self.assertIn('HttpOnly', guest.headers['Set-Cookie'])
         self.assertIn('SameSite=Strict', guest.headers['Set-Cookie'])
+
+    def test_01_color_icons_shared_by_public_and_private_pages(self):
+        icon_url = None
+        for path in ['/', '/references', '/reference/3', '/admin/login.php']:
+            response = self.get(path)
+            self.assertEqual(response.status_code, 200, path)
+            found = re.search(r'sizes="32x32" href="([^"]+)"', response.text)
+            self.assertIsNotNone(found, path)
+            self.assertRegex(found[1], r'^/favicon-32x32\.png\?v=[a-f0-9]{12}$')
+            if icon_url: self.assertEqual(found[1], icon_url)
+            icon_url = found[1]
+        icon = self.get(icon_url)
+        self.assertEqual(icon.status_code, 200)
+        self.assertEqual(icon.content[:8], b'\x89PNG\r\n\x1a\n')
+        self.assertEqual(struct.unpack('!2I', icon.content[16:24]), (32, 32))
+        self.assertEqual(self.get('/favicon.ico').content[:4], b'\0\0\1\0')
+        manifest = self.get('/site.webmanifest').json()
+        self.assertEqual(manifest['theme_color'], '#0067d6')
+        self.assertTrue(all('?v=' in icon['src'] for icon in manifest['icons']))
 
     def test_02_csrf_and_logout(self):
         before = self.photo_count()
