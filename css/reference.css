@@ -295,3 +295,13 @@ body.reference-page, .reference-shell, .reference-top-gradient-wrapper {
     .card-row { min-height: 56px; padding-block: 6px; }
     .reference-stats { padding-block: 8px; }
 }
+
+/* On desktop the photo ends at the bottom of the complete information panel.
+   Its measured baseline is retained when visible information is hidden. */
+.reference-info-measure { position: fixed; left: -10000px; top: 0; visibility: hidden; pointer-events: none; height: auto !important; min-height: 0 !important; max-height: none !important; }
+.reference-info-measure .card-row { display: flex !important; }
+@media (min-width: 981px) {
+    .reference-gallery { height: var(--reference-complete-info-height, 615px); }
+    .reference-project-heading { flex-shrink: 0; }
+    .reference-main-image-container { flex: 1; height: auto; aspect-ratio: auto; }
+}

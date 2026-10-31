@@ -519,31 +519,93 @@ $activePage = 'references';
         if (window.lucide) window.lucide.createIcons();
 
         const titles = Array.from(document.querySelectorAll('.reference-project-heading .page-title, .card-header h2, .reference-characteristics-title, .same-domain-section h2, .same-domain-card h3'));
+        const titleCanvas = document.createElement('canvas').getContext('2d');
         function fitTitles() {
             titles.forEach(title => {
+                if (!title.isConnected || !title.clientWidth) return;
                 title.style.removeProperty('font-size');
-                const maximum = parseFloat(getComputedStyle(title).fontSize);
-                if (title.scrollWidth <= title.clientWidth) return;
-                let low = 1;
-                let high = maximum;
-                // Keep the full title on one line at the largest size that fits.
-                for (let step = 0; step < 12; step++) {
-                    const size = (low + high) / 2;
-                    title.style.fontSize = size + 'px';
-                    if (title.scrollWidth > title.clientWidth) high = size;
-                    else low = size;
+                const style = getComputedStyle(title);
+                const maximum = parseFloat(style.fontSize);
+                const text = title.textContent.trim();
+                titleCanvas.font = style.fontWeight + ' ' + maximum + 'px ' + style.fontFamily;
+                const spacing = parseFloat(style.letterSpacing) || 0;
+                const textWidth = titleCanvas.measureText(text).width + Math.max(0, text.length - 1) * spacing;
+                if (textWidth > title.clientWidth) {
+                    title.style.fontSize = Math.max(1, maximum * title.clientWidth / textWidth * 0.995) + 'px';
                 }
-                title.style.fontSize = low + 'px';
             });
         }
         fitTitles();
         document.fonts.ready.then(fitTitles);
-        const titleObserver = new ResizeObserver(fitTitles);
+        const titleWidths = new WeakMap();
+        const titleObserver = new ResizeObserver(entries => {
+            let widthChanged = false;
+            for (const entry of entries) {
+                const width = entry.contentRect.width;
+                if (!entry.target.isConnected || width <= 0) continue;
+                if (Math.abs(width - (titleWidths.get(entry.target) ?? -1)) > 0.5) {
+                    titleWidths.set(entry.target, width);
+                    widthChanged = true;
+                }
+            }
+            // Font fitting changes height itself; observe width only to avoid a resize loop.
+            if (widthChanged) fitTitles();
+        });
+        window.apsiPageSignal?.addEventListener('abort', () => titleObserver.disconnect(), { once: true });
         new Set(titles.map(title => title.parentElement)).forEach(parent => titleObserver.observe(parent));
     });
 
     window.apsiPageReady(function() {
         const gallery = document.querySelector('.reference-main-image-container');
+        const info = document.querySelector('.reference-showcase > .reference-info-card');
+        const galleryColumn = document.querySelector('.reference-gallery');
+        const heading = document.querySelector('.reference-project-heading');
+        const pageSignal = window.apsiPageSignal;
+        // Freeze a complete panel, including all labels, as the sizing reference.
+        // This hidden copy never depends on later visibility changes in the real panel.
+        if (gallery && info && galleryColumn && heading) {
+            const measure = document.createElement('div');
+            measure.className = 'reference-info-card reference-info-measure';
+            measure.setAttribute('aria-hidden', 'true');
+            measure.inert = true;
+            [...info.childNodes].forEach(node => measure.append(node.cloneNode(true)));
+            measure.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
+            measure.querySelectorAll('[hidden]').forEach(node => node.removeAttribute('hidden'));
+            document.body.append(measure);
+            let frame = 0;
+            function sizeGallery() {
+                frame = 0;
+                if (!gallery.isConnected || pageSignal?.aborted || document.fullscreenElement === gallery) return;
+                if (window.innerWidth <= 980) {
+                    galleryColumn.style.removeProperty('--reference-complete-info-height');
+                    measure.style.display = 'none';
+                    return;
+                }
+                measure.style.display = 'flex';
+                const columns = getComputedStyle(info.parentElement).gridTemplateColumns.split(' ');
+                const width = info.getBoundingClientRect().width || parseFloat(columns[1]);
+                if (!width) return;
+                measure.style.width = width + 'px';
+                for (const selector of ['.card-header h2', '.reference-characteristics-title']) {
+                    const actual = info.querySelector(selector);
+                    if (actual && actual.getBoundingClientRect().width) measure.querySelector(selector).style.fontSize = getComputedStyle(actual).fontSize;
+                }
+                const height = Math.max(1, measure.getBoundingClientRect().height);
+                const value = height.toFixed(3) + 'px';
+                if (galleryColumn.style.getPropertyValue('--reference-complete-info-height') !== value) {
+                    galleryColumn.style.setProperty('--reference-complete-info-height', value);
+                }
+            }
+            function requestSize() { if (!frame) frame = requestAnimationFrame(sizeGallery); }
+            const observer = new ResizeObserver(requestSize);
+            observer.observe(info);
+            observer.observe(heading);
+            window.addEventListener('resize', requestSize, { signal: pageSignal });
+            document.addEventListener('fullscreenchange', requestSize, { signal: pageSignal });
+            document.fonts.ready.then(requestSize);
+            pageSignal?.addEventListener('abort', () => { observer.disconnect(); cancelAnimationFrame(frame); measure.remove(); }, { once: true });
+            sizeGallery();
+        }
         const fullscreenButton = document.querySelector('.reference-fullscreen');
         if (gallery?.requestFullscreen) {
             fullscreenButton?.addEventListener('click', async () => {

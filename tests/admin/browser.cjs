@@ -68,6 +68,35 @@ fs.mkdirSync(output, { recursive: true });
       fullPage: true,
     });
     await accessibility("Login accessibility");
+    const loginNavy = await page
+      .locator(".auth-story")
+      .evaluate((el) => getComputedStyle(el).backgroundColor);
+    const checkSidebarBrand = async () => {
+      assert.equal(
+        await page
+          .locator(".sidebar")
+          .evaluate((el) => getComputedStyle(el).backgroundColor),
+        loginNavy,
+      );
+      assert.equal(
+        await page
+          .locator(".sidebar .brand")
+          .evaluate((el) => getComputedStyle(el).backgroundColor),
+        "rgb(0, 103, 214)",
+      );
+      assert.equal(
+        await page.locator(".sidebar .brand-logo").getAttribute("src"),
+        "/img/logo-header-white.webp",
+      );
+      const sidebar = await page.locator(".sidebar").boundingBox();
+      const logo = await page.locator(".sidebar .brand-logo").boundingBox();
+      const navigation = await page.locator(".sidebar nav").boundingBox();
+      assert.ok(
+        Math.abs(logo.x + logo.width / 2 - sidebar.x - sidebar.width / 2) < 1,
+        "Logo centered in sidebar",
+      );
+      assert.ok(logo.y + logo.height < navigation.y, "Logo above menu");
+    };
     await page.locator("#login").fill("admin");
     await page.locator("#pass").fill(process.env.APSI_TEST_PASSWORD);
     await page.getByRole("button", { name: "Afficher", exact: true }).click();
@@ -75,6 +104,7 @@ fs.mkdirSync(output, { recursive: true });
     await page.getByRole("button", { name: /Accéder à mon espace/ }).click();
     await page.waitForURL("**/admin/admin.php");
     assert.equal(await page.locator(".project-card").count(), 7);
+    await checkSidebarBrand();
     await accessibility("Dashboard accessibility");
     await noOverflow();
     await page.screenshot({
@@ -264,7 +294,9 @@ fs.mkdirSync(output, { recursive: true });
       fullPage: true,
     });
     const logout = await context.request.post(base + "/admin/logout.php", {
-      form: { csrf: await page.locator('#reference-form [name="csrf"]').inputValue() },
+      form: {
+        csrf: await page.locator('#reference-form [name="csrf"]').inputValue(),
+      },
       maxRedirects: 0,
     });
     assert.equal(logout.status(), 303);
@@ -321,6 +353,7 @@ fs.mkdirSync(output, { recursive: true });
     await page.goto(base + "/admin/admin.php");
     await noOverflow();
     await accessibility("Mobile dashboard accessibility");
+    await checkSidebarBrand();
     await page.screenshot({
       path: path.join(output, "dashboard-mobile.png"),
       fullPage: true,

@@ -1884,9 +1884,29 @@ textarea {
 
 /* Match the public APSI identity: white surfaces, #0067d6 blue and #061733 navy. */
 .sidebar {
-  background: #fff;
-  color: var(--ink);
-  border-right: 1px solid var(--line);
+  background: var(--ink);
+  color: #fff;
+  border-right: 1px solid #193459;
+  padding-top: 24px;
+}
+.sidebar .brand {
+  width: 100%;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+  background: var(--accent);
+  padding: 20px 12px 17px;
+  border-radius: 12px;
+}
+.sidebar .brand-logo {
+  width: 140px;
+}
+.sidebar .brand-caption {
+  color: #fff;
+  letter-spacing: 1.4px;
+}
+.sidebar-label {
+  margin-top: 30px;
 }
 .brand-logo {
   width: 112px;
@@ -1895,33 +1915,32 @@ textarea {
 .auth-story .brand-logo {
   width: 146px;
 }
-.sidebar .brand-caption,
 .sidebar-label,
 .sidebar .external-hint,
 .sidebar .workspace-account small {
-  color: var(--muted);
+  color: #b8c9e1;
 }
 .sidebar .nav-item {
-  color: var(--ink);
+  color: #e5edf8;
 }
 .sidebar .nav-item:hover {
-  background: #edf6fd;
-  color: var(--ink);
+  background: #122d50;
+  color: #fff;
 }
 .sidebar .nav-item.is-active {
   background: var(--accent);
   color: #fff;
 }
 .sidebar .workspace-account {
-  border-color: var(--line);
+  border-color: #234163;
 }
 .sidebar .avatar {
-  background: #edf6fd;
-  border-color: #dce5ef;
-  color: #0067d6;
+  background: #123154;
+  border-color: #375274;
+  color: #fff;
 }
 .sidebar .online-dot {
-  background: #0067d6;
+  background: #69b0ff;
 }
 .button.primary {
   background: var(--accent);
@@ -1953,7 +1972,23 @@ textarea:focus {
   .auth-story .brand-logo {
     width: 112px;
   }
+  .sidebar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px 20px 10px;
+  }
+  .sidebar .brand {
+    max-width: 240px;
+    padding: 14px 12px;
+  }
+  .sidebar .brand-logo {
+    width: 112px;
+  }
+  .sidebar nav {
+    margin-left: 0;
+    justify-content: center;
+  }
   .sidebar-bottom {
-    border-top-color: var(--line);
+    border-top-color: #234163;
   }
 }
