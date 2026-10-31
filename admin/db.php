@@ -77,6 +77,13 @@ class NullDb
 loadEnvFile(__DIR__ . '/../.env');
 loadEnvFile(__DIR__ . '/.env');
 
+// The local preview launcher explicitly enables demo data. Never connect its
+// public preview to a live database, and never enable this automatically in production.
+if (PHP_SAPI === 'cli-server' && envValue('APSI_ALLOW_DEMO_DATA', '0') === '1') {
+    $db = new NullDb();
+    return;
+}
+
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 ];

@@ -34,6 +34,6 @@ En cas de modification concurrente des données pendant le déploiement, le scri
 
 ## Développement local
 
-Par défaut, une base inaccessible renvoie une indisponibilité explicite (HTTP 503), jamais des références de démonstration. Le mode de démonstration local nécessite `APSI_ALLOW_DEMO_DATA=1`. Cette option doit rester désactivée en production et le déploiement refuse de continuer si elle est activée.
+En production, une base inaccessible renvoie une indisponibilité explicite (HTTP 503), jamais des références de démonstration. Le lanceur `start-local.ps1` active explicitement `APSI_ALLOW_DEMO_DATA=1` pour son processus PHP de prévisualisation : les références locales restent disponibles sans connexion à une base en ligne. `start-local.ps1 -RequireDatabase` désactive ce mode et exige une vraie base locale configurée. Cette option de démonstration doit rester désactivée en production et le déploiement refuse de continuer si elle est activée.
 
 Les fichiers `bdd/*.sql` servent uniquement à une initialisation locale ou à une migration préparée séparément. Le déploiement OVH ne les exécute pas. Le guide `DEPLOY.md` concerne un autre hébergement, sur VPS, et ne doit pas servir à mettre à jour l'OVH actuel.

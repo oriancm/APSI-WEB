@@ -6,13 +6,13 @@ $id = $_GET['id'] ?? null;
 
 function fallbackReferences(): array {
     return [
-        ['id' => 1, 'titre' => 'Aménagement de la Place Jean Jaurès', 'commune' => 'APT (84)', 'domaine' => '5', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2025', 'duree_travaux_mois' => '12', 'moa' => 'CITADIS (84)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 980000, 'nbPhase' => 'XXX', 'nbE' => 4, 'nombre_lots' => 6, 'description' => 'Aménagement de la Place Jean Jaurès à Apt.'],
-        ['id' => 2, 'titre' => 'Centre Culturel Simone Signoret', 'commune' => 'CHATEAU-ARNOUX (04)', 'domaine' => '3', 'statut' => '1', 'anneeD' => '2023', 'anneeF' => '2025', 'duree_travaux_mois' => '15', 'moa' => 'PROVENCE ALPES AGGLOMERATION Digne-les-Bains (04)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 2875000, 'nbPhase' => 'XXX', 'nbE' => 13, 'nombre_lots' => 18, 'description' => 'Réhabilitation du Centre Culturel Simone Signoret et de ses abords à Château-Arnoux-Saint-Auban.'],
-        ['id' => 3, 'titre' => 'L’hôtel des Monnaies-Niel', 'commune' => 'AVIGNON (84)', 'domaine' => '12', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '20', 'moa' => 'Groupe E-Hôtel (69)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 8000000, 'nbPhase' => 'XXX', 'nbE' => 18, 'nombre_lots' => 25, 'description' => "Reconversion de l'hôtel des Monnaies-Niel pour la création d'un hôtel de 40 chambres, Place du Palais des Papes à Avignon."],
-        ['id' => 4, 'titre' => "Residence l'Aygues", 'commune' => 'ORANGE (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '24', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 9250000, 'nbPhase' => 'XXX', 'nbE' => 9, 'nombre_lots' => 12, 'description' => "Réhabilitation de 146 logements collectifs - Résidence « L'Aygues » à Orange."],
-        ['id' => 5, 'titre' => 'Réfectoire de Coudoux', 'commune' => 'COUDOUX (13)', 'domaine' => '4', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '11', 'moa' => 'Commune de COUDOUX (13)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 1300000, 'nbPhase' => 'XXX', 'nbE' => 14, 'nombre_lots' => 16, 'description' => "Création d'un réfectoire et extension du groupe scolaire à Coudoux."],
-        ['id' => 6, 'titre' => 'Réhabilitation du collège Paul Cézanne', 'commune' => 'BRIGNOLES (83)', 'domaine' => '4', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '19', 'moa' => 'Conseil Départemental (83)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 5400000, 'nbPhase' => 'XXX', 'nbE' => 14, 'nombre_lots' => 18, 'description' => 'Réhabilitation du collège Paul Cézanne à Brignoles.'],
-        ['id' => 7, 'titre' => 'Résidence Les Angevines', 'commune' => 'LE THOR (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '20', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => 'Architecte Test', 'eMoe' => 'Équipe Test', 'montant' => 3280000, 'nbPhase' => 'XXX', 'nbE' => 17, 'nombre_lots' => 22, 'description' => 'Construction de 30 logements collectifs – Résidence « Les Angevines » au Thor.']
+        ['id' => 1, 'titre' => 'Aménagement de la Place Jean Jaurès', 'commune' => 'APT (84)', 'domaine' => '5', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2025', 'duree_travaux_mois' => '12', 'moa' => 'CITADIS (84)', 'archi' => 'XXX', 'eMoe' => 'XXX', 'montant' => 980000, 'nbPhase' => 'XXX', 'nbE' => 4, 'nombre_lots' => 6, 'description' => 'Aménagement de la Place Jean Jaurès à Apt.'],
+        ['id' => 2, 'titre' => 'Centre Culturel Simone Signoret', 'commune' => 'CHATEAU-ARNOUX (04)', 'domaine' => '3', 'statut' => '1', 'anneeD' => '2023', 'anneeF' => '2025', 'duree_travaux_mois' => '15', 'moa' => 'PROVENCE ALPES AGGLOMERATION Digne-les-Bains (04)', 'archi' => 'XXX', 'eMoe' => 'XXX', 'montant' => 2875000, 'nbPhase' => 'XXX', 'nbE' => 13, 'nombre_lots' => 18, 'description' => 'Réhabilitation du Centre Culturel Simone Signoret et de ses abords à Château-Arnoux-Saint-Auban.'],
+        ['id' => 3, 'titre' => 'L’hôtel des Monnaies-Niel', 'commune' => 'AVIGNON (84)', 'domaine' => '12', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '20', 'moa' => 'Groupe E-Hôtel (69)', 'archi' => 'XXX', 'eMoe' => 'XXX', 'montant' => 8000000, 'nbPhase' => 'XXX', 'nbE' => 18, 'nombre_lots' => 25, 'description' => "Reconversion de l'hôtel des Monnaies-Niel pour la création d'un hôtel de 40 chambres, Place du Palais des Papes à Avignon."],
+        ['id' => 4, 'titre' => "Residence l'Aygues", 'commune' => 'ORANGE (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '24', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => 'XXX', 'eMoe' => 'XXX', 'montant' => 9250000, 'nbPhase' => 'XXX', 'nbE' => 9, 'nombre_lots' => 12, 'description' => "Réhabilitation de 146 logements collectifs - Résidence « L'Aygues » à Orange."],
+        ['id' => 5, 'titre' => 'Réfectoire de Coudoux', 'commune' => 'COUDOUX (13)', 'domaine' => '4', 'statut' => '1', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '11', 'moa' => 'Commune de COUDOUX (13)', 'archi' => 'XXX', 'eMoe' => 'XXX', 'montant' => 1300000, 'nbPhase' => 'XXX', 'nbE' => 14, 'nombre_lots' => 16, 'description' => "Création d'un réfectoire et extension du groupe scolaire à Coudoux."],
+        ['id' => 6, 'titre' => 'Réhabilitation du collège Paul Cézanne', 'commune' => 'BRIGNOLES (83)', 'domaine' => '4', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2027', 'duree_travaux_mois' => '19', 'moa' => 'Conseil Départemental (83)', 'archi' => 'XXX', 'eMoe' => 'XXX', 'montant' => 5400000, 'nbPhase' => 'XXX', 'nbE' => 14, 'nombre_lots' => 18, 'description' => 'Réhabilitation du collège Paul Cézanne à Brignoles.'],
+        ['id' => 7, 'titre' => 'Résidence Les Angevines', 'commune' => 'LE THOR (84)', 'domaine' => '10', 'statut' => '2', 'anneeD' => '2024', 'anneeF' => '2026', 'duree_travaux_mois' => '20', 'moa' => 'GRAND DELTA HABITAT (84)', 'archi' => 'XXX', 'eMoe' => 'XXX', 'montant' => 3280000, 'nbPhase' => 'XXX', 'nbE' => 17, 'nombre_lots' => 22, 'description' => 'Construction de 30 logements collectifs – Résidence « Les Angevines » au Thor.']
     ];
 }
 
@@ -193,6 +193,11 @@ function getAllPics($db): array {
     return apsiWebpPhotos($pics);
 }
 
+/** Missing project information stays visible, without writing placeholders to the CRM. */
+function referenceDisplayValue($value): string {
+    return $value === null || trim((string)$value) === '' ? 'XXX' : (string)$value;
+}
+
 function formatNumber($number) {
     return number_format((float)$number, 0, ',', ' ');
 }
@@ -265,6 +270,12 @@ $infoRows = [
     ['users-round', "Nombre d'entreprises", $ref['nbE'] ?? null],
     ['layout-grid', 'Nombre de lots', $ref['nombre_lots'] ?? null],
 ];
+
+$displayPeriod = !empty($ref['anneeD']) || !empty($ref['anneeF'])
+    ? referenceDisplayValue($ref['anneeD'] ?? null) . ' – ' . referenceDisplayValue($ref['anneeF'] ?? null) : 'XXX';
+$displayDuration = isset($ref['duree_travaux_mois']) && trim((string)$ref['duree_travaux_mois']) !== ''
+    ? $ref['duree_travaux_mois'] . ' mois' : 'XXX';
+$displayBudget = isset($ref['montant']) && is_numeric($ref['montant']) ? formatNumber($ref['montant']) . ' € HT' : 'XXX';
 
 $activePage = 'references';
 ?>
@@ -412,54 +423,50 @@ $activePage = 'references';
                                     <i data-lucide="hard-hat" aria-hidden="true"></i>
                                     <strong>Maître d'ouvrage</strong>
                                 </div>
-                                <span class="row-value"><?= htmlspecialchars($ref['moa'] ?? '—') ?></span>
+                                <span class="row-value"><?= htmlspecialchars(referenceDisplayValue($ref['moa'] ?? null)) ?></span>
                             </div>
-                            <?php if (!empty($ref['archi'])): ?>
                             <div class="card-row">
                                 <div class="row-label-container">
                                     <i data-lucide="building-2" aria-hidden="true"></i>
                                     <strong>Architecte</strong>
                                 </div>
-                                <span class="row-value"><?= htmlspecialchars($ref['archi']) ?></span>
+                                <span class="row-value"><?= htmlspecialchars(referenceDisplayValue($ref['archi'] ?? null)) ?></span>
                             </div>
-                            <?php endif; ?>
-                            <?php if (!empty($ref['eMoe'])): ?>
                             <div class="card-row">
                                 <div class="row-label-container">
                                     <i data-lucide="boxes" aria-hidden="true"></i>
                                     <strong>Maîtrise d'œuvre</strong>
                                 </div>
-                                <span class="row-value"><?= htmlspecialchars($ref['eMoe']) ?></span>
+                                <span class="row-value"><?= htmlspecialchars(referenceDisplayValue($ref['eMoe'] ?? null)) ?></span>
                             </div>
-                            <?php endif; ?>
                         </div>
                         <h2 class="reference-characteristics-title">CARACTÉRISTIQUES DU PROJET</h2>
                         <div class="reference-schedule">
                             <div class="schedule-item">
                                 <i data-lucide="calendar-days" aria-hidden="true"></i>
-                                <div><span>Période</span><strong><?= !empty($ref['anneeD']) ? htmlspecialchars($ref['anneeD']) . (!empty($ref['anneeF']) ? ' – ' . htmlspecialchars($ref['anneeF']) : '') : '—' ?></strong></div>
+                                <div><span>Période</span><strong><?= htmlspecialchars($displayPeriod) ?></strong></div>
                             </div>
                             <div class="schedule-item">
                                 <i data-lucide="clock" aria-hidden="true"></i>
-                                <div><span>Durée</span><strong><?= !empty($ref['duree_travaux_mois']) ? htmlspecialchars($ref['duree_travaux_mois']) . ' mois' : '—' ?></strong></div>
+                                <div><span>Durée</span><strong><?= htmlspecialchars($displayDuration) ?></strong></div>
                             </div>
                             <div class="schedule-item">
                                 <i data-lucide="circle-check" aria-hidden="true"></i>
-                                <div><span>Statut</span><strong><?= !empty($ref['statut']) ? htmlspecialchars(statutLabel($ref['statut'])) : '—' ?></strong></div>
+                                <div><span>Statut</span><strong><?= !empty($ref['statut']) ? htmlspecialchars(referenceDisplayValue(statutLabel($ref['statut']))) : 'XXX' ?></strong></div>
                             </div>
                         </div>
                         <div class="reference-stats">
                             <?php foreach ([['layers-3', 'Phases', $ref['nbPhase'] ?? null], ['building', 'Entreprises', $ref['nbE'] ?? null], ['boxes', 'Lots', $ref['nombre_lots'] ?? null]] as [$icon, $label, $value]): ?>
                                 <div class="reference-stat">
                                     <i data-lucide="<?= $icon ?>" aria-hidden="true"></i>
-                                    <div><span><?= $label ?></span><strong><?= htmlspecialchars((string)($value ?: '—')) ?></strong></div>
+                                    <div><span><?= $label ?></span><strong><?= htmlspecialchars(referenceDisplayValue($value)) ?></strong></div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
 
                         <div class="reference-budget">
                             <i data-lucide="database" aria-hidden="true"></i>
-                            <div><span>Montant des travaux</span><strong><?= !empty($ref['montant']) ? htmlspecialchars(formatNumber($ref['montant'])) . ' € HT' : '—' ?></strong></div>
+                            <div><span>Montant des travaux</span><strong><?= htmlspecialchars($displayBudget) ?></strong></div>
                         </div>
                     </aside>
                 </section>

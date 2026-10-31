@@ -21,7 +21,7 @@ body.reference-page, .reference-shell, .reference-top-gradient-wrapper {
 .back-link { display: inline-flex; align-items: center; gap: 10px; color: var(--apsi-blue); font-weight: 700; font-size: 15px; }
 .back-link svg { width: 20px; height: 20px; }
 .back-link:hover { text-decoration: underline; }
-.reference-showcase { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 28px; align-items: stretch; }
+.reference-showcase { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 28px; align-items: start; }
 .reference-gallery { min-width: 0; display: flex; flex-direction: column; }
 .reference-project-heading { margin-bottom: 18px; }
 .reference-project-heading .page-title, .reference-info-card .card-header h2, .same-domain-section h2, .same-domain-card h3 { white-space: nowrap; overflow-wrap: normal; }
@@ -31,7 +31,7 @@ body.reference-page, .reference-shell, .reference-top-gradient-wrapper {
 .reference-badge { background: #eaf4ff; color: var(--apsi-blue); padding: 8px 12px; border-radius: 24px; }
 .reference-location { color: #607498; }
 .reference-project-meta svg { width: 19px; height: 19px; flex-shrink: 0; color: var(--apsi-blue); }
-.reference-main-image-container { position: relative; flex: 1; min-height: 360px; overflow: hidden; border-radius: 8px; background: var(--apsi-navy); }
+.reference-main-image-container { position: relative; width: 100%; flex: none; min-height: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 8px; background: var(--apsi-navy); }
 .reference-main-image-container picture { display: block; position: absolute; inset: 0; }
 .reference-main-image-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 46px; height: 46px; display: grid; place-items: center; border: 0; border-radius: 50%; background: #fff; color: var(--apsi-navy); cursor: pointer; box-shadow: 0 3px 15px #06173318; }
@@ -194,7 +194,7 @@ body.reference-page, .reference-shell, .reference-top-gradient-wrapper {
 }
 @media (max-width: 980px) {
     .reference-showcase { grid-template-columns: minmax(0, 1fr); gap: 26px; }
-    .reference-main-image-container { flex: none; min-height: 0; aspect-ratio: 16 / 9; }
+    .reference-main-image-container { flex: none; min-height: 0; aspect-ratio: 4 / 3; }
     .reference-info-card { border-left: 0; border-top: 1px solid #dbe5f1; padding: 24px 0 0; }
     .reference-project-heading .page-title { font-size: clamp(28px, 4.5vw, 40px); }
     .reference-stats { padding-block: 20px; }
@@ -254,13 +254,12 @@ body.reference-page, .reference-shell, .reference-top-gradient-wrapper {
     .reference-budget { padding-block: 12px; }
     .reference-budget strong { font-size: 28px; }
     .reference-project-heading { margin-bottom: 14px; }
-    .reference-main-image-container { min-height: 300px; }
 }
 .reference-fullscreen { position: absolute; right: 16px; top: 16px; z-index: 3; display: grid; place-items: center; width: 38px; height: 38px; background: #061733b3; color: white; border: 0; border-radius: 50%; cursor: pointer; }
 .reference-fullscreen[hidden] { display: none; }
 .reference-fullscreen svg { width: 20px; height: 20px; }
 .reference-fullscreen:focus-visible { outline: 3px solid #1684ff; outline-offset: 3px; }
-.reference-main-image-container:fullscreen { border-radius: 0; background: #061733; }
+.reference-main-image-container:fullscreen { width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0; background: #061733; }
 .reference-main-image-container:fullscreen img { object-fit: contain; }
 @media (hover: hover) and (pointer: fine) {
     .gallery-arrow { opacity: 0; transition: opacity .2s; }
