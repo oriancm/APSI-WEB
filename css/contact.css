@@ -80,7 +80,8 @@ body.contact-body { background: #fff; }
 .contact-description { max-width: var(--apsi-intro-measure); margin: 26px 0 32px; font-size: 16px; line-height: 1.65; }
 .contact-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .contact-form-group { min-width: 0; }
-.contact-form-group--message, .contact-form-footer, .form-error { grid-column: 1 / -1; }
+.contact-form-group--email, .contact-form-group--message, .contact-form-footer, .form-error { grid-column: 1 / -1; }
+.contact-form-trap { display: none; }
 .contact-form label { display: block; margin-bottom: 10px; font-size: 13px; font-weight: 800; text-transform: uppercase; }
 .contact-form .field { position: relative; }
 .contact-form .field svg { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 21px; height: 21px; pointer-events: none; }

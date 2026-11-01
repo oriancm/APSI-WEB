@@ -32,6 +32,10 @@ Le mode `--check-only` vérifie et sauvegarde la production sans modifier les fi
 
 En cas de modification concurrente des données pendant le déploiement, le script s'arrête et remet le code précédent : vérifier la modification CRM puis relancer. Il ne faut pas réimporter les données du dépôt pour débloquer la situation.
 
+## Formulaire de contact
+
+Les demandes sont envoyées exclusivement à `info@apsi-btp.fr`, avec l'adresse du visiteur en `Reply-To`. Sans `SMTP_HOST`, PHPMailer utilise le service `mail()` de l'hébergement OVH et l'expéditeur `info@apsi-btp.fr` (ou `SMTP_FROM` s'il est configuré). Aucun identifiant Gmail n'est nécessaire dans ce mode. Si une ancienne configuration Gmail est encore présente dans le `.env` de production, retirer `SMTP_HOST` et les anciens identifiants, ou renseigner un service SMTP valide. Le déploiement préserve ce fichier : contrôler la configuration directement sur l'hébergement. Pour SMTP, `SMTP_ENCRYPTION` accepte `tls`, `ssl` ou `none` (réservé à un relais local de confiance) ; par défaut, le port 465 utilise SSL et les autres ports STARTTLS. Une erreur d'envoi conserve les champs et affiche un message ; la confirmation n'est affichée qu'après acceptation par le service d'envoi. Vérifier ensuite la réception effective dans la boîte de destination.
+
 ## Développement local
 
 En production, une base inaccessible renvoie une indisponibilité explicite (HTTP 503), jamais des références de démonstration. Le lanceur `start-local.ps1` active explicitement `APSI_ALLOW_DEMO_DATA=1` pour son processus PHP de prévisualisation : les références locales restent disponibles sans connexion à une base en ligne. `start-local.ps1 -RequireDatabase` désactive ce mode et exige une vraie base locale configurée. Cette option de démonstration doit rester désactivée en production et le déploiement refuse de continuer si elle est activée.

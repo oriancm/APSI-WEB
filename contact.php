@@ -2,9 +2,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'phpmailer6.10/src/PHPMailer.php';
-require 'phpmailer6.10/src/SMTP.php';
-require 'phpmailer6.10/src/Exception.php';
+require __DIR__ . '/phpmailer6.10/src/PHPMailer.php';
+require __DIR__ . '/phpmailer6.10/src/SMTP.php';
+require __DIR__ . '/phpmailer6.10/src/Exception.php';
 
 // Load .env file if it exists
 if (file_exists(__DIR__ . '/.env')) {
@@ -25,41 +25,61 @@ if (file_exists(__DIR__ . '/.env')) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = isset($_POST['name']) ? trim($_POST['name']) : '';
-    $objet = isset($_POST['objet']) ? trim($_POST['objet']) : '';
-    $message = isset($_POST['message']) ? trim($_POST['message']) : '';
-    $smtpHost = getenv('SMTP_HOST') ?: 'smtp.gmail.com';
+    $field = static fn(string $key): string => is_string($_POST[$key] ?? null) ? trim($_POST[$key]) : '';
+    $name = $field('name');
+    $email = $field('email');
+    $objet = $field('objet');
+    $message = $field('message');
+    $smtpHost = getenv('SMTP_HOST') ?: '';
     $smtpPort = (int)(getenv('SMTP_PORT') ?: 587);
     $smtpUsername = getenv('SMTP_USERNAME') ?: '';
     $smtpPassword = getenv('SMTP_PASSWORD') ?: '';
-    $smtpFrom = getenv('SMTP_FROM') ?: $smtpUsername;
-    $smtpFromName = getenv('SMTP_FROM_NAME') ?: 'Formulaire de contact';
-    $smtpTo = getenv('SMTP_TO') ?: '';
+    $smtpFrom = getenv('SMTP_FROM') ?: ($smtpUsername ?: 'info@apsi-btp.fr');
+    $smtpFromName = getenv('SMTP_FROM_NAME') ?: 'APSI BTP — Formulaire de contact';
+    // All website contact requests go to the company's contact inbox.
+    $smtpTo = 'info@apsi-btp.fr';
 
-    if ($name === '' || $objet === '' || $message === '') {
+    if ($name === '' || $email === '' || $objet === '' || $message === '') {
         $form_error = "Veuillez remplir tous les champs.";
-    } elseif ($smtpUsername === '' || $smtpPassword === '' || $smtpFrom === '' || $smtpTo === '') {
-        $form_error = "La configuration email du site est incomplète.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) || preg_match('/[\r\n]/', $email . $name . $objet)) {
+        $form_error = "Veuillez vérifier votre adresse e-mail, votre nom et l'objet du message.";
+    } elseif (strlen($name) > 200 || strlen($email) > 254 || strlen($objet) > 300 || strlen($message) > 20000) {
+        $form_error = "Votre message est trop long. Veuillez raccourcir les champs saisis.";
+    } elseif ($field('website') !== '') {
+        $form_error = "Impossible d'envoyer ce formulaire.";
     } else {
         $mail = new PHPMailer(true);
         try {
-            $mail->isSMTP();
-            $mail->Host = $smtpHost;
-            $mail->SMTPAuth = true;
-            $mail->Username = $smtpUsername;
-            $mail->Password = $smtpPassword;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = $smtpPort;
+            if ($smtpHost !== '') {
+                $mail->isSMTP();
+                $mail->Host = $smtpHost;
+                $mail->SMTPAuth = $smtpUsername !== '' || $smtpPassword !== '';
+                $mail->Username = $smtpUsername;
+                $mail->Password = $smtpPassword;
+                $encryption = getenv('SMTP_ENCRYPTION') ?: ($smtpPort === 465 ? 'ssl' : 'tls');
+                if (!in_array($encryption, ['ssl', 'tls', 'none'], true)) {
+                    throw new Exception('Invalid SMTP_ENCRYPTION configuration');
+                }
+                $mail->SMTPSecure = $encryption === 'none' ? '' : $encryption;
+                $mail->SMTPAutoTLS = $encryption !== 'none';
+                $mail->Port = $smtpPort;
+                $mail->Timeout = 15;
+            } else {
+                // OVH shared hosting provides PHP mail without Gmail credentials.
+                $mail->isMail();
+            }
             $mail->CharSet = 'UTF-8';
             $mail->setFrom($smtpFrom, $smtpFromName);
             $mail->addAddress($smtpTo);
+            $mail->addReplyTo($email, $name);
             $mail->Subject = "Message de $name : $objet";
-            $mail->Body = $message;
+            $mail->Body = "Nouvelle demande depuis le site APSI BTP\n\nNom : $name\nE-mail : $email\nObjet : $objet\n\n$message";
             $mail->send();
-            header('Location: mailSent');
+            header('Location: /mailSent', true, 303);
             exit;
         } catch (Exception $e) {
-            $form_error = "Erreur lors de l'envoi du message.";
+            error_log('APSI contact mail delivery failed: ' . $e->getMessage());
+            $form_error = "L'envoi a échoué. Veuillez réessayer ou nous écrire à info@apsi-btp.fr.";
         }
     }
 }
@@ -151,7 +171,7 @@ $activePage = 'contact';
 
         <section class="contact-hero" aria-labelledby="contact-title">
             <div class="contact-scene">
-                <img width="1200" height="400" class="contact-scene__image" src="/img/contact-crane.webp" alt="Grue et bâtiment en construction">
+                <img width="2172" height="724" class="contact-scene__image" src="<?= apsiAsset('/img/home-crane-original.webp') ?>" alt="Grue et bâtiment en construction" decoding="async">
                 <div class="contact-details">
                     <a href="mailto:info@apsi-btp.fr"><i data-lucide="mail" aria-hidden="true"></i><strong>info@apsi-btp.fr</strong></a>
                     <p><i data-lucide="map-pin" aria-hidden="true"></i><span>84750 Caseneuve</span></p>
@@ -173,19 +193,30 @@ $activePage = 'contact';
                 <label for="fname">Nom Prénom</label>
                 <div class="field">
                     <i data-lucide="user-round" aria-hidden="true"></i>
-                    <input type="text" id="fname" name="name" autocomplete="name" required placeholder="Ex : MARTY Paul" value="<?php echo isset($name) ? htmlspecialchars($name) : '' ?>">
+                    <input type="text" id="fname" name="name" autocomplete="name" maxlength="200" required placeholder="Ex : MARTY Paul" value="<?php echo isset($name) ? htmlspecialchars($name) : '' ?>">
                 </div>
                 </div>
                 <div class="contact-form-group">
                 <label for="sujet">Objet</label>
                 <div class="field">
                     <i data-lucide="clipboard-list" aria-hidden="true"></i>
-                    <input type="text" id="sujet" name="objet" required placeholder="Ex : Demande d'information" value="<?php echo isset($objet) ? htmlspecialchars($objet) : '' ?>">
+                    <input type="text" id="sujet" name="objet" maxlength="300" required placeholder="Ex : Demande d'information" value="<?php echo isset($objet) ? htmlspecialchars($objet) : '' ?>">
                 </div>
+                </div>
+                <div class="contact-form-group contact-form-group--email">
+                <label for="email">Adresse e-mail</label>
+                <div class="field">
+                    <i data-lucide="mail" aria-hidden="true"></i>
+                    <input type="email" id="email" name="email" autocomplete="email" maxlength="254" required placeholder="Ex : nom@entreprise.fr" value="<?= isset($email) ? htmlspecialchars($email, ENT_QUOTES, 'UTF-8') : '' ?>">
+                </div>
+                </div>
+                <div class="contact-form-trap" aria-hidden="true" inert>
+                    <label for="website">Site internet</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                 </div>
                 <div class="contact-form-group contact-form-group--message">
                 <label for="subject">Message</label>
-                <textarea id="subject" name="message" required placeholder="Votre message..."><?php echo isset($message) ? htmlspecialchars($message) : '' ?></textarea>
+                <textarea id="subject" name="message" maxlength="20000" required placeholder="Votre message..."><?php echo isset($message) ? htmlspecialchars($message) : '' ?></textarea>
                 </div>
                 <div class="contact-form-footer">
                     <button type="submit" id="submitBtn">

@@ -1,23 +1,8 @@
-
-
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstname = $_POST['firstname'];
-    $email = $_POST['email'];
-    $subject = $_POST['sujet'];
-    $message = $_POST['message'];
-
-    $to = 'info@apsi-btp.fr';
-    $subject = 'Nouveau message de ' . $firstname . ': ' . $subject;
-    $headers = 'From: ' . $email . "\r\n" .
-        'Reply-To: ' . $email . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
-
-    // Envoi de l'email
-    mail($to, $subject, $message, $headers);
-
-    // Redirection vers une page de confirmation
-    // header('Location: confirmation.php');
+// Delivery is handled exclusively by /contact; this is a confirmation page.
+if ($_SERVER['REQUEST_METHOD'] !== 'GET' && $_SERVER['REQUEST_METHOD'] !== 'HEAD') {
+    header('Allow: GET, HEAD');
+    http_response_code(405);
     exit;
 }
 ?>
@@ -88,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <main id="main" class="scrolled hidden-until-loaded">   
 
-        <div">
+        <div>
             <div style="text-align: center; width: 100%">
             <!-- <h1 class="senth1">Nous Contacter</h1> -->
             <div class="sent">
