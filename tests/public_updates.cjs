@@ -1,6 +1,7 @@
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const base = process.env.APSI_TEST_URL || 'http://127.0.0.1:8088';
+const singlePhotoId = Number(process.env.APSI_SINGLE_PHOTO_ID || 4);
 
 (async () => {
     const browser = await chromium.launch({ channel: 'chrome', headless: true });
@@ -25,7 +26,7 @@ const base = process.env.APSI_TEST_URL || 'http://127.0.0.1:8088';
                 return button.left > field.right && Math.abs(button.bottom - field.bottom) < 1;
             });
             assert.ok(adjacent, 'Send icon sits to the right of the message');
-            await page.goto(base + '/reference/4', { waitUntil: 'networkidle' });
+            await page.goto(base + '/reference/' + singlePhotoId, { waitUntil: 'networkidle' });
             assert.equal((await page.locator('.reference-slide-progress').innerText()).replace(/\s+/g, ' '), '1 sur 1');
             assert.equal(await page.locator('.gallery-arrow').count(), 0);
             assert.equal(await page.locator('.same-domain-grid .reference-tile').count(), 3);
