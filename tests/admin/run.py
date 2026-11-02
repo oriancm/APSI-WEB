@@ -130,7 +130,7 @@ class AdminHTTPTests(unittest.TestCase):
 
     def test_01_authentication_headers_and_private_modules(self):
         self.assertEqual(requests.get(self.fixture.base + '/admin/session.php').status_code, 401)
-        for path in ['/admin/admin.php', '/admin/add.php', '/admin/mod.php?id=1', '/admin/change_password.php']:
+        for path in ['/admin/admin.php', '/admin/order.php', '/admin/add.php', '/admin/mod.php?id=1', '/admin/change_password.php']:
             response = requests.get(self.fixture.base + path, allow_redirects=False)
             self.assertEqual(response.status_code, 303, path)
             self.assertEqual(response.headers['Location'], '/admin/login.php')
@@ -143,6 +143,58 @@ class AdminHTTPTests(unittest.TestCase):
         guest = requests.get(self.fixture.base + '/admin/login.php')
         self.assertIn('HttpOnly', guest.headers['Set-Cookie'])
         self.assertIn('SameSite=Strict', guest.headers['Set-Cookie'])
+
+    def test_02_reference_order_is_published_and_protected(self):
+        settings = self.fixture.root / 'secrets/reference-order.json'
+        previous = settings.read_bytes() if settings.exists() else None
+        def public_ids():
+            return [int(value) for value in re.findall(r'<article class="reference-tile"[^>]*>\s*<a href="/reference/(\d+)"', self.get('/references').text)]
+        try:
+            form = Inputs(self.get('/admin/order.php').text).values
+            data = dict(form, sort_mode='manual')
+            data['positions[7]'] = '1'; data['positions[1]'] = '2'
+            invalid = dict(data, csrf='invalid')
+            self.assertEqual(self.session.post(self.fixture.base + '/admin/order.php', data=invalid).status_code, 403)
+            response = self.session.post(self.fixture.base + '/admin/order.php', data=data, allow_redirects=False)
+            self.assertEqual(response.status_code, 303)
+            self.assertEqual(public_ids()[:2], [7, 1])
+            self.assertEqual(self.get('/secrets/reference-order.json').status_code, 403)
+            stale = self.session.post(self.fixture.base + '/admin/order.php', data=data)
+            self.assertIn('autre onglet', stale.text)
+            self.assertEqual(public_ids()[:2], [7, 1])
+            form = Inputs(self.get('/admin/order.php').text).values
+            for invalid_mode in ['unknown', 'id; DROP TABLE reference']:
+                response = self.session.post(self.fixture.base + '/admin/order.php', data=dict(form, sort_mode=invalid_mode))
+                self.assertIn('mode de classement valide', response.text)
+            data = dict(form, sort_mode='manual'); data['positions[1]'] = '-1'
+            self.assertIn('99 999', self.session.post(self.fixture.base + '/admin/order.php', data=data).text)
+            self.fixture.connection.execute('UPDATE reference SET montant=9000000, anneeF=2030 WHERE id=1')
+            self.fixture.connection.execute('UPDATE reference SET montant=NULL, anneeF=NULL, anneeD=NULL WHERE id=2')
+            self.fixture.connection.commit()
+            for mode in ['budget_desc', 'budget_asc', 'date_desc', 'date_asc', 'title_asc', 'title_desc']:
+                form = Inputs(self.get('/admin/order.php').text).values
+                response = self.session.post(self.fixture.base + '/admin/order.php', data=dict(form, sort_mode=mode), allow_redirects=False)
+                self.assertEqual(response.status_code, 303)
+                ids = public_ids()
+                if mode in ['date_desc', 'budget_desc']: self.assertEqual(ids[0], 1)
+                if mode.startswith(('date_', 'budget_')): self.assertEqual(ids[-1], 2)
+                self.assertEqual(json.loads(settings.read_text())['positions']['7'], 1)
+        finally:
+            self.fixture.connection.execute('UPDATE reference SET montant=2500000, anneeF=2027, anneeD=2024 WHERE id IN (1,2)')
+            self.fixture.connection.commit()
+            if previous is None:
+                if settings.exists(): settings.unlink()
+            else: settings.write_bytes(previous)
+
+    def test_02_reference_suggestions_and_single_photo(self):
+        single = self.get('/reference/4').text
+        self.assertNotIn('class="gallery-arrow ', single)
+        self.assertIn('id="current-slide-index">1</span>', single)
+        self.assertEqual(len(re.findall('class="reference-tile"', single)), 3)
+        multiple = self.get('/reference/3').text
+        self.assertEqual(len(re.findall('class="gallery-arrow ', multiple)), 2)
+        self.assertEqual(len(re.findall('class="reference-tile"', multiple)), 3)
+        self.assertNotIn('references-carousel__pause', self.get('/references').text)
 
     def test_01_color_icons_shared_by_public_and_private_pages(self):
         icon_url = None

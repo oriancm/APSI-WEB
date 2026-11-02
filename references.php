@@ -1,6 +1,7 @@
 <?php
 require('admin/db.php');
 require_once __DIR__ . '/functions/images.php';
+require_once __DIR__ . '/functions/reference_order.php';
 
 function getAllRef($db) {
     $sql = "SELECT * FROM reference ORDER BY id ASC";
@@ -75,7 +76,7 @@ function getAllPic($db) {
     return apsiWebpPhotos($pics);
 }
 
-$refTab = getAllRef($db);
+$refTab = apsiSortReferences(getAllRef($db), apsiReferenceOrder());
 $picTab = getAllPic($db);
 $picByRef = [];
 foreach ($picTab as $pic) {
@@ -103,11 +104,6 @@ $domains = [
 ];
 
 $featuredRefs = array_values(array_filter($refTab, fn($ref) => isset($picByRef[$ref['id']])));
-usort($featuredRefs, function ($left, $right) {
-    $leftRank = stripos($left['titre'], 'monnaies') !== false ? 0 : 1;
-    $rightRank = stripos($right['titre'], 'monnaies') !== false ? 0 : 1;
-    return ($leftRank <=> $rightRank) ?: ((int)$left['id'] <=> (int)$right['id']);
-});
 $featuredRefs = array_slice($featuredRefs, 0, 3);
 $activePage = 'references';
 ?>
@@ -150,6 +146,7 @@ $activePage = 'references';
         <?php require_once __DIR__ . '/functions/assets.php'; ?>
     <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
     <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/references.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/reference-cards.css') ?>">
     <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/hero-layout-test.css') ?>">
     
     <!-- Fonts Preload -->
@@ -173,10 +170,9 @@ $activePage = 'references';
             </div>
             <?php if ($featuredRefs): ?>
                 <div class="references-carousel" role="region" aria-roledescription="carrousel" aria-label="Quelques références APSI BTP">
-                    <button class="references-carousel__pause" type="button" aria-pressed="false" aria-label="Mettre le carrousel en pause">Pause</button>
                     <?php foreach ($featuredRefs as $index => $featured): ?>
                         <div class="references-carousel__slide" role="group" aria-roledescription="diapositive" aria-label="<?= $index + 1 ?> sur <?= count($featuredRefs) ?>" <?= $index ? 'hidden' : '' ?>>
-                            <img <?= apsiImageSize($picByRef[$featured['id']]) ?> src="/pic/<?= htmlspecialchars($picByRef[$featured['id']]) ?>" alt="<?= htmlspecialchars($featured['titre']) ?> à <?= htmlspecialchars($featured['commune']) ?>" loading="lazy" decoding="async" <?= $index === 0 ? 'fetchpriority="high"' : '' ?>>
+                            <img <?= apsiImageSize($picByRef[$featured['id']]) ?> src="/pic/<?= htmlspecialchars($picByRef[$featured['id']]) ?>" alt="<?= htmlspecialchars($featured['titre']) ?> à <?= htmlspecialchars($featured['commune']) ?>" loading="eager" decoding="async" <?= $index === 0 ? 'fetchpriority="high"' : '' ?>>
                             <a class="references-carousel__caption" href="/reference/<?= htmlspecialchars($featured['id']) ?>">
                                 <strong><?= htmlspecialchars($featured['titre']) ?></strong>
                                 <span><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($featured['commune']) ?></span>
@@ -214,43 +210,12 @@ $activePage = 'references';
             </div>
 
             <div class="references-grid" id="references-grid">
-                <?php 
-                $is_first = true;
-                foreach ($refTab as $ref): 
-                    $img = $picByRef[$ref['id']] ?? null; 
-                ?>
-                    <article class="reference-tile" data-domain="<?= htmlspecialchars($ref['domaine'] ?? '0') ?>">
-                        <a href="/reference/<?= htmlspecialchars($ref['id']) ?>" aria-label="<?= htmlspecialchars($ref['titre']) ?>"></a>
-                        <?php if (isset($domains[$ref['domaine'] ?? '0'])): ?>
-                            <span class="reference-tile__domain"><?= htmlspecialchars($domains[$ref['domaine']]) ?></span>
-                        <?php endif; ?>
-                        <?php if ($img): ?>
-                            <?php
-                            $img_clean = htmlspecialchars(apsiCardImage($img));
-                            $img_basename = pathinfo($img, PATHINFO_FILENAME);
-                            $mobile_img_path = "pic/previews/" . $img_basename . ".webp";
-                            $has_mobile = file_exists(__DIR__ . '/' . $mobile_img_path);
-                            $lazy_attr = $is_first ? 'fetchpriority="high"' : 'loading="lazy"';
-                            ?>
-                            <?php if ($has_mobile): ?>
-                                <picture>
-                                    <source media="(max-width: 980px)" srcset="/<?= $mobile_img_path ?>">
-                                    <img <?= apsiImageSize(apsiCardImage($img)) ?> src="/pic/<?= $img_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" <?= $lazy_attr ?>>
-                                </picture>
-                            <?php else: ?>
-                                <img <?= apsiImageSize(apsiCardImage($img)) ?> src="/pic/<?= $img_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune']) ?> par APSI BTP" <?= $lazy_attr ?>>
-                            <?php endif; ?>
-                        <?php else: ?>
-                            <div class="reference-tile-empty">Aucune image disponible</div>
-                        <?php endif; ?>
-                        <span class="reference-tile__arrow" aria-hidden="true"><i data-lucide="arrow-right"></i></span>
-                        <div>
-                            <h2><?= htmlspecialchars($ref['titre']) ?></h2>
-                            <p><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($ref['commune']) ?></p>
-                        </div>
-                    </article>
-                    <?php $is_first = false; ?>
-                <?php endforeach; ?>
+                <?php foreach ($refTab as $cardRef):
+                    $cardImage = $picByRef[$cardRef['id']] ?? null;
+                    $cardDomain = $domains[$cardRef['domaine'] ?? '0'] ?? '';
+                    $cardHeading = 'h2';
+                    include __DIR__ . '/partials/referenceCard.php';
+                endforeach; ?>
                 <p class="references-empty" hidden role="status">Aucune référence dans ce domaine pour le moment.</p>
             </div>
         </section>

@@ -1,6 +1,7 @@
 <?php
 require('admin/db.php');
 require_once __DIR__ . '/functions/images.php';
+require_once __DIR__ . '/functions/reference_order.php';
 
 $id = $_GET['id'] ?? null;
 
@@ -106,16 +107,19 @@ function getThePic($db, $idR) {
 }
 
 function getSameDomainReferences($db, $domaine, $currentId) {
-    $sql = "SELECT * FROM reference WHERE domaine = :domaine AND id != :currentId LIMIT 4";
+    $sql = "SELECT * FROM reference WHERE id != :currentId";
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':domaine', $domaine);
     $stmt->bindValue(':currentId', $currentId);
     $stmt->execute();
     $refs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if (empty($refs) && $db instanceof NullDb) {
-        return array_slice(array_values(array_filter(fallbackReferences(), fn($ref) => (string)$ref['id'] !== (string)$currentId)), 0, 4);
+        $refs = array_values(array_filter(fallbackReferences(), fn($ref) => (string)$ref['id'] !== (string)$currentId));
     }
-    return $refs;
+    $refs = apsiSortReferences($refs, apsiReferenceOrder());
+    // Prefer the same domain, then complete the three suggestions with other projects.
+    $preferred = array_values(array_filter($refs, fn($ref) => (string)$ref['domaine'] === (string)$domaine));
+    $others = array_values(array_filter($refs, fn($ref) => (string)$ref['domaine'] !== (string)$domaine));
+    return array_slice(array_merge($preferred, $others), 0, 3);
 }
 
 function getAllPics($db): array {
@@ -318,6 +322,7 @@ $activePage = 'references';
         <?php require_once __DIR__ . '/functions/assets.php'; ?>
     <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/site.css') ?>">
     <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/reference.css') ?>">
+    <link data-apsi-style rel="stylesheet" href="<?= apsiAsset('/css/reference-cards.css') ?>">
     
     <!-- Fonts Preload -->
     <link rel="stylesheet" href="<?= apsiAsset('/css/fonts.css') ?>">
@@ -357,9 +362,9 @@ $activePage = 'references';
                         <div class="reference-main-image-container">
                             <button type="button" class="reference-fullscreen" aria-label="Agrandir la photo"><i data-lucide="expand" aria-hidden="true"></i></button>
                             <!-- Navigation Arrows -->
-                            <button type="button" class="gallery-arrow gallery-arrow--left" aria-label="Image précédente">
+                            <?php if (count($picTab) > 1): ?><button type="button" class="gallery-arrow gallery-arrow--left" aria-label="Image précédente">
                                 <i data-lucide="chevron-left" aria-hidden="true"></i>
-                            </button>
+                            </button><?php endif; ?>
                             <?php
                             $main_pic_clean = htmlspecialchars($mainPic);
                             $img_basename = pathinfo($mainPic, PATHINFO_FILENAME);
@@ -372,17 +377,17 @@ $activePage = 'references';
                                 <img <?= apsiImageSize($mainPic) ?> id="main-reference-image" src="/pic/<?= $main_pic_clean ?>" alt="Projet <?= htmlspecialchars($ref['titre']) ?> à <?= htmlspecialchars($ref['commune'] ?? '') ?> - APSI BTP" fetchpriority="high">
                             </picture>
 
-                            <button type="button" class="gallery-arrow gallery-arrow--right" aria-label="Image suivante">
+                            <?php if (count($picTab) > 1): ?><button type="button" class="gallery-arrow gallery-arrow--right" aria-label="Image suivante">
                                 <i data-lucide="chevron-right" aria-hidden="true"></i>
-                            </button>
+                            </button><?php endif; ?>
 
                             <div class="reference-image-overlay">
-                                <!-- Slide Indicator: e.g., 01 -------- 06 -->
-                                <?php if (count($picTab) > 1): ?>
+                                <!-- Photo position is shown even when the project has only one image. -->
+                                <?php if (count($picTab) > 0): ?>
                                     <div class="reference-slide-progress">
-                                        <span id="current-slide-index">01</span>
-                                        <span aria-hidden="true">/</span>
-                                        <span><?= sprintf('%02d', count($picTab)) ?></span>
+                                        <span id="current-slide-index">1</span>
+                                        <span>sur</span>
+                                        <span><?= count($picTab) ?></span>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -470,34 +475,12 @@ $activePage = 'references';
                 <div class="site-container">
                     <h2>Suggestions de références</h2>
                     <div class="same-domain-grid">
-                        <?php foreach($sameDomainRefs as $sameRef): ?>
-                            <?php $img = $samePicByRef[$sameRef['id']] ?? null; ?>
-                            <article class="same-domain-card">
-                                <a href="/reference/<?= htmlspecialchars($sameRef['id']) ?>" aria-label="<?= htmlspecialchars($sameRef['titre']) ?>"></a>
-                                <?php if ($img): ?>
-                                    <?php
-                                    $same_img_clean = htmlspecialchars(apsiCardImage($img));
-                                    $same_basename = pathinfo($img, PATHINFO_FILENAME);
-                                    $same_mobile_path = "pic/cards/" . $same_basename . ".webp";
-                                    $same_has_mobile = file_exists(__DIR__ . '/' . $same_mobile_path);
-                                    ?>
-                                    <?php if ($same_has_mobile): ?>
-                                        <picture>
-                                            <source media="(max-width: 980px)" srcset="/<?= $same_mobile_path ?>">
-                                            <img src="/pic/<?= $same_img_clean ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
-                                        </picture>
-                                    <?php else: ?>
-                                        <img src="/pic/<?= $same_img_clean ?>" alt="Projet similaire - <?= htmlspecialchars($sameRef['titre']) ?> à <?= htmlspecialchars($sameRef['commune'] ?? '') ?> par APSI BTP" loading="lazy">
-                                    <?php endif; ?>
-                                <?php else: ?>
-                                    <div class="same-empty">Aucune image disponible</div>
-                                <?php endif; ?>
-                                <div>
-                                    <h3><?= htmlspecialchars($sameRef['titre']) ?></h3>
-                                    <p><i data-lucide="map-pin" aria-hidden="true"></i><?= htmlspecialchars($sameRef['commune']) ?></p>
-                                </div>
-                            </article>
-                        <?php endforeach; ?>
+                        <?php foreach ($sameDomainRefs as $cardRef):
+                            $cardImage = $samePicByRef[$cardRef['id']] ?? null;
+                            $cardDomain = domaineLabel($cardRef['domaine']);
+                            $cardHeading = 'h3';
+                            include __DIR__ . '/partials/referenceCard.php';
+                        endforeach; ?>
                     </div>
                 </div>
             </section>
@@ -510,7 +493,7 @@ $activePage = 'references';
     window.apsiPageReady(function() {
         if (window.lucide) window.lucide.createIcons();
 
-        const titles = Array.from(document.querySelectorAll('.reference-project-heading .page-title, .card-header h2, .reference-characteristics-title, .same-domain-section h2, .same-domain-card h3'));
+        const titles = Array.from(document.querySelectorAll('.reference-project-heading .page-title, .card-header h2, .reference-characteristics-title, .same-domain-section h2'));
         const titleCanvas = document.createElement('canvas').getContext('2d');
         function fitTitles() {
             titles.forEach(title => {
@@ -624,10 +607,10 @@ $activePage = 'references';
                 source.srcset = thumbs[current].dataset.mobileSrc || thumbs[current].dataset.src;
             }
 
-            // Update 2-digit slide progress text (e.g. 01, 02)
+            // Update the photo position.
             const indicator = document.getElementById('current-slide-index');
             if (indicator) {
-                indicator.textContent = String(current + 1).padStart(2, '0');
+                indicator.textContent = String(current + 1);
             }
         }
 

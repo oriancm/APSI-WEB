@@ -24,7 +24,7 @@ body.reference-page, .reference-shell, .reference-top-gradient-wrapper {
 .reference-showcase { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 28px; align-items: start; }
 .reference-gallery { min-width: 0; display: flex; flex-direction: column; }
 .reference-project-heading { margin-bottom: 18px; }
-.reference-project-heading .page-title, .reference-info-card .card-header h2, .same-domain-section h2, .same-domain-card h3 { white-space: nowrap; overflow-wrap: normal; }
+.reference-project-heading .page-title, .reference-info-card .card-header h2, .same-domain-section h2 { white-space: nowrap; overflow-wrap: normal; }
 .reference-project-heading .page-title { margin: 0 0 12px; color: var(--apsi-navy); font-family: 'Montserrat', sans-serif; font-size: clamp(28px, 3.2vw, 46px); line-height: 1.12; font-weight: 800; letter-spacing: -.04em; overflow-wrap: anywhere; }
 .reference-project-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; }
 .reference-badge, .reference-location { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; line-height: 1.4; }
@@ -66,7 +66,7 @@ body.reference-page, .reference-shell, .reference-top-gradient-wrapper {
 .reference-budget svg { width: 30px; height: 30px; flex-shrink: 0; stroke-width: 1.6; }
 .reference-budget span { font-size: 11px; text-transform: uppercase; font-weight: 500; }
 .reference-budget strong { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(21px, 2vw, 28px); line-height: 1.2; }
-.gallery-arrow:focus-visible, .back-link:focus-visible, .same-domain-card a:focus-visible { outline: 3px solid var(--apsi-blue-2); outline-offset: 4px; }
+.gallery-arrow:focus-visible, .back-link:focus-visible { outline: 3px solid var(--apsi-blue-2); outline-offset: 4px; }
 
 .same-domain-section {
     background: var(--apsi-bg, #f7fbff);
@@ -95,93 +95,9 @@ body.reference-page, .reference-shell, .reference-top-gradient-wrapper {
 
 .same-domain-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(16px, 2vw, 24px);
 }
-
-.same-domain-card {
-    position: relative;
-    min-height: 240px;
-    overflow: hidden;
-    border-radius: 8px;
-    background: var(--apsi-navy);
-    box-shadow: 0 10px 28px rgba(6, 23, 51, 0.08);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-}
-
-.same-domain-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 48px rgba(6, 23, 51, 0.14);
-}
-
-.same-domain-card a {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-}
-
-.same-domain-card img,
-.same-empty {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.same-domain-card:hover img {
-    transform: scale(1.05);
-}
-
-.same-empty {
-    display: grid;
-    place-items: center;
-    color: #fff;
-    background: linear-gradient(135deg, #8cbce6, #0a376b);
-}
-
-.same-domain-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(180deg, rgba(6,18,38,0.02) 0%, rgba(6,18,38,0.38) 48%, rgba(3,16,35,0.92) 100%);
-}
-
-.same-domain-card > div {
-    position: absolute;
-    left: 20px;
-    right: 20px;
-    bottom: 18px;
-    z-index: 2;
-}
-
-.same-domain-card h3 {
-    margin: 0 0 10px;
-    color: #fff;
-    font-family: "Montserrat", "Inter", Arial, sans-serif;
-    font-size: 16.5px;
-    font-weight: 800;
-    line-height: 1.25;
-}
-
-.same-domain-card p {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    margin: 0;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 13px;
-}
-
-.same-domain-card p svg {
-    width: 16px;
-    height: 16px;
-    color: var(--apsi-blue-2);
-}
-
-
 
 @media (min-width: 1600px) {
     .reference-showcase { gap: 32px; }

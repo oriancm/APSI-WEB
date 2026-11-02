@@ -196,18 +196,18 @@ $activePage = 'contact';
                     <input type="text" id="fname" name="name" autocomplete="name" maxlength="200" required placeholder="Ex : MARTY Paul" value="<?php echo isset($name) ? htmlspecialchars($name) : '' ?>">
                 </div>
                 </div>
-                <div class="contact-form-group">
-                <label for="sujet">Objet</label>
-                <div class="field">
-                    <i data-lucide="clipboard-list" aria-hidden="true"></i>
-                    <input type="text" id="sujet" name="objet" maxlength="300" required placeholder="Ex : Demande d'information" value="<?php echo isset($objet) ? htmlspecialchars($objet) : '' ?>">
-                </div>
-                </div>
                 <div class="contact-form-group contact-form-group--email">
                 <label for="email">Adresse e-mail</label>
                 <div class="field">
                     <i data-lucide="mail" aria-hidden="true"></i>
                     <input type="email" id="email" name="email" autocomplete="email" maxlength="254" required placeholder="Ex : nom@entreprise.fr" value="<?= isset($email) ? htmlspecialchars($email, ENT_QUOTES, 'UTF-8') : '' ?>">
+                </div>
+                </div>
+                <div class="contact-form-group contact-form-group--subject">
+                <label for="sujet">Objet</label>
+                <div class="field">
+                    <i data-lucide="clipboard-list" aria-hidden="true"></i>
+                    <input type="text" id="sujet" name="objet" maxlength="300" required placeholder="Ex : Demande d'information" value="<?php echo isset($objet) ? htmlspecialchars($objet) : '' ?>">
                 </div>
                 </div>
                 <div class="contact-form-trap" aria-hidden="true" inert>
@@ -216,14 +216,12 @@ $activePage = 'contact';
                 </div>
                 <div class="contact-form-group contact-form-group--message">
                 <label for="subject">Message</label>
+                <div class="contact-message-row">
                 <textarea id="subject" name="message" maxlength="20000" required placeholder="Votre message..."><?php echo isset($message) ? htmlspecialchars($message) : '' ?></textarea>
-                </div>
-                <div class="contact-form-footer">
-                    <button type="submit" id="submitBtn">
-                        Envoyer
+                    <button type="submit" id="submitBtn" aria-label="Envoyer le message" title="Envoyer le message">
                         <i data-lucide="send" aria-hidden="true"></i>
                     </button>
-                    <a href="/privacyPolicy" class="contact-privacy-link">Politique de confidentialité <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+                </div>
                 </div>
             </form>
             </div>
@@ -254,15 +252,14 @@ $activePage = 'contact';
         contactForm.addEventListener('submit', function () {
             loadingOverlay.style.display = 'flex';
             submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Envoi...';
+            submitBtn.setAttribute('aria-busy', 'true');
         });
 
         window.addEventListener('pageshow', function (event) {
             if (event.persisted) {
                 loadingOverlay.style.display = 'none';
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Envoyer <i data-lucide="send" aria-hidden="true"></i>';
-                if (window.lucide) window.lucide.createIcons();
+                submitBtn.removeAttribute('aria-busy');
             }
         }, { signal: window.apsiPageSignal });
     </script>

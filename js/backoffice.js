@@ -18,6 +18,11 @@
       button.setAttribute("aria-pressed", String(visible));
     }),
   );
+  const sortMode = $("#sort_mode");
+  sortMode?.addEventListener("change", () => {
+    const manual = $(".reference-order-manual");
+    if (manual) manual.open = sortMode.value === "manual";
+  });
   const search = $("#reference-search");
   if (search) {
     const domain = $("#domain-filter"),

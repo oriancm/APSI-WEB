@@ -168,7 +168,7 @@ assert.match(base || "", /^http:\/\/127\.0\.0\.1:\d+$/);
           await page.keyboard.press("Enter");
           assert.equal(
             await page.locator("#current-slide-index").innerText(),
-            "02",
+            "2",
           );
           await page.locator(".reference-fullscreen").focus();
           await page.keyboard.press("Enter");

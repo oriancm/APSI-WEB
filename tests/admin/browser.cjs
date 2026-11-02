@@ -111,6 +111,25 @@ fs.mkdirSync(output, { recursive: true });
       path: path.join(output, "dashboard-desktop.png"),
       fullPage: true,
     });
+    await page.getByRole('link', { name: 'Classer les références', exact: true }).click();
+    await page.waitForURL('**/admin/order.php');
+    assert.equal(await page.locator('#sort_mode option').count(), 7);
+    await page.locator('#position-7').fill('1');
+    await accessibility('Reference ordering accessibility');
+    await page.getByRole('button', { name: 'Enregistrer et publier le classement' }).click();
+    await page.waitForURL('**/admin/order.php');
+    assert.equal(await page.locator('#position-7').inputValue(), '1');
+    const orderedPublic = await (await page.request.get(base + '/references')).text();
+    assert.match(orderedPublic, /<article class="reference-tile"[^>]*>\s*<a href="\/reference\/7"/);
+    await page.screenshot({ path: path.join(output, 'ordering-desktop.png'), fullPage: true });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await noOverflow();
+    await page.screenshot({ path: path.join(output, 'ordering-mobile.png'), fullPage: true });
+    await page.locator('#position-7').fill('');
+    await page.getByRole('button', { name: 'Enregistrer et publier le classement' }).click();
+    await page.waitForURL('**/admin/order.php');
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.goto(base + '/admin/admin.php');
     await page.locator("#domain-filter-control").click();
     await accessibility("Expanded dropdown accessibility");
     await page.screenshot({

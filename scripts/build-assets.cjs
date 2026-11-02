@@ -12,7 +12,7 @@ for (const file of [...css, 'js/navigation.js', 'js/site.js', 'js/references.js'
     const result = esbuild.transformSync(fs.readFileSync(file, 'utf8'), { loader: isCss ? 'css' : 'js', minify: true, legalComments: 'eof' });
     fs.writeFileSync(file.replace(/\.(css|js)$/, '.min.$1'), result.code);
 }
-sources.push(...['partials/siteHeader.php', 'partials/siteFooter.php'].map(file => fs.readFileSync(file, 'utf8')));
+sources.push(...['partials/siteHeader.php', 'partials/siteFooter.php', 'partials/referenceCard.php'].map(file => fs.readFileSync(file, 'utf8')));
 const names = new Set([...sources.join('\n').matchAll(/data-lucide="([a-z0-9-]+)"/g)].map(match => match[1]));
 // The project details table also selects icons on the server.
 for (const icon of ['map-pin', 'building-2', 'check-circle-2', 'calendar-days', 'user-round-cog', 'pencil-ruler', 'users', 'euro', 'layers-3', 'users-round', 'layout-grid']) names.add(icon);

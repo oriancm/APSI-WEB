@@ -52,3 +52,9 @@ Utiliser exclusivement `scripts/deploy_ovh.py` et le guide `AGENT_DEPLOY_GUIDE_O
 Références : [API officielle des communes](https://geo.api.gouv.fr/decoupage-administratif/communes), [sécurité des sessions PHP](https://www.php.net/manual/en/features.session.security.management.php).
 
 Les listes déroulantes du back-office proposent des options stylisées, une sélection visible et la navigation au clavier (flèches, Entrée, Échap, début/fin et recherche par lettres). Les champs natifs restent transmis et validés par le serveur. Le favicon coloré du site et du back-office est régénéré avec `python scripts/build-favicons.py` à partir du logo original.
+
+## Classement public
+
+Depuis « Références », ouvrir « Classer les références ». Choisir un ordre manuel (numéros croissants), l’année du projet, le montant des travaux ou le nom, puis « Enregistrer et publier le classement ». Les numéros manuels restent mémorisés lorsque le tri automatique change. Ce réglage s’applique à la liste, au carrousel et aux suggestions, en conservant la priorité aux projets du même domaine dans les suggestions. Les valeurs manquantes sont placées à la fin. Les égalités sont départagées par l’ordre de création.
+
+Le réglage est stocké dans `secrets/reference-order.json`, protégé des accès web et conservé par le déploiement. Il ne modifie pas les fiches des références. Les tests HTTP couvrent l’authentification, le jeton CSRF, les entrées invalides, les tris, les valeurs absentes, les modifications concurrentes et la persistance des positions.
